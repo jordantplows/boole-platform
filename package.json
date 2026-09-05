@@ -1,11 +1,15 @@
 {
-  "name": "@boole/site",
+  "name": "@boole/root",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "start": "tsx build.ts --serve",
     "build": "tsx build.ts",
-    "preview": "tsx build.ts --serve"
+    "preview": "tsx build.ts --serve",
+    "test": "node --import tsx --test packages/hardware/src/detect.test.ts packages/cli/src/aliases.test.ts"
   },
   "devDependencies": {
     "sharp": "^0.33.0",

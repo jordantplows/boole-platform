@@ -1,0 +1,62 @@
+{
+  "llama3": {
+    "repo": "bartowski/Meta-Llama-3.1-8B-Instruct-GGUF",
+    "description": "Meta Llama 3.1 8B Instruct",
+    "params": "8B",
+    "quants": ["Q3_K_M", "Q4_K_M", "Q5_K_M", "Q6_K", "Q8_0"]
+  },
+  "llama3-70b": {
+    "repo": "bartowski/Meta-Llama-3.1-70B-Instruct-GGUF",
+    "description": "Meta Llama 3.1 70B Instruct",
+    "params": "70B",
+    "quants": ["Q3_K_M", "Q4_K_M", "Q5_K_M", "Q6_K", "Q8_0"]
+  },
+  "llama2": {
+    "repo": "TheBloke/Llama-2-7B-Chat-GGUF",
+    "description": "Meta Llama 2 7B Chat",
+    "params": "7B",
+    "quants": ["Q2_K", "Q3_K_M", "Q4_K_M", "Q5_K_M", "Q6_K", "Q8_0"]
+  },
+  "mistral": {
+    "repo": "bartowski/Mistral-7B-Instruct-v0.3-GGUF",
+    "description": "Mistral 7B Instruct v0.3",
+    "params": "7B",
+    "quants": ["Q3_K_M", "Q4_K_M", "Q5_K_M", "Q6_K", "Q8_0"]
+  },
+  "mixtral": {
+    "repo": "TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF",
+    "description": "Mixtral 8x7B Instruct v0.1",
+    "params": "47B",
+    "quants": ["Q2_K", "Q3_K_M", "Q4_K_M", "Q5_K_M"]
+  },
+  "phi3": {
+    "repo": "bartowski/Phi-3.1-mini-4k-instruct-GGUF",
+    "description": "Microsoft Phi-3.1 Mini 4K Instruct",
+    "params": "3.8B",
+    "quants": ["Q4_K_M", "Q5_K_M", "Q6_K", "Q8_0"]
+  },
+  "phi4": {
+    "repo": "bartowski/phi-4-GGUF",
+    "description": "Microsoft Phi-4",
+    "params": "14B",
+    "quants": ["Q3_K_M", "Q4_K_M", "Q5_K_M", "Q6_K", "Q8_0"]
+  },
+  "gemma2": {
+    "repo": "bartowski/gemma-2-9b-it-GGUF",
+    "description": "Google Gemma 2 9B Instruct",
+    "params": "9B",
+    "quants": ["Q3_K_M", "Q4_K_M", "Q5_K_M", "Q6_K", "Q8_0"]
+  },
+  "qwen2.5": {
+    "repo": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+    "description": "Alibaba Qwen 2.5 7B Instruct",
+    "params": "7B",
+    "quants": ["Q3_K_M", "Q4_K_M", "Q5_K_M", "Q6_K", "Q8_0"]
+  },
+  "codellama": {
+    "repo": "TheBloke/CodeLlama-7B-Instruct-GGUF",
+    "description": "Meta Code Llama 7B Instruct",
+    "params": "7B",
+    "quants": ["Q2_K", "Q3_K_M", "Q4_K_M", "Q5_K_M", "Q6_K", "Q8_0"]
+  }
+}

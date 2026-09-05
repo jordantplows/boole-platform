@@ -1,0 +1,14 @@
+{
+  "name": "@boole/hardware",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": "./src/index.ts",
+  "peerDependencies": {
+    "node-llama-cpp": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "node-llama-cpp": {
+      "optional": true
+    }
+  }
+}
