@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>boole — local LLM inference for JavaScript</title><meta name="description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go."><link rel="canonical" href="https://boole.sh/"><meta property="og:title" content="boole — local LLM inference for JavaScript"><meta property="og:description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go."><meta property="og:image" content="https://boole.sh/og.png"><meta property="og:type" content="website"><meta property="og:url" content="https://boole.sh/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="boole — local LLM inference for JavaScript"><meta name="twitter:description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go."><meta name="twitter:image" content="https://boole.sh/og.png"><meta name="theme-color" content="#fbfbf9" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><style>:root{--bg: #fbfbf9;--fg: #16181a;--accent: #ad4e09;--muted: #6b6b68;--border: #e0dfdc;--terminal-bg: #1a1c1e;--terminal-fg: #d4d4d4;--terminal-muted: #707070;--mono: "SF Mono", ui-monospace, "Cascadia Code", "Fira Mono", Consolas, monospace;--sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;--col: 720px;--gap: 4rem}@media(prefers-color-scheme:dark){:root{--bg: #161618;--fg: #e8e6e3;--accent: #e8862f;--muted: #929290;--border: #2e2e2c;--terminal-bg: #111113}}*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{font-family:var(--sans);font-size:1rem;line-height:1.65;color:var(--fg);background:var(--bg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}::selection{background:var(--accent);color:#fff}:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.col{max-width:var(--col);margin:0 auto;padding:0 1.5rem}section{padding:var(--gap) 0}section+section{border-top:1px solid var(--border)}h1,h2,h3,h4,nav,code,pre,kbd,th,.mono{font-family:var(--mono)}h2{font-size:.8125rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1.5rem}h3{font-size:.9375rem;font-weight:600;margin-bottom:.375rem}p{margin-bottom:1rem}p:last-child{margin-bottom:0}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}code{font-size:.875em}pre{font-size:.8125rem;line-height:1.6;overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:.875rem;line-height:1.5}th{text-align:left;font-weight:600;font-size:.6875rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:.5rem 1rem .5rem 0;border-bottom:1px solid var(--border)}td{padding:.375rem 1rem .375rem 0;border-bottom:1px solid var(--border);vertical-align:baseline}td:first-child{white-space:nowrap}.hero{padding-top:calc(var(--gap) * 1.5)}.wordmark{font-family:var(--mono);font-size:1.75rem;font-weight:700;letter-spacing:-.03em;margin-bottom:1rem}.hero .lead{max-width:560px;font-size:1.0625rem;line-height:1.6;margin-bottom:2rem}.cmd{display:flex;align-items:center;justify-content:space-between;gap:1rem;background:var(--terminal-bg);color:var(--terminal-fg);padding:.875rem 1rem;border:1px solid var(--border);overflow-x:auto}.cmd code{font-size:.9375rem;white-space:nowrap}.prompt-char{color:var(--accent);margin-right:.5em;user-select:none}.copy-btn{font-family:var(--mono);font-size:.6875rem;text-transform:uppercase;letter-spacing:.05em;color:var(--terminal-muted);background:transparent;border:1px solid var(--terminal-muted);padding:.25rem .625rem;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:color .15s,border-color .15s}.copy-btn:hover{color:var(--terminal-fg);border-color:var(--terminal-fg)}.terminal{background:var(--terminal-bg);color:var(--terminal-fg);padding:1.25rem 1.5rem;border:1px solid var(--border);overflow-x:auto}.terminal pre{margin:0}.terminal .prompt{color:var(--accent);user-select:none}.terminal .muted{color:var(--terminal-muted)}.terminal .cursor{display:inline;animation:blink 1s step-end infinite}@keyframes blink{50%{opacity:0}}@media(prefers-reduced-motion:reduce){.terminal .cursor{display:none}}.features{display:grid;gap:2.5rem}.features p{margin-bottom:0;max-width:600px}.command+.command{margin-top:2.5rem}.command>p:first-of-type{color:var(--muted);font-size:.875rem;margin-bottom:1rem}.warning{font-size:.875rem;border-left:2px solid var(--accent);padding-left:1rem;margin-top:1rem}.example{margin-bottom:1.5rem}.example code{display:block;font-size:.875rem;margin-bottom:.25rem}.example p{font-size:.875rem;color:var(--muted)}footer{border-top:1px solid var(--border);padding:2rem 0;margin-top:var(--gap)}.footer-links{font-family:var(--mono);font-size:.8125rem;color:var(--muted);display:flex;gap:1.5rem;flex-wrap:wrap}.footer-links a{color:var(--muted)}.footer-links a:hover{color:var(--accent)}@media(max-width:600px){:root{--gap: 3rem}.col{padding:0 1rem}.hero{padding-top:var(--gap)}.terminal{padding:1rem}}
+</style></head> <body>  <main class="col"> <section class="hero"> <h1 class="wordmark">boole</h1> <p class="lead">
+Local LLM inference for JavaScript — run GGUF models on your own machine
+      via llama.cpp, no API key or per-token cost required.
+</p> <div class="cmd"> <code><span class="prompt-char">$</span>npx @boole/cli</code> <button class="copy-btn" data-copy="npx @boole/cli">copy</button> </div> </section> <section> <div class="terminal" id="terminal" aria-label="Terminal session demonstrating boole run with streaming output"> <pre><code id="terminal-output"><span class="prompt">$ </span>boole run TheBloke/Llama-2-7B-GGUF:Q4_K_M "Explain what a boolean is in one sentence." --stream
+<span class="muted">pulling TheBloke/Llama-2-7B-GGUF:Q4_K_M... </span><span class="muted">done (3.8 GB)
+</span><span class="muted">loading model... </span><span class="muted">done (Metal, 35 layers offloaded)
+
+</span>A boolean is a data type that holds exactly one of two values — true or false — and is the foundation
+of every conditional branch in every program you have ever run.</code></pre> </div> </section> <section> <div class="features"> <div> <h3>Your hardware, your latency</h3> <p>
+Inference runs on the machine that called it. No cold start, no
+          round-trip to a datacenter, no queue. Metal on Apple Silicon, CUDA and
+          Vulkan on Linux and Windows.
+</p> </div> <div> <h3>Any GGUF, any quant</h3> <p>
+Point Boole at a HuggingFace repo and a quantization pattern. It
+          downloads the file, verifies the hash, and caches it locally. You pick
+          the size/quality trade-off.
+</p> </div> <div> <h3>An npm install, not a daemon</h3> <p> <code>npm i -g @boole/cli</code>. No Docker container, no system
+          service, no background process. It links against node-llama-cpp and
+          loads the model on demand.
+</p> </div> </div> </section> <section> <h2>Commands</h2> <div class="command"> <h3>run</h3> <p>Run a prompt against a model.</p> <table> <thead><tr><th>Flag</th><th>Description</th></tr></thead> <tbody> <tr><td><code>--model, -m</code></td><td>Model specifier or local <code>.gguf</code> path</td></tr> <tr><td><code>--stream</code></td><td>Stream tokens to stdout</td></tr> <tr><td><code>--system, -s</code></td><td>System prompt</td></tr> <tr><td><code>--temp, -t</code></td><td>Sampling temperature (default: 0.8)</td></tr> <tr><td><code>--ctx-size</code></td><td>Context window in tokens (default: 2048)</td></tr> <tr><td><code>--gpu-layers</code></td><td>Layers to offload to GPU (default: all)</td></tr> <tr><td><code>--max-tokens</code></td><td>Maximum tokens to generate</td></tr> </tbody> </table> </div> <div class="command"> <h3>pull</h3> <p>Download a model to the local cache.</p> <table> <thead><tr><th>Flag</th><th>Description</th></tr></thead> <tbody> <tr><td><code>--model, -m</code></td><td>Model specifier</td></tr> <tr><td><code>--dir</code></td><td>Custom cache directory</td></tr> </tbody> </table> </div> <div class="command"> <h3>serve</h3> <p>Start an OpenAI-compatible HTTP server.</p> <table> <thead><tr><th>Flag</th><th>Description</th></tr></thead> <tbody> <tr><td><code>--model, -m</code></td><td>Model specifier or local <code>.gguf</code> path</td></tr> <tr><td><code>--port, -p</code></td><td>Port (default: 8080)</td></tr> <tr><td><code>--host</code></td><td>Bind address (default: 127.0.0.1)</td></tr> </tbody> </table> <div class="warning"> <strong>Warning:</strong> <code>serve</code> binds to 127.0.0.1 by default.
+        Setting <code>--host 0.0.0.0</code> exposes the model endpoint to your
+        entire network with no authentication. Do not expose it to the public
+        internet.
+</div> </div> <div class="command"> <h3>list</h3> <p>List downloaded models.</p> <table> <thead><tr><th>Flag</th><th>Description</th></tr></thead> <tbody> <tr><td><code>--json</code></td><td>Output as JSON</td></tr> </tbody> </table> </div> </section> <section> <h2>Model specifiers</h2> <p>Models are addressed as <code>&lt;hf-repo&gt;:&lt;quant-pattern&gt;</code>.</p> <div class="example"> <code>TheBloke/Llama-2-7B-GGUF:Q4_K_M</code> <p>Downloads the Q4_K_M quantization of Llama 2 7B from TheBloke's HuggingFace repo.</p> </div> <div class="example"> <code>bartowski/Phi-3-mini-4k-instruct-GGUF:Q5_K_S</code> <p>Downloads Phi-3 Mini at Q5_K_S quantization.</p> </div> <p>A local <code>.gguf</code> file path works anywhere a specifier does:</p> <div class="cmd" style="margin-top: 0.5rem"> <code><span class="prompt-char">$</span>boole run ./mistral-7b-q4.gguf "your prompt"</code> <button class="copy-btn" data-copy="boole run ./mistral-7b-q4.gguf &quot;your prompt&quot;">copy</button> </div> </section> <section> <h2>Platform support</h2> <table> <thead> <tr><th>Platform</th><th>Arch</th><th>GPU</th><th>Backend</th></tr> </thead> <tbody> <tr><td>macOS</td><td>Apple Silicon</td><td>Yes</td><td>Metal</td></tr> <tr><td>macOS</td><td>Intel</td><td>—</td><td>CPU only</td></tr> <tr><td>Linux</td><td>x86_64</td><td>NVIDIA</td><td>CUDA</td></tr> <tr><td>Linux</td><td>x86_64</td><td>AMD</td><td>Vulkan</td></tr> <tr><td>Linux</td><td>x86_64</td><td>—</td><td>CPU only</td></tr> <tr><td>Windows</td><td>x86_64</td><td>NVIDIA</td><td>CUDA</td></tr> <tr><td>Windows</td><td>x86_64</td><td>AMD</td><td>Vulkan</td></tr> <tr><td>Windows</td><td>x86_64</td><td>—</td><td>CPU only</td></tr> </tbody> </table> </section> </main> <footer class="col"> <div class="footer-links"> <a href="https://www.npmjs.com/package/@boole/cli">npm</a> <a href="https://github.com/boole-sh/boole">GitHub</a> <span>MIT License</span> <a href="mailto:hello@boole.sh">hello@boole.sh</a> </div> </footer> <script>(function(){const frames = [{"t":"$ ","c":"prompt","d":0},{"t":"boole run TheBloke/Llama-2-7B-GGUF:Q4_K_M \"Explain what a boolean is in one sentence.\" --stream\n","d":500},{"t":"pulling TheBloke/Llama-2-7B-GGUF:Q4_K_M... ","c":"muted","d":600},{"t":"done (3.8 GB)\n","c":"muted","d":1800},{"t":"loading model... ","c":"muted","d":400},{"t":"done (Metal, 35 layers offloaded)\n\n","c":"muted","d":1400},{"t":"A ","d":120},{"t":"boolean ","d":60},{"t":"is ","d":45},{"t":"a ","d":40},{"t":"data ","d":50},{"t":"type ","d":55},{"t":"that ","d":45},{"t":"holds ","d":50},{"t":"exactly ","d":55},{"t":"one ","d":45},{"t":"of ","d":35},{"t":"two ","d":45},{"t":"values ","d":50},{"t":"— ","d":70},{"t":"true ","d":50},{"t":"or ","d":40},{"t":"false ","d":50},{"t":"— ","d":70},{"t":"and ","d":45},{"t":"is ","d":35},{"t":"the ","d":40},{"t":"foundation\n","d":55},{"t":"of ","d":40},{"t":"every ","d":50},{"t":"conditional ","d":65},{"t":"branch ","d":55},{"t":"in ","d":35},{"t":"every ","d":50},{"t":"program ","d":60},{"t":"you ","d":45},{"t":"have ","d":45},{"t":"ever ","d":50},{"t":"run.","d":55}];
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var el = document.getElementById('terminal');
+    var output = document.getElementById('terminal-output');
+
+    var observer = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        observer.disconnect();
+        output.innerHTML = '';
+
+        var cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        cursor.textContent = '█';
+        output.appendChild(cursor);
+
+        var i = 0;
+        function step() {
+          var f = frames[i];
+          if (f.c) {
+            var span = document.createElement('span');
+            span.className = f.c;
+            span.textContent = f.t;
+            output.insertBefore(span, cursor);
+          } else {
+            output.insertBefore(document.createTextNode(f.t), cursor);
+          }
+          i++;
+          if (i < frames.length) {
+            setTimeout(step, frames[i].d);
+          } else {
+            cursor.remove();
+          }
+        }
+        setTimeout(step, frames[0].d);
+      }
+    }, { threshold: 0.3 });
+
+    observer.observe(el);
+  }
+})();</script> <script>
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      navigator.clipboard.writeText(btn.getAttribute('data-copy')).then(function () {
+        var prev = btn.textContent;
+        btn.textContent = 'copied';
+        setTimeout(function () { btn.textContent = prev; }, 2000);
+      });
+    });
+  });
+</script>  </body></html>
