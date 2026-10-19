@@ -16,13 +16,14 @@ const CTA = {
   email: 'hello@booleinference.com',
   buyNow: `mailto:hello@booleinference.com?subject=${encodeURIComponent('Boole: Buy now')}`,
   bookCall: `mailto:hello@booleinference.com?subject=${encodeURIComponent('Boole: Book a call')}`,
+  buyCodebase: `mailto:hello@booleinference.com?subject=${encodeURIComponent('Boole: Codebase acquisition')}`,
 } as const;
 
 const TITLE = 'Imagine OS — on-device models for software that adapts';
 const DESCRIPTION =
   'Imagine OS runs models on the device and shapes software around you. Local GGUF inference today. A 20B model at 200 tok/s is a goal.';
 const KEYWORDS =
-  'on-device AI, local models, local inference, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF';
+  'on-device AI, local models, local inference, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF, managed on-device AI, acquire AI codebase';
 
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -30,7 +31,8 @@ const jsonLd = JSON.stringify({
     {
       '@type': 'Organization',
       '@id': `${SITE}/#organization`,
-      name: 'Boole',
+      name: 'Boole AI, Inc.',
+      legalName: 'Boole AI, Inc.',
       url: `${SITE}/`,
       email: CTA.email,
       logo: `${SITE}/favicon.svg`,
@@ -52,9 +54,10 @@ const jsonLd = JSON.stringify({
       softwareVersion: '0.0.1',
       url: `${SITE}/`,
       description:
-        'Imagine OS is Boole’s direction: software shaped around the person using it, with models that run on the device. Release 0.0.1 is a local GGUF runtime through llama.cpp. A 20-billion-parameter model at 200 tokens per second is a target, not a measured result.',
+        'Imagine OS is the direction of Boole AI, Inc.: software shaped around the person using it, with models that run on the device. Release 0.0.1 is a local GGUF runtime through llama.cpp. A 20-billion-parameter model at 200 tokens per second is a target, not a measured result.',
       keywords: KEYWORDS,
-      license: 'https://opensource.org/licenses/MIT',
+      copyrightHolder: { '@id': `${SITE}/#organization` },
+      copyrightNotice: 'Copyright (c) 2026 Boole AI, Inc. All rights reserved.',
       installUrl: 'https://www.npmjs.com/package/@boole/cli',
       featureList: [
         'Local GGUF inference through llama.cpp',
@@ -72,6 +75,7 @@ mkdirSync(DIST, { recursive: true });
 
 const css = readFileSync('src/styles/global.css', 'utf-8');
 
+// Counsel should review the proprietary notice in LICENSE before it is relied on.
 const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -105,6 +109,21 @@ const html = `<!doctype html>
 </head>
 <body>
   <a class="skip" href="#vision">Skip to content</a>
+  <aside class="announce" aria-label="Ways to work with Boole">
+    <div class="announce-inner">
+      <p class="announce-lead"><span>Two ways in</span> A managed product, or full ownership of the codebase.</p>
+      <div class="announce-paths">
+        <div class="announce-path">
+          <p><strong>Managed product.</strong> <span class="announce-detail">Boole AI stands it up and runs it.</span></p>
+          <a class="btn btn-buy" href="${CTA.buyNow}">Get started</a>
+        </div>
+        <div class="announce-path">
+          <p><strong>Acquire the codebase.</strong> <span class="announce-detail">Full ownership of the code and the technology.</span></p>
+          <a class="btn btn-call" href="${CTA.buyCodebase}">Inquire</a>
+        </div>
+      </div>
+    </div>
+  </aside>
   <header class="bar">
     <a class="brand" href="#vision">boole <span>Imagine OS</span></a>
     <nav class="actions" aria-label="Contact">
@@ -133,7 +152,7 @@ const html = `<!doctype html>
           <div><dt>Runtime</dt><dd>llama.cpp</dd></div>
           <div><dt>Weights</dt><dd>GGUF, on disk</dd></div>
           <div><dt>Interface</dt><dd>Command line</dd></div>
-          <div><dt>License</dt><dd><a class="inline" href="#license">MIT</a></dd></div>
+          <div><dt>License</dt><dd><a class="inline" href="#license">Proprietary</a></dd></div>
         </dl>
       </div>
     </section>
@@ -318,7 +337,7 @@ const html = `<!doctype html>
             <tr><th scope="row">doctor</th><td>Read the machine and suggest a size it can hold.</td></tr>
             <tr><th scope="row">models</th><td>List the aliases.</td></tr>
             <tr><th scope="row">Not built</th><td><code>serve</code> and <code>list</code> are reserved and not implemented. If node-llama-cpp is missing, the CLI says so and stops.</td></tr>
-            <tr><th scope="row">Source</th><td><a class="inline" href="https://github.com/jordantplows/boole-platform">github.com/jordantplows/boole-platform</a> · <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm</a></td></tr>
+            <tr><th scope="row">Package</th><td>The command-line runtime is published as <a class="inline" href="https://www.npmjs.com/package/@boole/cli">@boole/cli</a>.</td></tr>
           </tbody>
         </table>
       </div>
@@ -327,20 +346,46 @@ const html = `<!doctype html>
     <section id="license" tabindex="-1">
       <div class="wrap reveal">
         <p class="kicker">License</p>
-        <h2>MIT. Copyright (c) 2026 Jordan Plows.</h2>
+        <h2>All rights reserved.</h2>
         <div class="prose">
           <p>
-            The repository is released under the MIT License, as stated in its
-            <a class="inline" href="https://github.com/jordantplows/boole-platform/blob/main/LICENSE">LICENSE</a>
-            file. The copyright holder named there is Jordan Plows.
+            The software is proprietary to Boole AI, Inc. Copyright (c) 2026.
+            Use, copying, modification, and distribution require a written
+            license or agreement.
           </p>
           <p>
-            That license lets any person use, copy, modify, merge, publish,
-            distribute, sublicense, and sell copies of the software and its
-            documentation. Copies and substantial portions must keep the
-            copyright notice and the permission notice. The software is
-            provided as is, without warranty.
+            Access comes either through the managed product or through a
+            codebase acquisition. Licensing inquiries go to
+            <a class="inline" href="mailto:${CTA.email}">${CTA.email}</a>.
           </p>
+          <p>Earlier public releases were published under the MIT License.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="offers" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Ways to work with Boole</p>
+        <h2 class="reveal">A managed product, or the codebase.</h2>
+        <div class="offers reveal-seq">
+          <article class="card">
+            <span class="tag">Product</span>
+            <h3>Imagine OS, managed.</h3>
+            <p>
+              The lower-cost path. Boole AI stands the product up and runs it:
+              managed setup and deployment, and access to the technology.
+            </p>
+            <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
+          </article>
+          <article class="card">
+            <span class="tag">Codebase</span>
+            <h3>Acquire the codebase.</h3>
+            <p>
+              Full ownership of the code and the technology, under a written
+              agreement with Boole AI, Inc.
+            </p>
+            <a class="btn btn-call" href="${CTA.buyCodebase}">Book a call</a>
+          </article>
         </div>
       </div>
     </section>
@@ -351,9 +396,11 @@ const html = `<!doctype html>
         <h2 class="reveal">If the machine should belong to you.</h2>
         <div class="prose">
           <p>
-            Buy now and Book a call both open a note to
+            Buy now and Book a call open a note to
             <a class="inline" href="mailto:${CTA.email}">${CTA.email}</a>,
-            with the subject already filled in.
+            with the subject already filled in. An inquiry about acquiring
+            the codebase uses the same address, with the subject
+            “Boole: Codebase acquisition”.
           </p>
         </div>
         <div class="actions actions-hero" style="margin-top:1.5rem">
@@ -366,10 +413,10 @@ const html = `<!doctype html>
 
   <footer>
     <div class="wrap footer-row">
-      <span>boole</span>
+      <span>© 2026 Boole AI, Inc.</span>
       <a href="#license">License</a>
+      <a href="#offers">Ways to work with Boole</a>
       <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
-      <a href="https://github.com/jordantplows/boole-platform">Source</a>
       <a href="mailto:${CTA.email}">${CTA.email}</a>
     </div>
   </footer>

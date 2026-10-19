@@ -234,4 +234,10 @@ npx tsx packages/cli/src/index.ts models    # list aliases
 
 ## License
 
-MIT
+Proprietary. Copyright (c) 2026 Boole AI, Inc. All rights reserved.
+
+No use, copying, modification, or distribution without a written license or agreement from Boole AI, Inc. Licensing inquiries: hello@booleinference.com.
+
+Earlier public releases were published under the MIT License.
+
+Counsel should review the LICENSE file before it is relied on.

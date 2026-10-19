@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Imagine OS — on-device models for software that adapts</title>
   <meta name="description" content="Imagine OS runs models on the device and shapes software around you. Local GGUF inference today. A 20B model at 200 tok/s is a goal.">
-  <meta name="keywords" content="on-device AI, local models, local inference, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF">
+  <meta name="keywords" content="on-device AI, local models, local inference, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF, managed on-device AI, acquire AI codebase">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://boole.sh/">
   <meta property="og:site_name" content="Boole">
@@ -26,7 +26,7 @@
   <meta name="theme-color" content="#0c0d10">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script>document.documentElement.classList.add('js')</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://boole.sh/#organization","name":"Boole","url":"https://boole.sh/","email":"hello@booleinference.com","logo":"https://boole.sh/favicon.svg"},{"@type":"WebSite","@id":"https://boole.sh/#website","url":"https://boole.sh/","name":"Boole","description":"Imagine OS runs models on the device and shapes software around you. Local GGUF inference today. A 20B model at 200 tok/s is a goal.","publisher":{"@id":"https://boole.sh/#organization"}},{"@type":"SoftwareApplication","name":"Imagine OS","alternateName":"Boole","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows","softwareVersion":"0.0.1","url":"https://boole.sh/","description":"Imagine OS is Boole’s direction: software shaped around the person using it, with models that run on the device. Release 0.0.1 is a local GGUF runtime through llama.cpp. A 20-billion-parameter model at 200 tokens per second is a target, not a measured result.","keywords":"on-device AI, local models, local inference, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF","license":"https://opensource.org/licenses/MIT","installUrl":"https://www.npmjs.com/package/@boole/cli","featureList":["Local GGUF inference through llama.cpp","An in-browser demonstration that runs SmolLM2 135M on the visitor’s device","A direction toward software shaped around its user"],"author":{"@id":"https://boole.sh/#organization"},"publisher":{"@id":"https://boole.sh/#organization"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://boole.sh/#organization","name":"Boole AI, Inc.","legalName":"Boole AI, Inc.","url":"https://boole.sh/","email":"hello@booleinference.com","logo":"https://boole.sh/favicon.svg"},{"@type":"WebSite","@id":"https://boole.sh/#website","url":"https://boole.sh/","name":"Boole","description":"Imagine OS runs models on the device and shapes software around you. Local GGUF inference today. A 20B model at 200 tok/s is a goal.","publisher":{"@id":"https://boole.sh/#organization"}},{"@type":"SoftwareApplication","name":"Imagine OS","alternateName":"Boole","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows","softwareVersion":"0.0.1","url":"https://boole.sh/","description":"Imagine OS is the direction of Boole AI, Inc.: software shaped around the person using it, with models that run on the device. Release 0.0.1 is a local GGUF runtime through llama.cpp. A 20-billion-parameter model at 200 tokens per second is a target, not a measured result.","keywords":"on-device AI, local models, local inference, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF, managed on-device AI, acquire AI codebase","copyrightHolder":{"@id":"https://boole.sh/#organization"},"copyrightNotice":"Copyright (c) 2026 Boole AI, Inc. All rights reserved.","installUrl":"https://www.npmjs.com/package/@boole/cli","featureList":["Local GGUF inference through llama.cpp","An in-browser demonstration that runs SmolLM2 135M on the visitor’s device","A direction toward software shaped around its user"],"author":{"@id":"https://boole.sh/#organization"},"publisher":{"@id":"https://boole.sh/#organization"}}]}</script>
   <style>:root {
   --ink: #121318;
   --cream: #f3f1eb;
@@ -88,6 +88,79 @@ body {
 .skip:focus {
   top: 0.75rem;
   outline-color: var(--ink);
+}
+
+.announce {
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.announce-inner {
+  width: min(1080px, calc(100% - 3rem));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(11rem, 0.72fr) 1.7fr;
+  gap: 0.65rem 1.75rem;
+  align-items: center;
+  padding: 0.7rem 0;
+}
+
+.announce-lead {
+  font-size: 0.95rem;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+.announce-lead span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.announce-paths {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem 1.25rem;
+}
+
+.announce-path {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem 0.9rem;
+  min-height: 44px;
+}
+
+.announce-path p {
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.announce-path strong {
+  color: var(--cream);
+  font-weight: 600;
+}
+
+.announce-path .btn {
+  flex: 0 0 auto;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.875rem;
+}
+
+.offers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  margin-top: 0.4rem;
+}
+
+.offers .btn {
+  margin-top: 1.15rem;
 }
 
 .bar {
@@ -500,11 +573,24 @@ footer {
     font-size: 1.08rem;
   }
 
+  .announce-inner {
+    width: min(1080px, calc(100% - 1.5rem));
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    padding: 0.85rem 0;
+  }
+
+  .announce-paths,
+  .offers,
   .facts,
   .split,
   .flow,
   .beats {
     grid-template-columns: 1fr;
+  }
+
+  .announce-detail {
+    display: none;
   }
 
   .brand span {
@@ -553,6 +639,7 @@ footer {
   #demo-output,
   .btn,
   .bar,
+  .announce,
   footer {
     background: Canvas;
     color: CanvasText;
@@ -563,6 +650,21 @@ footer {
 </head>
 <body>
   <a class="skip" href="#vision">Skip to content</a>
+  <aside class="announce" aria-label="Ways to work with Boole">
+    <div class="announce-inner">
+      <p class="announce-lead"><span>Two ways in</span> A managed product, or full ownership of the codebase.</p>
+      <div class="announce-paths">
+        <div class="announce-path">
+          <p><strong>Managed product.</strong> <span class="announce-detail">Boole AI stands it up and runs it.</span></p>
+          <a class="btn btn-buy" href="mailto:hello@booleinference.com?subject=Boole%3A%20Buy%20now">Get started</a>
+        </div>
+        <div class="announce-path">
+          <p><strong>Acquire the codebase.</strong> <span class="announce-detail">Full ownership of the code and the technology.</span></p>
+          <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Codebase%20acquisition">Inquire</a>
+        </div>
+      </div>
+    </div>
+  </aside>
   <header class="bar">
     <a class="brand" href="#vision">boole <span>Imagine OS</span></a>
     <nav class="actions" aria-label="Contact">
@@ -591,7 +693,7 @@ footer {
           <div><dt>Runtime</dt><dd>llama.cpp</dd></div>
           <div><dt>Weights</dt><dd>GGUF, on disk</dd></div>
           <div><dt>Interface</dt><dd>Command line</dd></div>
-          <div><dt>License</dt><dd><a class="inline" href="#license">MIT</a></dd></div>
+          <div><dt>License</dt><dd><a class="inline" href="#license">Proprietary</a></dd></div>
         </dl>
       </div>
     </section>
@@ -776,7 +878,7 @@ footer {
             <tr><th scope="row">doctor</th><td>Read the machine and suggest a size it can hold.</td></tr>
             <tr><th scope="row">models</th><td>List the aliases.</td></tr>
             <tr><th scope="row">Not built</th><td><code>serve</code> and <code>list</code> are reserved and not implemented. If node-llama-cpp is missing, the CLI says so and stops.</td></tr>
-            <tr><th scope="row">Source</th><td><a class="inline" href="https://github.com/jordantplows/boole-platform">github.com/jordantplows/boole-platform</a> · <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm</a></td></tr>
+            <tr><th scope="row">Package</th><td>The command-line runtime is published as <a class="inline" href="https://www.npmjs.com/package/@boole/cli">@boole/cli</a>.</td></tr>
           </tbody>
         </table>
       </div>
@@ -785,20 +887,46 @@ footer {
     <section id="license" tabindex="-1">
       <div class="wrap reveal">
         <p class="kicker">License</p>
-        <h2>MIT. Copyright (c) 2026 Jordan Plows.</h2>
+        <h2>All rights reserved.</h2>
         <div class="prose">
           <p>
-            The repository is released under the MIT License, as stated in its
-            <a class="inline" href="https://github.com/jordantplows/boole-platform/blob/main/LICENSE">LICENSE</a>
-            file. The copyright holder named there is Jordan Plows.
+            The software is proprietary to Boole AI, Inc. Copyright (c) 2026.
+            Use, copying, modification, and distribution require a written
+            license or agreement.
           </p>
           <p>
-            That license lets any person use, copy, modify, merge, publish,
-            distribute, sublicense, and sell copies of the software and its
-            documentation. Copies and substantial portions must keep the
-            copyright notice and the permission notice. The software is
-            provided as is, without warranty.
+            Access comes either through the managed product or through a
+            codebase acquisition. Licensing inquiries go to
+            <a class="inline" href="mailto:hello@booleinference.com">hello@booleinference.com</a>.
           </p>
+          <p>Earlier public releases were published under the MIT License.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="offers" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Ways to work with Boole</p>
+        <h2 class="reveal">A managed product, or the codebase.</h2>
+        <div class="offers reveal-seq">
+          <article class="card">
+            <span class="tag">Product</span>
+            <h3>Imagine OS, managed.</h3>
+            <p>
+              The lower-cost path. Boole AI stands the product up and runs it:
+              managed setup and deployment, and access to the technology.
+            </p>
+            <a class="btn btn-buy" href="mailto:hello@booleinference.com?subject=Boole%3A%20Buy%20now">Buy now</a>
+          </article>
+          <article class="card">
+            <span class="tag">Codebase</span>
+            <h3>Acquire the codebase.</h3>
+            <p>
+              Full ownership of the code and the technology, under a written
+              agreement with Boole AI, Inc.
+            </p>
+            <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Codebase%20acquisition">Book a call</a>
+          </article>
         </div>
       </div>
     </section>
@@ -809,9 +937,11 @@ footer {
         <h2 class="reveal">If the machine should belong to you.</h2>
         <div class="prose">
           <p>
-            Buy now and Book a call both open a note to
+            Buy now and Book a call open a note to
             <a class="inline" href="mailto:hello@booleinference.com">hello@booleinference.com</a>,
-            with the subject already filled in.
+            with the subject already filled in. An inquiry about acquiring
+            the codebase uses the same address, with the subject
+            “Boole: Codebase acquisition”.
           </p>
         </div>
         <div class="actions actions-hero" style="margin-top:1.5rem">
@@ -824,10 +954,10 @@ footer {
 
   <footer>
     <div class="wrap footer-row">
-      <span>boole</span>
+      <span>© 2026 Boole AI, Inc.</span>
       <a href="#license">License</a>
+      <a href="#offers">Ways to work with Boole</a>
       <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
-      <a href="https://github.com/jordantplows/boole-platform">Source</a>
       <a href="mailto:hello@booleinference.com">hello@booleinference.com</a>
     </div>
   </footer>
