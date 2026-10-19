@@ -834,14 +834,7 @@ footer {
     padding: 0.85rem 0;
   }
 
-  .bar {
-    display: grid;
-    grid-template-columns: 1fr auto;
-  }
-
   .nav-links {
-    grid-column: 1 / -1;
-    margin-left: 0;
     gap: 0.9rem;
   }
 
@@ -862,11 +855,11 @@ footer {
   }
 
   html {
-    scroll-padding-top: 7.5rem;
+    scroll-padding-top: 4.25rem;
   }
 
   section {
-    scroll-margin-top: 7.5rem;
+    scroll-margin-top: 4.25rem;
   }
 
   .brand span {

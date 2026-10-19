@@ -182,7 +182,6 @@ const html = `<!doctype html>
       <a href="#devices">Devices</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn btn-pay" href="${CTA.buyNow}">Pay to start</a>
   </header>
 
   <main>
