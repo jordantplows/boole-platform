@@ -3,579 +3,1012 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>boole — local LLM inference for JavaScript</title>
-  <meta name="description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <title>Boole — Imagine OS, on-device local AI</title>
+  <meta name="description" content="Local GGUF inference via llama.cpp, on your machine. Imagine OS is the direction: software that adapts to you. 20B at 200 tok/s is a target.">
+  <meta name="keywords" content="local AI, on-device LLM, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF, edge inference, Imagine OS">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://boole.sh/">
-
-  <meta property="og:title" content="boole — local LLM inference for JavaScript">
-  <meta property="og:description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <meta property="og:site_name" content="Boole">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Boole — Imagine OS, on-device local AI">
+  <meta property="og:description" content="Local GGUF inference via llama.cpp, on your machine. Imagine OS is the direction: software that adapts to you. 20B at 200 tok/s is a target.">
   <meta property="og:image" content="https://boole.sh/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Boole, Imagine OS. Local models on your machine.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boole.sh/">
-
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="boole — local LLM inference for JavaScript">
-  <meta name="twitter:description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <meta name="twitter:title" content="Boole — Imagine OS, on-device local AI">
+  <meta name="twitter:description" content="Local GGUF inference via llama.cpp, on your machine. Imagine OS is the direction: software that adapts to you. 20B at 200 tok/s is a target.">
   <meta name="twitter:image" content="https://boole.sh/og.png">
-
-  <meta name="theme-color" content="#fbfbf9" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)">
-
+  <meta name="twitter:image:alt" content="Boole, Imagine OS. Local models on your machine.">
+  <meta name="theme-color" content="#0e1016">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://boole.sh/#organization","name":"Boole","url":"https://boole.sh/","email":"jordan@bunkerbio.com","logo":"https://boole.sh/favicon.svg"},{"@type":"WebSite","@id":"https://boole.sh/#website","url":"https://boole.sh/","name":"Boole","description":"Local GGUF inference via llama.cpp, on your machine. Imagine OS is the direction: software that adapts to you. 20B at 200 tok/s is a target.","publisher":{"@id":"https://boole.sh/#organization"}},{"@type":"SoftwareApplication","name":"Boole","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows","softwareVersion":"0.0.1","url":"https://boole.sh/","description":"Local GGUF inference via llama.cpp, on your machine. Imagine OS is the direction: software that adapts to you. 20B at 200 tok/s is a target.","keywords":"local AI, on-device LLM, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF, edge inference, Imagine OS","license":"https://opensource.org/licenses/MIT","installUrl":"https://www.npmjs.com/package/@boole/cli","featureList":["Local GGUF inference through llama.cpp","Hardware-aware quantization for model aliases","On-device model cache with resumable downloads"],"author":{"@id":"https://boole.sh/#organization"},"publisher":{"@id":"https://boole.sh/#organization"}}]}</script>
   <style>:root {
-  --bg: #fbfbf9;
-  --fg: #16181a;
-  --accent: #ad4e09;
-  --muted: #6b6b68;
-  --border: #e0dfdc;
-  --terminal-bg: #1a1c1e;
-  --terminal-fg: #d4d4d4;
-  --terminal-muted: #707070;
-  --mono: 'SF Mono', ui-monospace, 'Cascadia Code', 'Fira Mono', Consolas, monospace;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --col: 720px;
-  --gap: 4rem;
+  --ink: #16171c;
+  --paper: #f7f4ec;
+  --muted: #3a3f4b;
+  --field: #0e1016;
+  --field-text: #f7f4ec;
+  --field-muted: #d4cfc4;
+  --line: rgba(22, 23, 28, 0.12);
+  --accent: #ff4f9a;
+  --accent-2: #7d5cff;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, "Cascadia Code", "Segoe UI Mono", Menlo, Consolas, monospace;
+  --shadow: 0 22px 50px rgba(0, 0, 0, 0.32);
+  --mx: 0.5;
+  --my: 0.42;
+  --scroll: 0;
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #161618;
-    --fg: #e8e6e3;
-    --accent: #e8862f;
-    --muted: #929290;
-    --border: #2e2e2c;
-    --terminal-bg: #111113;
-  }
+@property --accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ff4f9a;
+}
+
+@property --accent-2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #7d5cff;
 }
 
 *,
 *::before,
 *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
-  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5.25rem;
+  scroll-padding-bottom: 1.5rem;
 }
 
 body {
+  min-height: 100vh;
   font-family: var(--sans);
-  font-size: 1rem;
-  line-height: 1.65;
-  color: var(--fg);
-  background: var(--bg);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--field-text);
+  background: #140812;
+  padding-bottom: 2.75rem;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  transition: --accent 0.45s ease, --accent-2 0.45s ease;
 }
 
 ::selection {
-  background: var(--accent);
-  color: #fff;
+  background: #ffd0e4;
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline: 2px solid var(--field-text);
+  outline-offset: 3px;
 }
 
-.col {
-  max-width: var(--col);
-  margin: 0 auto;
-  padding: 0 1.5rem;
+.window :focus-visible,
+.skip:focus {
+  outline-color: var(--ink);
 }
 
-section {
-  padding: var(--gap) 0;
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 40;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
 }
 
-section + section {
-  border-top: 1px solid var(--border);
+.skip:focus {
+  top: 0.75rem;
 }
 
-h1, h2, h3, h4,
-nav, code, pre, kbd, th, .mono {
-  font-family: var(--mono);
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(46rem 36rem at 0% 18%, #ff3b8d 0%, rgba(255, 59, 141, 0.45) 38%, transparent 70%),
+    radial-gradient(42rem 38rem at 100% 6%, #7a45ff 0%, rgba(122, 69, 255, 0.4) 40%, transparent 72%),
+    radial-gradient(44rem 32rem at 96% 72%, #12e0d0 0%, rgba(18, 224, 208, 0.38) 42%, transparent 74%),
+    radial-gradient(36rem 30rem at 4% 88%, #ffb020 0%, rgba(255, 176, 32, 0.4) 40%, transparent 72%),
+    #1a0b16;
 }
 
-h2 {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  margin-bottom: 1.5rem;
+.blob {
+  position: absolute;
+  width: 64vw;
+  height: 64vw;
+  will-change: transform;
 }
 
-h3 {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  margin-bottom: 0.375rem;
+.blob-a {
+  top: -6%;
+  left: -10%;
+  transform: translate3d(calc((var(--mx) - 0.5) * 20vw), calc((var(--my) - 0.5) * 16vh + var(--scroll) * -10vh), 0);
 }
 
-p {
-  margin-bottom: 1rem;
+.blob-b {
+  top: 0;
+  right: -12%;
+  width: 58vw;
+  height: 58vw;
+  transform: translate3d(calc((var(--mx) - 0.5) * -18vw), calc((var(--my) - 0.5) * 14vh), 0);
 }
 
-p:last-child {
-  margin-bottom: 0;
+.blob-c {
+  top: 42%;
+  left: -6%;
+  width: 74vw;
+  height: 52vw;
+  transform: translate3d(calc((var(--mx) - 0.5) * 14vw), calc((var(--scroll) - 0.3) * 18vh), 0);
 }
 
-a {
-  color: var(--accent);
-  text-decoration: none;
+.blob-d {
+  top: 58%;
+  right: -8%;
+  width: 60vw;
+  height: 60vw;
+  transform: translate3d(calc((var(--mx) - 0.5) * -12vw), calc((var(--my) - 0.5) * 10vh + var(--scroll) * 12vh), 0);
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
-code {
-  font-size: 0.875em;
-}
-
-pre {
-  font-size: 0.8125rem;
-  line-height: 1.6;
-  overflow-x: auto;
-}
-
-table {
+.drift {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
-  line-height: 1.5;
+  height: 100%;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  animation: drift 18s ease-in-out infinite alternate;
 }
 
-th {
-  text-align: left;
+.blob-a .drift {
+  background: radial-gradient(circle, rgba(255, 45, 140, 0.95) 0%, rgba(255, 45, 140, 0.5) 30%, rgba(255, 45, 140, 0) 68%);
+}
+
+.blob-b .drift {
+  background: radial-gradient(circle, rgba(132, 86, 255, 0.92) 0%, rgba(132, 86, 255, 0.42) 32%, rgba(132, 86, 255, 0) 70%);
+  animation-duration: 23s;
+  animation-direction: alternate-reverse;
+}
+
+.blob-c .drift {
+  background: radial-gradient(circle, rgba(16, 220, 206, 0.85) 0%, rgba(16, 220, 206, 0.36) 34%, rgba(16, 220, 206, 0) 70%);
+  animation-duration: 20s;
+}
+
+.blob-d .drift {
+  background: radial-gradient(circle, rgba(255, 176, 32, 0.8) 0%, rgba(255, 90, 50, 0.28) 36%, rgba(255, 176, 32, 0) 70%);
+  animation-duration: 26s;
+}
+
+@keyframes drift {
+  from { transform: translate3d(-2vw, 0, 0) scale(1); }
+  to { transform: translate3d(5vw, 3vh, 0) scale(1.08); }
+}
+
+.menubar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  min-height: 4.25rem;
+  padding: 0.75rem 1.25rem;
+  background: #101218;
+  border-bottom: 1px solid rgba(247, 244, 236, 0.08);
+}
+
+.menubar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  color: var(--field-text);
+  text-decoration: none;
   font-weight: 600;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  padding: 0.5rem 1rem 0.5rem 0;
-  border-bottom: 1px solid var(--border);
+  letter-spacing: -0.04em;
+  font-size: 1.25rem;
 }
 
-td {
-  padding: 0.375rem 1rem 0.375rem 0;
-  border-bottom: 1px solid var(--border);
-  vertical-align: baseline;
-}
-
-td:first-child {
-  white-space: nowrap;
-}
-
-.hero {
-  padding-top: calc(var(--gap) * 1.5);
-}
-
-.wordmark {
+.brand-os {
   font-family: var(--mono);
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  margin-bottom: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--field-muted);
 }
 
-.hero .lead {
-  max-width: 560px;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
+.status {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--field-muted);
 }
+
+.status span { display: none; }
+.status .s-default { display: inline; }
+body:has(#today:target) .s-default,
+body:has(#direction:target) .s-default,
+body:has(#machine:target) .s-default { display: none; }
+body:has(#today:target) .s-today,
+body:has(#direction:target) .s-direction,
+body:has(#machine:target) .s-machine { display: inline; }
+
+.menu-actions,
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.55rem 1.05rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  font: 600 0.9375rem/1 var(--sans);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-buy {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.btn-call {
+  background: transparent;
+  color: var(--field-text);
+  border-color: var(--field-text);
+}
+
+.window .btn-buy {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.window .btn-call {
+  color: var(--ink);
+  border-color: var(--ink);
+  background: transparent;
+}
+
+.btn-buy:hover,
+.btn-call:hover {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 70%, white);
+}
+
+.desktop {
+  width: min(920px, calc(100% - 2.5rem));
+  margin: 0 auto;
+  padding-top: 2.75rem;
+}
+
+body:has(#today:target) {
+  --accent: #ff4f9a;
+  --accent-2: #ffb020;
+}
+
+body:has(#direction:target) {
+  --accent: #2ad4c8;
+  --accent-2: #7d5cff;
+}
+
+body:has(#machine:target) {
+  --accent: #d6f25c;
+  --accent-2: #ff7a3c;
+}
+
+body:has(a[href="#today"]:hover),
+body:has(a[href="#today"]:focus-visible) {
+  --accent: #ff4f9a;
+  --accent-2: #ffb020;
+}
+
+body:has(a[href="#direction"]:hover),
+body:has(a[href="#direction"]:focus-visible) {
+  --accent: #2ad4c8;
+  --accent-2: #7d5cff;
+}
+
+body:has(a[href="#machine"]:hover),
+body:has(a[href="#machine"]:focus-visible) {
+  --accent: #d6f25c;
+  --accent-2: #ff7a3c;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+}
+
+.window {
+  color: var(--ink);
+  background:
+    linear-gradient(var(--paper), var(--paper)) padding-box,
+    linear-gradient(105deg, var(--accent), var(--accent-2)) border-box;
+  border: 3px solid transparent;
+  color-scheme: light;
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.chrome {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0.7rem 1rem;
+  background: linear-gradient(
+    100deg,
+    color-mix(in oklab, var(--accent) 40%, var(--paper)),
+    color-mix(in oklab, var(--accent-2) 34%, var(--paper))
+  );
+}
+
+.lights {
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+.lights i {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  display: block;
+}
+
+.lights i:nth-child(1) { background: #ff5d73; }
+.lights i:nth-child(2) { background: #ffc14d; }
+.lights i:nth-child(3) { background: #2ad4c8; }
+
+.chrome h2,
+.chrome-label {
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.chrome-meta {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--ink);
+}
+
+.window-body {
+  padding: 2rem 2.1rem 2.15rem;
+}
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.9rem;
+}
+
+h1 {
+  font-size: clamp(2.35rem, 5.4vw, 4.35rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  max-width: 14ch;
+  margin-bottom: 1.15rem;
+}
+
+.lede,
+.section-lead {
+  max-width: 62ch;
+  margin-bottom: 1.35rem;
+}
+
+.lede { font-size: 1.2rem; line-height: 1.5; }
+
+.cta-row { margin-bottom: 1.35rem; }
 
 .cmd {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  background: var(--terminal-bg);
-  color: var(--terminal-fg);
-  padding: 0.875rem 1rem;
-  border: 1px solid var(--border);
-  overflow-x: auto;
+  gap: 0.75rem;
+  padding: 0.7rem 0.75rem 0.7rem 1rem;
+  border-radius: 12px;
+  background: #14151c;
+  color: #e6e2da;
 }
 
 .cmd code {
-  font-size: 0.9375rem;
-  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  color: #e6e2da;
 }
 
 .prompt-char {
-  color: var(--accent);
-  margin-right: 0.5em;
+  color: #ffb3d4;
+  margin-right: 0.45rem;
   user-select: none;
 }
 
 .copy-btn {
-  font-family: var(--mono);
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--terminal-muted);
+  min-height: 44px;
+  min-width: 4.5rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #c8c3b8;
   background: transparent;
-  border: 1px solid var(--terminal-muted);
-  padding: 0.25rem 0.625rem;
+  color: #e6e2da;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
   cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: color 0.15s, border-color 0.15s;
 }
 
-.copy-btn:hover {
-  color: var(--terminal-fg);
-  border-color: var(--terminal-fg);
+.copy-btn:hover { border-color: #f7f4ec; color: #f7f4ec; }
+
+.dock {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  gap: 0.35rem;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0.4rem;
+  border-radius: 22px;
+  background: #12141c;
+  border: 1px solid rgba(247, 244, 236, 0.16);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.dock a {
+  min-width: 5.4rem;
+  min-height: 4.4rem;
+  padding: 0.45rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border-radius: 16px;
+  color: var(--field-text);
+  text-decoration: none;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.dock a:hover { background: #22242e; }
+
+.desktop:has(#today:target) .dock a[href="#today"],
+.desktop:has(#direction:target) .dock a[href="#direction"],
+.desktop:has(#machine:target) .dock a[href="#machine"] {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.glyph {
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 1.5px solid currentColor;
+  border-radius: 4px;
+  display: block;
+}
+
+.glyph-direction {
+  border-radius: 50%;
+  background:
+    linear-gradient(currentColor, currentColor) center/1.5px 100% no-repeat,
+    linear-gradient(currentColor, currentColor) center/100% 1.5px no-repeat;
+}
+
+.glyph-machine {
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 3px #12141c, inset 0 0 0 4.5px currentColor;
+}
+
+.desktop:has(#machine:target) .glyph-machine {
+  box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4.5px currentColor;
+}
+
+h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+}
+
+.block + .block { margin-top: 1.35rem; }
+
+p { margin-bottom: 0.85rem; }
+p:last-child { margin-bottom: 0; }
+
+.note {
+  max-width: 62ch;
+  color: var(--muted);
+  margin-top: 1.2rem;
+}
+
+.callout {
+  max-width: 62ch;
+  margin-bottom: 1.35rem;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in oklab, var(--accent) 12%, var(--paper));
+  border-radius: 0 10px 10px 0;
+}
+
+.specs { display: grid; gap: 1rem; }
+.specs div { max-width: 68ch; }
+.specs dt {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.specs dd { color: var(--ink); }
+
+.stack {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: 0.45rem 1rem;
+  max-width: 42rem;
+  margin-bottom: 1.25rem;
+}
+
+.stack dt {
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.stack dd { margin: 0; }
+
+.platforms {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.4rem 0 1.2rem;
+}
+
+.platforms li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--line);
+  max-width: 36rem;
+}
+
+.platforms span:last-child {
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  text-align: right;
+}
+
+a.inline {
+  color: #5b21b6;
+  text-underline-offset: 0.15em;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
 }
 
 .terminal {
-  background: var(--terminal-bg);
-  color: var(--terminal-fg);
-  padding: 1.25rem 1.5rem;
-  border: 1px solid var(--border);
+  background: #14151c;
+  color: #e6e2da;
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
   overflow-x: auto;
 }
 
 .terminal pre {
-  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
 }
 
-.terminal .prompt {
-  color: var(--accent);
-  user-select: none;
-}
+.terminal .muted { color: #c8c3b8; }
+.terminal .out { color: #f7f4ec; }
 
-.terminal .muted {
-  color: var(--terminal-muted);
-}
-
-.terminal .cursor {
-  display: inline;
-  animation: blink 1s step-end infinite;
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: #8ae8df;
+  transform: translateY(0.15em);
+  animation: blink 1.1s steps(1) infinite;
 }
 
 @keyframes blink {
   50% { opacity: 0; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .terminal .cursor {
-    display: none;
-  }
-}
-
-.features {
-  display: grid;
-  gap: 2.5rem;
-}
-
-.features p {
-  margin-bottom: 0;
-  max-width: 600px;
-}
-
-.command + .command {
-  margin-top: 2.5rem;
-}
-
-.command > p:first-of-type {
+.caption {
+  margin-top: 0.75rem;
   color: var(--muted);
-  font-size: 0.875rem;
-  margin-bottom: 1rem;
-}
-
-.warning {
-  font-size: 0.875rem;
-  border-left: 2px solid var(--accent);
-  padding-left: 1rem;
-  margin-top: 1rem;
-}
-
-.example {
-  margin-bottom: 1.5rem;
-}
-
-.example code {
-  display: block;
-  font-size: 0.875rem;
-  margin-bottom: 0.25rem;
-}
-
-.example p {
-  font-size: 0.875rem;
-  color: var(--muted);
+  font-size: 0.95rem;
 }
 
 footer {
-  border-top: 1px solid var(--border);
-  padding: 2rem 0;
-  margin-top: var(--gap);
+  width: min(920px, calc(100% - 2.5rem));
+  margin: 1.75rem auto 0;
+  padding: 0.5rem 0 0.25rem;
 }
 
-.footer-links {
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-  color: var(--muted);
+.footer-row {
   display: flex;
-  gap: 1.5rem;
   flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  align-items: center;
+  color: var(--field-muted);
+  font-size: 0.95rem;
 }
 
-.footer-links a {
-  color: var(--muted);
+.footer-row a {
+  color: var(--field-text);
+  text-underline-offset: 0.16em;
 }
 
-.footer-links a:hover {
-  color: var(--accent);
+@media (max-width: 720px) {
+  .desktop { width: min(920px, calc(100% - 2rem)); }
+  .window-body { padding: 1.3rem 1.05rem 1.4rem; }
+  h1 { max-width: none; }
+  .lede { font-size: 1.0625rem; }
+  .status { display: none; }
+  .stack { grid-template-columns: 1fr; gap: 0.15rem; }
+  .stack div, .stack dt, .stack dd { display: block; }
+  .stack dt { margin-top: 0.55rem; }
+  .window .cta-row .btn,
+  .menu-actions .btn { flex: 1 1 8.5rem; }
+  .platforms li { align-items: baseline; }
+  footer { width: min(920px, calc(100% - 1.25rem)); }
 }
 
-@media (max-width: 600px) {
-  :root {
-    --gap: 3rem;
-  }
+@media (max-width: 380px) {
+  .dock a { min-width: 4.7rem; padding-inline: 0.4rem; }
+  .brand { font-size: 1.1rem; }
+}
 
-  .col {
-    padding: 0 1rem;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .blob { transform: none; }
+  .drift,
+  .caret { animation: none; }
+  body,
+  .window,
+  .btn,
+  .dock a,
+  .menubar::after { transition: none; }
+}
 
-  .hero {
-    padding-top: var(--gap);
-  }
-
+@media (forced-colors: active) {
+  .aurora { display: none; }
+  .window,
+  .menubar,
+  .dock,
+  .btn,
+  .cmd,
   .terminal {
-    padding: 1rem;
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
   }
 }
 </style>
 </head>
 <body>
-
-<main class="col">
-
-  <section class="hero">
-    <h1 class="wordmark">boole</h1>
-    <p class="lead">
-      Local LLM inference for JavaScript — run GGUF models on your own machine
-      via llama.cpp, no API key or per-token cost required.
-    </p>
-    <div class="cmd">
-      <code><span class="prompt-char">$</span>npx @boole/cli</code>
-      <button class="copy-btn" data-copy="npx @boole/cli">copy</button>
-    </div>
-  </section>
-
-  <section>
-    <div class="terminal" id="terminal" aria-label="Terminal session demonstrating boole run with streaming output">
-      <pre><code id="terminal-output"><span class="prompt">$ </span>boole run TheBloke/Llama-2-7B-GGUF:Q4_K_M "Explain what a boolean is in one sentence." --stream
-<span class="muted">pulling TheBloke/Llama-2-7B-GGUF:Q4_K_M... </span><span class="muted">done (3.8 GB)
-</span><span class="muted">loading model... </span><span class="muted">done (Metal, 35 layers offloaded)
-
-</span>A boolean is a data type that holds exactly one of two values — true or false — and is the foundation
-of every conditional branch in every program you have ever run.</code></pre>
-    </div>
-  </section>
-
-  <section>
-    <div class="features">
-      <div>
-        <h3>Your hardware, your latency</h3>
-        <p>
-          Inference runs on the machine that called it. No cold start, no
-          round-trip to a datacenter, no queue. Metal on Apple Silicon, CUDA and
-          Vulkan on Linux and Windows.
-        </p>
-      </div>
-      <div>
-        <h3>Any GGUF, any quant</h3>
-        <p>
-          Point Boole at a HuggingFace repo and a quantization pattern. It
-          downloads the file, verifies the hash, and caches it locally. You pick
-          the size/quality trade-off.
-        </p>
-      </div>
-      <div>
-        <h3>An npm install, not a daemon</h3>
-        <p>
-          <code>npm i -g @boole/cli</code>. No Docker container, no system
-          service, no background process. It links against node-llama-cpp and
-          loads the model on demand.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Commands</h2>
-
-    <div class="command">
-      <h3>run</h3>
-      <p>Run a prompt against a model.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier or local <code>.gguf</code> path</td></tr>
-          <tr><td><code>--stream</code></td><td>Stream tokens to stdout</td></tr>
-          <tr><td><code>--system, -s</code></td><td>System prompt</td></tr>
-          <tr><td><code>--temp, -t</code></td><td>Sampling temperature (default: 0.8)</td></tr>
-          <tr><td><code>--ctx-size</code></td><td>Context window in tokens (default: 2048)</td></tr>
-          <tr><td><code>--gpu-layers</code></td><td>Layers to offload to GPU (default: all)</td></tr>
-          <tr><td><code>--max-tokens</code></td><td>Maximum tokens to generate</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="command">
-      <h3>pull</h3>
-      <p>Download a model to the local cache.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier</td></tr>
-          <tr><td><code>--dir</code></td><td>Custom cache directory</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="command">
-      <h3>serve</h3>
-      <p>Start an OpenAI-compatible HTTP server.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier or local <code>.gguf</code> path</td></tr>
-          <tr><td><code>--port, -p</code></td><td>Port (default: 8080)</td></tr>
-          <tr><td><code>--host</code></td><td>Bind address (default: 127.0.0.1)</td></tr>
-        </tbody>
-      </table>
-      <div class="warning">
-        <strong>Warning:</strong> <code>serve</code> binds to 127.0.0.1 by default.
-        Setting <code>--host 0.0.0.0</code> exposes the model endpoint to your
-        entire network with no authentication. Do not expose it to the public
-        internet.
-      </div>
-    </div>
-
-    <div class="command">
-      <h3>list</h3>
-      <p>List downloaded models.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--json</code></td><td>Output as JSON</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <h2>Model specifiers</h2>
-    <p>Models are addressed as <code>&lt;hf-repo&gt;:&lt;quant-pattern&gt;</code>.</p>
-
-    <div class="example">
-      <code>TheBloke/Llama-2-7B-GGUF:Q4_K_M</code>
-      <p>Downloads the Q4_K_M quantization of Llama 2 7B from TheBloke's HuggingFace repo.</p>
-    </div>
-
-    <div class="example">
-      <code>bartowski/Phi-3-mini-4k-instruct-GGUF:Q5_K_S</code>
-      <p>Downloads Phi-3 Mini at Q5_K_S quantization.</p>
-    </div>
-
-    <p>A local <code>.gguf</code> file path works anywhere a specifier does:</p>
-    <div class="cmd" style="margin-top: 0.5rem">
-      <code><span class="prompt-char">$</span>boole run ./mistral-7b-q4.gguf "your prompt"</code>
-      <button class="copy-btn" data-copy="boole run ./mistral-7b-q4.gguf &quot;your prompt&quot;">copy</button>
-    </div>
-  </section>
-
-  <section>
-    <h2>Platform support</h2>
-    <table>
-      <thead>
-        <tr><th>Platform</th><th>Arch</th><th>GPU</th><th>Backend</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>macOS</td><td>Apple Silicon</td><td>Yes</td><td>Metal</td></tr>
-        <tr><td>macOS</td><td>Intel</td><td>—</td><td>CPU only</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>NVIDIA</td><td>CUDA</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>AMD</td><td>Vulkan</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>—</td><td>CPU only</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>NVIDIA</td><td>CUDA</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>AMD</td><td>Vulkan</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>—</td><td>CPU only</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-</main>
-
-<footer class="col">
-  <div class="footer-links">
-    <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
-    <a href="https://github.com/boole-sh/boole">GitHub</a>
-    <span>MIT License</span>
-    <a href="mailto:hello@boole.sh">hello@boole.sh</a>
+  <a class="skip" href="#product">Skip to content</a>
+  <div class="aurora" aria-hidden="true">
+    <div class="blob blob-a"><div class="drift"></div></div>
+    <div class="blob blob-b"><div class="drift"></div></div>
+    <div class="blob blob-c"><div class="drift"></div></div>
+    <div class="blob blob-d"><div class="drift"></div></div>
   </div>
-</footer>
 
-<script>
-(function () {
-  var frames = [{"t":"$ ","c":"prompt","d":0},{"t":"boole run TheBloke/Llama-2-7B-GGUF:Q4_K_M \"Explain what a boolean is in one sentence.\" --stream\n","d":500},{"t":"pulling TheBloke/Llama-2-7B-GGUF:Q4_K_M... ","c":"muted","d":600},{"t":"done (3.8 GB)\n","c":"muted","d":1800},{"t":"loading model... ","c":"muted","d":400},{"t":"done (Metal, 35 layers offloaded)\n\n","c":"muted","d":1400},{"t":"A ","d":120},{"t":"boolean ","d":60},{"t":"is ","d":45},{"t":"a ","d":40},{"t":"data ","d":50},{"t":"type ","d":55},{"t":"that ","d":45},{"t":"holds ","d":50},{"t":"exactly ","d":55},{"t":"one ","d":45},{"t":"of ","d":35},{"t":"two ","d":45},{"t":"values ","d":50},{"t":"— ","d":70},{"t":"true ","d":50},{"t":"or ","d":40},{"t":"false ","d":50},{"t":"— ","d":70},{"t":"and ","d":45},{"t":"is ","d":35},{"t":"the ","d":40},{"t":"foundation\n","d":55},{"t":"of ","d":40},{"t":"every ","d":50},{"t":"conditional ","d":65},{"t":"branch ","d":55},{"t":"in ","d":35},{"t":"every ","d":50},{"t":"program ","d":60},{"t":"you ","d":45},{"t":"have ","d":45},{"t":"ever ","d":50},{"t":"run.","d":55}];
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  <header class="menubar">
+    <a class="brand" href="/">boole <span class="brand-os">Imagine OS</span></a>
+    <p class="status" aria-hidden="true">
+      <span class="s-default">local model</span>
+      <span class="s-today">on this machine</span>
+      <span class="s-direction">targets, not benchmarks</span>
+      <span class="s-machine">llama.cpp · gguf</span>
+    </p>
+    <nav class="menu-actions" aria-label="Contact">
+      <a class="btn btn-call" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Book%20a%20call">Book a call</a>
+      <a class="btn btn-buy" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Buy%20now">Buy now</a>
+    </nav>
+  </header>
 
-  var el = document.getElementById('terminal');
-  var output = document.getElementById('terminal-output');
+  <div class="desktop">
+    <main id="product" tabindex="-1">
+      <section class="window hero" aria-labelledby="imagine-heading">
+        <div class="chrome" aria-hidden="true">
+          <span class="lights"><i></i><i></i><i></i></span>
+          <span class="chrome-label">Imagine</span>
+          <span class="chrome-meta">on device</span>
+        </div>
+        <div class="window-body">
+          <p class="kicker">Local LLM inference for JavaScript</p>
+          <h1 id="imagine-heading">Run the model on the device. Let the interface imagine.</h1>
+          <p class="lede">
+            Boole is a terminal for GGUF models. It runs them on your machine
+            through llama.cpp: no API key, and no per-token cloud bill. Imagine OS
+            is the direction from here. The interface should evolve around how you
+            use the device, with the model staying local.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-buy" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Buy%20now">Buy now</a>
+            <a class="btn btn-call" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Book%20a%20call">Book a call</a>
+          </div>
+          <div class="cmd">
+            <code><span class="prompt-char">$</span>npx @boole/cli</code>
+            <button class="copy-btn" type="button" data-copy="npx @boole/cli">Copy</button>
+          </div>
+        </div>
+      </section>
 
-  var observer = new IntersectionObserver(function (entries) {
-    if (entries[0].isIntersecting) {
-      observer.disconnect();
-      output.innerHTML = '';
+      <nav class="dock" aria-label="Sections">
+        <a href="#today"><span class="glyph glyph-today" aria-hidden="true"></span>Today</a>
+        <a href="#direction"><span class="glyph glyph-direction" aria-hidden="true"></span>Direction</a>
+        <a href="#machine"><span class="glyph glyph-machine" aria-hidden="true"></span>Machine</a>
+      </nav>
 
-      var cursor = document.createElement('span');
-      cursor.className = 'cursor';
-      cursor.textContent = '\u2588';
-      output.appendChild(cursor);
+      <section class="window" id="today" tabindex="-1">
+        <div class="chrome">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h2>Today</h2>
+          <span class="chrome-meta">0.0.1</span>
+        </div>
+        <div class="window-body">
+          <p class="section-lead">
+            Version 0.0.1 is a Node.js command line. Four commands work.
+            <code>serve</code> and <code>list</code> are reserved and not implemented yet.
+          </p>
+          <div class="block">
+            <h3><code>run</code></h3>
+            <p>
+              Prompt a model. Use an alias such as <code>llama3</code>, a full
+              specifier like <code>TheBloke/Llama-2-7B-GGUF:Q4_K_M</code>, or a
+              local <code>.gguf</code> path. An alias resolves to a Hugging Face
+              repo, then Boole picks the highest-quality quantization that fits
+              in available memory.
+            </p>
+          </div>
+          <div class="block">
+            <h3><code>pull</code></h3>
+            <p>
+              Download that file into a local cache. An interrupted download
+              resumes instead of starting over.
+            </p>
+          </div>
+          <div class="block">
+            <h3><code>doctor</code></h3>
+            <p>
+              Report the OS, memory, and GPU backend, then suggest a model size
+              this machine can hold.
+            </p>
+          </div>
+          <div class="block">
+            <h3><code>models</code></h3>
+            <p>
+              List the aliases shipped with the CLI, including llama3, mistral,
+              phi3, and qwen2.5.
+            </p>
+          </div>
+          <p class="note">
+            The model’s text is the only thing written to stdout. Progress and
+            errors stay on stderr. GPU support follows node-llama-cpp: Metal on
+            Apple Silicon, CUDA or Vulkan where that runtime provides them, and
+            CPU otherwise. If node-llama-cpp is not installed, Boole says so and
+            exits. A local server, when it exists, should stay on localhost.
+          </p>
+        </div>
+      </section>
 
-      var i = 0;
-      function step() {
-        var f = frames[i];
-        if (f.c) {
-          var span = document.createElement('span');
-          span.className = f.c;
-          span.textContent = f.t;
-          output.insertBefore(span, cursor);
-        } else {
-          output.insertBefore(document.createTextNode(f.t), cursor);
-        }
-        i++;
-        if (i < frames.length) {
-          setTimeout(step, frames[i].d);
-        } else {
-          cursor.remove();
-        }
-      }
-      setTimeout(step, frames[0].d);
+      <section class="window" id="direction" tabindex="-1">
+        <div class="chrome">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h2>Direction</h2>
+          <span class="chrome-meta">roadmap</span>
+        </div>
+        <div class="window-body">
+          <p class="callout">Targets, not measured results. Boole has not published a benchmark for these.</p>
+          <div class="block">
+            <h3>Ternary weights</h3>
+            <p>
+              BitNet-style 1.58-bit models, so a full network can live on the
+              device instead of in a datacenter.
+            </p>
+          </div>
+          <div class="block">
+            <h3>20B at 200 tokens per second</h3>
+            <p>
+              A 20-billion-parameter model with a speed target of 200 tokens per
+              second. That figure is a goal. It is not a result we have recorded.
+            </p>
+          </div>
+          <div class="block">
+            <h3>Imagine OS</h3>
+            <p>
+              The interface should change with how you actually use the machine.
+              A fixed native shell is the starting point, not the finished
+              product. The model still runs locally.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="window" id="machine" tabindex="-1">
+        <div class="chrome">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h2>This machine</h2>
+          <span class="chrome-meta">stack</span>
+        </div>
+        <div class="window-body">
+          <p class="section-lead">
+            Inference is a process on the computer that asked for it. After the
+            weights are cached, that run does not need a network round trip.
+          </p>
+          <dl class="stack">
+            <dt>Language</dt>
+            <dd>TypeScript on Node.js 18+</dd>
+            <dt>Packages</dt>
+            <dd><code>@boole/cli</code> and <code>@boole/hardware</code></dd>
+            <dt>Runtime</dt>
+            <dd>llama.cpp through node-llama-cpp</dd>
+            <dt>Weights</dt>
+            <dd>GGUF files from Hugging Face, cached on disk</dd>
+            <dt>License</dt>
+            <dd>MIT</dd>
+          </dl>
+          <h3>Where it runs</h3>
+          <ul class="platforms">
+            <li><span>macOS, Apple Silicon</span><span>Metal</span></li>
+            <li><span>macOS, Intel</span><span>CPU</span></li>
+            <li><span>Linux, x86_64</span><span>CUDA, Vulkan, or CPU</span></li>
+            <li><span>Windows, x86_64</span><span>CUDA, Vulkan, or CPU</span></li>
+          </ul>
+          <p>
+            There is no API key and no per-token invoice for the run itself.
+            Install with <code>npx @boole/cli</code> or <code>npm i -g @boole/cli</code>.
+            The <a class="inline" href="https://github.com/jordantplows/boole-platform">source</a>
+            and the <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm package</a>
+            are public.
+          </p>
+        </div>
+      </section>
+
+      <section class="window" id="session" tabindex="-1" aria-labelledby="session-title">
+        <div class="chrome">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h2 id="session-title">Terminal</h2>
+          <span class="chrome-meta">example</span>
+        </div>
+        <div class="window-body">
+          <div class="terminal">
+            <pre><span class="prompt-char">$ </span>boole run llama3 -p "Explain what a boolean is in one sentence."
+<span class="muted">llama3 -&gt; bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:&lt;quant&gt;
+  highest quality quantization that fits available RAM</span>
+
+<span class="out">A boolean holds one of two values — true or false.</span><span class="caret" aria-hidden="true"></span></pre>
+          </div>
+          <p class="caption">
+            Illustrative session, not a timing result. The quantization depends
+            on the memory free on that machine. stdout is only the model’s text.
+          </p>
+        </div>
+      </section>
+
+      <section class="window" id="talk" tabindex="-1">
+        <div class="chrome">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h2>Talk</h2>
+          <span class="chrome-meta">jordan@bunkerbio.com</span>
+        </div>
+        <div class="window-body">
+          <p class="section-lead">
+            Buy now and Book a call both open an email to
+            <a class="inline" href="mailto:jordan@bunkerbio.com">jordan@bunkerbio.com</a>,
+            with the subject already filled in.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-buy" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Buy%20now">Buy now</a>
+            <a class="btn btn-call" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Book%20a%20call">Book a call</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-row">
+      <span>boole · MIT</span>
+      <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
+      <a href="https://github.com/jordantplows/boole-platform">Source</a>
+      <a href="mailto:jordan@bunkerbio.com">jordan@bunkerbio.com</a>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    var root = document.documentElement;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var raf = 0;
+    var px = 0.5;
+    var py = 0.42;
+    var scroll = 0;
+    function paint() {
+      raf = 0;
+      root.style.setProperty('--mx', px.toFixed(4));
+      root.style.setProperty('--my', py.toFixed(4));
+      root.style.setProperty('--scroll', scroll.toFixed(4));
     }
-  }, { threshold: 0.3 });
-
-  observer.observe(el);
-})();
-</script>
-
-<script>
-document.querySelectorAll('[data-copy]').forEach(function (btn) {
-  btn.addEventListener('click', function () {
-    navigator.clipboard.writeText(btn.getAttribute('data-copy')).then(function () {
+    function schedule() {
+      if (!raf) raf = requestAnimationFrame(paint);
+    }
+    addEventListener('pointermove', function (e) {
+      px = e.clientX / innerWidth;
+      py = e.clientY / innerHeight;
+      schedule();
+    }, { passive: true });
+    addEventListener('scroll', function () {
+      var max = document.documentElement.scrollHeight - innerHeight;
+      scroll = max > 0 ? window.scrollY / max : 0;
+      schedule();
+    }, { passive: true });
+  })();
+  </script>
+  <script>
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy') || '';
       var prev = btn.textContent;
-      btn.textContent = 'copied';
-      setTimeout(function () { btn.textContent = prev; }, 2000);
+      function done() {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = prev; }, 1600);
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done).catch(function () {
+          btn.textContent = 'Select it';
+          setTimeout(function () { btn.textContent = prev; }, 1600);
+        });
+      }
     });
   });
-});
-</script>
-
+  </script>
 </body>
 </html>

@@ -7,284 +7,421 @@ const DIST = 'dist';
 const SITE = 'https://boole.sh';
 const PORT = 4321;
 
+/**
+ * Inquiry destinations. One place to swap later:
+ * set buyNow to a Stripe Payment Link and bookCall to a Cal.com URL.
+ * Until then both are mailto links with the subject filled in.
+ */
+const CTA = {
+  email: 'jordan@bunkerbio.com',
+  buyNow: `mailto:jordan@bunkerbio.com?subject=${encodeURIComponent('Boole: Buy now')}`,
+  bookCall: `mailto:jordan@bunkerbio.com?subject=${encodeURIComponent('Boole: Book a call')}`,
+} as const;
+
+const TITLE = 'Boole — Imagine OS, on-device local AI';
+const DESCRIPTION =
+  'Local GGUF inference via llama.cpp, on your machine. Imagine OS is the direction: software that adapts to you. 20B at 200 tok/s is a target.';
+const KEYWORDS =
+  'local AI, on-device LLM, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF, edge inference, Imagine OS';
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE}/#organization`,
+      name: 'Boole',
+      url: `${SITE}/`,
+      email: CTA.email,
+      logo: `${SITE}/favicon.svg`,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE}/#website`,
+      url: `${SITE}/`,
+      name: 'Boole',
+      description: DESCRIPTION,
+      publisher: { '@id': `${SITE}/#organization` },
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Boole',
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'macOS, Linux, Windows',
+      softwareVersion: '0.0.1',
+      url: `${SITE}/`,
+      description: DESCRIPTION,
+      keywords: KEYWORDS,
+      license: 'https://opensource.org/licenses/MIT',
+      installUrl: 'https://www.npmjs.com/package/@boole/cli',
+      featureList: [
+        'Local GGUF inference through llama.cpp',
+        'Hardware-aware quantization for model aliases',
+        'On-device model cache with resumable downloads',
+      ],
+      author: { '@id': `${SITE}/#organization` },
+      publisher: { '@id': `${SITE}/#organization` },
+    },
+  ],
+}).replace(/</g, '\\u003c');
+
 if (existsSync(DIST)) rmSync(DIST, { recursive: true });
 mkdirSync(DIST, { recursive: true });
 
 const css = readFileSync('src/styles/global.css', 'utf-8');
-const frames: Array<{ t: string; c?: string; d: number }> = JSON.parse(
-  readFileSync('src/data/terminal-frames.json', 'utf-8'),
-);
-
-const staticTerminal = frames
-  .map(f => {
-    const t = f.t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    return f.c ? `<span class="${f.c}">${t}</span>` : t;
-  })
-  .join('');
 
 const html = `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>boole — local LLM inference for JavaScript</title>
-  <meta name="description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <title>${TITLE}</title>
+  <meta name="description" content="${DESCRIPTION}">
+  <meta name="keywords" content="${KEYWORDS}">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="${SITE}/">
-
-  <meta property="og:title" content="boole — local LLM inference for JavaScript">
-  <meta property="og:description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <meta property="og:site_name" content="Boole">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="${TITLE}">
+  <meta property="og:description" content="${DESCRIPTION}">
   <meta property="og:image" content="${SITE}/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Boole, Imagine OS. Local models on your machine.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${SITE}/">
-
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="boole — local LLM inference for JavaScript">
-  <meta name="twitter:description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <meta name="twitter:title" content="${TITLE}">
+  <meta name="twitter:description" content="${DESCRIPTION}">
   <meta name="twitter:image" content="${SITE}/og.png">
-
-  <meta name="theme-color" content="#fbfbf9" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)">
-
+  <meta name="twitter:image:alt" content="Boole, Imagine OS. Local models on your machine.">
+  <meta name="theme-color" content="#0e1016">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">${jsonLd}</script>
   <style>${css}</style>
 </head>
 <body>
-
-<main class="col">
-
-  <section class="hero">
-    <h1 class="wordmark">boole</h1>
-    <p class="lead">
-      Local LLM inference for JavaScript — run GGUF models on your own machine
-      via llama.cpp, no API key or per-token cost required.
-    </p>
-    <div class="cmd">
-      <code><span class="prompt-char">$</span>npx @boole/cli</code>
-      <button class="copy-btn" data-copy="npx @boole/cli">copy</button>
-    </div>
-  </section>
-
-  <section>
-    <div class="terminal" id="terminal" aria-label="Terminal session demonstrating boole run with streaming output">
-      <pre><code id="terminal-output">${staticTerminal}</code></pre>
-    </div>
-  </section>
-
-  <section>
-    <div class="features">
-      <div>
-        <h3>Your hardware, your latency</h3>
-        <p>
-          Inference runs on the machine that called it. No cold start, no
-          round-trip to a datacenter, no queue. Metal on Apple Silicon, CUDA and
-          Vulkan on Linux and Windows.
-        </p>
-      </div>
-      <div>
-        <h3>Any GGUF, any quant</h3>
-        <p>
-          Point Boole at a HuggingFace repo and a quantization pattern. It
-          downloads the file, verifies the hash, and caches it locally. You pick
-          the size/quality trade-off.
-        </p>
-      </div>
-      <div>
-        <h3>An npm install, not a daemon</h3>
-        <p>
-          <code>npm i -g @boole/cli</code>. No Docker container, no system
-          service, no background process. It links against node-llama-cpp and
-          loads the model on demand.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Commands</h2>
-
-    <div class="command">
-      <h3>run</h3>
-      <p>Run a prompt against a model.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier or local <code>.gguf</code> path</td></tr>
-          <tr><td><code>--stream</code></td><td>Stream tokens to stdout</td></tr>
-          <tr><td><code>--system, -s</code></td><td>System prompt</td></tr>
-          <tr><td><code>--temp, -t</code></td><td>Sampling temperature (default: 0.8)</td></tr>
-          <tr><td><code>--ctx-size</code></td><td>Context window in tokens (default: 2048)</td></tr>
-          <tr><td><code>--gpu-layers</code></td><td>Layers to offload to GPU (default: all)</td></tr>
-          <tr><td><code>--max-tokens</code></td><td>Maximum tokens to generate</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="command">
-      <h3>pull</h3>
-      <p>Download a model to the local cache.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier</td></tr>
-          <tr><td><code>--dir</code></td><td>Custom cache directory</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="command">
-      <h3>serve</h3>
-      <p>Start an OpenAI-compatible HTTP server.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier or local <code>.gguf</code> path</td></tr>
-          <tr><td><code>--port, -p</code></td><td>Port (default: 8080)</td></tr>
-          <tr><td><code>--host</code></td><td>Bind address (default: 127.0.0.1)</td></tr>
-        </tbody>
-      </table>
-      <div class="warning">
-        <strong>Warning:</strong> <code>serve</code> binds to 127.0.0.1 by default.
-        Setting <code>--host 0.0.0.0</code> exposes the model endpoint to your
-        entire network with no authentication. Do not expose it to the public
-        internet.
-      </div>
-    </div>
-
-    <div class="command">
-      <h3>list</h3>
-      <p>List downloaded models.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--json</code></td><td>Output as JSON</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <h2>Model specifiers</h2>
-    <p>Models are addressed as <code>&lt;hf-repo&gt;:&lt;quant-pattern&gt;</code>.</p>
-
-    <div class="example">
-      <code>TheBloke/Llama-2-7B-GGUF:Q4_K_M</code>
-      <p>Downloads the Q4_K_M quantization of Llama 2 7B from TheBloke's HuggingFace repo.</p>
-    </div>
-
-    <div class="example">
-      <code>bartowski/Phi-3-mini-4k-instruct-GGUF:Q5_K_S</code>
-      <p>Downloads Phi-3 Mini at Q5_K_S quantization.</p>
-    </div>
-
-    <p>A local <code>.gguf</code> file path works anywhere a specifier does:</p>
-    <div class="cmd" style="margin-top: 0.5rem">
-      <code><span class="prompt-char">$</span>boole run ./mistral-7b-q4.gguf "your prompt"</code>
-      <button class="copy-btn" data-copy="boole run ./mistral-7b-q4.gguf &quot;your prompt&quot;">copy</button>
-    </div>
-  </section>
-
-  <section>
-    <h2>Platform support</h2>
-    <table>
-      <thead>
-        <tr><th>Platform</th><th>Arch</th><th>GPU</th><th>Backend</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>macOS</td><td>Apple Silicon</td><td>Yes</td><td>Metal</td></tr>
-        <tr><td>macOS</td><td>Intel</td><td>—</td><td>CPU only</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>NVIDIA</td><td>CUDA</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>AMD</td><td>Vulkan</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>—</td><td>CPU only</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>NVIDIA</td><td>CUDA</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>AMD</td><td>Vulkan</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>—</td><td>CPU only</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-</main>
-
-<footer class="col">
-  <div class="footer-links">
-    <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
-    <a href="https://github.com/boole-sh/boole">GitHub</a>
-    <span>MIT License</span>
-    <a href="mailto:hello@boole.sh">hello@boole.sh</a>
+  <a class="skip" href="#product">Skip to content</a>
+  <div class="aurora" aria-hidden="true">
+    <div class="blob blob-a"><div class="drift"></div></div>
+    <div class="blob blob-b"><div class="drift"></div></div>
+    <div class="blob blob-c"><div class="drift"></div></div>
+    <div class="blob blob-d"><div class="drift"></div></div>
   </div>
-</footer>
 
-<script>
-(function () {
-  var frames = ${JSON.stringify(frames)};
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  <header class="menubar">
+    <a class="brand" href="/">boole <span class="brand-os">Imagine OS</span></a>
+    <p class="status" aria-hidden="true">
+      <span class="s-default">local model</span>
+      <span class="s-today">on this machine</span>
+      <span class="s-direction">targets, not benchmarks</span>
+      <span class="s-machine">llama.cpp · gguf</span>
+    </p>
+    <nav class="menu-actions" aria-label="Contact">
+      <a class="btn btn-call" href="${CTA.bookCall}">Book a call</a>
+      <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
+    </nav>
+  </header>
 
-  var el = document.getElementById('terminal');
-  var output = document.getElementById('terminal-output');
+  <div class="desktop">
+    <main id="product" tabindex="-1">
+      <section class="window hero" aria-labelledby="imagine-heading">
+        <div class="chrome" aria-hidden="true">
+          <span class="lights"><i></i><i></i><i></i></span>
+          <span class="chrome-label">Imagine</span>
+          <span class="chrome-meta">on device</span>
+        </div>
+        <div class="window-body">
+          <p class="kicker">Local LLM inference for JavaScript</p>
+          <h1 id="imagine-heading">Run the model on the device. Let the interface imagine.</h1>
+          <p class="lede">
+            Boole is a terminal for GGUF models. It runs them on your machine
+            through llama.cpp: no API key, and no per-token cloud bill. Imagine OS
+            is the direction from here. The interface should evolve around how you
+            use the device, with the model staying local.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
+            <a class="btn btn-call" href="${CTA.bookCall}">Book a call</a>
+          </div>
+          <div class="cmd">
+            <code><span class="prompt-char">$</span>npx @boole/cli</code>
+            <button class="copy-btn" type="button" data-copy="npx @boole/cli">Copy</button>
+          </div>
+        </div>
+      </section>
 
-  var observer = new IntersectionObserver(function (entries) {
-    if (entries[0].isIntersecting) {
-      observer.disconnect();
-      output.innerHTML = '';
+      <nav class="dock" aria-label="Sections">
+        <a href="#today"><span class="glyph glyph-today" aria-hidden="true"></span>Today</a>
+        <a href="#direction"><span class="glyph glyph-direction" aria-hidden="true"></span>Direction</a>
+        <a href="#machine"><span class="glyph glyph-machine" aria-hidden="true"></span>Machine</a>
+      </nav>
 
-      var cursor = document.createElement('span');
-      cursor.className = 'cursor';
-      cursor.textContent = '\\u2588';
-      output.appendChild(cursor);
+      <section class="window" id="today" tabindex="-1">
+        <div class="chrome">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h2>Today</h2>
+          <span class="chrome-meta">0.0.1</span>
+        </div>
+        <div class="window-body">
+          <p class="section-lead">
+            Version 0.0.1 is a Node.js command line. Four commands work.
+            <code>serve</code> and <code>list</code> are reserved and not implemented yet.
+          </p>
+          <div class="block">
+            <h3><code>run</code></h3>
+            <p>
+              Prompt a model. Use an alias such as <code>llama3</code>, a full
+              specifier like <code>TheBloke/Llama-2-7B-GGUF:Q4_K_M</code>, or a
+              local <code>.gguf</code> path. An alias resolves to a Hugging Face
+              repo, then Boole picks the highest-quality quantization that fits
+              in available memory.
+            </p>
+          </div>
+          <div class="block">
+            <h3><code>pull</code></h3>
+            <p>
+              Download that file into a local cache. An interrupted download
+              resumes instead of starting over.
+            </p>
+          </div>
+          <div class="block">
+            <h3><code>doctor</code></h3>
+            <p>
+              Report the OS, memory, and GPU backend, then suggest a model size
+              this machine can hold.
+            </p>
+          </div>
+          <div class="block">
+            <h3><code>models</code></h3>
+            <p>
+              List the aliases shipped with the CLI, including llama3, mistral,
+              phi3, and qwen2.5.
+            </p>
+          </div>
+          <p class="note">
+            The model’s text is the only thing written to stdout. Progress and
+            errors stay on stderr. GPU support follows node-llama-cpp: Metal on
+            Apple Silicon, CUDA or Vulkan where that runtime provides them, and
+            CPU otherwise. If node-llama-cpp is not installed, Boole says so and
+            exits. A local server, when it exists, should stay on localhost.
+          </p>
+        </div>
+      </section>
 
-      var i = 0;
-      function step() {
-        var f = frames[i];
-        if (f.c) {
-          var span = document.createElement('span');
-          span.className = f.c;
-          span.textContent = f.t;
-          output.insertBefore(span, cursor);
-        } else {
-          output.insertBefore(document.createTextNode(f.t), cursor);
-        }
-        i++;
-        if (i < frames.length) {
-          setTimeout(step, frames[i].d);
-        } else {
-          cursor.remove();
-        }
-      }
-      setTimeout(step, frames[0].d);
+      <section class="window" id="direction" tabindex="-1">
+        <div class="chrome">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h2>Direction</h2>
+          <span class="chrome-meta">roadmap</span>
+        </div>
+        <div class="window-body">
+          <p class="callout">Targets, not measured results. Boole has not published a benchmark for these.</p>
+          <div class="block">
+            <h3>Ternary weights</h3>
+            <p>
+              BitNet-style 1.58-bit models, so a full network can live on the
+              device instead of in a datacenter.
+            </p>
+          </div>
+          <div class="block">
+            <h3>20B at 200 tokens per second</h3>
+            <p>
+              A 20-billion-parameter model with a speed target of 200 tokens per
+              second. That figure is a goal. It is not a result we have recorded.
+            </p>
+          </div>
+          <div class="block">
+            <h3>Imagine OS</h3>
+            <p>
+              The interface should change with how you actually use the machine.
+              A fixed native shell is the starting point, not the finished
+              product. The model still runs locally.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="window" id="machine" tabindex="-1">
+        <div class="chrome">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h2>This machine</h2>
+          <span class="chrome-meta">stack</span>
+        </div>
+        <div class="window-body">
+          <p class="section-lead">
+            Inference is a process on the computer that asked for it. After the
+            weights are cached, that run does not need a network round trip.
+          </p>
+          <dl class="stack">
+            <dt>Language</dt>
+            <dd>TypeScript on Node.js 18+</dd>
+            <dt>Packages</dt>
+            <dd><code>@boole/cli</code> and <code>@boole/hardware</code></dd>
+            <dt>Runtime</dt>
+            <dd>llama.cpp through node-llama-cpp</dd>
+            <dt>Weights</dt>
+            <dd>GGUF files from Hugging Face, cached on disk</dd>
+            <dt>License</dt>
+            <dd>MIT</dd>
+          </dl>
+          <h3>Where it runs</h3>
+          <ul class="platforms">
+            <li><span>macOS, Apple Silicon</span><span>Metal</span></li>
+            <li><span>macOS, Intel</span><span>CPU</span></li>
+            <li><span>Linux, x86_64</span><span>CUDA, Vulkan, or CPU</span></li>
+            <li><span>Windows, x86_64</span><span>CUDA, Vulkan, or CPU</span></li>
+          </ul>
+          <p>
+            There is no API key and no per-token invoice for the run itself.
+            Install with <code>npx @boole/cli</code> or <code>npm i -g @boole/cli</code>.
+            The <a class="inline" href="https://github.com/jordantplows/boole-platform">source</a>
+            and the <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm package</a>
+            are public.
+          </p>
+        </div>
+      </section>
+
+      <section class="window" id="session" tabindex="-1" aria-labelledby="session-title">
+        <div class="chrome">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h2 id="session-title">Terminal</h2>
+          <span class="chrome-meta">example</span>
+        </div>
+        <div class="window-body">
+          <div class="terminal">
+            <pre><span class="prompt-char">$ </span>boole run llama3 -p "Explain what a boolean is in one sentence."
+<span class="muted">llama3 -&gt; bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:&lt;quant&gt;
+  highest quality quantization that fits available RAM</span>
+
+<span class="out">A boolean holds one of two values — true or false.</span><span class="caret" aria-hidden="true"></span></pre>
+          </div>
+          <p class="caption">
+            Illustrative session, not a timing result. The quantization depends
+            on the memory free on that machine. stdout is only the model’s text.
+          </p>
+        </div>
+      </section>
+
+      <section class="window" id="talk" tabindex="-1">
+        <div class="chrome">
+          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h2>Talk</h2>
+          <span class="chrome-meta">${CTA.email}</span>
+        </div>
+        <div class="window-body">
+          <p class="section-lead">
+            Buy now and Book a call both open an email to
+            <a class="inline" href="mailto:${CTA.email}">${CTA.email}</a>,
+            with the subject already filled in.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
+            <a class="btn btn-call" href="${CTA.bookCall}">Book a call</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-row">
+      <span>boole · MIT</span>
+      <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
+      <a href="https://github.com/jordantplows/boole-platform">Source</a>
+      <a href="mailto:${CTA.email}">${CTA.email}</a>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    var root = document.documentElement;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var raf = 0;
+    var px = 0.5;
+    var py = 0.42;
+    var scroll = 0;
+    function paint() {
+      raf = 0;
+      root.style.setProperty('--mx', px.toFixed(4));
+      root.style.setProperty('--my', py.toFixed(4));
+      root.style.setProperty('--scroll', scroll.toFixed(4));
     }
-  }, { threshold: 0.3 });
-
-  observer.observe(el);
-})();
-</script>
-
-<script>
-document.querySelectorAll('[data-copy]').forEach(function (btn) {
-  btn.addEventListener('click', function () {
-    navigator.clipboard.writeText(btn.getAttribute('data-copy')).then(function () {
+    function schedule() {
+      if (!raf) raf = requestAnimationFrame(paint);
+    }
+    addEventListener('pointermove', function (e) {
+      px = e.clientX / innerWidth;
+      py = e.clientY / innerHeight;
+      schedule();
+    }, { passive: true });
+    addEventListener('scroll', function () {
+      var max = document.documentElement.scrollHeight - innerHeight;
+      scroll = max > 0 ? window.scrollY / max : 0;
+      schedule();
+    }, { passive: true });
+  })();
+  </script>
+  <script>
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy') || '';
       var prev = btn.textContent;
-      btn.textContent = 'copied';
-      setTimeout(function () { btn.textContent = prev; }, 2000);
+      function done() {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = prev; }, 1600);
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(done).catch(function () {
+          btn.textContent = 'Select it';
+          setTimeout(function () { btn.textContent = prev; }, 1600);
+        });
+      }
     });
   });
-});
-</script>
-
+  </script>
 </body>
 </html>`;
 
 writeFileSync(join(DIST, 'index.html'), html);
 
 const ogSvg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#161618"/>
-  <text x="100" y="260" font-family="monospace" font-size="64" font-weight="700" fill="#e8e6e3">boole</text>
-  <text x="100" y="330" font-family="sans-serif" font-size="26" fill="#929290">Local LLM inference for JavaScript</text>
-  <text x="100" y="400" font-family="monospace" font-size="20" fill="#e8862f">$ npx @boole/cli</text>
+  <rect width="1200" height="630" fill="#0e1016"/>
+  <circle cx="160" cy="80" r="240" fill="#ff2f86"/>
+  <circle cx="1080" cy="40" r="280" fill="#7d5cff"/>
+  <circle cx="980" cy="620" r="300" fill="#14d6c8"/>
+  <circle cx="360" cy="640" r="200" fill="#ffb020" opacity="0.9"/>
+  <rect x="72" y="128" width="1056" height="390" rx="28" fill="#f7f4ec"/>
+  <circle cx="118" cy="176" r="8" fill="#ff5d73"/>
+  <circle cx="146" cy="176" r="8" fill="#ffc14d"/>
+  <circle cx="174" cy="176" r="8" fill="#2ad4c8"/>
+  <text x="210" y="184" font-family="Inter, DejaVu Sans, sans-serif" font-size="22" font-weight="600" fill="#16171c">IMAGINE OS</text>
+  <text x="112" y="300" font-family="Inter, DejaVu Sans, sans-serif" font-size="84" font-weight="600" fill="#16171c">boole</text>
+  <text x="116" y="368" font-family="Inter, DejaVu Sans, sans-serif" font-size="30" fill="#3a3f4b">Local models, on your machine.</text>
+  <text x="116" y="450" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-size="24" fill="#16171c">$ npx @boole/cli</text>
 </svg>`;
 
 const ogPng = await sharp(Buffer.from(ogSvg)).png().toBuffer();
 writeFileSync(join(DIST, 'og.png'), ogPng);
 
 cpSync('public', DIST, { recursive: true });
+
+const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${SITE}/sitemap.xml
+`;
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${SITE}/</loc>
+  </url>
+</urlset>
+`;
+
+writeFileSync(join(DIST, 'robots.txt'), robots);
+writeFileSync(join(DIST, 'sitemap.xml'), sitemap);
 
 console.log(`Built to ${DIST}/ (${(html.length / 1024).toFixed(1)}KB html, ${(ogPng.length / 1024).toFixed(1)}KB og.png)`);
 
@@ -296,6 +433,8 @@ if (process.argv.includes('--serve')) {
     '.json': 'application/json',
     '.png': 'image/png',
     '.svg': 'image/svg+xml',
+    '.xml': 'application/xml; charset=utf-8',
+    '.txt': 'text/plain; charset=utf-8',
     '': 'text/plain; charset=utf-8',
   };
 
@@ -313,7 +452,7 @@ if (process.argv.includes('--serve')) {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       res.end('Not found');
     }
-  }).listen(PORT, () => {
+  }).listen(PORT, '0.0.0.0', () => {
     console.log(`Serving at http://localhost:${PORT}`);
   });
 }
