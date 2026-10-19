@@ -13,9 +13,9 @@ const PORT = 4321;
  * Until then both are mailto links with the subject filled in.
  */
 const CTA = {
-  email: 'jordan@bunkerbio.com',
-  buyNow: `mailto:jordan@bunkerbio.com?subject=${encodeURIComponent('Boole: Buy now')}`,
-  bookCall: `mailto:jordan@bunkerbio.com?subject=${encodeURIComponent('Boole: Book a call')}`,
+  email: 'hello@booleinference.com',
+  buyNow: `mailto:hello@booleinference.com?subject=${encodeURIComponent('Boole: Buy now')}`,
+  bookCall: `mailto:hello@booleinference.com?subject=${encodeURIComponent('Boole: Book a call')}`,
 } as const;
 
 const TITLE = 'Imagine OS — on-device models for software that adapts';
@@ -99,6 +99,7 @@ const html = `<!doctype html>
   <meta name="twitter:image:alt" content="Imagine OS. On-device models for software that adapts.">
   <meta name="theme-color" content="#0c0d10">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.add('js')</script>
   <script type="application/ld+json">${jsonLd}</script>
   <style>${css}</style>
 </head>
@@ -116,12 +117,13 @@ const html = `<!doctype html>
     <section id="vision" tabindex="-1">
       <div class="wrap">
         <p class="kicker">Imagine OS · Release 0.0.1</p>
-        <h1>The model stays on the device.</h1>
+        <h1>The computer should write the software with you.</h1>
         <p class="lede">
-          Imagine OS runs real models locally and shapes its software around the
-          person using it. Fixed apps are written before you arrive. This one
-          keeps taking shape after it ships. What runs today is the runtime.
-          The shell that imagines is what we are building on it.
+          Every app you use was finished before you opened it. Imagine OS is
+          the other arrangement: a real model runs on the device, and the
+          software takes its shape from the person holding it. Private.
+          Immediate. Still yours when the network is gone. The runtime is what
+          you can run today. The shell that imagines is what that runtime is for.
         </p>
         <div class="actions actions-hero">
           <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
@@ -131,7 +133,7 @@ const html = `<!doctype html>
           <div><dt>Runtime</dt><dd>llama.cpp</dd></div>
           <div><dt>Weights</dt><dd>GGUF, on disk</dd></div>
           <div><dt>Interface</dt><dd>Command line</dd></div>
-          <div><dt>License</dt><dd>MIT</dd></div>
+          <div><dt>License</dt><dd><a class="inline" href="#license">MIT</a></dd></div>
         </dl>
       </div>
     </section>
@@ -139,26 +141,35 @@ const html = `<!doctype html>
     <section id="product" tabindex="-1">
       <div class="wrap">
         <p class="kicker">The product</p>
-        <h2>Software, written around a person.</h2>
-        <div class="split">
-          <div class="stack">
-            <h3>What ships finished</h3>
+        <h2 class="reveal">Own the machine. Then own the software.</h2>
+        <div class="beats reveal-seq">
+          <article class="card">
+            <span class="tag">01</span>
+            <h3>Finished software asks you to adapt.</h3>
             <p>
               Menus, icons, and workflows are decided before the machine is
-              opened. The person adapts. The software does not. That made
-              computers usable, and it made them the same for everyone.
+              opened. You learn the product. It does not learn the way you work.
+              The same interface is shipped to everyone.
             </p>
-          </div>
-          <div class="stack">
-            <h3>What Imagine OS is for</h3>
+          </article>
+          <article class="card">
+            <span class="tag">02</span>
+            <h3>A rented model asks you to send the work away.</h3>
             <p>
-              A task begins, and the interface for it is composed for that
-              work: the controls, the layout, a piece of software that was not
-              installed this morning. The model that makes this possible runs
-              on the device, not in a rented cluster. This is the direction.
-              It is not a theme on top of the same apps.
+              The useful part of the computer now lives in someone else’s
+              cluster. Your prompt, your files, and the shape of your day leave
+              the building so a model can answer.
             </p>
-          </div>
+          </article>
+          <article class="card">
+            <span class="tag">03</span>
+            <h3>Imagine OS keeps both on the device.</h3>
+            <p>
+              The model runs where you are, and the software is composed for
+              the task in front of you. That is the product. Release 0.0.1 is
+              the local runtime it stands on. The shell is the work in front of us.
+            </p>
+          </article>
         </div>
       </div>
     </section>
@@ -166,8 +177,8 @@ const html = `<!doctype html>
     <section id="demo" tabindex="-1">
       <div class="wrap">
         <p class="kicker">Proof</p>
-        <h2>Run a model in this browser.</h2>
-        <div class="prose">
+        <h2 class="reveal">Run a model in this browser.</h2>
+        <div class="prose reveal">
           <p>
             Press the button and a small open model loads into WebAssembly on
             this device. Nothing is typed in for you, and the tokens are the
@@ -176,8 +187,9 @@ const html = `<!doctype html>
             Generation is capped at 64 tokens, and after the weights are in
             memory it does not call a server.
           </p>
+          <p class="soon">A Hugging Face example is coming soon.</p>
         </div>
-        <div class="bench">
+        <div class="bench reveal">
           <div class="bench-top">
             <strong>${'SmolLM2-135M-Instruct'}</strong>
             <span>Q4_K_M · llama.cpp via wllama · Apache-2.0 weights</span>
@@ -200,7 +212,7 @@ const html = `<!doctype html>
     <section id="architecture" tabindex="-1">
       <div class="wrap">
         <p class="kicker">Architecture</p>
-        <h2>How a local run works.</h2>
+        <h2 class="reveal">How a local run works.</h2>
         <div class="prose">
           <p>
             <code>boole run</code> takes an alias, such as <code>llama3</code>, or a
@@ -212,7 +224,7 @@ const html = `<!doctype html>
             model text. Diagnostics stay on standard error.
           </p>
         </div>
-        <ol class="flow">
+        <ol class="flow reveal-seq">
           <li>
             <span class="tag">01</span>
             <h3>Session</h3>
@@ -243,8 +255,8 @@ const html = `<!doctype html>
     <section id="privacy" tabindex="-1">
       <div class="wrap">
         <p class="kicker">Privacy and security</p>
-        <h2>What stays here, and what does not.</h2>
-        <div class="split">
+        <h2 class="reveal">What stays here, and what does not.</h2>
+        <div class="split reveal-seq">
           <article class="card">
             <h3>The command line</h3>
             <p>
@@ -272,9 +284,9 @@ const html = `<!doctype html>
     <section id="roadmap" tabindex="-1">
       <div class="wrap">
         <p class="kicker">Research roadmap</p>
-        <h2>Where the work is going.</h2>
-        <p class="note">These are goals. Boole has not published a measurement for them.</p>
-        <ol class="goals">
+        <h2 class="reveal">Where the work is going.</h2>
+        <p class="note reveal">These are goals. Boole has not published a measurement for them.</p>
+        <ol class="goals reveal-seq">
           <li>
             <span class="tag">Goal</span>
             <h3>Ternary weights</h3>
@@ -297,7 +309,7 @@ const html = `<!doctype html>
     <section id="builders" tabindex="-1">
       <div class="wrap">
         <p class="kicker">For builders</p>
-        <h2>Release 0.0.1</h2>
+        <h2 class="reveal">Release 0.0.1</h2>
         <table class="spec">
           <tbody>
             <tr><th scope="row">Install</th><td><code>npx @boole/cli</code></td></tr>
@@ -306,16 +318,37 @@ const html = `<!doctype html>
             <tr><th scope="row">doctor</th><td>Read the machine and suggest a size it can hold.</td></tr>
             <tr><th scope="row">models</th><td>List the aliases.</td></tr>
             <tr><th scope="row">Not built</th><td><code>serve</code> and <code>list</code> are reserved and not implemented. If node-llama-cpp is missing, the CLI says so and stops.</td></tr>
-            <tr><th scope="row">Source</th><td><a class="inline" href="https://github.com/jordantplows/boole-platform">github.com/jordantplows/boole-platform</a> · <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm</a> · MIT</td></tr>
+            <tr><th scope="row">Source</th><td><a class="inline" href="https://github.com/jordantplows/boole-platform">github.com/jordantplows/boole-platform</a> · <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm</a></td></tr>
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <section id="license" tabindex="-1">
+      <div class="wrap reveal">
+        <p class="kicker">License</p>
+        <h2>MIT. Copyright (c) 2026 Jordan Plows.</h2>
+        <div class="prose">
+          <p>
+            The repository is released under the MIT License, as stated in its
+            <a class="inline" href="https://github.com/jordantplows/boole-platform/blob/main/LICENSE">LICENSE</a>
+            file. The copyright holder named there is Jordan Plows.
+          </p>
+          <p>
+            That license lets any person use, copy, modify, merge, publish,
+            distribute, sublicense, and sell copies of the software and its
+            documentation. Copies and substantial portions must keep the
+            copyright notice and the permission notice. The software is
+            provided as is, without warranty.
+          </p>
+        </div>
       </div>
     </section>
 
     <section id="talk" tabindex="-1">
       <div class="wrap">
         <p class="kicker">Begin</p>
-        <h2>If this is the system you want.</h2>
+        <h2 class="reveal">If the machine should belong to you.</h2>
         <div class="prose">
           <p>
             Buy now and Book a call both open a note to
@@ -333,13 +366,32 @@ const html = `<!doctype html>
 
   <footer>
     <div class="wrap footer-row">
-      <span>boole · MIT</span>
+      <span>boole</span>
+      <a href="#license">License</a>
       <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
       <a href="https://github.com/jordantplows/boole-platform">Source</a>
       <a href="mailto:${CTA.email}">${CTA.email}</a>
     </div>
   </footer>
 
+  <script>
+  (function () {
+    var nodes = document.querySelectorAll('.reveal, .reveal-seq');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) {
+      nodes.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.55, rootMargin: '0px 0px -8% 0px' });
+    nodes.forEach(function (el) { io.observe(el); });
+  })();
+  </script>
   <script type="module">
   var btn = document.getElementById('run-demo');
   btn.addEventListener('click', function () {
