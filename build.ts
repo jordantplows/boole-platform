@@ -18,11 +18,11 @@ const CTA = {
   bookCall: `mailto:jordan@bunkerbio.com?subject=${encodeURIComponent('Boole: Book a call')}`,
 } as const;
 
-const TITLE = 'Imagine OS — software shaped around you';
+const TITLE = 'Imagine OS — on-device models for software that adapts';
 const DESCRIPTION =
-  'Imagine OS runs real models on your device and shapes software around you. Private, instant, offline, and yours. 20B at 200 tok/s is a goal.';
+  'Imagine OS runs models on the device and shapes software around you. Local GGUF inference today. A 20B model at 200 tok/s is a goal.';
 const KEYWORDS =
-  'on-device AI, local models, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF';
+  'on-device AI, local models, local inference, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF';
 
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -47,19 +47,19 @@ const jsonLd = JSON.stringify({
       '@type': 'SoftwareApplication',
       name: 'Imagine OS',
       alternateName: 'Boole',
-      applicationCategory: 'OperatingSystem',
+      applicationCategory: 'DeveloperApplication',
       operatingSystem: 'macOS, Linux, Windows',
       softwareVersion: '0.0.1',
       url: `${SITE}/`,
       description:
-        'Imagine OS is Boole’s direction: software shaped around the person using it, powered by models that run on the device. The current release is a local runtime for GGUF models. A 20-billion-parameter model at 200 tokens per second is a target, not a measured result.',
+        'Imagine OS is Boole’s direction: software shaped around the person using it, with models that run on the device. Release 0.0.1 is a local GGUF runtime through llama.cpp. A 20-billion-parameter model at 200 tokens per second is a target, not a measured result.',
       keywords: KEYWORDS,
       license: 'https://opensource.org/licenses/MIT',
       installUrl: 'https://www.npmjs.com/package/@boole/cli',
       featureList: [
-        'On-device local models',
+        'Local GGUF inference through llama.cpp',
+        'An in-browser demonstration that runs SmolLM2 135M on the visitor’s device',
         'A direction toward software shaped around its user',
-        'A local GGUF runtime through llama.cpp',
       ],
       author: { '@id': `${SITE}/#organization` },
       publisher: { '@id': `${SITE}/#organization` },
@@ -89,27 +89,21 @@ const html = `<!doctype html>
   <meta property="og:image" content="${SITE}/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Imagine OS. Software shaped around you, on your device.">
+  <meta property="og:image:alt" content="Imagine OS. On-device models for software that adapts.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${SITE}/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${TITLE}">
   <meta name="twitter:description" content="${DESCRIPTION}">
   <meta name="twitter:image" content="${SITE}/og.png">
-  <meta name="twitter:image:alt" content="Imagine OS. Software shaped around you, on your device.">
-  <meta name="theme-color" content="#100c14">
+  <meta name="twitter:image:alt" content="Imagine OS. On-device models for software that adapts.">
+  <meta name="theme-color" content="#0c0d10">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script type="application/ld+json">${jsonLd}</script>
   <style>${css}</style>
 </head>
 <body>
   <a class="skip" href="#vision">Skip to content</a>
-  <div class="aurora" aria-hidden="true">
-    <div class="wash wash-a"><span></span></div>
-    <div class="wash wash-b"><span></span></div>
-    <div class="wash wash-c"><span></span></div>
-  </div>
-
   <header class="bar">
     <a class="brand" href="#vision">boole <span>Imagine OS</span></a>
     <nav class="actions" aria-label="Contact">
@@ -118,171 +112,227 @@ const html = `<!doctype html>
     </nav>
   </header>
 
-  <main class="story">
-    <section class="chapter" id="vision" tabindex="-1">
-      <p class="chapter-kicker">Imagine OS</p>
-      <h1>The end of finished software.</h1>
-      <p class="lede">
-        Imagine OS will change how software is built. Instead of fixed apps,
-        shipped once and learned forever, the device runs a real model locally
-        and shapes its software around the person using it.
-      </p>
-      <div class="actions actions-hero">
-        <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
-        <a class="btn btn-call" href="${CTA.bookCall}">Book a call</a>
-      </div>
-      <ul class="promise">
-        <li>Private</li>
-        <li>Instant</li>
-        <li>Offline</li>
-        <li>Yours</li>
-      </ul>
-    </section>
-
-    <div class="interlude" data-tone="rose" aria-hidden="true"><span></span></div>
-
-    <section class="chapter" id="fixed" tabindex="-1">
-      <p class="chapter-kicker">01 — The fixed world</p>
-      <h2>Software arrives finished.</h2>
-      <div class="prose">
-        <p>
-          The phone in a pocket, the laptop on a desk, the row of apps waiting
-          in a dock: all of it was decided before you opened it. Menus, icons,
-          workflows, the shape of a day. You adapt. The software does not.
+  <main>
+    <section id="vision" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Imagine OS · Release 0.0.1</p>
+        <h1>The model stays on the device.</h1>
+        <p class="lede">
+          Imagine OS runs real models locally and shapes its software around the
+          person using it. Fixed apps are written before you arrive. This one
+          keeps taking shape after it ships. What runs today is the runtime.
+          The shell that imagines is what we are building on it.
         </p>
-        <p>
-          That bargain made computers useful. It also made them the same for
-          everyone. A tool can be powerful and still have nothing to do with
-          the way you actually think.
-        </p>
+        <div class="actions actions-hero">
+          <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
+          <a class="btn btn-call" href="${CTA.bookCall}">Book a call</a>
+        </div>
+        <dl class="facts">
+          <div><dt>Runtime</dt><dd>llama.cpp</dd></div>
+          <div><dt>Weights</dt><dd>GGUF, on disk</dd></div>
+          <div><dt>Interface</dt><dd>Command line</dd></div>
+          <div><dt>License</dt><dd>MIT</dd></div>
+        </dl>
       </div>
     </section>
 
-    <div class="interlude" data-tone="violet" aria-hidden="true"><span></span></div>
-
-    <section class="chapter" id="imagines" tabindex="-1">
-      <p class="chapter-kicker">02 — The picture</p>
-      <h2>An operating system that imagines.</h2>
-      <div class="prose">
-        <p>
-          Picture a machine that starts from you. You begin a task, and the
-          interface for it is composed in the moment: the controls you need,
-          the layout that fits the work, a small piece of software that did
-          not exist this morning. The next day it is different, because you were.
-        </p>
-        <p>
-          This is not a theme, and it is not a skin over the same apps. Native
-          software stops being a finished object. Imagine OS is that picture.
-          It is what Boole is building toward.
-        </p>
+    <section id="product" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">The product</p>
+        <h2>Software, written around a person.</h2>
+        <div class="split">
+          <div class="stack">
+            <h3>What ships finished</h3>
+            <p>
+              Menus, icons, and workflows are decided before the machine is
+              opened. The person adapts. The software does not. That made
+              computers usable, and it made them the same for everyone.
+            </p>
+          </div>
+          <div class="stack">
+            <h3>What Imagine OS is for</h3>
+            <p>
+              A task begins, and the interface for it is composed for that
+              work: the controls, the layout, a piece of software that was not
+              installed this morning. The model that makes this possible runs
+              on the device, not in a rented cluster. This is the direction.
+              It is not a theme on top of the same apps.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <div class="interlude" data-tone="teal" aria-hidden="true"><span></span></div>
-
-    <section class="chapter" id="device" tabindex="-1">
-      <p class="chapter-kicker">03 — On the device</p>
-      <h2>The model has to live here.</h2>
-      <div class="prose">
-        <p>
-          An interface that can imagine needs a model close enough to know you,
-          and close enough to answer without a datacenter in the loop. Local
-          is what makes the rest possible.
-        </p>
-      </div>
-      <div class="qualities">
-        <article>
-          <h3>Private</h3>
-          <p>The work stays on the device. Your habits are not a transcript sent somewhere else to be useful.</p>
-        </article>
-        <article>
-          <h3>Instant</h3>
-          <p>There is no queue and no round trip. The model is already where you are.</p>
-        </article>
-        <article>
-          <h3>Offline</h3>
-          <p>Once the weights are on the machine, the work does not wait on a network.</p>
-        </article>
-        <article>
-          <h3>Yours</h3>
-          <p>No API key and no per-token bill for the run. The runtime is something you hold.</p>
-        </article>
-      </div>
-    </section>
-
-    <div class="interlude" data-tone="amber" aria-hidden="true"><span></span></div>
-
-    <section class="chapter" id="horizon" tabindex="-1">
-      <p class="chapter-kicker">04 — The horizon</p>
-      <h2>Where it is going.</h2>
-      <p class="note">These are goals. Boole has not published a benchmark for them.</p>
-      <div class="goals">
-        <article>
-          <span class="goal-label">Goal</span>
-          <h3>Ternary weights</h3>
-          <p>BitNet-style 1.58-bit models, so a full network can live on the device rather than in a rented cluster.</p>
-        </article>
-        <article>
-          <span class="goal-label">Goal</span>
-          <h3>20 billion parameters, 200 tokens a second</h3>
-          <p>A speed target for a model of that size. A number we are aiming at. Not a number we have measured.</p>
-        </article>
-        <article>
-          <span class="goal-label">Goal</span>
-          <h3>A shell, unfinished on purpose</h3>
-          <p>The default interface is a beginning. The longer work is software that keeps reshaping itself from use, with the model still running locally.</p>
-        </article>
+    <section id="demo" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Proof</p>
+        <h2>Run a model in this browser.</h2>
+        <div class="prose">
+          <p>
+            Press the button and a small open model loads into WebAssembly on
+            this device. Nothing is typed in for you, and the tokens are the
+            model’s. This is SmolLM2 135M Instruct at Q4_K_M, not the 20-billion-parameter
+            target. The first run downloads the weights from Hugging Face.
+            Generation is capped at 64 tokens, and after the weights are in
+            memory it does not call a server.
+          </p>
+        </div>
+        <div class="bench">
+          <div class="bench-top">
+            <strong>${'SmolLM2-135M-Instruct'}</strong>
+            <span>Q4_K_M · llama.cpp via wllama · Apache-2.0 weights</span>
+          </div>
+          <label for="demo-prompt">Prompt</label>
+          <textarea id="demo-prompt" maxlength="500">What does it mean to run a language model on the device?</textarea>
+          <button class="btn btn-buy" id="run-demo" type="button">Run on this device</button>
+          <p class="bench-meta" id="demo-status">Waiting. Weights are not loaded.</p>
+          <div class="bench-meta">
+            <span>Decode <strong id="demo-metrics">—</strong></span>
+            <span id="demo-net">No generation yet</span>
+          </div>
+          <label for="demo-output">Output</label>
+          <pre id="demo-output" aria-live="polite"></pre>
+          <p class="host" id="demo-host">Hardware is reported when you run it.</p>
+        </div>
       </div>
     </section>
 
-    <section class="chapter" id="builders" tabindex="-1">
-      <p class="chapter-kicker">For builders</p>
-      <h2>The runtime, today.</h2>
-      <div class="prose">
-        <p>
-          What runs today is a command line, version 0.0.1. It runs GGUF models
-          on your machine through llama.cpp. That local runtime is what this
-          idea stands on.
-        </p>
-      </div>
-      <p class="install"><code>npx @boole/cli</code></p>
-      <ul class="build">
-        <li><code>run</code> prompts a local model. An alias such as <code>llama3</code> picks a quantization that fits available memory.</li>
-        <li><code>pull</code> downloads weights into a cache. An interrupted download resumes.</li>
-        <li><code>doctor</code> reads the machine and suggests a size it can hold.</li>
-        <li><code>models</code> lists the aliases.</li>
-      </ul>
-      <div class="prose">
-        <p>
-          <code>serve</code> and <code>list</code> are reserved and not implemented.
-          If node-llama-cpp is missing, the CLI says so and stops. The
-          <a class="inline" href="https://github.com/jordantplows/boole-platform">source</a>
-          and the
-          <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm package</a>
-          are public. The license is MIT.
-        </p>
+    <section id="architecture" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Architecture</p>
+        <h2>How a local run works.</h2>
+        <div class="prose">
+          <p>
+            <code>boole run</code> takes an alias, such as <code>llama3</code>, or a
+            repository and quantization. The alias resolves to a GGUF file that
+            fits the memory this machine reports. If that file is not in the
+            cache, <code>pull</code> downloads it from Hugging Face and resumes
+            if the transfer stops. node-llama-cpp then loads the file, opens a
+            context, and samples tokens in-process. Standard output is the
+            model text. Diagnostics stay on standard error.
+          </p>
+        </div>
+        <ol class="flow">
+          <li>
+            <span class="tag">01</span>
+            <h3>Session</h3>
+            <span>The prompt comes from an argument, a file, or stdin. It is not uploaded by this code.</span>
+          </li>
+          <li>
+            <span class="tag">02</span>
+            <h3>Runtime</h3>
+            <span>llama.cpp through node-llama-cpp. GPU offload when that build provides it, otherwise the CPU. The default context is 2048 tokens.</span>
+          </li>
+          <li>
+            <span class="tag">03</span>
+            <h3>Weights</h3>
+            <span>A GGUF file in the local cache. After it is there, generation does not need the network.</span>
+          </li>
+        </ol>
+        <div class="prose" style="margin-top:1.25rem">
+          <p>
+            The demonstration on this page is the same family of runtime, compiled
+            to WebAssembly, with one thread and no GPU layers. It is a proof that
+            inference can happen in the browser. It is not the command-line release,
+            and it is not Imagine OS imagining an interface.
+          </p>
+        </div>
       </div>
     </section>
 
-    <section class="chapter" id="talk" tabindex="-1">
-      <p class="chapter-kicker">Begin</p>
-      <h2>If this is the computer you want.</h2>
-      <div class="prose">
-        <p>
-          Buy now and Book a call both open a note to
-          <a class="inline" href="mailto:${CTA.email}">${CTA.email}</a>,
-          with the subject already filled in.
-        </p>
+    <section id="privacy" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Privacy and security</p>
+        <h2>What stays here, and what does not.</h2>
+        <div class="split">
+          <article class="card">
+            <h3>The command line</h3>
+            <p>
+              The published source has no analytics call. The only network
+              code downloads a model file from Hugging Face during
+              <code>pull</code>. A prompt is passed to the local session.
+              The CLI does not sign or attest the weights. You are trusting
+              the repository the alias, or you, selected.
+            </p>
+          </article>
+          <article class="card">
+            <h3>This page</h3>
+            <p>
+              The runtime and the page are static. The model file is fetched
+              only after you press the button, from one public Hugging Face
+              URL. During generation the page counts new network requests and
+              reports that count. There is no account and no telemetry pixel.
+              This is not a security certification.
+            </p>
+          </article>
+        </div>
       </div>
-      <div class="actions actions-hero">
-        <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
-        <a class="btn btn-call" href="${CTA.bookCall}">Book a call</a>
+    </section>
+
+    <section id="roadmap" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Research roadmap</p>
+        <h2>Where the work is going.</h2>
+        <p class="note">These are goals. Boole has not published a measurement for them.</p>
+        <ol class="goals">
+          <li>
+            <span class="tag">Goal</span>
+            <h3>Ternary weights</h3>
+            <p>BitNet-style 1.58-bit models, so a full network can live on the device instead of in a cluster.</p>
+          </li>
+          <li>
+            <span class="tag">Goal</span>
+            <h3>20 billion parameters, 200 tokens a second</h3>
+            <p>A speed target for a model of that size. A number we are aiming at. Not a number we have measured. The speed in the demonstration above is whatever this browser just produced on a 135M model.</p>
+          </li>
+          <li>
+            <span class="tag">Goal</span>
+            <h3>A shell that keeps shaping software</h3>
+            <p>The default interface is a beginning. The longer work is software that changes with use, with the model still running locally.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="builders" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">For builders</p>
+        <h2>Release 0.0.1</h2>
+        <table class="spec">
+          <tbody>
+            <tr><th scope="row">Install</th><td><code>npx @boole/cli</code></td></tr>
+            <tr><th scope="row">run</th><td>Prompt a local model. An alias such as <code>llama3</code> picks a quantization that fits available memory.</td></tr>
+            <tr><th scope="row">pull</th><td>Download weights into the cache. An interrupted download resumes.</td></tr>
+            <tr><th scope="row">doctor</th><td>Read the machine and suggest a size it can hold.</td></tr>
+            <tr><th scope="row">models</th><td>List the aliases.</td></tr>
+            <tr><th scope="row">Not built</th><td><code>serve</code> and <code>list</code> are reserved and not implemented. If node-llama-cpp is missing, the CLI says so and stops.</td></tr>
+            <tr><th scope="row">Source</th><td><a class="inline" href="https://github.com/jordantplows/boole-platform">github.com/jordantplows/boole-platform</a> · <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm</a> · MIT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="talk" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Begin</p>
+        <h2>If this is the system you want.</h2>
+        <div class="prose">
+          <p>
+            Buy now and Book a call both open a note to
+            <a class="inline" href="mailto:${CTA.email}">${CTA.email}</a>,
+            with the subject already filled in.
+          </p>
+        </div>
+        <div class="actions actions-hero" style="margin-top:1.5rem">
+          <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
+          <a class="btn btn-call" href="${CTA.bookCall}">Book a call</a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="footer-row">
+    <div class="wrap footer-row">
       <span>boole · MIT</span>
       <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
       <a href="https://github.com/jordantplows/boole-platform">Source</a>
@@ -290,38 +340,34 @@ const html = `<!doctype html>
     </div>
   </footer>
 
-  <script>
-  (function () {
-    var root = document.documentElement;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var raf = 0;
-    var scroll = 0;
-    function paint() {
-      raf = 0;
-      root.style.setProperty('--scroll', scroll.toFixed(4));
+  <script type="module">
+  var btn = document.getElementById('run-demo');
+  btn.addEventListener('click', function () {
+    if (typeof WebAssembly !== 'object') {
+      document.getElementById('demo-status').textContent = 'This browser does not provide WebAssembly. The command-line runtime is npx @boole/cli.';
+      return;
     }
-    addEventListener('scroll', function () {
-      var max = document.documentElement.scrollHeight - innerHeight;
-      scroll = max > 0 ? window.scrollY / max : 0;
-      if (!raf) raf = requestAnimationFrame(paint);
-    }, { passive: true });
-  })();
+    btn.disabled = true;
+    import('/demo.js').then(function (mod) {
+      return mod.run();
+    }).catch(function (err) {
+      document.getElementById('demo-status').textContent = (err && err.message) ? err.message : 'The demo failed to start.';
+    }).then(function () {
+      btn.disabled = false;
+      btn.textContent = 'Run again';
+    });
+  });
   </script>
 </body>
 </html>`;
 
-
 writeFileSync(join(DIST, 'index.html'), html);
 
 const ogSvg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#100c14"/>
-  <circle cx="180" cy="40" r="260" fill="#ff3b8d"/>
-  <circle cx="1100" cy="80" r="300" fill="#7a45ff"/>
-  <circle cx="980" cy="640" r="280" fill="#14d6c4"/>
-  <circle cx="220" cy="620" r="200" fill="#ffb020"/>
-  <text x="96" y="250" font-family="Liberation Serif, DejaVu Serif, serif" font-size="34" fill="#d2cbbf">IMAGINE OS</text>
-  <text x="96" y="360" font-family="Liberation Serif, DejaVu Serif, serif" font-size="78" fill="#f6f1e8">The end of</text>
-  <text x="96" y="450" font-family="Liberation Serif, DejaVu Serif, serif" font-size="78" fill="#f6f1e8">finished software.</text>
+  <rect width="1200" height="630" fill="#0c0d10"/>
+  <text x="88" y="210" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="28" letter-spacing="6" fill="#c9c4ba">IMAGINE OS</text>
+  <text x="88" y="320" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="72" font-weight="600" fill="#f3f1eb">On-device</text>
+  <text x="88" y="410" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="72" font-weight="600" fill="#f3f1eb">inference.</text>
 </svg>`;
 
 const ogPng = await sharp(Buffer.from(ogSvg)).png().toBuffer();
@@ -358,6 +404,7 @@ if (process.argv.includes('--serve')) {
     '.svg': 'image/svg+xml',
     '.xml': 'application/xml; charset=utf-8',
     '.txt': 'text/plain; charset=utf-8',
+    '.wasm': 'application/wasm',
     '': 'text/plain; charset=utf-8',
   };
 
