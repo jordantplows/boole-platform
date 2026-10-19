@@ -3,579 +3,768 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>boole — local LLM inference for JavaScript</title>
-  <meta name="description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <title>Imagine OS — on-device models for software that adapts</title>
+  <meta name="description" content="Imagine OS runs models on the device and shapes software around you. Local GGUF inference today. A 20B model at 200 tok/s is a goal.">
+  <meta name="keywords" content="on-device AI, local models, local inference, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://boole.sh/">
-
-  <meta property="og:title" content="boole — local LLM inference for JavaScript">
-  <meta property="og:description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <meta property="og:site_name" content="Boole">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Imagine OS — on-device models for software that adapts">
+  <meta property="og:description" content="Imagine OS runs models on the device and shapes software around you. Local GGUF inference today. A 20B model at 200 tok/s is a goal.">
   <meta property="og:image" content="https://boole.sh/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Imagine OS. On-device models for software that adapts.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boole.sh/">
-
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="boole — local LLM inference for JavaScript">
-  <meta name="twitter:description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <meta name="twitter:title" content="Imagine OS — on-device models for software that adapts">
+  <meta name="twitter:description" content="Imagine OS runs models on the device and shapes software around you. Local GGUF inference today. A 20B model at 200 tok/s is a goal.">
   <meta name="twitter:image" content="https://boole.sh/og.png">
-
-  <meta name="theme-color" content="#fbfbf9" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)">
-
+  <meta name="twitter:image:alt" content="Imagine OS. On-device models for software that adapts.">
+  <meta name="theme-color" content="#0c0d10">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://boole.sh/#organization","name":"Boole","url":"https://boole.sh/","email":"jordan@bunkerbio.com","logo":"https://boole.sh/favicon.svg"},{"@type":"WebSite","@id":"https://boole.sh/#website","url":"https://boole.sh/","name":"Boole","description":"Imagine OS runs models on the device and shapes software around you. Local GGUF inference today. A 20B model at 200 tok/s is a goal.","publisher":{"@id":"https://boole.sh/#organization"}},{"@type":"SoftwareApplication","name":"Imagine OS","alternateName":"Boole","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows","softwareVersion":"0.0.1","url":"https://boole.sh/","description":"Imagine OS is Boole’s direction: software shaped around the person using it, with models that run on the device. Release 0.0.1 is a local GGUF runtime through llama.cpp. A 20-billion-parameter model at 200 tokens per second is a target, not a measured result.","keywords":"on-device AI, local models, local inference, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF","license":"https://opensource.org/licenses/MIT","installUrl":"https://www.npmjs.com/package/@boole/cli","featureList":["Local GGUF inference through llama.cpp","An in-browser demonstration that runs SmolLM2 135M on the visitor’s device","A direction toward software shaped around its user"],"author":{"@id":"https://boole.sh/#organization"},"publisher":{"@id":"https://boole.sh/#organization"}}]}</script>
   <style>:root {
-  --bg: #fbfbf9;
-  --fg: #16181a;
-  --accent: #ad4e09;
-  --muted: #6b6b68;
-  --border: #e0dfdc;
-  --terminal-bg: #1a1c1e;
-  --terminal-fg: #d4d4d4;
-  --terminal-muted: #707070;
-  --mono: 'SF Mono', ui-monospace, 'Cascadia Code', 'Fira Mono', Consolas, monospace;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --col: 720px;
-  --gap: 4rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #161618;
-    --fg: #e8e6e3;
-    --accent: #e8862f;
-    --muted: #929290;
-    --border: #2e2e2c;
-    --terminal-bg: #111113;
-  }
+  --ink: #121318;
+  --cream: #f3f1eb;
+  --muted: #c9c4ba;
+  --field: #0c0d10;
+  --panel: #14161c;
+  --line: rgba(243, 241, 235, 0.16);
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  color-scheme: dark;
 }
 
 *,
 *::before,
 *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
-  -webkit-text-size-adjust: 100%;
+  background: var(--field);
+  scroll-padding-top: 5.25rem;
 }
 
 body {
+  min-height: 100%;
+  background: var(--field);
+  color: var(--cream);
   font-family: var(--sans);
-  font-size: 1rem;
-  line-height: 1.65;
-  color: var(--fg);
-  background: var(--bg);
+  font-size: 1.0625rem;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: var(--accent);
-  color: #fff;
+  background: #d9deff;
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline: 2px solid var(--cream);
+  outline-offset: 3px;
 }
 
-.col {
-  max-width: var(--col);
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 40;
+  background: var(--cream);
+  color: var(--ink);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+}
+
+.skip:focus {
+  top: 0.75rem;
+  outline-color: var(--ink);
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  min-height: 4.25rem;
+  padding: 0.7rem 1.5rem;
+  background: var(--field);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  color: var(--cream);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  font-size: 1.05rem;
+}
+
+.brand span {
+  margin-left: 0.7rem;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  font: 600 0.9375rem/1 var(--sans);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+.btn-buy {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.btn-call {
+  color: var(--cream);
+  border-color: var(--cream);
+}
+
+.btn:hover {
+  box-shadow: 0 0 0 3px rgba(217, 222, 255, 0.45);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.wrap {
+  width: min(1080px, calc(100% - 3rem));
   margin: 0 auto;
-  padding: 0 1.5rem;
 }
 
 section {
-  padding: var(--gap) 0;
+  padding: 5.25rem 0;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 5.25rem;
 }
 
-section + section {
-  border-top: 1px solid var(--border);
+#vision {
+  border-top: 0;
+  padding-top: 4.75rem;
 }
 
-h1, h2, h3, h4,
-nav, code, pre, kbd, th, .mono {
-  font-family: var(--mono);
+.kicker {
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+h1 {
+  max-width: 16ch;
+  margin-bottom: 1.25rem;
+  font-size: clamp(2.7rem, 5.4vw, 4.5rem);
 }
 
 h2 {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  margin-bottom: 1.5rem;
+  max-width: 18ch;
+  margin-bottom: 1.1rem;
+  font-size: clamp(1.85rem, 3vw, 2.6rem);
 }
 
 h3 {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.15rem;
 }
 
-p {
-  margin-bottom: 1rem;
+.lede, .prose {
+  max-width: 40rem;
 }
 
-p:last-child {
-  margin-bottom: 0;
-}
-
-a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-code {
-  font-size: 0.875em;
-}
-
-pre {
-  font-size: 0.8125rem;
-  line-height: 1.6;
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
+.lede {
+  margin-bottom: 1.75rem;
+  font-size: 1.2rem;
   line-height: 1.5;
 }
 
-th {
-  text-align: left;
-  font-weight: 600;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  padding: 0.5rem 1rem 0.5rem 0;
-  border-bottom: 1px solid var(--border);
+.prose p + p,
+.stack > * + * {
+  margin-top: 0.9rem;
 }
 
-td {
-  padding: 0.375rem 1rem 0.375rem 0;
-  border-bottom: 1px solid var(--border);
-  vertical-align: baseline;
+.actions-hero {
+  margin-bottom: 2.25rem;
 }
 
-td:first-child {
-  white-space: nowrap;
-}
-
-.hero {
-  padding-top: calc(var(--gap) * 1.5);
-}
-
-.wordmark {
-  font-family: var(--mono);
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  margin-bottom: 1rem;
-}
-
-.hero .lead {
-  max-width: 560px;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-.cmd {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  background: var(--terminal-bg);
-  color: var(--terminal-fg);
-  padding: 0.875rem 1rem;
-  border: 1px solid var(--border);
-  overflow-x: auto;
-}
-
-.cmd code {
-  font-size: 0.9375rem;
-  white-space: nowrap;
-}
-
-.prompt-char {
-  color: var(--accent);
-  margin-right: 0.5em;
-  user-select: none;
-}
-
-.copy-btn {
-  font-family: var(--mono);
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--terminal-muted);
-  background: transparent;
-  border: 1px solid var(--terminal-muted);
-  padding: 0.25rem 0.625rem;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: color 0.15s, border-color 0.15s;
-}
-
-.copy-btn:hover {
-  color: var(--terminal-fg);
-  border-color: var(--terminal-fg);
-}
-
-.terminal {
-  background: var(--terminal-bg);
-  color: var(--terminal-fg);
-  padding: 1.25rem 1.5rem;
-  border: 1px solid var(--border);
-  overflow-x: auto;
-}
-
-.terminal pre {
-  margin: 0;
-}
-
-.terminal .prompt {
-  color: var(--accent);
-  user-select: none;
-}
-
-.terminal .muted {
-  color: var(--terminal-muted);
-}
-
-.terminal .cursor {
-  display: inline;
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .terminal .cursor {
-    display: none;
-  }
-}
-
-.features {
+.facts {
   display: grid;
-  gap: 2.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  max-width: 52rem;
 }
 
-.features p {
-  margin-bottom: 0;
-  max-width: 600px;
+.facts div {
+  background: var(--field);
+  padding: 0.95rem 1rem 1.05rem;
 }
 
-.command + .command {
-  margin-top: 2.5rem;
-}
-
-.command > p:first-of-type {
+.facts dt {
   color: var(--muted);
-  font-size: 0.875rem;
-  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
 }
 
-.warning {
-  font-size: 0.875rem;
-  border-left: 2px solid var(--accent);
-  padding-left: 1rem;
+.facts dd {
+  font-size: 0.98rem;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem 3rem;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.35rem 1.35rem 1.2rem;
+}
+
+.card h3 {
+  margin-bottom: 0.55rem;
+}
+
+.bench {
+  margin-top: 1.75rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.25rem 1.25rem 1.35rem;
+}
+
+.bench-top,
+.bench-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.bench-meta {
   margin-top: 1rem;
-}
-
-.example {
-  margin-bottom: 1.5rem;
-}
-
-.example code {
-  display: block;
-  font-size: 0.875rem;
-  margin-bottom: 0.25rem;
-}
-
-.example p {
-  font-size: 0.875rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
   color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.bench-meta strong,
+#demo-metrics {
+  color: var(--cream);
+  font-weight: 600;
+}
+
+label {
+  display: block;
+  margin: 1.1rem 0 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+textarea {
+  width: 100%;
+  min-height: 6.5rem;
+  resize: vertical;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #0e1015;
+  color: var(--cream);
+  font: 1rem/1.5 var(--sans);
+  padding: 0.8rem 0.9rem;
+}
+
+.bench .btn {
+  margin-top: 0.9rem;
+}
+
+#demo-output {
+  min-height: 7.5rem;
+  margin-top: 0.9rem;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  background: #0e1015;
+  color: var(--cream);
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.host {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.flow,
+.goals {
+  display: grid;
+  gap: 1px;
+  margin-top: 1.75rem;
+  background: var(--line);
+  border: 1px solid var(--line);
+  list-style: none;
+}
+
+.flow {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.flow li,
+.goals li {
+  background: var(--panel);
+  padding: 1.15rem 1.15rem 1.25rem;
+}
+
+.flow span,
+.goals p,
+.note {
+  color: var(--cream);
+}
+
+.goals {
+  grid-template-columns: 1fr;
+}
+
+.tag {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.spec {
+  width: 100%;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.spec th,
+.spec td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.85rem 0.9rem 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+  font-weight: 500;
+}
+
+.spec th {
+  width: 9.5rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+}
+
+a {
+  color: var(--cream);
+}
+
+.inline {
+  text-underline-offset: 0.16em;
 }
 
 footer {
-  border-top: 1px solid var(--border);
-  padding: 2rem 0;
-  margin-top: var(--gap);
+  border-top: 1px solid var(--line);
+  padding: 1.4rem 0 2.5rem;
 }
 
-.footer-links {
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-  color: var(--muted);
+.footer-row {
   display: flex;
-  gap: 1.5rem;
   flex-wrap: wrap;
-}
-
-.footer-links a {
+  gap: 0.7rem 1.3rem;
   color: var(--muted);
+  font-size: 0.95rem;
 }
 
-.footer-links a:hover {
-  color: var(--accent);
+.footer-row a {
+  color: var(--cream);
+  text-underline-offset: 0.16em;
 }
 
-@media (max-width: 600px) {
-  :root {
-    --gap: 3rem;
+@media (max-width: 800px) {
+  .wrap {
+    width: min(1080px, calc(100% - 1.5rem));
   }
 
-  .col {
-    padding: 0 1rem;
+  section {
+    padding: 3.5rem 0;
   }
 
-  .hero {
-    padding-top: var(--gap);
+  #vision {
+    padding-top: 3rem;
   }
 
-  .terminal {
-    padding: 1rem;
+  .lede {
+    font-size: 1.08rem;
+  }
+
+  .facts,
+  .split,
+  .flow {
+    grid-template-columns: 1fr;
+  }
+
+  .brand span {
+    display: block;
+    margin: 0.2rem 0 0;
+  }
+
+  .spec th {
+    display: block;
+    width: auto;
+    padding-bottom: 0.2rem;
+  }
+
+  .spec td {
+    display: block;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .actions .btn,
+  .actions-hero .btn,
+  .bench .btn {
+    flex: 1 1 8.5rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .facts,
+  .flow,
+  .goals,
+  .card,
+  .bench,
+  textarea,
+  #demo-output,
+  .btn,
+  .bar,
+  footer {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
   }
 }
 </style>
 </head>
 <body>
+  <a class="skip" href="#vision">Skip to content</a>
+  <header class="bar">
+    <a class="brand" href="#vision">boole <span>Imagine OS</span></a>
+    <nav class="actions" aria-label="Contact">
+      <a class="btn btn-call" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Book%20a%20call">Book a call</a>
+      <a class="btn btn-buy" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Buy%20now">Buy now</a>
+    </nav>
+  </header>
 
-<main class="col">
-
-  <section class="hero">
-    <h1 class="wordmark">boole</h1>
-    <p class="lead">
-      Local LLM inference for JavaScript — run GGUF models on your own machine
-      via llama.cpp, no API key or per-token cost required.
-    </p>
-    <div class="cmd">
-      <code><span class="prompt-char">$</span>npx @boole/cli</code>
-      <button class="copy-btn" data-copy="npx @boole/cli">copy</button>
-    </div>
-  </section>
-
-  <section>
-    <div class="terminal" id="terminal" aria-label="Terminal session demonstrating boole run with streaming output">
-      <pre><code id="terminal-output"><span class="prompt">$ </span>boole run TheBloke/Llama-2-7B-GGUF:Q4_K_M "Explain what a boolean is in one sentence." --stream
-<span class="muted">pulling TheBloke/Llama-2-7B-GGUF:Q4_K_M... </span><span class="muted">done (3.8 GB)
-</span><span class="muted">loading model... </span><span class="muted">done (Metal, 35 layers offloaded)
-
-</span>A boolean is a data type that holds exactly one of two values — true or false — and is the foundation
-of every conditional branch in every program you have ever run.</code></pre>
-    </div>
-  </section>
-
-  <section>
-    <div class="features">
-      <div>
-        <h3>Your hardware, your latency</h3>
-        <p>
-          Inference runs on the machine that called it. No cold start, no
-          round-trip to a datacenter, no queue. Metal on Apple Silicon, CUDA and
-          Vulkan on Linux and Windows.
+  <main>
+    <section id="vision" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Imagine OS · Release 0.0.1</p>
+        <h1>The model stays on the device.</h1>
+        <p class="lede">
+          Imagine OS runs real models locally and shapes its software around the
+          person using it. Fixed apps are written before you arrive. This one
+          keeps taking shape after it ships. What runs today is the runtime.
+          The shell that imagines is what we are building on it.
         </p>
+        <div class="actions actions-hero">
+          <a class="btn btn-buy" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Buy%20now">Buy now</a>
+          <a class="btn btn-call" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Book%20a%20call">Book a call</a>
+        </div>
+        <dl class="facts">
+          <div><dt>Runtime</dt><dd>llama.cpp</dd></div>
+          <div><dt>Weights</dt><dd>GGUF, on disk</dd></div>
+          <div><dt>Interface</dt><dd>Command line</dd></div>
+          <div><dt>License</dt><dd>MIT</dd></div>
+        </dl>
       </div>
-      <div>
-        <h3>Any GGUF, any quant</h3>
-        <p>
-          Point Boole at a HuggingFace repo and a quantization pattern. It
-          downloads the file, verifies the hash, and caches it locally. You pick
-          the size/quality trade-off.
-        </p>
+    </section>
+
+    <section id="product" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">The product</p>
+        <h2>Software, written around a person.</h2>
+        <div class="split">
+          <div class="stack">
+            <h3>What ships finished</h3>
+            <p>
+              Menus, icons, and workflows are decided before the machine is
+              opened. The person adapts. The software does not. That made
+              computers usable, and it made them the same for everyone.
+            </p>
+          </div>
+          <div class="stack">
+            <h3>What Imagine OS is for</h3>
+            <p>
+              A task begins, and the interface for it is composed for that
+              work: the controls, the layout, a piece of software that was not
+              installed this morning. The model that makes this possible runs
+              on the device, not in a rented cluster. This is the direction.
+              It is not a theme on top of the same apps.
+            </p>
+          </div>
+        </div>
       </div>
-      <div>
-        <h3>An npm install, not a daemon</h3>
-        <p>
-          <code>npm i -g @boole/cli</code>. No Docker container, no system
-          service, no background process. It links against node-llama-cpp and
-          loads the model on demand.
-        </p>
+    </section>
+
+    <section id="demo" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Proof</p>
+        <h2>Run a model in this browser.</h2>
+        <div class="prose">
+          <p>
+            Press the button and a small open model loads into WebAssembly on
+            this device. Nothing is typed in for you, and the tokens are the
+            model’s. This is SmolLM2 135M Instruct at Q4_K_M, not the 20-billion-parameter
+            target. The first run downloads the weights from Hugging Face.
+            Generation is capped at 64 tokens, and after the weights are in
+            memory it does not call a server.
+          </p>
+        </div>
+        <div class="bench">
+          <div class="bench-top">
+            <strong>SmolLM2-135M-Instruct</strong>
+            <span>Q4_K_M · llama.cpp via wllama · Apache-2.0 weights</span>
+          </div>
+          <label for="demo-prompt">Prompt</label>
+          <textarea id="demo-prompt" maxlength="500">What does it mean to run a language model on the device?</textarea>
+          <button class="btn btn-buy" id="run-demo" type="button">Run on this device</button>
+          <p class="bench-meta" id="demo-status">Waiting. Weights are not loaded.</p>
+          <div class="bench-meta">
+            <span>Decode <strong id="demo-metrics">—</strong></span>
+            <span id="demo-net">No generation yet</span>
+          </div>
+          <label for="demo-output">Output</label>
+          <pre id="demo-output" aria-live="polite"></pre>
+          <p class="host" id="demo-host">Hardware is reported when you run it.</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Commands</h2>
-
-    <div class="command">
-      <h3>run</h3>
-      <p>Run a prompt against a model.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier or local <code>.gguf</code> path</td></tr>
-          <tr><td><code>--stream</code></td><td>Stream tokens to stdout</td></tr>
-          <tr><td><code>--system, -s</code></td><td>System prompt</td></tr>
-          <tr><td><code>--temp, -t</code></td><td>Sampling temperature (default: 0.8)</td></tr>
-          <tr><td><code>--ctx-size</code></td><td>Context window in tokens (default: 2048)</td></tr>
-          <tr><td><code>--gpu-layers</code></td><td>Layers to offload to GPU (default: all)</td></tr>
-          <tr><td><code>--max-tokens</code></td><td>Maximum tokens to generate</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="command">
-      <h3>pull</h3>
-      <p>Download a model to the local cache.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier</td></tr>
-          <tr><td><code>--dir</code></td><td>Custom cache directory</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="command">
-      <h3>serve</h3>
-      <p>Start an OpenAI-compatible HTTP server.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier or local <code>.gguf</code> path</td></tr>
-          <tr><td><code>--port, -p</code></td><td>Port (default: 8080)</td></tr>
-          <tr><td><code>--host</code></td><td>Bind address (default: 127.0.0.1)</td></tr>
-        </tbody>
-      </table>
-      <div class="warning">
-        <strong>Warning:</strong> <code>serve</code> binds to 127.0.0.1 by default.
-        Setting <code>--host 0.0.0.0</code> exposes the model endpoint to your
-        entire network with no authentication. Do not expose it to the public
-        internet.
+    <section id="architecture" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Architecture</p>
+        <h2>How a local run works.</h2>
+        <div class="prose">
+          <p>
+            <code>boole run</code> takes an alias, such as <code>llama3</code>, or a
+            repository and quantization. The alias resolves to a GGUF file that
+            fits the memory this machine reports. If that file is not in the
+            cache, <code>pull</code> downloads it from Hugging Face and resumes
+            if the transfer stops. node-llama-cpp then loads the file, opens a
+            context, and samples tokens in-process. Standard output is the
+            model text. Diagnostics stay on standard error.
+          </p>
+        </div>
+        <ol class="flow">
+          <li>
+            <span class="tag">01</span>
+            <h3>Session</h3>
+            <span>The prompt comes from an argument, a file, or stdin. It is not uploaded by this code.</span>
+          </li>
+          <li>
+            <span class="tag">02</span>
+            <h3>Runtime</h3>
+            <span>llama.cpp through node-llama-cpp. GPU offload when that build provides it, otherwise the CPU. The default context is 2048 tokens.</span>
+          </li>
+          <li>
+            <span class="tag">03</span>
+            <h3>Weights</h3>
+            <span>A GGUF file in the local cache. After it is there, generation does not need the network.</span>
+          </li>
+        </ol>
+        <div class="prose" style="margin-top:1.25rem">
+          <p>
+            The demonstration on this page is the same family of runtime, compiled
+            to WebAssembly, with one thread and no GPU layers. It is a proof that
+            inference can happen in the browser. It is not the command-line release,
+            and it is not Imagine OS imagining an interface.
+          </p>
+        </div>
       </div>
+    </section>
+
+    <section id="privacy" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Privacy and security</p>
+        <h2>What stays here, and what does not.</h2>
+        <div class="split">
+          <article class="card">
+            <h3>The command line</h3>
+            <p>
+              The published source has no analytics call. The only network
+              code downloads a model file from Hugging Face during
+              <code>pull</code>. A prompt is passed to the local session.
+              The CLI does not sign or attest the weights. You are trusting
+              the repository the alias, or you, selected.
+            </p>
+          </article>
+          <article class="card">
+            <h3>This page</h3>
+            <p>
+              The runtime and the page are static. The model file is fetched
+              only after you press the button, from one public Hugging Face
+              URL. During generation the page counts new network requests and
+              reports that count. There is no account and no telemetry pixel.
+              This is not a security certification.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Research roadmap</p>
+        <h2>Where the work is going.</h2>
+        <p class="note">These are goals. Boole has not published a measurement for them.</p>
+        <ol class="goals">
+          <li>
+            <span class="tag">Goal</span>
+            <h3>Ternary weights</h3>
+            <p>BitNet-style 1.58-bit models, so a full network can live on the device instead of in a cluster.</p>
+          </li>
+          <li>
+            <span class="tag">Goal</span>
+            <h3>20 billion parameters, 200 tokens a second</h3>
+            <p>A speed target for a model of that size. A number we are aiming at. Not a number we have measured. The speed in the demonstration above is whatever this browser just produced on a 135M model.</p>
+          </li>
+          <li>
+            <span class="tag">Goal</span>
+            <h3>A shell that keeps shaping software</h3>
+            <p>The default interface is a beginning. The longer work is software that changes with use, with the model still running locally.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="builders" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">For builders</p>
+        <h2>Release 0.0.1</h2>
+        <table class="spec">
+          <tbody>
+            <tr><th scope="row">Install</th><td><code>npx @boole/cli</code></td></tr>
+            <tr><th scope="row">run</th><td>Prompt a local model. An alias such as <code>llama3</code> picks a quantization that fits available memory.</td></tr>
+            <tr><th scope="row">pull</th><td>Download weights into the cache. An interrupted download resumes.</td></tr>
+            <tr><th scope="row">doctor</th><td>Read the machine and suggest a size it can hold.</td></tr>
+            <tr><th scope="row">models</th><td>List the aliases.</td></tr>
+            <tr><th scope="row">Not built</th><td><code>serve</code> and <code>list</code> are reserved and not implemented. If node-llama-cpp is missing, the CLI says so and stops.</td></tr>
+            <tr><th scope="row">Source</th><td><a class="inline" href="https://github.com/jordantplows/boole-platform">github.com/jordantplows/boole-platform</a> · <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm</a> · MIT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="talk" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Begin</p>
+        <h2>If this is the system you want.</h2>
+        <div class="prose">
+          <p>
+            Buy now and Book a call both open a note to
+            <a class="inline" href="mailto:jordan@bunkerbio.com">jordan@bunkerbio.com</a>,
+            with the subject already filled in.
+          </p>
+        </div>
+        <div class="actions actions-hero" style="margin-top:1.5rem">
+          <a class="btn btn-buy" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Buy%20now">Buy now</a>
+          <a class="btn btn-call" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Book%20a%20call">Book a call</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>boole · MIT</span>
+      <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
+      <a href="https://github.com/jordantplows/boole-platform">Source</a>
+      <a href="mailto:jordan@bunkerbio.com">jordan@bunkerbio.com</a>
     </div>
+  </footer>
 
-    <div class="command">
-      <h3>list</h3>
-      <p>List downloaded models.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--json</code></td><td>Output as JSON</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <h2>Model specifiers</h2>
-    <p>Models are addressed as <code>&lt;hf-repo&gt;:&lt;quant-pattern&gt;</code>.</p>
-
-    <div class="example">
-      <code>TheBloke/Llama-2-7B-GGUF:Q4_K_M</code>
-      <p>Downloads the Q4_K_M quantization of Llama 2 7B from TheBloke's HuggingFace repo.</p>
-    </div>
-
-    <div class="example">
-      <code>bartowski/Phi-3-mini-4k-instruct-GGUF:Q5_K_S</code>
-      <p>Downloads Phi-3 Mini at Q5_K_S quantization.</p>
-    </div>
-
-    <p>A local <code>.gguf</code> file path works anywhere a specifier does:</p>
-    <div class="cmd" style="margin-top: 0.5rem">
-      <code><span class="prompt-char">$</span>boole run ./mistral-7b-q4.gguf "your prompt"</code>
-      <button class="copy-btn" data-copy="boole run ./mistral-7b-q4.gguf &quot;your prompt&quot;">copy</button>
-    </div>
-  </section>
-
-  <section>
-    <h2>Platform support</h2>
-    <table>
-      <thead>
-        <tr><th>Platform</th><th>Arch</th><th>GPU</th><th>Backend</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>macOS</td><td>Apple Silicon</td><td>Yes</td><td>Metal</td></tr>
-        <tr><td>macOS</td><td>Intel</td><td>—</td><td>CPU only</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>NVIDIA</td><td>CUDA</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>AMD</td><td>Vulkan</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>—</td><td>CPU only</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>NVIDIA</td><td>CUDA</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>AMD</td><td>Vulkan</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>—</td><td>CPU only</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-</main>
-
-<footer class="col">
-  <div class="footer-links">
-    <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
-    <a href="https://github.com/boole-sh/boole">GitHub</a>
-    <span>MIT License</span>
-    <a href="mailto:hello@boole.sh">hello@boole.sh</a>
-  </div>
-</footer>
-
-<script>
-(function () {
-  var frames = [{"t":"$ ","c":"prompt","d":0},{"t":"boole run TheBloke/Llama-2-7B-GGUF:Q4_K_M \"Explain what a boolean is in one sentence.\" --stream\n","d":500},{"t":"pulling TheBloke/Llama-2-7B-GGUF:Q4_K_M... ","c":"muted","d":600},{"t":"done (3.8 GB)\n","c":"muted","d":1800},{"t":"loading model... ","c":"muted","d":400},{"t":"done (Metal, 35 layers offloaded)\n\n","c":"muted","d":1400},{"t":"A ","d":120},{"t":"boolean ","d":60},{"t":"is ","d":45},{"t":"a ","d":40},{"t":"data ","d":50},{"t":"type ","d":55},{"t":"that ","d":45},{"t":"holds ","d":50},{"t":"exactly ","d":55},{"t":"one ","d":45},{"t":"of ","d":35},{"t":"two ","d":45},{"t":"values ","d":50},{"t":"— ","d":70},{"t":"true ","d":50},{"t":"or ","d":40},{"t":"false ","d":50},{"t":"— ","d":70},{"t":"and ","d":45},{"t":"is ","d":35},{"t":"the ","d":40},{"t":"foundation\n","d":55},{"t":"of ","d":40},{"t":"every ","d":50},{"t":"conditional ","d":65},{"t":"branch ","d":55},{"t":"in ","d":35},{"t":"every ","d":50},{"t":"program ","d":60},{"t":"you ","d":45},{"t":"have ","d":45},{"t":"ever ","d":50},{"t":"run.","d":55}];
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var el = document.getElementById('terminal');
-  var output = document.getElementById('terminal-output');
-
-  var observer = new IntersectionObserver(function (entries) {
-    if (entries[0].isIntersecting) {
-      observer.disconnect();
-      output.innerHTML = '';
-
-      var cursor = document.createElement('span');
-      cursor.className = 'cursor';
-      cursor.textContent = '\u2588';
-      output.appendChild(cursor);
-
-      var i = 0;
-      function step() {
-        var f = frames[i];
-        if (f.c) {
-          var span = document.createElement('span');
-          span.className = f.c;
-          span.textContent = f.t;
-          output.insertBefore(span, cursor);
-        } else {
-          output.insertBefore(document.createTextNode(f.t), cursor);
-        }
-        i++;
-        if (i < frames.length) {
-          setTimeout(step, frames[i].d);
-        } else {
-          cursor.remove();
-        }
-      }
-      setTimeout(step, frames[0].d);
-    }
-  }, { threshold: 0.3 });
-
-  observer.observe(el);
-})();
-</script>
-
-<script>
-document.querySelectorAll('[data-copy]').forEach(function (btn) {
+  <script type="module">
+  var btn = document.getElementById('run-demo');
   btn.addEventListener('click', function () {
-    navigator.clipboard.writeText(btn.getAttribute('data-copy')).then(function () {
-      var prev = btn.textContent;
-      btn.textContent = 'copied';
-      setTimeout(function () { btn.textContent = prev; }, 2000);
+    if (typeof WebAssembly !== 'object') {
+      document.getElementById('demo-status').textContent = 'This browser does not provide WebAssembly. The command-line runtime is npx @boole/cli.';
+      return;
+    }
+    btn.disabled = true;
+    import('/demo.js').then(function (mod) {
+      return mod.run();
+    }).catch(function (err) {
+      document.getElementById('demo-status').textContent = (err && err.message) ? err.message : 'The demo failed to start.';
+    }).then(function () {
+      btn.disabled = false;
+      btn.textContent = 'Run again';
     });
   });
-});
-</script>
-
+  </script>
 </body>
 </html>

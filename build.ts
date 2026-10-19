@@ -7,284 +7,390 @@ const DIST = 'dist';
 const SITE = 'https://boole.sh';
 const PORT = 4321;
 
+/**
+ * Inquiry destinations. One place to swap later:
+ * set buyNow to a Stripe Payment Link and bookCall to a Cal.com URL.
+ * Until then both are mailto links with the subject filled in.
+ */
+const CTA = {
+  email: 'jordan@bunkerbio.com',
+  buyNow: `mailto:jordan@bunkerbio.com?subject=${encodeURIComponent('Boole: Buy now')}`,
+  bookCall: `mailto:jordan@bunkerbio.com?subject=${encodeURIComponent('Boole: Book a call')}`,
+} as const;
+
+const TITLE = 'Imagine OS — on-device models for software that adapts';
+const DESCRIPTION =
+  'Imagine OS runs models on the device and shapes software around you. Local GGUF inference today. A 20B model at 200 tok/s is a goal.';
+const KEYWORDS =
+  'on-device AI, local models, local inference, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF';
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE}/#organization`,
+      name: 'Boole',
+      url: `${SITE}/`,
+      email: CTA.email,
+      logo: `${SITE}/favicon.svg`,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE}/#website`,
+      url: `${SITE}/`,
+      name: 'Boole',
+      description: DESCRIPTION,
+      publisher: { '@id': `${SITE}/#organization` },
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Imagine OS',
+      alternateName: 'Boole',
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'macOS, Linux, Windows',
+      softwareVersion: '0.0.1',
+      url: `${SITE}/`,
+      description:
+        'Imagine OS is Boole’s direction: software shaped around the person using it, with models that run on the device. Release 0.0.1 is a local GGUF runtime through llama.cpp. A 20-billion-parameter model at 200 tokens per second is a target, not a measured result.',
+      keywords: KEYWORDS,
+      license: 'https://opensource.org/licenses/MIT',
+      installUrl: 'https://www.npmjs.com/package/@boole/cli',
+      featureList: [
+        'Local GGUF inference through llama.cpp',
+        'An in-browser demonstration that runs SmolLM2 135M on the visitor’s device',
+        'A direction toward software shaped around its user',
+      ],
+      author: { '@id': `${SITE}/#organization` },
+      publisher: { '@id': `${SITE}/#organization` },
+    },
+  ],
+}).replace(/</g, '\\u003c');
+
 if (existsSync(DIST)) rmSync(DIST, { recursive: true });
 mkdirSync(DIST, { recursive: true });
 
 const css = readFileSync('src/styles/global.css', 'utf-8');
-const frames: Array<{ t: string; c?: string; d: number }> = JSON.parse(
-  readFileSync('src/data/terminal-frames.json', 'utf-8'),
-);
-
-const staticTerminal = frames
-  .map(f => {
-    const t = f.t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    return f.c ? `<span class="${f.c}">${t}</span>` : t;
-  })
-  .join('');
 
 const html = `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>boole — local LLM inference for JavaScript</title>
-  <meta name="description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <title>${TITLE}</title>
+  <meta name="description" content="${DESCRIPTION}">
+  <meta name="keywords" content="${KEYWORDS}">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="${SITE}/">
-
-  <meta property="og:title" content="boole — local LLM inference for JavaScript">
-  <meta property="og:description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <meta property="og:site_name" content="Boole">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="${TITLE}">
+  <meta property="og:description" content="${DESCRIPTION}">
   <meta property="og:image" content="${SITE}/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Imagine OS. On-device models for software that adapts.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${SITE}/">
-
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="boole — local LLM inference for JavaScript">
-  <meta name="twitter:description" content="Run GGUF models on your own machine via llama.cpp. No API key, no per-token cost. npm install and go.">
+  <meta name="twitter:title" content="${TITLE}">
+  <meta name="twitter:description" content="${DESCRIPTION}">
   <meta name="twitter:image" content="${SITE}/og.png">
-
-  <meta name="theme-color" content="#fbfbf9" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)">
-
+  <meta name="twitter:image:alt" content="Imagine OS. On-device models for software that adapts.">
+  <meta name="theme-color" content="#0c0d10">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">${jsonLd}</script>
   <style>${css}</style>
 </head>
 <body>
+  <a class="skip" href="#vision">Skip to content</a>
+  <header class="bar">
+    <a class="brand" href="#vision">boole <span>Imagine OS</span></a>
+    <nav class="actions" aria-label="Contact">
+      <a class="btn btn-call" href="${CTA.bookCall}">Book a call</a>
+      <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
+    </nav>
+  </header>
 
-<main class="col">
-
-  <section class="hero">
-    <h1 class="wordmark">boole</h1>
-    <p class="lead">
-      Local LLM inference for JavaScript — run GGUF models on your own machine
-      via llama.cpp, no API key or per-token cost required.
-    </p>
-    <div class="cmd">
-      <code><span class="prompt-char">$</span>npx @boole/cli</code>
-      <button class="copy-btn" data-copy="npx @boole/cli">copy</button>
-    </div>
-  </section>
-
-  <section>
-    <div class="terminal" id="terminal" aria-label="Terminal session demonstrating boole run with streaming output">
-      <pre><code id="terminal-output">${staticTerminal}</code></pre>
-    </div>
-  </section>
-
-  <section>
-    <div class="features">
-      <div>
-        <h3>Your hardware, your latency</h3>
-        <p>
-          Inference runs on the machine that called it. No cold start, no
-          round-trip to a datacenter, no queue. Metal on Apple Silicon, CUDA and
-          Vulkan on Linux and Windows.
+  <main>
+    <section id="vision" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Imagine OS · Release 0.0.1</p>
+        <h1>The model stays on the device.</h1>
+        <p class="lede">
+          Imagine OS runs real models locally and shapes its software around the
+          person using it. Fixed apps are written before you arrive. This one
+          keeps taking shape after it ships. What runs today is the runtime.
+          The shell that imagines is what we are building on it.
         </p>
+        <div class="actions actions-hero">
+          <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
+          <a class="btn btn-call" href="${CTA.bookCall}">Book a call</a>
+        </div>
+        <dl class="facts">
+          <div><dt>Runtime</dt><dd>llama.cpp</dd></div>
+          <div><dt>Weights</dt><dd>GGUF, on disk</dd></div>
+          <div><dt>Interface</dt><dd>Command line</dd></div>
+          <div><dt>License</dt><dd>MIT</dd></div>
+        </dl>
       </div>
-      <div>
-        <h3>Any GGUF, any quant</h3>
-        <p>
-          Point Boole at a HuggingFace repo and a quantization pattern. It
-          downloads the file, verifies the hash, and caches it locally. You pick
-          the size/quality trade-off.
-        </p>
+    </section>
+
+    <section id="product" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">The product</p>
+        <h2>Software, written around a person.</h2>
+        <div class="split">
+          <div class="stack">
+            <h3>What ships finished</h3>
+            <p>
+              Menus, icons, and workflows are decided before the machine is
+              opened. The person adapts. The software does not. That made
+              computers usable, and it made them the same for everyone.
+            </p>
+          </div>
+          <div class="stack">
+            <h3>What Imagine OS is for</h3>
+            <p>
+              A task begins, and the interface for it is composed for that
+              work: the controls, the layout, a piece of software that was not
+              installed this morning. The model that makes this possible runs
+              on the device, not in a rented cluster. This is the direction.
+              It is not a theme on top of the same apps.
+            </p>
+          </div>
+        </div>
       </div>
-      <div>
-        <h3>An npm install, not a daemon</h3>
-        <p>
-          <code>npm i -g @boole/cli</code>. No Docker container, no system
-          service, no background process. It links against node-llama-cpp and
-          loads the model on demand.
-        </p>
+    </section>
+
+    <section id="demo" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Proof</p>
+        <h2>Run a model in this browser.</h2>
+        <div class="prose">
+          <p>
+            Press the button and a small open model loads into WebAssembly on
+            this device. Nothing is typed in for you, and the tokens are the
+            model’s. This is SmolLM2 135M Instruct at Q4_K_M, not the 20-billion-parameter
+            target. The first run downloads the weights from Hugging Face.
+            Generation is capped at 64 tokens, and after the weights are in
+            memory it does not call a server.
+          </p>
+        </div>
+        <div class="bench">
+          <div class="bench-top">
+            <strong>${'SmolLM2-135M-Instruct'}</strong>
+            <span>Q4_K_M · llama.cpp via wllama · Apache-2.0 weights</span>
+          </div>
+          <label for="demo-prompt">Prompt</label>
+          <textarea id="demo-prompt" maxlength="500">What does it mean to run a language model on the device?</textarea>
+          <button class="btn btn-buy" id="run-demo" type="button">Run on this device</button>
+          <p class="bench-meta" id="demo-status">Waiting. Weights are not loaded.</p>
+          <div class="bench-meta">
+            <span>Decode <strong id="demo-metrics">—</strong></span>
+            <span id="demo-net">No generation yet</span>
+          </div>
+          <label for="demo-output">Output</label>
+          <pre id="demo-output" aria-live="polite"></pre>
+          <p class="host" id="demo-host">Hardware is reported when you run it.</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Commands</h2>
-
-    <div class="command">
-      <h3>run</h3>
-      <p>Run a prompt against a model.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier or local <code>.gguf</code> path</td></tr>
-          <tr><td><code>--stream</code></td><td>Stream tokens to stdout</td></tr>
-          <tr><td><code>--system, -s</code></td><td>System prompt</td></tr>
-          <tr><td><code>--temp, -t</code></td><td>Sampling temperature (default: 0.8)</td></tr>
-          <tr><td><code>--ctx-size</code></td><td>Context window in tokens (default: 2048)</td></tr>
-          <tr><td><code>--gpu-layers</code></td><td>Layers to offload to GPU (default: all)</td></tr>
-          <tr><td><code>--max-tokens</code></td><td>Maximum tokens to generate</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="command">
-      <h3>pull</h3>
-      <p>Download a model to the local cache.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier</td></tr>
-          <tr><td><code>--dir</code></td><td>Custom cache directory</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="command">
-      <h3>serve</h3>
-      <p>Start an OpenAI-compatible HTTP server.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--model, -m</code></td><td>Model specifier or local <code>.gguf</code> path</td></tr>
-          <tr><td><code>--port, -p</code></td><td>Port (default: 8080)</td></tr>
-          <tr><td><code>--host</code></td><td>Bind address (default: 127.0.0.1)</td></tr>
-        </tbody>
-      </table>
-      <div class="warning">
-        <strong>Warning:</strong> <code>serve</code> binds to 127.0.0.1 by default.
-        Setting <code>--host 0.0.0.0</code> exposes the model endpoint to your
-        entire network with no authentication. Do not expose it to the public
-        internet.
+    <section id="architecture" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Architecture</p>
+        <h2>How a local run works.</h2>
+        <div class="prose">
+          <p>
+            <code>boole run</code> takes an alias, such as <code>llama3</code>, or a
+            repository and quantization. The alias resolves to a GGUF file that
+            fits the memory this machine reports. If that file is not in the
+            cache, <code>pull</code> downloads it from Hugging Face and resumes
+            if the transfer stops. node-llama-cpp then loads the file, opens a
+            context, and samples tokens in-process. Standard output is the
+            model text. Diagnostics stay on standard error.
+          </p>
+        </div>
+        <ol class="flow">
+          <li>
+            <span class="tag">01</span>
+            <h3>Session</h3>
+            <span>The prompt comes from an argument, a file, or stdin. It is not uploaded by this code.</span>
+          </li>
+          <li>
+            <span class="tag">02</span>
+            <h3>Runtime</h3>
+            <span>llama.cpp through node-llama-cpp. GPU offload when that build provides it, otherwise the CPU. The default context is 2048 tokens.</span>
+          </li>
+          <li>
+            <span class="tag">03</span>
+            <h3>Weights</h3>
+            <span>A GGUF file in the local cache. After it is there, generation does not need the network.</span>
+          </li>
+        </ol>
+        <div class="prose" style="margin-top:1.25rem">
+          <p>
+            The demonstration on this page is the same family of runtime, compiled
+            to WebAssembly, with one thread and no GPU layers. It is a proof that
+            inference can happen in the browser. It is not the command-line release,
+            and it is not Imagine OS imagining an interface.
+          </p>
+        </div>
       </div>
+    </section>
+
+    <section id="privacy" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Privacy and security</p>
+        <h2>What stays here, and what does not.</h2>
+        <div class="split">
+          <article class="card">
+            <h3>The command line</h3>
+            <p>
+              The published source has no analytics call. The only network
+              code downloads a model file from Hugging Face during
+              <code>pull</code>. A prompt is passed to the local session.
+              The CLI does not sign or attest the weights. You are trusting
+              the repository the alias, or you, selected.
+            </p>
+          </article>
+          <article class="card">
+            <h3>This page</h3>
+            <p>
+              The runtime and the page are static. The model file is fetched
+              only after you press the button, from one public Hugging Face
+              URL. During generation the page counts new network requests and
+              reports that count. There is no account and no telemetry pixel.
+              This is not a security certification.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Research roadmap</p>
+        <h2>Where the work is going.</h2>
+        <p class="note">These are goals. Boole has not published a measurement for them.</p>
+        <ol class="goals">
+          <li>
+            <span class="tag">Goal</span>
+            <h3>Ternary weights</h3>
+            <p>BitNet-style 1.58-bit models, so a full network can live on the device instead of in a cluster.</p>
+          </li>
+          <li>
+            <span class="tag">Goal</span>
+            <h3>20 billion parameters, 200 tokens a second</h3>
+            <p>A speed target for a model of that size. A number we are aiming at. Not a number we have measured. The speed in the demonstration above is whatever this browser just produced on a 135M model.</p>
+          </li>
+          <li>
+            <span class="tag">Goal</span>
+            <h3>A shell that keeps shaping software</h3>
+            <p>The default interface is a beginning. The longer work is software that changes with use, with the model still running locally.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="builders" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">For builders</p>
+        <h2>Release 0.0.1</h2>
+        <table class="spec">
+          <tbody>
+            <tr><th scope="row">Install</th><td><code>npx @boole/cli</code></td></tr>
+            <tr><th scope="row">run</th><td>Prompt a local model. An alias such as <code>llama3</code> picks a quantization that fits available memory.</td></tr>
+            <tr><th scope="row">pull</th><td>Download weights into the cache. An interrupted download resumes.</td></tr>
+            <tr><th scope="row">doctor</th><td>Read the machine and suggest a size it can hold.</td></tr>
+            <tr><th scope="row">models</th><td>List the aliases.</td></tr>
+            <tr><th scope="row">Not built</th><td><code>serve</code> and <code>list</code> are reserved and not implemented. If node-llama-cpp is missing, the CLI says so and stops.</td></tr>
+            <tr><th scope="row">Source</th><td><a class="inline" href="https://github.com/jordantplows/boole-platform">github.com/jordantplows/boole-platform</a> · <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm</a> · MIT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="talk" tabindex="-1">
+      <div class="wrap">
+        <p class="kicker">Begin</p>
+        <h2>If this is the system you want.</h2>
+        <div class="prose">
+          <p>
+            Buy now and Book a call both open a note to
+            <a class="inline" href="mailto:${CTA.email}">${CTA.email}</a>,
+            with the subject already filled in.
+          </p>
+        </div>
+        <div class="actions actions-hero" style="margin-top:1.5rem">
+          <a class="btn btn-buy" href="${CTA.buyNow}">Buy now</a>
+          <a class="btn btn-call" href="${CTA.bookCall}">Book a call</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>boole · MIT</span>
+      <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
+      <a href="https://github.com/jordantplows/boole-platform">Source</a>
+      <a href="mailto:${CTA.email}">${CTA.email}</a>
     </div>
+  </footer>
 
-    <div class="command">
-      <h3>list</h3>
-      <p>List downloaded models.</p>
-      <table>
-        <thead><tr><th>Flag</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>--json</code></td><td>Output as JSON</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <h2>Model specifiers</h2>
-    <p>Models are addressed as <code>&lt;hf-repo&gt;:&lt;quant-pattern&gt;</code>.</p>
-
-    <div class="example">
-      <code>TheBloke/Llama-2-7B-GGUF:Q4_K_M</code>
-      <p>Downloads the Q4_K_M quantization of Llama 2 7B from TheBloke's HuggingFace repo.</p>
-    </div>
-
-    <div class="example">
-      <code>bartowski/Phi-3-mini-4k-instruct-GGUF:Q5_K_S</code>
-      <p>Downloads Phi-3 Mini at Q5_K_S quantization.</p>
-    </div>
-
-    <p>A local <code>.gguf</code> file path works anywhere a specifier does:</p>
-    <div class="cmd" style="margin-top: 0.5rem">
-      <code><span class="prompt-char">$</span>boole run ./mistral-7b-q4.gguf "your prompt"</code>
-      <button class="copy-btn" data-copy="boole run ./mistral-7b-q4.gguf &quot;your prompt&quot;">copy</button>
-    </div>
-  </section>
-
-  <section>
-    <h2>Platform support</h2>
-    <table>
-      <thead>
-        <tr><th>Platform</th><th>Arch</th><th>GPU</th><th>Backend</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>macOS</td><td>Apple Silicon</td><td>Yes</td><td>Metal</td></tr>
-        <tr><td>macOS</td><td>Intel</td><td>—</td><td>CPU only</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>NVIDIA</td><td>CUDA</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>AMD</td><td>Vulkan</td></tr>
-        <tr><td>Linux</td><td>x86_64</td><td>—</td><td>CPU only</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>NVIDIA</td><td>CUDA</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>AMD</td><td>Vulkan</td></tr>
-        <tr><td>Windows</td><td>x86_64</td><td>—</td><td>CPU only</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-</main>
-
-<footer class="col">
-  <div class="footer-links">
-    <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
-    <a href="https://github.com/boole-sh/boole">GitHub</a>
-    <span>MIT License</span>
-    <a href="mailto:hello@boole.sh">hello@boole.sh</a>
-  </div>
-</footer>
-
-<script>
-(function () {
-  var frames = ${JSON.stringify(frames)};
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var el = document.getElementById('terminal');
-  var output = document.getElementById('terminal-output');
-
-  var observer = new IntersectionObserver(function (entries) {
-    if (entries[0].isIntersecting) {
-      observer.disconnect();
-      output.innerHTML = '';
-
-      var cursor = document.createElement('span');
-      cursor.className = 'cursor';
-      cursor.textContent = '\\u2588';
-      output.appendChild(cursor);
-
-      var i = 0;
-      function step() {
-        var f = frames[i];
-        if (f.c) {
-          var span = document.createElement('span');
-          span.className = f.c;
-          span.textContent = f.t;
-          output.insertBefore(span, cursor);
-        } else {
-          output.insertBefore(document.createTextNode(f.t), cursor);
-        }
-        i++;
-        if (i < frames.length) {
-          setTimeout(step, frames[i].d);
-        } else {
-          cursor.remove();
-        }
-      }
-      setTimeout(step, frames[0].d);
-    }
-  }, { threshold: 0.3 });
-
-  observer.observe(el);
-})();
-</script>
-
-<script>
-document.querySelectorAll('[data-copy]').forEach(function (btn) {
+  <script type="module">
+  var btn = document.getElementById('run-demo');
   btn.addEventListener('click', function () {
-    navigator.clipboard.writeText(btn.getAttribute('data-copy')).then(function () {
-      var prev = btn.textContent;
-      btn.textContent = 'copied';
-      setTimeout(function () { btn.textContent = prev; }, 2000);
+    if (typeof WebAssembly !== 'object') {
+      document.getElementById('demo-status').textContent = 'This browser does not provide WebAssembly. The command-line runtime is npx @boole/cli.';
+      return;
+    }
+    btn.disabled = true;
+    import('/demo.js').then(function (mod) {
+      return mod.run();
+    }).catch(function (err) {
+      document.getElementById('demo-status').textContent = (err && err.message) ? err.message : 'The demo failed to start.';
+    }).then(function () {
+      btn.disabled = false;
+      btn.textContent = 'Run again';
     });
   });
-});
-</script>
-
+  </script>
 </body>
 </html>`;
 
 writeFileSync(join(DIST, 'index.html'), html);
 
 const ogSvg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#161618"/>
-  <text x="100" y="260" font-family="monospace" font-size="64" font-weight="700" fill="#e8e6e3">boole</text>
-  <text x="100" y="330" font-family="sans-serif" font-size="26" fill="#929290">Local LLM inference for JavaScript</text>
-  <text x="100" y="400" font-family="monospace" font-size="20" fill="#e8862f">$ npx @boole/cli</text>
+  <rect width="1200" height="630" fill="#0c0d10"/>
+  <text x="88" y="210" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="28" letter-spacing="6" fill="#c9c4ba">IMAGINE OS</text>
+  <text x="88" y="320" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="72" font-weight="600" fill="#f3f1eb">On-device</text>
+  <text x="88" y="410" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="72" font-weight="600" fill="#f3f1eb">inference.</text>
 </svg>`;
 
 const ogPng = await sharp(Buffer.from(ogSvg)).png().toBuffer();
 writeFileSync(join(DIST, 'og.png'), ogPng);
 
 cpSync('public', DIST, { recursive: true });
+
+const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${SITE}/sitemap.xml
+`;
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${SITE}/</loc>
+  </url>
+</urlset>
+`;
+
+writeFileSync(join(DIST, 'robots.txt'), robots);
+writeFileSync(join(DIST, 'sitemap.xml'), sitemap);
 
 console.log(`Built to ${DIST}/ (${(html.length / 1024).toFixed(1)}KB html, ${(ogPng.length / 1024).toFixed(1)}KB og.png)`);
 
@@ -296,6 +402,9 @@ if (process.argv.includes('--serve')) {
     '.json': 'application/json',
     '.png': 'image/png',
     '.svg': 'image/svg+xml',
+    '.xml': 'application/xml; charset=utf-8',
+    '.txt': 'text/plain; charset=utf-8',
+    '.wasm': 'application/wasm',
     '': 'text/plain; charset=utf-8',
   };
 
@@ -313,7 +422,7 @@ if (process.argv.includes('--serve')) {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       res.end('Not found');
     }
-  }).listen(PORT, () => {
+  }).listen(PORT, '0.0.0.0', () => {
     console.log(`Serving at http://localhost:${PORT}`);
   });
 }
