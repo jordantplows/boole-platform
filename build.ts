@@ -1,29 +1,29 @@
 import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, existsSync } from 'node:fs';
-import { join, extname } from 'node:path';
+import { join, extname, dirname } from 'node:path';
 import { createServer } from 'node:http';
 import sharp from 'sharp';
+import { sitePages } from './src/guides.ts';
 
 const DIST = 'dist';
 const SITE = 'https://boole.sh';
 const PORT = 4321;
 
 /**
- * Inquiry destinations. One place to swap later:
- * set buyNow to a Stripe Payment Link and bookCall to a Cal.com URL.
- * Until then both are mailto links with the subject filled in.
+ * Managed checkout is the Stripe Payment Link. Codebase acquisition stays an inquiry.
  */
+const STRIPE = 'https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03';
 const CTA = {
   email: 'hello@booleinference.com',
-  buyNow: `mailto:hello@booleinference.com?subject=${encodeURIComponent('Boole: Buy now')}`,
+  buyNow: STRIPE,
   bookCall: `mailto:hello@booleinference.com?subject=${encodeURIComponent('Boole: Book a call')}`,
   buyCodebase: `mailto:hello@booleinference.com?subject=${encodeURIComponent('Boole: Codebase acquisition')}`,
 } as const;
 
-const TITLE = 'Imagine OS — on-device models for software that adapts';
+const TITLE = 'Run a local AI model on your own device — Boole';
 const DESCRIPTION =
-  'Imagine OS runs models on the device and shapes software around you. Local GGUF inference today. A 20B model at 200 tok/s is a goal.';
+  'Run a local LLM on your Mac, Windows, or Linux machine. Managed setup from Boole AI, Inc. is a $1,800 entry payment. A 20B model at 200 tok/s is a goal.';
 const KEYWORDS =
-  'on-device AI, local models, local inference, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF, managed on-device AI, acquire AI codebase, on-device energy, device support, Apple Silicon Metal, CUDA, Vulkan, WebAssembly, quantization, local power';
+  'run LLM locally on Mac, run local AI model on Windows, offline AI on Linux, on-device AI, local models, local inference, Imagine OS, GGUF, Apple Silicon Metal, CUDA, Vulkan, WebAssembly, managed on-device AI';
 
 const FAQ = [
   {
@@ -44,7 +44,7 @@ const FAQ = [
   },
   {
     q: 'What do managed and white-glove include?',
-    a: 'Pay to start is Imagine OS as a managed product. Boole AI stands it up, deploys it, and keeps it running with continuous uptime. White-glove means that setup and service are done by Boole AI. The scope of that service is agreed when you start. There is no published uptime percentage.',
+    a: 'Pay to start is a $1,800 entry payment for the managed tier. Boole AI sets Imagine OS up and runs it, with continuous uptime and white-glove onboarding. The button goes to Stripe. The scope of that service is agreed when you start. There is no published uptime percentage.',
   },
   {
     q: 'How does acquiring the codebase work?',
@@ -56,7 +56,7 @@ const FAQ = [
   },
   {
     q: 'How do I contact Boole AI?',
-    a: 'Email hello@booleinference.com. Pay to start uses the subject “Boole: Buy now”. A codebase inquiry uses “Boole: Codebase acquisition”. A general call uses “Boole: Book a call”.',
+    a: 'Email hello@booleinference.com. Pay to start is a $1,800 Stripe payment for the managed tier. A codebase inquiry uses the subject “Boole: Codebase acquisition”.',
   },
 ];
 
@@ -101,6 +101,23 @@ const jsonLd = JSON.stringify({
       ],
       author: { '@id': `${SITE}/#organization` },
       publisher: { '@id': `${SITE}/#organization` },
+    },
+    {
+      '@type': 'Product',
+      '@id': `${SITE}/#managed-product`,
+      name: 'Imagine OS managed tier',
+      description:
+        'Entry payment for the managed tier. Boole AI, Inc. sets Imagine OS up and runs it, with continuous uptime and white-glove onboarding.',
+      brand: { '@type': 'Brand', name: 'Imagine OS' },
+      manufacturer: { '@id': `${SITE}/#organization` },
+      offers: {
+        '@type': 'Offer',
+        price: '1800',
+        priceCurrency: 'USD',
+        url: STRIPE,
+        availability: 'https://schema.org/OnlineOnly',
+        seller: { '@id': `${SITE}/#organization` },
+      },
     },
     {
       '@type': 'FAQPage',
@@ -162,10 +179,10 @@ const html = `<!doctype html>
   <a class="skip" href="#vision">Skip to content</a>
   <aside class="announce" aria-label="Ways to work with Boole">
     <div class="announce-inner">
-      <p class="announce-lead"><span>Two ways in</span> Pay to start is the fast path. Acquiring the codebase is a full inquiry.</p>
+      <p class="announce-lead"><span>Two ways in</span> Pay to start is a $1,800 entry payment. Acquiring the codebase is a full inquiry.</p>
       <div class="announce-paths">
         <div class="announce-path">
-          <p><strong>Pay to start.</strong> <span class="announce-detail">Managed Imagine OS. Continuous uptime. White-glove setup.</span></p>
+          <p><strong>Pay to start · $1,800.</strong> <span class="announce-detail">Managed tier. We set it up and run it. Continuous uptime. White-glove onboarding.</span></p>
           <a class="btn btn-pay" href="${CTA.buyNow}">Pay to start</a>
         </div>
         <div class="announce-path">
@@ -199,6 +216,7 @@ const html = `<!doctype html>
         <div class="actions actions-hero">
           <a class="btn btn-pay" href="${CTA.buyNow}">Pay to start</a>
           <a class="text-link" href="#offers">Or inquire about the codebase</a>
+          <p class="price-inline">$1,800 entry payment for the managed tier. We set it up and run it.</p>
         </div>
         <dl class="facts">
           <div><dt>Runtime</dt><dd>llama.cpp</dd></div>
@@ -358,7 +376,7 @@ const html = `<!doctype html>
               The CLI calls <code>getLlama({ gpu: 'auto' })</code>. That runtime
               uses Metal, CUDA, or Vulkan when the prebuilt binary matches the
               machine, and the CPU when it does not. <code>--gpu-layers</code>
-              sets a layer count. Omit it and the runtime decides.
+              is accepted and is not passed to <code>loadModel</code> in 0.0.1.
             </p>
           </article>
           <article class="card">
@@ -397,18 +415,18 @@ const html = `<!doctype html>
       <div class="wrap">
         <p class="kicker">Devices</p>
         <h2 class="reveal">Supported today, and the next 24 months.</h2>
-        <p class="note reveal">Today follows the prebuilt binaries of node-llama-cpp 3.22.2, the runtime this CLI imports, plus the WebAssembly demo. The planned column is a roadmap, not a commitment.</p>
+        <p class="note reveal">Today follows the prebuilt binaries of node-llama-cpp 3.22.2, the runtime this CLI imports, plus the WebAssembly demo. Each supported device links to a <a class="inline" href="/guides/">setup guide</a>. The planned column is a roadmap, not a commitment.</p>
         <div class="matrix">
           <h3 class="matrix-label today-label">Supported today</h3>
           <ul class="matrix-grid">
-            <li><span class="tag">macOS</span><strong>Apple Silicon</strong><span>Metal. Package mac-arm64-metal.</span></li>
-            <li><span class="tag">macOS</span><strong>Intel</strong><span>CPU. Metal is off by default. Package mac-x64.</span></li>
-            <li><span class="tag">Windows x64</span><strong>CUDA, Vulkan, or CPU</strong><span>Packages win-x64, win-x64-cuda, win-x64-vulkan.</span></li>
-            <li><span class="tag">Linux x64</span><strong>CUDA, Vulkan, or CPU</strong><span>Packages linux-x64, linux-x64-cuda, linux-x64-vulkan.</span></li>
-            <li><span class="tag">Linux arm64</span><strong>CPU</strong><span>Package linux-arm64. No CUDA or Vulkan package.</span></li>
-            <li><span class="tag">Windows arm64</span><strong>CPU</strong><span>Package win-arm64. No GPU package.</span></li>
-            <li><span class="tag">Linux</span><strong>armv7l and riscv64</strong><span>CPU prebuilts. linux-armv7l, linux-riscv64.</span></li>
-            <li><span class="tag">Browser</span><strong>WebAssembly demo</strong><span>wllama, one thread, no GPU layers. Not the CLI.</span></li>
+            <li><span class="tag">macOS</span><strong><a href="/guides/macos-apple-silicon/">Apple Silicon</a></strong><span>Metal. Package mac-arm64-metal. <a class="inline" href="/guides/macos-apple-silicon/">Setup guide</a>.</span></li>
+            <li><span class="tag">macOS</span><strong><a href="/guides/macos-intel/">Intel</a></strong><span>CPU. Metal is off by default. Package mac-x64. <a class="inline" href="/guides/macos-intel/">Setup guide</a>.</span></li>
+            <li><span class="tag">Windows x64</span><strong><a href="/guides/windows-x64/">CUDA, Vulkan, or CPU</a></strong><span>Packages win-x64, win-x64-cuda, win-x64-vulkan. <a class="inline" href="/guides/windows-x64/">Setup guide</a>.</span></li>
+            <li><span class="tag">Linux x64</span><strong><a href="/guides/linux-x64/">CUDA, Vulkan, or CPU</a></strong><span>Packages linux-x64, linux-x64-cuda, linux-x64-vulkan. <a class="inline" href="/guides/linux-x64/">Setup guide</a>.</span></li>
+            <li><span class="tag">Linux arm64</span><strong><a href="/guides/linux-arm64/">CPU</a></strong><span>Package linux-arm64. No CUDA or Vulkan package. <a class="inline" href="/guides/linux-arm64/">Setup guide</a>.</span></li>
+            <li><span class="tag">Windows arm64</span><strong><a href="/guides/windows-arm64/">CPU</a></strong><span>Package win-arm64. No GPU package. <a class="inline" href="/guides/windows-arm64/">Setup guide</a>.</span></li>
+            <li><span class="tag">Linux</span><strong>armv7l and riscv64</strong><span>CPU prebuilts. linux-armv7l and linux-riscv64 are not the <a class="inline" href="/guides/linux-arm64/">arm64 guide</a>.</span></li>
+            <li><span class="tag">Browser</span><strong><a href="/guides/browser/">WebAssembly demo</a></strong><span>wllama, one thread, no GPU layers. Not the CLI. <a class="inline" href="/guides/browser/">Setup guide</a>.</span></li>
           </ul>
           <h3 class="matrix-label plan-label">Planned · next 24 months</h3>
           <p class="soon">A roadmap for Boole AI. Jordan should confirm this list. It is not a delivery commitment.</p>
@@ -532,6 +550,7 @@ const html = `<!doctype html>
             <tr><th scope="row">doctor</th><td>Read the machine and suggest a size it can hold.</td></tr>
             <tr><th scope="row">models</th><td>List the aliases.</td></tr>
             <tr><th scope="row">Not built</th><td><code>serve</code> and <code>list</code> are reserved and not implemented. If node-llama-cpp is missing, the CLI says so and stops.</td></tr>
+            <tr><th scope="row">Guides</th><td>Device setup, from Apple Silicon to the browser demo, is in the <a class="inline" href="/guides/">setup guides</a>.</td></tr>
             <tr><th scope="row">Package</th><td>The command-line runtime is published as <a class="inline" href="https://www.npmjs.com/package/@boole/cli">@boole/cli</a>.</td></tr>
           </tbody>
         </table>
@@ -566,10 +585,11 @@ const html = `<!doctype html>
           <article class="card tier-fast">
             <span class="tag">Tier 1 · Fast path</span>
             <h3>Pay to start.</h3>
+            <p class="price">$1,800</p>
             <p>
-              Imagine OS as a managed product. Boole AI stands it up and runs
-              it: continuous uptime, white-glove setup, and white-glove service.
-              This is the path that starts now.
+              Entry payment for the managed tier. Boole sets it up and runs it:
+              continuous uptime and white-glove onboarding. This is the path
+              that starts now.
             </p>
             <a class="btn btn-pay" href="${CTA.buyNow}">Pay to start</a>
           </article>
@@ -603,10 +623,12 @@ const html = `<!doctype html>
         <h2 class="reveal">Start with the product. Or ask for the code.</h2>
         <div class="prose">
           <p>
-            Pay to start opens a note to
+            Pay to start is a $1,800 entry payment on Stripe for the managed
+            tier. Boole sets it up and runs it, with continuous uptime and
+            white-glove onboarding. Acquiring the codebase is a separate
+            inquiry to
             <a class="inline" href="mailto:${CTA.email}">${CTA.email}</a>
-            with the subject “Boole: Buy now”. Acquiring the codebase uses
-            the same address with the subject “Boole: Codebase acquisition”.
+            with the subject “Boole: Codebase acquisition”.
           </p>
         </div>
         <div class="actions actions-hero" style="margin-top:1.5rem">
@@ -622,6 +644,7 @@ const html = `<!doctype html>
       <span>© 2026 Boole AI, Inc.</span>
       <a href="#license">License</a>
       <a href="#offers">Ways to work with Boole</a>
+      <a href="/guides/">Setup guides</a>
       <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
       <a href="mailto:${CTA.email}">${CTA.email}</a>
     </div>
@@ -668,6 +691,12 @@ const html = `<!doctype html>
 
 writeFileSync(join(DIST, 'index.html'), html);
 
+for (const page of sitePages(css)) {
+  const filePath = join(DIST, page.file);
+  mkdirSync(dirname(filePath), { recursive: true });
+  writeFileSync(filePath, page.html);
+}
+
 const ogSvg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="630" fill="#090909"/>
   <text x="88" y="210" font-family="Instrument Sans, Liberation Sans, DejaVu Sans, sans-serif" font-size="22" letter-spacing="5" fill="#8f8f8b">IMAGINE OS</text>
@@ -682,15 +711,15 @@ cpSync('public', DIST, { recursive: true });
 
 const robots = `User-agent: *
 Allow: /
+Disallow: /welcome/
 
 Sitemap: ${SITE}/sitemap.xml
 `;
 
+const sitemapLocs = [`${SITE}/`, ...sitePages(css).flatMap((page) => (page.loc ? [page.loc] : []))];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${SITE}/</loc>
-  </url>
+${sitemapLocs.map((loc) => `  <url><loc>${loc}</loc></url>`).join('\n')}
 </urlset>
 `;
 
@@ -716,6 +745,14 @@ if (process.argv.includes('--serve')) {
 
   createServer((req, res) => {
     let url = req.url?.split('?')[0] || '/';
+    if (!url.includes('.') && !url.endsWith('/')) {
+      const indexPath = join(DIST, url, 'index.html');
+      if (existsSync(indexPath)) {
+        res.writeHead(302, { Location: `${url}/` });
+        res.end();
+        return;
+      }
+    }
     if (url.endsWith('/')) url += 'index.html';
 
     const filePath = join(DIST, url);

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /welcome/
 
 Sitemap: https://boole.sh/sitemap.xml
