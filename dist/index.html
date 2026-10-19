@@ -3,58 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Boole — Imagine OS, on-device local AI</title>
-  <meta name="description" content="Local GGUF inference via llama.cpp, on your machine. Imagine OS is the direction: software that adapts to you. 20B at 200 tok/s is a target.">
-  <meta name="keywords" content="local AI, on-device LLM, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF, edge inference, Imagine OS">
+  <title>Imagine OS — software shaped around you</title>
+  <meta name="description" content="Imagine OS runs real models on your device and shapes software around you. Private, instant, offline, and yours. 20B at 200 tok/s is a goal.">
+  <meta name="keywords" content="on-device AI, local models, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://boole.sh/">
   <meta property="og:site_name" content="Boole">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Boole — Imagine OS, on-device local AI">
-  <meta property="og:description" content="Local GGUF inference via llama.cpp, on your machine. Imagine OS is the direction: software that adapts to you. 20B at 200 tok/s is a target.">
+  <meta property="og:title" content="Imagine OS — software shaped around you">
+  <meta property="og:description" content="Imagine OS runs real models on your device and shapes software around you. Private, instant, offline, and yours. 20B at 200 tok/s is a goal.">
   <meta property="og:image" content="https://boole.sh/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Boole, Imagine OS. Local models on your machine.">
+  <meta property="og:image:alt" content="Imagine OS. Software shaped around you, on your device.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boole.sh/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Boole — Imagine OS, on-device local AI">
-  <meta name="twitter:description" content="Local GGUF inference via llama.cpp, on your machine. Imagine OS is the direction: software that adapts to you. 20B at 200 tok/s is a target.">
+  <meta name="twitter:title" content="Imagine OS — software shaped around you">
+  <meta name="twitter:description" content="Imagine OS runs real models on your device and shapes software around you. Private, instant, offline, and yours. 20B at 200 tok/s is a goal.">
   <meta name="twitter:image" content="https://boole.sh/og.png">
-  <meta name="twitter:image:alt" content="Boole, Imagine OS. Local models on your machine.">
-  <meta name="theme-color" content="#0e1016">
+  <meta name="twitter:image:alt" content="Imagine OS. Software shaped around you, on your device.">
+  <meta name="theme-color" content="#100c14">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://boole.sh/#organization","name":"Boole","url":"https://boole.sh/","email":"jordan@bunkerbio.com","logo":"https://boole.sh/favicon.svg"},{"@type":"WebSite","@id":"https://boole.sh/#website","url":"https://boole.sh/","name":"Boole","description":"Local GGUF inference via llama.cpp, on your machine. Imagine OS is the direction: software that adapts to you. 20B at 200 tok/s is a target.","publisher":{"@id":"https://boole.sh/#organization"}},{"@type":"SoftwareApplication","name":"Boole","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows","softwareVersion":"0.0.1","url":"https://boole.sh/","description":"Local GGUF inference via llama.cpp, on your machine. Imagine OS is the direction: software that adapts to you. 20B at 200 tok/s is a target.","keywords":"local AI, on-device LLM, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF, edge inference, Imagine OS","license":"https://opensource.org/licenses/MIT","installUrl":"https://www.npmjs.com/package/@boole/cli","featureList":["Local GGUF inference through llama.cpp","Hardware-aware quantization for model aliases","On-device model cache with resumable downloads"],"author":{"@id":"https://boole.sh/#organization"},"publisher":{"@id":"https://boole.sh/#organization"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://boole.sh/#organization","name":"Boole","url":"https://boole.sh/","email":"jordan@bunkerbio.com","logo":"https://boole.sh/favicon.svg"},{"@type":"WebSite","@id":"https://boole.sh/#website","url":"https://boole.sh/","name":"Boole","description":"Imagine OS runs real models on your device and shapes software around you. Private, instant, offline, and yours. 20B at 200 tok/s is a goal.","publisher":{"@id":"https://boole.sh/#organization"}},{"@type":"SoftwareApplication","name":"Imagine OS","alternateName":"Boole","applicationCategory":"OperatingSystem","operatingSystem":"macOS, Linux, Windows","softwareVersion":"0.0.1","url":"https://boole.sh/","description":"Imagine OS is Boole’s direction: software shaped around the person using it, powered by models that run on the device. The current release is a local runtime for GGUF models. A 20-billion-parameter model at 200 tokens per second is a target, not a measured result.","keywords":"on-device AI, local models, imagination, future of software, Imagine OS, ternary weights, BitNet-style 1.58-bit models, llama.cpp, GGUF","license":"https://opensource.org/licenses/MIT","installUrl":"https://www.npmjs.com/package/@boole/cli","featureList":["On-device local models","A direction toward software shaped around its user","A local GGUF runtime through llama.cpp"],"author":{"@id":"https://boole.sh/#organization"},"publisher":{"@id":"https://boole.sh/#organization"}}]}</script>
   <style>:root {
-  --ink: #16171c;
-  --paper: #f7f4ec;
-  --muted: #3a3f4b;
-  --field: #0e1016;
-  --field-text: #f7f4ec;
-  --field-muted: #d4cfc4;
-  --line: rgba(22, 23, 28, 0.12);
-  --accent: #ff4f9a;
-  --accent-2: #7d5cff;
+  --ink: #16141c;
+  --cream: #f6f1e8;
+  --muted: #d2cbbf;
+  --field: #100c14;
+  --line: rgba(246, 241, 232, 0.18);
+  --serif: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, "Liberation Serif", serif;
   --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --mono: "JetBrains Mono", "SF Mono", ui-monospace, "Cascadia Code", "Segoe UI Mono", Menlo, Consolas, monospace;
-  --shadow: 0 22px 50px rgba(0, 0, 0, 0.32);
-  --mx: 0.5;
-  --my: 0.42;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
   --scroll: 0;
   color-scheme: dark;
-}
-
-@property --accent {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #ff4f9a;
-}
-
-@property --accent-2 {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #7d5cff;
 }
 
 *,
@@ -66,20 +48,16 @@
 }
 
 html {
-  scroll-padding-top: 5.25rem;
-  scroll-padding-bottom: 1.5rem;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
-  min-height: 100vh;
   font-family: var(--sans);
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: var(--field-text);
-  background: #140812;
-  padding-bottom: 2.75rem;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--cream);
+  background: var(--field);
   -webkit-font-smoothing: antialiased;
-  transition: --accent 0.45s ease, --accent-2 0.45s ease;
 }
 
 ::selection {
@@ -88,13 +66,8 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--field-text);
+  outline: 2px solid var(--cream);
   outline-offset: 3px;
-}
-
-.window :focus-visible,
-.skip:focus {
-  outline-color: var(--ink);
 }
 
 .skip {
@@ -102,7 +75,7 @@ body {
   left: 1rem;
   top: -4rem;
   z-index: 40;
-  background: var(--paper);
+  background: var(--cream);
   color: var(--ink);
   padding: 0.6rem 1rem;
   border-radius: 8px;
@@ -110,6 +83,7 @@ body {
 
 .skip:focus {
   top: 0.75rem;
+  outline-color: var(--ink);
 }
 
 .aurora {
@@ -118,146 +92,105 @@ body {
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  background:
-    radial-gradient(46rem 36rem at 0% 18%, #ff3b8d 0%, rgba(255, 59, 141, 0.45) 38%, transparent 70%),
-    radial-gradient(42rem 38rem at 100% 6%, #7a45ff 0%, rgba(122, 69, 255, 0.4) 40%, transparent 72%),
-    radial-gradient(44rem 32rem at 96% 72%, #12e0d0 0%, rgba(18, 224, 208, 0.38) 42%, transparent 74%),
-    radial-gradient(36rem 30rem at 4% 88%, #ffb020 0%, rgba(255, 176, 32, 0.4) 40%, transparent 72%),
-    #1a0b16;
+  background: var(--field);
 }
 
-.blob {
+.wash {
   position: absolute;
-  width: 64vw;
-  height: 64vw;
+  width: 70vw;
+  height: 70vw;
   will-change: transform;
 }
 
-.blob-a {
-  top: -6%;
-  left: -10%;
-  transform: translate3d(calc((var(--mx) - 0.5) * 20vw), calc((var(--my) - 0.5) * 16vh + var(--scroll) * -10vh), 0);
-}
-
-.blob-b {
-  top: 0;
-  right: -12%;
-  width: 58vw;
-  height: 58vw;
-  transform: translate3d(calc((var(--mx) - 0.5) * -18vw), calc((var(--my) - 0.5) * 14vh), 0);
-}
-
-.blob-c {
-  top: 42%;
-  left: -6%;
-  width: 74vw;
-  height: 52vw;
-  transform: translate3d(calc((var(--mx) - 0.5) * 14vw), calc((var(--scroll) - 0.3) * 18vh), 0);
-}
-
-.blob-d {
-  top: 58%;
-  right: -8%;
-  width: 60vw;
-  height: 60vw;
-  transform: translate3d(calc((var(--mx) - 0.5) * -12vw), calc((var(--my) - 0.5) * 10vh + var(--scroll) * 12vh), 0);
-}
-
-.drift {
+.wash span {
+  display: block;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   mix-blend-mode: screen;
-  animation: drift 18s ease-in-out infinite alternate;
+  animation: drift 32s ease-in-out infinite alternate;
 }
 
-.blob-a .drift {
-  background: radial-gradient(circle, rgba(255, 45, 140, 0.95) 0%, rgba(255, 45, 140, 0.5) 30%, rgba(255, 45, 140, 0) 68%);
+.wash-a {
+  top: -6%;
+  right: -6%;
+  left: auto;
+  width: 52vw;
+  height: 52vw;
+  transform: translate3d(0, calc(var(--scroll) * -12vh), 0);
 }
 
-.blob-b .drift {
-  background: radial-gradient(circle, rgba(132, 86, 255, 0.92) 0%, rgba(132, 86, 255, 0.42) 32%, rgba(132, 86, 255, 0) 70%);
-  animation-duration: 23s;
+.wash-a span {
+  background: radial-gradient(circle, rgba(255, 64, 140, 0.95) 0%, rgba(255, 64, 140, 0.45) 32%, transparent 68%);
+}
+
+.wash-b {
+  top: 28%;
+  right: -16%;
+  width: 58vw;
+  height: 58vw;
+  transform: translate3d(0, calc((var(--scroll) - 0.35) * 18vh), 0);
+}
+
+.wash-b span {
+  background: radial-gradient(circle, rgba(124, 86, 255, 0.85) 0%, rgba(124, 86, 255, 0.22) 38%, transparent 72%);
+  animation-duration: 38s;
   animation-direction: alternate-reverse;
 }
 
-.blob-c .drift {
-  background: radial-gradient(circle, rgba(16, 220, 206, 0.85) 0%, rgba(16, 220, 206, 0.36) 34%, rgba(16, 220, 206, 0) 70%);
-  animation-duration: 20s;
+.wash-c {
+  bottom: -22%;
+  left: 8%;
+  width: 76vw;
+  height: 56vw;
+  transform: translate3d(calc(var(--scroll) * 6vw), calc(var(--scroll) * 10vh), 0);
 }
 
-.blob-d .drift {
-  background: radial-gradient(circle, rgba(255, 176, 32, 0.8) 0%, rgba(255, 90, 50, 0.28) 36%, rgba(255, 176, 32, 0) 70%);
-  animation-duration: 26s;
+.wash-c span {
+  background: radial-gradient(circle, rgba(24, 214, 196, 0.7) 0%, rgba(255, 176, 48, 0.28) 40%, transparent 72%);
+  animation-duration: 36s;
 }
 
 @keyframes drift {
   from { transform: translate3d(-2vw, 0, 0) scale(1); }
-  to { transform: translate3d(5vw, 3vh, 0) scale(1.08); }
+  to { transform: translate3d(4vw, 2vh, 0) scale(1.06); }
 }
 
-.menubar {
+.bar {
   position: sticky;
   top: 0;
-  z-index: 30;
+  z-index: 20;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem 1.25rem;
   min-height: 4.25rem;
-  padding: 0.75rem 1.25rem;
-  background: #101218;
-  border-bottom: 1px solid rgba(247, 244, 236, 0.08);
-}
-
-.menubar::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  padding: 0.75rem 1.5rem;
+  background: #100c14;
+  border-bottom: 1px solid var(--line);
 }
 
 .brand {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.7rem;
-  color: var(--field-text);
+  color: var(--cream);
   text-decoration: none;
+  font-family: var(--serif);
+  font-size: 1.35rem;
   font-weight: 600;
-  letter-spacing: -0.04em;
-  font-size: 1.25rem;
+  letter-spacing: -0.03em;
 }
 
-.brand-os {
-  font-family: var(--mono);
+.brand span {
+  margin-left: 0.7rem;
+  font-family: var(--sans);
   font-size: 0.8125rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--field-muted);
+  color: var(--muted);
 }
 
-.status {
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-  color: var(--field-muted);
-}
-
-.status span { display: none; }
-.status .s-default { display: inline; }
-body:has(#today:target) .s-default,
-body:has(#direction:target) .s-default,
-body:has(#machine:target) .s-default { display: none; }
-body:has(#today:target) .s-today,
-body:has(#direction:target) .s-direction,
-body:has(#machine:target) .s-machine { display: inline; }
-
-.menu-actions,
-.cta-row {
+.actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
@@ -268,461 +201,315 @@ body:has(#machine:target) .s-machine { display: inline; }
   align-items: center;
   justify-content: center;
   min-height: 44px;
-  padding: 0.55rem 1.05rem;
+  padding: 0.55rem 1.15rem;
   border-radius: 999px;
   border: 1.5px solid transparent;
   font: 600 0.9375rem/1 var(--sans);
   letter-spacing: -0.01em;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .btn-buy {
-  background: var(--paper);
+  background: var(--cream);
   color: var(--ink);
 }
 
 .btn-call {
   background: transparent;
-  color: var(--field-text);
-  border-color: var(--field-text);
+  color: var(--cream);
+  border-color: var(--cream);
 }
 
-.window .btn-buy {
-  background: var(--ink);
-  color: var(--paper);
+.btn:hover {
+  box-shadow: 0 0 0 3px rgba(255, 120, 170, 0.55);
 }
 
-.window .btn-call {
-  color: var(--ink);
-  border-color: var(--ink);
-  background: transparent;
-}
-
-.btn-buy:hover,
-.btn-call:hover {
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 70%, white);
-}
-
-.desktop {
-  width: min(920px, calc(100% - 2.5rem));
+.story {
+  width: min(1120px, calc(100% - 3rem));
   margin: 0 auto;
-  padding-top: 2.75rem;
 }
 
-body:has(#today:target) {
-  --accent: #ff4f9a;
-  --accent-2: #ffb020;
-}
-
-body:has(#direction:target) {
-  --accent: #2ad4c8;
-  --accent-2: #7d5cff;
-}
-
-body:has(#machine:target) {
-  --accent: #d6f25c;
-  --accent-2: #ff7a3c;
-}
-
-body:has(a[href="#today"]:hover),
-body:has(a[href="#today"]:focus-visible) {
-  --accent: #ff4f9a;
-  --accent-2: #ffb020;
-}
-
-body:has(a[href="#direction"]:hover),
-body:has(a[href="#direction"]:focus-visible) {
-  --accent: #2ad4c8;
-  --accent-2: #7d5cff;
-}
-
-body:has(a[href="#machine"]:hover),
-body:has(a[href="#machine"]:focus-visible) {
-  --accent: #d6f25c;
-  --accent-2: #ff7a3c;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  gap: 2.75rem;
-}
-
-.window {
-  color: var(--ink);
-  background:
-    linear-gradient(var(--paper), var(--paper)) padding-box,
-    linear-gradient(105deg, var(--accent), var(--accent-2)) border-box;
-  border: 3px solid transparent;
-  color-scheme: light;
-  border-radius: 22px;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-
-.chrome {
+.chapter {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  min-height: 3.25rem;
-  padding: 0.7rem 1rem;
-  background: linear-gradient(
-    100deg,
-    color-mix(in oklab, var(--accent) 40%, var(--paper)),
-    color-mix(in oklab, var(--accent-2) 34%, var(--paper))
-  );
+  padding: 7.5rem 0 2rem;
+  scroll-margin-top: 5.5rem;
 }
 
-.lights {
-  display: inline-flex;
-  gap: 0.4rem;
+.chapter > * {
+  position: relative;
+  z-index: 1;
 }
 
-.lights i {
-  width: 0.7rem;
-  height: 0.7rem;
-  border-radius: 50%;
-  display: block;
+#vision::after,
+#imagines::after,
+#device::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: -6rem;
+  top: 6rem;
+  width: min(34rem, 42vw);
+  height: 34rem;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--glow), transparent 68%);
 }
 
-.lights i:nth-child(1) { background: #ff5d73; }
-.lights i:nth-child(2) { background: #ffc14d; }
-.lights i:nth-child(3) { background: #2ad4c8; }
+#vision { --glow: rgba(255, 70, 150, 0.9); }
+#imagines { --glow: rgba(124, 86, 255, 0.85); }
+#device { --glow: rgba(24, 214, 196, 0.8); }
 
-.chrome h2,
-.chrome-label {
-  font-family: var(--mono);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink);
+@media (max-width: 1099px) {
+  #vision::after,
+  #imagines::after,
+  #device::after {
+    display: none;
+  }
 }
 
-.chrome-meta {
-  margin-left: auto;
-  font-family: var(--mono);
+.chapter-kicker {
   font-size: 0.8125rem;
-  color: var(--ink);
-}
-
-.window-body {
-  padding: 2rem 2.1rem 2.15rem;
-}
-
-.kicker {
-  font-family: var(--mono);
-  font-size: 0.875rem;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 0.9rem;
-}
-
-h1 {
-  font-size: clamp(2.35rem, 5.4vw, 4.35rem);
-  font-weight: 600;
-  letter-spacing: -0.045em;
-  line-height: 1.08;
-  max-width: 14ch;
-  margin-bottom: 1.15rem;
-}
-
-.lede,
-.section-lead {
-  max-width: 62ch;
-  margin-bottom: 1.35rem;
-}
-
-.lede { font-size: 1.2rem; line-height: 1.5; }
-
-.cta-row { margin-bottom: 1.35rem; }
-
-.cmd {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.7rem 0.75rem 0.7rem 1rem;
-  border-radius: 12px;
-  background: #14151c;
-  color: #e6e2da;
-}
-
-.cmd code {
-  font-family: var(--mono);
-  font-size: 0.95rem;
-  color: #e6e2da;
-}
-
-.prompt-char {
-  color: #ffb3d4;
-  margin-right: 0.45rem;
-  user-select: none;
-}
-
-.copy-btn {
-  min-height: 44px;
-  min-width: 4.5rem;
-  padding: 0.4rem 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #c8c3b8;
-  background: transparent;
-  color: #e6e2da;
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-  cursor: pointer;
-}
-
-.copy-btn:hover { border-color: #f7f4ec; color: #f7f4ec; }
-
-.dock {
-  position: relative;
-  z-index: 5;
-  display: flex;
-  gap: 0.35rem;
-  width: max-content;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0.4rem;
-  border-radius: 22px;
-  background: #12141c;
-  border: 1px solid rgba(247, 244, 236, 0.16);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-}
-
-.dock a {
-  min-width: 5.4rem;
-  min-height: 4.4rem;
-  padding: 0.45rem 0.7rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  border-radius: 16px;
-  color: var(--field-text);
-  text-decoration: none;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.dock a:hover { background: #22242e; }
-
-.desktop:has(#today:target) .dock a[href="#today"],
-.desktop:has(#direction:target) .dock a[href="#direction"],
-.desktop:has(#machine:target) .dock a[href="#machine"] {
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.glyph {
-  width: 1.15rem;
-  height: 1.15rem;
-  border: 1.5px solid currentColor;
-  border-radius: 4px;
-  display: block;
-}
-
-.glyph-direction {
-  border-radius: 50%;
-  background:
-    linear-gradient(currentColor, currentColor) center/1.5px 100% no-repeat,
-    linear-gradient(currentColor, currentColor) center/100% 1.5px no-repeat;
-}
-
-.glyph-machine {
-  border-radius: 3px;
-  box-shadow: inset 0 0 0 3px #12141c, inset 0 0 0 4.5px currentColor;
-}
-
-.desktop:has(#machine:target) .glyph-machine {
-  box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4.5px currentColor;
-}
-
-h3 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.3rem;
-}
-
-.block + .block { margin-top: 1.35rem; }
-
-p { margin-bottom: 0.85rem; }
-p:last-child { margin-bottom: 0; }
-
-.note {
-  max-width: 62ch;
-  color: var(--muted);
-  margin-top: 1.2rem;
-}
-
-.callout {
-  max-width: 62ch;
-  margin-bottom: 1.35rem;
-  padding: 0.85rem 1rem;
-  border-left: 3px solid var(--accent);
-  background: color-mix(in oklab, var(--accent) 12%, var(--paper));
-  border-radius: 0 10px 10px 0;
-}
-
-.specs { display: grid; gap: 1rem; }
-.specs div { max-width: 68ch; }
-.specs dt {
-  font-family: var(--mono);
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin-bottom: 0.2rem;
-}
-.specs dd { color: var(--ink); }
-
-.stack {
-  display: grid;
-  grid-template-columns: 9.5rem 1fr;
-  gap: 0.45rem 1rem;
-  max-width: 42rem;
   margin-bottom: 1.25rem;
 }
 
-.stack dt {
-  font-family: var(--mono);
-  font-size: 0.875rem;
-  color: var(--muted);
-}
-.stack dd { margin: 0; }
-
-.platforms {
-  list-style: none;
-  display: grid;
-  gap: 0.45rem;
-  margin: 0.4rem 0 1.2rem;
+h1, h2, .deck {
+  font-family: var(--serif);
+  font-weight: 600;
+  letter-spacing: -0.035em;
 }
 
-.platforms li {
+h1 {
+  font-size: clamp(3.1rem, 7.4vw, 6.6rem);
+  line-height: 0.98;
+  max-width: 11ch;
+  margin-bottom: 1.5rem;
+}
+
+.lede {
+  max-width: 38rem;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.actions-hero {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--line);
-  max-width: 36rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
 }
 
-.platforms span:last-child {
-  font-family: var(--mono);
-  font-size: 0.875rem;
-  text-align: right;
-}
-
-a.inline {
-  color: #5b21b6;
-  text-underline-offset: 0.15em;
-}
-
-code {
-  font-family: var(--mono);
-  font-size: 0.9em;
-}
-
-.terminal {
-  background: #14151c;
-  color: #e6e2da;
-  border-radius: 12px;
-  padding: 1rem 1.1rem;
-  overflow-x: auto;
-}
-
-.terminal pre {
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  line-height: 1.55;
-  white-space: pre-wrap;
-}
-
-.terminal .muted { color: #c8c3b8; }
-.terminal .out { color: #f7f4ec; }
-
-.caret {
-  display: inline-block;
-  width: 0.55em;
-  height: 1em;
-  background: #8ae8df;
-  transform: translateY(0.15em);
-  animation: blink 1.1s steps(1) infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
-.caption {
-  margin-top: 0.75rem;
+.promise {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  max-width: 40rem;
+  padding: 0;
+  list-style: none;
   color: var(--muted);
   font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  line-height: 1.02;
+  max-width: 14ch;
+  margin-bottom: 1.5rem;
+}
+
+.prose {
+  max-width: 38rem;
+}
+
+.prose p + p {
+  margin-top: 1.15rem;
+}
+
+.interlude {
+  height: 36vh;
+  min-height: 11rem;
+  margin: 1rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.interlude span {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 60% 50%, var(--tone), transparent 62%);
+  animation: drift 28s ease-in-out infinite alternate;
+}
+
+.interlude[data-tone="rose"] { --tone: #ff4f9a; }
+.interlude[data-tone="violet"] { --tone: #8a62ff; }
+.interlude[data-tone="teal"] { --tone: #1ad6c4; }
+.interlude[data-tone="amber"] { --tone: #ffb020; }
+
+.qualities,
+.goals {
+  display: grid;
+  gap: 2.25rem 3rem;
+  margin-top: 3rem;
+}
+
+.qualities {
+  grid-template-columns: 1fr 1fr;
+  max-width: 52rem;
+}
+
+.goals {
+  grid-template-columns: 1fr;
+  max-width: 40rem;
+}
+
+.qualities article:nth-child(1),
+.goals article:nth-child(1) { --hue: #ff4f9a; }
+.qualities article:nth-child(2),
+.goals article:nth-child(2) { --hue: #7d5cff; }
+.qualities article:nth-child(3),
+.goals article:nth-child(3) { --hue: #14d6c4; }
+.qualities article:nth-child(4) { --hue: #ffb020; }
+
+.qualities article,
+.goals article {
+  border-top: 2px solid var(--hue, var(--cream));
+  padding-top: 1rem;
+}
+
+h3 {
+  font-family: var(--serif);
+  font-size: 1.65rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.45rem;
+}
+
+.goal-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.note {
+  max-width: 38rem;
+  margin-bottom: 0.5rem;
+  color: var(--cream);
+}
+
+a {
+  color: var(--cream);
+}
+
+.inline {
+  text-underline-offset: 0.16em;
+}
+
+.build {
+  max-width: 38rem;
+  margin-top: 1.5rem;
+}
+
+.build li {
+  margin: 0.85rem 0 0 1.1rem;
+}
+
+.build code,
+.install code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+}
+
+.install {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  background: #1b1722;
+  color: var(--cream);
 }
 
 footer {
-  width: min(920px, calc(100% - 2.5rem));
-  margin: 1.75rem auto 0;
-  padding: 0.5rem 0 0.25rem;
+  width: min(1120px, calc(100% - 3rem));
+  margin: 0 auto;
+  padding: 1rem 0 3rem;
 }
 
 .footer-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 1.25rem;
-  align-items: center;
-  color: var(--field-muted);
+  gap: 0.75rem 1.4rem;
+  color: var(--muted);
   font-size: 0.95rem;
 }
 
 .footer-row a {
-  color: var(--field-text);
+  color: var(--cream);
   text-underline-offset: 0.16em;
 }
 
-@media (max-width: 720px) {
-  .desktop { width: min(920px, calc(100% - 2rem)); }
-  .window-body { padding: 1.3rem 1.05rem 1.4rem; }
-  h1 { max-width: none; }
-  .lede { font-size: 1.0625rem; }
-  .status { display: none; }
-  .stack { grid-template-columns: 1fr; gap: 0.15rem; }
-  .stack div, .stack dt, .stack dd { display: block; }
-  .stack dt { margin-top: 0.55rem; }
-  .window .cta-row .btn,
-  .menu-actions .btn { flex: 1 1 8.5rem; }
-  .platforms li { align-items: baseline; }
-  footer { width: min(920px, calc(100% - 1.25rem)); }
+@media (max-width: 800px) {
+  .story,
+  footer {
+    width: min(1120px, calc(100% - 1.5rem));
+  }
+
+  .chapter {
+    padding: 4.5rem 0 1rem;
+  }
+
+  .lede {
+    font-size: 1.125rem;
+  }
+
+  .qualities,
+  .goals {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .interlude {
+    height: 28vh;
+    min-height: 8rem;
+  }
+
+  .brand span {
+    display: block;
+    margin: 0.2rem 0 0;
+  }
 }
 
-@media (max-width: 380px) {
-  .dock a { min-width: 4.7rem; padding-inline: 0.4rem; }
-  .brand { font-size: 1.1rem; }
+@media (max-width: 420px) {
+  .actions-hero .btn,
+  .actions .btn {
+    flex: 1 1 8.5rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .blob { transform: none; }
-  .drift,
-  .caret { animation: none; }
-  body,
-  .window,
-  .btn,
-  .dock a,
-  .menubar::after { transition: none; }
+  .wash,
+  .wash span,
+  .interlude span {
+    animation: none;
+    transform: none;
+  }
 }
 
 @media (forced-colors: active) {
-  .aurora { display: none; }
-  .window,
-  .menubar,
-  .dock,
+  .aurora,
+  .interlude { display: none; }
   .btn,
-  .cmd,
-  .terminal {
+  .install,
+  .bar {
     background: Canvas;
     color: CanvasText;
     border: 1px solid CanvasText;
@@ -731,228 +518,183 @@ footer {
 </style>
 </head>
 <body>
-  <a class="skip" href="#product">Skip to content</a>
+  <a class="skip" href="#vision">Skip to content</a>
   <div class="aurora" aria-hidden="true">
-    <div class="blob blob-a"><div class="drift"></div></div>
-    <div class="blob blob-b"><div class="drift"></div></div>
-    <div class="blob blob-c"><div class="drift"></div></div>
-    <div class="blob blob-d"><div class="drift"></div></div>
+    <div class="wash wash-a"><span></span></div>
+    <div class="wash wash-b"><span></span></div>
+    <div class="wash wash-c"><span></span></div>
   </div>
 
-  <header class="menubar">
-    <a class="brand" href="/">boole <span class="brand-os">Imagine OS</span></a>
-    <p class="status" aria-hidden="true">
-      <span class="s-default">local model</span>
-      <span class="s-today">on this machine</span>
-      <span class="s-direction">targets, not benchmarks</span>
-      <span class="s-machine">llama.cpp · gguf</span>
-    </p>
-    <nav class="menu-actions" aria-label="Contact">
+  <header class="bar">
+    <a class="brand" href="#vision">boole <span>Imagine OS</span></a>
+    <nav class="actions" aria-label="Contact">
       <a class="btn btn-call" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Book%20a%20call">Book a call</a>
       <a class="btn btn-buy" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Buy%20now">Buy now</a>
     </nav>
   </header>
 
-  <div class="desktop">
-    <main id="product" tabindex="-1">
-      <section class="window hero" aria-labelledby="imagine-heading">
-        <div class="chrome" aria-hidden="true">
-          <span class="lights"><i></i><i></i><i></i></span>
-          <span class="chrome-label">Imagine</span>
-          <span class="chrome-meta">on device</span>
-        </div>
-        <div class="window-body">
-          <p class="kicker">Local LLM inference for JavaScript</p>
-          <h1 id="imagine-heading">Run the model on the device. Let the interface imagine.</h1>
-          <p class="lede">
-            Boole is a terminal for GGUF models. It runs them on your machine
-            through llama.cpp: no API key, and no per-token cloud bill. Imagine OS
-            is the direction from here. The interface should evolve around how you
-            use the device, with the model staying local.
-          </p>
-          <div class="cta-row">
-            <a class="btn btn-buy" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Buy%20now">Buy now</a>
-            <a class="btn btn-call" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Book%20a%20call">Book a call</a>
-          </div>
-          <div class="cmd">
-            <code><span class="prompt-char">$</span>npx @boole/cli</code>
-            <button class="copy-btn" type="button" data-copy="npx @boole/cli">Copy</button>
-          </div>
-        </div>
-      </section>
+  <main class="story">
+    <section class="chapter" id="vision" tabindex="-1">
+      <p class="chapter-kicker">Imagine OS</p>
+      <h1>The end of finished software.</h1>
+      <p class="lede">
+        Imagine OS will change how software is built. Instead of fixed apps,
+        shipped once and learned forever, the device runs a real model locally
+        and shapes its software around the person using it.
+      </p>
+      <div class="actions actions-hero">
+        <a class="btn btn-buy" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Buy%20now">Buy now</a>
+        <a class="btn btn-call" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Book%20a%20call">Book a call</a>
+      </div>
+      <ul class="promise">
+        <li>Private</li>
+        <li>Instant</li>
+        <li>Offline</li>
+        <li>Yours</li>
+      </ul>
+    </section>
 
-      <nav class="dock" aria-label="Sections">
-        <a href="#today"><span class="glyph glyph-today" aria-hidden="true"></span>Today</a>
-        <a href="#direction"><span class="glyph glyph-direction" aria-hidden="true"></span>Direction</a>
-        <a href="#machine"><span class="glyph glyph-machine" aria-hidden="true"></span>Machine</a>
-      </nav>
+    <div class="interlude" data-tone="rose" aria-hidden="true"><span></span></div>
 
-      <section class="window" id="today" tabindex="-1">
-        <div class="chrome">
-          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
-          <h2>Today</h2>
-          <span class="chrome-meta">0.0.1</span>
-        </div>
-        <div class="window-body">
-          <p class="section-lead">
-            Version 0.0.1 is a Node.js command line. Four commands work.
-            <code>serve</code> and <code>list</code> are reserved and not implemented yet.
-          </p>
-          <div class="block">
-            <h3><code>run</code></h3>
-            <p>
-              Prompt a model. Use an alias such as <code>llama3</code>, a full
-              specifier like <code>TheBloke/Llama-2-7B-GGUF:Q4_K_M</code>, or a
-              local <code>.gguf</code> path. An alias resolves to a Hugging Face
-              repo, then Boole picks the highest-quality quantization that fits
-              in available memory.
-            </p>
-          </div>
-          <div class="block">
-            <h3><code>pull</code></h3>
-            <p>
-              Download that file into a local cache. An interrupted download
-              resumes instead of starting over.
-            </p>
-          </div>
-          <div class="block">
-            <h3><code>doctor</code></h3>
-            <p>
-              Report the OS, memory, and GPU backend, then suggest a model size
-              this machine can hold.
-            </p>
-          </div>
-          <div class="block">
-            <h3><code>models</code></h3>
-            <p>
-              List the aliases shipped with the CLI, including llama3, mistral,
-              phi3, and qwen2.5.
-            </p>
-          </div>
-          <p class="note">
-            The model’s text is the only thing written to stdout. Progress and
-            errors stay on stderr. GPU support follows node-llama-cpp: Metal on
-            Apple Silicon, CUDA or Vulkan where that runtime provides them, and
-            CPU otherwise. If node-llama-cpp is not installed, Boole says so and
-            exits. A local server, when it exists, should stay on localhost.
-          </p>
-        </div>
-      </section>
+    <section class="chapter" id="fixed" tabindex="-1">
+      <p class="chapter-kicker">01 — The fixed world</p>
+      <h2>Software arrives finished.</h2>
+      <div class="prose">
+        <p>
+          The phone in a pocket, the laptop on a desk, the row of apps waiting
+          in a dock: all of it was decided before you opened it. Menus, icons,
+          workflows, the shape of a day. You adapt. The software does not.
+        </p>
+        <p>
+          That bargain made computers useful. It also made them the same for
+          everyone. A tool can be powerful and still have nothing to do with
+          the way you actually think.
+        </p>
+      </div>
+    </section>
 
-      <section class="window" id="direction" tabindex="-1">
-        <div class="chrome">
-          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
-          <h2>Direction</h2>
-          <span class="chrome-meta">roadmap</span>
-        </div>
-        <div class="window-body">
-          <p class="callout">Targets, not measured results. Boole has not published a benchmark for these.</p>
-          <div class="block">
-            <h3>Ternary weights</h3>
-            <p>
-              BitNet-style 1.58-bit models, so a full network can live on the
-              device instead of in a datacenter.
-            </p>
-          </div>
-          <div class="block">
-            <h3>20B at 200 tokens per second</h3>
-            <p>
-              A 20-billion-parameter model with a speed target of 200 tokens per
-              second. That figure is a goal. It is not a result we have recorded.
-            </p>
-          </div>
-          <div class="block">
-            <h3>Imagine OS</h3>
-            <p>
-              The interface should change with how you actually use the machine.
-              A fixed native shell is the starting point, not the finished
-              product. The model still runs locally.
-            </p>
-          </div>
-        </div>
-      </section>
+    <div class="interlude" data-tone="violet" aria-hidden="true"><span></span></div>
 
-      <section class="window" id="machine" tabindex="-1">
-        <div class="chrome">
-          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
-          <h2>This machine</h2>
-          <span class="chrome-meta">stack</span>
-        </div>
-        <div class="window-body">
-          <p class="section-lead">
-            Inference is a process on the computer that asked for it. After the
-            weights are cached, that run does not need a network round trip.
-          </p>
-          <dl class="stack">
-            <dt>Language</dt>
-            <dd>TypeScript on Node.js 18+</dd>
-            <dt>Packages</dt>
-            <dd><code>@boole/cli</code> and <code>@boole/hardware</code></dd>
-            <dt>Runtime</dt>
-            <dd>llama.cpp through node-llama-cpp</dd>
-            <dt>Weights</dt>
-            <dd>GGUF files from Hugging Face, cached on disk</dd>
-            <dt>License</dt>
-            <dd>MIT</dd>
-          </dl>
-          <h3>Where it runs</h3>
-          <ul class="platforms">
-            <li><span>macOS, Apple Silicon</span><span>Metal</span></li>
-            <li><span>macOS, Intel</span><span>CPU</span></li>
-            <li><span>Linux, x86_64</span><span>CUDA, Vulkan, or CPU</span></li>
-            <li><span>Windows, x86_64</span><span>CUDA, Vulkan, or CPU</span></li>
-          </ul>
-          <p>
-            There is no API key and no per-token invoice for the run itself.
-            Install with <code>npx @boole/cli</code> or <code>npm i -g @boole/cli</code>.
-            The <a class="inline" href="https://github.com/jordantplows/boole-platform">source</a>
-            and the <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm package</a>
-            are public.
-          </p>
-        </div>
-      </section>
+    <section class="chapter" id="imagines" tabindex="-1">
+      <p class="chapter-kicker">02 — The picture</p>
+      <h2>An operating system that imagines.</h2>
+      <div class="prose">
+        <p>
+          Picture a machine that starts from you. You begin a task, and the
+          interface for it is composed in the moment: the controls you need,
+          the layout that fits the work, a small piece of software that did
+          not exist this morning. The next day it is different, because you were.
+        </p>
+        <p>
+          This is not a theme, and it is not a skin over the same apps. Native
+          software stops being a finished object. Imagine OS is that picture.
+          It is what Boole is building toward.
+        </p>
+      </div>
+    </section>
 
-      <section class="window" id="session" tabindex="-1" aria-labelledby="session-title">
-        <div class="chrome">
-          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
-          <h2 id="session-title">Terminal</h2>
-          <span class="chrome-meta">example</span>
-        </div>
-        <div class="window-body">
-          <div class="terminal">
-            <pre><span class="prompt-char">$ </span>boole run llama3 -p "Explain what a boolean is in one sentence."
-<span class="muted">llama3 -&gt; bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:&lt;quant&gt;
-  highest quality quantization that fits available RAM</span>
+    <div class="interlude" data-tone="teal" aria-hidden="true"><span></span></div>
 
-<span class="out">A boolean holds one of two values — true or false.</span><span class="caret" aria-hidden="true"></span></pre>
-          </div>
-          <p class="caption">
-            Illustrative session, not a timing result. The quantization depends
-            on the memory free on that machine. stdout is only the model’s text.
-          </p>
-        </div>
-      </section>
+    <section class="chapter" id="device" tabindex="-1">
+      <p class="chapter-kicker">03 — On the device</p>
+      <h2>The model has to live here.</h2>
+      <div class="prose">
+        <p>
+          An interface that can imagine needs a model close enough to know you,
+          and close enough to answer without a datacenter in the loop. Local
+          is what makes the rest possible.
+        </p>
+      </div>
+      <div class="qualities">
+        <article>
+          <h3>Private</h3>
+          <p>The work stays on the device. Your habits are not a transcript sent somewhere else to be useful.</p>
+        </article>
+        <article>
+          <h3>Instant</h3>
+          <p>There is no queue and no round trip. The model is already where you are.</p>
+        </article>
+        <article>
+          <h3>Offline</h3>
+          <p>Once the weights are on the machine, the work does not wait on a network.</p>
+        </article>
+        <article>
+          <h3>Yours</h3>
+          <p>No API key and no per-token bill for the run. The runtime is something you hold.</p>
+        </article>
+      </div>
+    </section>
 
-      <section class="window" id="talk" tabindex="-1">
-        <div class="chrome">
-          <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
-          <h2>Talk</h2>
-          <span class="chrome-meta">jordan@bunkerbio.com</span>
-        </div>
-        <div class="window-body">
-          <p class="section-lead">
-            Buy now and Book a call both open an email to
-            <a class="inline" href="mailto:jordan@bunkerbio.com">jordan@bunkerbio.com</a>,
-            with the subject already filled in.
-          </p>
-          <div class="cta-row">
-            <a class="btn btn-buy" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Buy%20now">Buy now</a>
-            <a class="btn btn-call" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Book%20a%20call">Book a call</a>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
+    <div class="interlude" data-tone="amber" aria-hidden="true"><span></span></div>
+
+    <section class="chapter" id="horizon" tabindex="-1">
+      <p class="chapter-kicker">04 — The horizon</p>
+      <h2>Where it is going.</h2>
+      <p class="note">These are goals. Boole has not published a benchmark for them.</p>
+      <div class="goals">
+        <article>
+          <span class="goal-label">Goal</span>
+          <h3>Ternary weights</h3>
+          <p>BitNet-style 1.58-bit models, so a full network can live on the device rather than in a rented cluster.</p>
+        </article>
+        <article>
+          <span class="goal-label">Goal</span>
+          <h3>20 billion parameters, 200 tokens a second</h3>
+          <p>A speed target for a model of that size. A number we are aiming at. Not a number we have measured.</p>
+        </article>
+        <article>
+          <span class="goal-label">Goal</span>
+          <h3>A shell, unfinished on purpose</h3>
+          <p>The default interface is a beginning. The longer work is software that keeps reshaping itself from use, with the model still running locally.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="chapter" id="builders" tabindex="-1">
+      <p class="chapter-kicker">For builders</p>
+      <h2>The runtime, today.</h2>
+      <div class="prose">
+        <p>
+          What runs today is a command line, version 0.0.1. It runs GGUF models
+          on your machine through llama.cpp. That local runtime is what this
+          idea stands on.
+        </p>
+      </div>
+      <p class="install"><code>npx @boole/cli</code></p>
+      <ul class="build">
+        <li><code>run</code> prompts a local model. An alias such as <code>llama3</code> picks a quantization that fits available memory.</li>
+        <li><code>pull</code> downloads weights into a cache. An interrupted download resumes.</li>
+        <li><code>doctor</code> reads the machine and suggests a size it can hold.</li>
+        <li><code>models</code> lists the aliases.</li>
+      </ul>
+      <div class="prose">
+        <p>
+          <code>serve</code> and <code>list</code> are reserved and not implemented.
+          If node-llama-cpp is missing, the CLI says so and stops. The
+          <a class="inline" href="https://github.com/jordantplows/boole-platform">source</a>
+          and the
+          <a class="inline" href="https://www.npmjs.com/package/@boole/cli">npm package</a>
+          are public. The license is MIT.
+        </p>
+      </div>
+    </section>
+
+    <section class="chapter" id="talk" tabindex="-1">
+      <p class="chapter-kicker">Begin</p>
+      <h2>If this is the computer you want.</h2>
+      <div class="prose">
+        <p>
+          Buy now and Book a call both open a note to
+          <a class="inline" href="mailto:jordan@bunkerbio.com">jordan@bunkerbio.com</a>,
+          with the subject already filled in.
+        </p>
+      </div>
+      <div class="actions actions-hero">
+        <a class="btn btn-buy" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Buy%20now">Buy now</a>
+        <a class="btn btn-call" href="mailto:jordan@bunkerbio.com?subject=Boole%3A%20Book%20a%20call">Book a call</a>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="footer-row">
@@ -968,47 +710,17 @@ footer {
     var root = document.documentElement;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var raf = 0;
-    var px = 0.5;
-    var py = 0.42;
     var scroll = 0;
     function paint() {
       raf = 0;
-      root.style.setProperty('--mx', px.toFixed(4));
-      root.style.setProperty('--my', py.toFixed(4));
       root.style.setProperty('--scroll', scroll.toFixed(4));
     }
-    function schedule() {
-      if (!raf) raf = requestAnimationFrame(paint);
-    }
-    addEventListener('pointermove', function (e) {
-      px = e.clientX / innerWidth;
-      py = e.clientY / innerHeight;
-      schedule();
-    }, { passive: true });
     addEventListener('scroll', function () {
       var max = document.documentElement.scrollHeight - innerHeight;
       scroll = max > 0 ? window.scrollY / max : 0;
-      schedule();
+      if (!raf) raf = requestAnimationFrame(paint);
     }, { passive: true });
   })();
-  </script>
-  <script>
-  document.querySelectorAll('[data-copy]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var text = btn.getAttribute('data-copy') || '';
-      var prev = btn.textContent;
-      function done() {
-        btn.textContent = 'Copied';
-        setTimeout(function () { btn.textContent = prev; }, 1600);
-      }
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(done).catch(function () {
-          btn.textContent = 'Select it';
-          setTimeout(function () { btn.textContent = prev; }, 1600);
-        });
-      }
-    });
-  });
   </script>
 </body>
 </html>
