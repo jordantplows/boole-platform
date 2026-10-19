@@ -121,8 +121,7 @@ const css = readFileSync('src/styles/global.css', 'utf-8');
 
 // Counsel should review the proprietary notice in LICENSE before it is relied on.
 // Jordan should confirm the planned device list (phones, NPUs, edge) before it is treated as a commitment.
-const TONES = ['blue', 'coral', 'teal', 'amber', 'violet', 'blue', 'coral', 'teal'];
-const faqHtml = FAQ.map((item, i) => `<details class="tone-${TONES[i]}">
+const faqHtml = FAQ.map((item) => `<details>
             <summary>${item.q}</summary>
             <p>${item.a}</p>
           </details>`).join('\n');
@@ -152,8 +151,9 @@ const html = `<!doctype html>
   <meta name="twitter:description" content="${DESCRIPTION}">
   <meta name="twitter:image" content="${SITE}/og.png">
   <meta name="twitter:image:alt" content="Imagine OS. On-device models for software that adapts.">
-  <meta name="theme-color" content="#0c0d10">
+  <meta name="theme-color" content="#090909">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add('js')</script>
   <script type="application/ld+json">${jsonLd}</script>
   <style>${css}</style>
@@ -187,7 +187,7 @@ const html = `<!doctype html>
   <main>
     <section id="vision" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-violet">Boole AI, Inc. · Imagine OS</p>
+        <p class="kicker">Boole AI, Inc. · Imagine OS</p>
         <h1>The machine should write the software with you.</h1>
         <p class="lede">
           Boole AI builds Imagine OS so the model stays on the device and the
@@ -211,10 +211,10 @@ const html = `<!doctype html>
 
     <section id="product" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-coral">The company</p>
+        <p class="kicker">The company</p>
         <h2 class="reveal">Software finished in a lab is the old arrangement.</h2>
         <div class="beats reveal-seq">
-          <article class="card tone-blue">
+          <article class="card">
             <span class="tag">01</span>
             <h3>You have been adapting to the product.</h3>
             <p>
@@ -223,7 +223,7 @@ const html = `<!doctype html>
               It does not learn the way you work.
             </p>
           </article>
-          <article class="card tone-coral">
+          <article class="card">
             <span class="tag">02</span>
             <h3>Then the useful part left the building.</h3>
             <p>
@@ -232,7 +232,7 @@ const html = `<!doctype html>
               answer. The computer in your hands waits.
             </p>
           </article>
-          <article class="card tone-teal">
+          <article class="card">
             <span class="tag">03</span>
             <h3>Boole AI puts both back on the device.</h3>
             <p>
@@ -247,7 +247,7 @@ const html = `<!doctype html>
 
     <section id="showcase" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-violet">Same system</p>
+        <p class="kicker">Same system</p>
         <h2 class="reveal">One model. The laptop and the phone.</h2>
         <p class="prose reveal">
           Imagine OS is the same session on both screens. The illustrated
@@ -288,7 +288,7 @@ const html = `<!doctype html>
 
     <section id="demo" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-teal">Proof</p>
+        <p class="kicker">Proof</p>
         <h2 class="reveal">Run a model in this browser.</h2>
         <div class="prose reveal">
           <p>
@@ -323,7 +323,7 @@ const html = `<!doctype html>
 
     <section id="energy" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-amber">Energy and performance</p>
+        <p class="kicker">Energy and performance</p>
         <h2 class="reveal">The model spends the machine’s own power.</h2>
         <p class="prose reveal">
           Boole keeps inference on the device so the work does not travel to a
@@ -333,7 +333,7 @@ const html = `<!doctype html>
           on a 4-core Xeon CPU in WebAssembly, one thread, no GPU layers.
         </p>
         <div class="energy reveal-seq">
-          <article class="card tone-amber">
+          <article class="card">
             <span class="tag">Quantization</span>
             <h3>Smaller weights, same file format.</h3>
             <p>
@@ -342,7 +342,7 @@ const html = `<!doctype html>
               to 8.50 for Q8_0.
             </p>
           </article>
-          <article class="card tone-teal">
+          <article class="card">
             <span class="tag">Memory</span>
             <h3>Pick the quant that fits.</h3>
             <p>
@@ -351,7 +351,7 @@ const html = `<!doctype html>
               fits, it stops and says so. <code>doctor</code> prints the same verdict.
             </p>
           </article>
-          <article class="card tone-blue">
+          <article class="card">
             <span class="tag">CPU and GPU</span>
             <h3>Offload when the build can.</h3>
             <p>
@@ -361,7 +361,7 @@ const html = `<!doctype html>
               sets a layer count. Omit it and the runtime decides.
             </p>
           </article>
-          <article class="card tone-coral">
+          <article class="card">
             <span class="tag">Threads</span>
             <h3>Not exposed in 0.0.1.</h3>
             <p>
@@ -370,7 +370,7 @@ const html = `<!doctype html>
               for a resident runtime is a design goal.
             </p>
           </article>
-          <article class="card tone-violet">
+          <article class="card">
             <span class="tag">Idle</span>
             <h3>The process exits, and the model goes with it.</h3>
             <p>
@@ -379,7 +379,7 @@ const html = `<!doctype html>
               when it is idle is a design goal, not a behavior of this release.
             </p>
           </article>
-          <article class="card tone-teal">
+          <article class="card">
             <span class="tag">Network</span>
             <h3>Generation reads the local file.</h3>
             <p>
@@ -395,28 +395,28 @@ const html = `<!doctype html>
 
     <section id="devices" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-blue">Devices</p>
+        <p class="kicker">Devices</p>
         <h2 class="reveal">Supported today, and the next 24 months.</h2>
         <p class="note reveal">Today follows the prebuilt binaries of node-llama-cpp 3.22.2, the runtime this CLI imports, plus the WebAssembly demo. The planned column is a roadmap, not a commitment.</p>
         <div class="matrix">
           <h3 class="matrix-label today-label">Supported today</h3>
           <ul class="matrix-grid">
-            <li class="tone-teal"><span class="tag">macOS</span><strong>Apple Silicon</strong><span>Metal. Package mac-arm64-metal.</span></li>
-            <li class="tone-blue"><span class="tag">macOS</span><strong>Intel</strong><span>CPU. Metal is off by default. Package mac-x64.</span></li>
-            <li class="tone-coral"><span class="tag">Windows x64</span><strong>CUDA, Vulkan, or CPU</strong><span>Packages win-x64, win-x64-cuda, win-x64-vulkan.</span></li>
-            <li class="tone-amber"><span class="tag">Linux x64</span><strong>CUDA, Vulkan, or CPU</strong><span>Packages linux-x64, linux-x64-cuda, linux-x64-vulkan.</span></li>
-            <li class="tone-violet"><span class="tag">Linux arm64</span><strong>CPU</strong><span>Package linux-arm64. No CUDA or Vulkan package.</span></li>
-            <li class="tone-teal"><span class="tag">Windows arm64</span><strong>CPU</strong><span>Package win-arm64. No GPU package.</span></li>
-            <li class="tone-blue"><span class="tag">Linux</span><strong>armv7l and riscv64</strong><span>CPU prebuilts. linux-armv7l, linux-riscv64.</span></li>
-            <li class="tone-coral"><span class="tag">Browser</span><strong>WebAssembly demo</strong><span>wllama, one thread, no GPU layers. Not the CLI.</span></li>
+            <li><span class="tag">macOS</span><strong>Apple Silicon</strong><span>Metal. Package mac-arm64-metal.</span></li>
+            <li><span class="tag">macOS</span><strong>Intel</strong><span>CPU. Metal is off by default. Package mac-x64.</span></li>
+            <li><span class="tag">Windows x64</span><strong>CUDA, Vulkan, or CPU</strong><span>Packages win-x64, win-x64-cuda, win-x64-vulkan.</span></li>
+            <li><span class="tag">Linux x64</span><strong>CUDA, Vulkan, or CPU</strong><span>Packages linux-x64, linux-x64-cuda, linux-x64-vulkan.</span></li>
+            <li><span class="tag">Linux arm64</span><strong>CPU</strong><span>Package linux-arm64. No CUDA or Vulkan package.</span></li>
+            <li><span class="tag">Windows arm64</span><strong>CPU</strong><span>Package win-arm64. No GPU package.</span></li>
+            <li><span class="tag">Linux</span><strong>armv7l and riscv64</strong><span>CPU prebuilts. linux-armv7l, linux-riscv64.</span></li>
+            <li><span class="tag">Browser</span><strong>WebAssembly demo</strong><span>wllama, one thread, no GPU layers. Not the CLI.</span></li>
           </ul>
           <h3 class="matrix-label plan-label">Planned · next 24 months</h3>
           <p class="soon">A roadmap for Boole AI. Jordan should confirm this list. It is not a delivery commitment.</p>
           <ul class="matrix-grid planned">
-            <li class="tone-amber"><span class="tag">Phones</span><strong>iOS</strong><span>Not supported by the CLI today.</span></li>
-            <li class="tone-coral"><span class="tag">Phones</span><strong>Android</strong><span>Not supported by the CLI today.</span></li>
-            <li class="tone-violet"><span class="tag">Accelerators</span><strong>NPUs</strong><span>No NPU path in this release.</span></li>
-            <li class="tone-teal"><span class="tag">Edge</span><strong>Other edge devices</strong><span>Beyond the CPU prebuilts already listed.</span></li>
+            <li><span class="tag">Phones</span><strong>iOS</strong><span>Not supported by the CLI today.</span></li>
+            <li><span class="tag">Phones</span><strong>Android</strong><span>Not supported by the CLI today.</span></li>
+            <li><span class="tag">Accelerators</span><strong>NPUs</strong><span>No NPU path in this release.</span></li>
+            <li><span class="tag">Edge</span><strong>Other edge devices</strong><span>Beyond the CPU prebuilts already listed.</span></li>
           </ul>
         </div>
       </div>
@@ -424,7 +424,7 @@ const html = `<!doctype html>
 
     <section id="architecture" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-blue">Architecture</p>
+        <p class="kicker">Architecture</p>
         <h2 class="reveal">How a local run works.</h2>
         <div class="prose">
           <p>
@@ -467,7 +467,7 @@ const html = `<!doctype html>
 
     <section id="privacy" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-teal">Privacy and security</p>
+        <p class="kicker">Privacy and security</p>
         <h2 class="reveal">What stays here, and what does not.</h2>
         <div class="split reveal-seq">
           <article class="card">
@@ -497,7 +497,7 @@ const html = `<!doctype html>
 
     <section id="roadmap" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-violet">Research roadmap</p>
+        <p class="kicker">Research roadmap</p>
         <h2 class="reveal">Where the work is going.</h2>
         <p class="note reveal">These are goals. Boole has not published a measurement for them.</p>
         <ol class="goals reveal-seq">
@@ -522,7 +522,7 @@ const html = `<!doctype html>
 
     <section id="builders" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-amber">For builders</p>
+        <p class="kicker">For builders</p>
         <h2 class="reveal">Release 0.0.1</h2>
         <table class="spec">
           <tbody>
@@ -540,7 +540,7 @@ const html = `<!doctype html>
 
     <section id="license" tabindex="-1">
       <div class="wrap reveal">
-        <p class="kicker k-coral">License</p>
+        <p class="kicker">License</p>
         <h2>All rights reserved.</h2>
         <div class="prose">
           <p>
@@ -560,7 +560,7 @@ const html = `<!doctype html>
 
     <section id="offers" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-coral">Ways to work with Boole</p>
+        <p class="kicker">Ways to work with Boole</p>
         <h2 class="reveal">Pay to start. Or acquire the codebase.</h2>
         <div class="offers">
           <article class="card tier-fast">
@@ -589,7 +589,7 @@ const html = `<!doctype html>
 
     <section id="faq" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-blue">Questions</p>
+        <p class="kicker">Questions</p>
         <h2 class="reveal">Answered up front.</h2>
         <div class="faq">
           ${faqHtml}
@@ -599,7 +599,7 @@ const html = `<!doctype html>
 
     <section id="talk" tabindex="-1">
       <div class="wrap">
-        <p class="kicker k-violet">Begin</p>
+        <p class="kicker">Begin</p>
         <h2 class="reveal">Start with the product. Or ask for the code.</h2>
         <div class="prose">
           <p>
@@ -669,10 +669,10 @@ const html = `<!doctype html>
 writeFileSync(join(DIST, 'index.html'), html);
 
 const ogSvg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#0c0d10"/>
-  <text x="88" y="210" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="28" letter-spacing="6" fill="#c9c4ba">IMAGINE OS</text>
-  <text x="88" y="320" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="72" font-weight="600" fill="#f3f1eb">On-device</text>
-  <text x="88" y="410" font-family="Inter, Liberation Sans, DejaVu Sans, sans-serif" font-size="72" font-weight="600" fill="#f3f1eb">inference.</text>
+  <rect width="1200" height="630" fill="#090909"/>
+  <text x="88" y="210" font-family="Instrument Sans, Liberation Sans, DejaVu Sans, sans-serif" font-size="22" letter-spacing="5" fill="#8f8f8b">IMAGINE OS</text>
+  <text x="88" y="320" font-family="Instrument Sans, Liberation Sans, DejaVu Sans, sans-serif" font-size="68" font-weight="500" fill="#f4f1ea">On-device</text>
+  <text x="88" y="408" font-family="Instrument Sans, Liberation Sans, DejaVu Sans, sans-serif" font-size="68" font-weight="500" fill="#f4f1ea">inference.</text>
 </svg>`;
 
 const ogPng = await sharp(Buffer.from(ogSvg)).png().toBuffer();
@@ -710,6 +710,7 @@ if (process.argv.includes('--serve')) {
     '.xml': 'application/xml; charset=utf-8',
     '.txt': 'text/plain; charset=utf-8',
     '.wasm': 'application/wasm',
+    '.woff2': 'font/woff2',
     '': 'text/plain; charset=utf-8',
   };
 
