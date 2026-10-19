@@ -13,8 +13,10 @@ npx @boole/cli
 npm i -g @boole/cli
 ```
 
-Requires Node.js 18+. GPU acceleration is automatic on Apple Silicon (Metal),
-NVIDIA (CUDA), and AMD (Vulkan).
+Requires Node.js 20 or newer, which is what node-llama-cpp 3.22.2 documents.
+GPU acceleration is automatic on Apple Silicon (Metal). On Windows and Linux
+x64 it uses CUDA or Vulkan when that prebuilt binary matches the machine,
+and the CPU otherwise.
 
 ## Quick start
 
@@ -183,16 +185,19 @@ token counts, and wall-clock timing — easy to parse in CI scripts.
 
 ## Platform support
 
-| Platform | Arch | GPU | Backend |
+Prebuilt binaries shipped by node-llama-cpp 3.22.2 (peer dependency `>=3.0.0`). GPU packages exist only where named.
+
+| Platform | Arch | Prebuilt package | Backend |
 |---|---|---|---|
-| macOS | Apple Silicon | Yes | Metal |
-| macOS | Intel | — | CPU only |
-| Linux | x86_64 | NVIDIA | CUDA |
-| Linux | x86_64 | AMD | Vulkan |
-| Linux | x86_64 | — | CPU only |
-| Windows | x86_64 | NVIDIA | CUDA |
-| Windows | x86_64 | AMD | Vulkan |
-| Windows | x86_64 | — | CPU only |
+| macOS | Apple Silicon | `@node-llama-cpp/mac-arm64-metal` | Metal |
+| macOS | Intel | `@node-llama-cpp/mac-x64` | CPU. Metal is off by default on Intel Macs. |
+| Linux | x64 | `linux-x64`, `linux-x64-cuda`, `linux-x64-vulkan` | CPU, CUDA, or Vulkan |
+| Windows | x64 | `win-x64`, `win-x64-cuda`, `win-x64-vulkan` | CPU, CUDA, or Vulkan |
+| Linux | arm64 | `@node-llama-cpp/linux-arm64` | CPU prebuilt. No CUDA or Vulkan package. |
+| Windows | arm64 | `@node-llama-cpp/win-arm64` | CPU prebuilt |
+| Linux | armv7l, riscv64 | `linux-armv7l`, `linux-riscv64` | CPU prebuilt |
+
+The browser demonstration is separate: wllama WebAssembly, one thread, no GPU layers. Phones, NPUs, and other edge devices are not supported today.
 
 ## Project structure
 
