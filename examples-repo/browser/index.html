@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boole browser example</title>
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0 auto;
+      max-width: 40rem;
+      padding: 2rem 1.25rem 3rem;
+      font: 1.05rem/1.5 ui-sans-serif, system-ui, sans-serif;
+      background: #090909;
+      color: #f4f1ea;
+    }
+    a { color: #f4f1ea; }
+    p, label { color: #c9c6bf; }
+    button, textarea {
+      font: inherit;
+      color: #141412;
+      background: #e7e2d8;
+      border: 0;
+      border-radius: 4px;
+    }
+    textarea {
+      display: block;
+      width: 100%;
+      min-height: 6rem;
+      margin: 0.4rem 0 0.8rem;
+      padding: 0.7rem;
+      background: #111;
+      color: #f4f1ea;
+      border: 1px solid rgba(244, 241, 234, 0.18);
+    }
+    button { min-height: 44px; padding: 0.5rem 1rem; cursor: pointer; }
+    pre {
+      min-height: 4rem;
+      padding: 0.8rem;
+      white-space: pre-wrap;
+      background: #111;
+      border: 1px solid rgba(244, 241, 234, 0.18);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Run a small model in the browser</h1>
+  <p>Press the button to load SmolLM2 135M through wllama. The first run downloads the weights. This is the public example, not the managed product. Setup and the $1,800 tier are on <a href="https://boole.sh">boole.sh</a>.</p>
+  <label for="prompt">Prompt</label>
+  <textarea id="prompt" maxlength="500">What does it mean to run a language model on the device?</textarea>
+  <button id="run" type="button">Run on this device</button>
+  <p id="status">Waiting. Weights are not loaded.</p>
+  <pre id="output"></pre>
+  <script type="module">
+    import { run } from './demo.js';
+    document.getElementById('run').addEventListener('click', () => {
+      const btn = document.getElementById('run');
+      btn.disabled = true;
+      run().catch((err) => {
+        document.getElementById('status').textContent = err && err.message ? err.message : 'The demo failed to start.';
+      }).finally(() => {
+        btn.disabled = false;
+      });
+    });
+  </script>
+</body>
+</html>

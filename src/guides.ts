@@ -4,6 +4,8 @@
  * run, pull, doctor, models. serve and list exit 1 with "not yet implemented".
  */
 
+import { seoPages } from './seo.ts';
+
 const SITE = 'https://boole.sh';
 const EMAIL = 'hello@booleinference.com';
 const STRIPE = 'https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03';
@@ -315,7 +317,7 @@ function cliBody(guide: Guide): string {
       <p class="prose end-note">Managed setup is a <a class="inline" href="${STRIPE}">$1,800 entry payment</a>. Acquiring the codebase is an inquiry to <a class="inline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Codebase acquisition')}">${EMAIL}</a>.</p>`;
 }
 
-function layout(opts: {
+export function layout(opts: {
   css: string;
   title: string;
   description: string;
@@ -379,6 +381,9 @@ function layout(opts: {
       <a href="/#license">License</a>
       <a href="/#offers">Ways to work with Boole</a>
       <a href="/guides/">Setup guides</a>
+      <a href="/on-premise/">On-premise</a>
+      <a href="/compare/ollama-lm-studio-llama-cpp/">Compare</a>
+      <a href="/ollama-alternative/">Ollama alternative</a>
       <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
       <a href="mailto:${EMAIL}">${EMAIL}</a>
     </div>
@@ -477,6 +482,12 @@ export function sitePages(css: string): BuiltPage[] {
           <p>These pages are for people who want to run an LLM locally on a Mac, run a local AI model on Windows, or keep offline AI on Linux. <code>serve</code> and <code>list</code> are not implemented. No guide invents a benchmark. The only measured speed on this site is the browser demo.</p>
           <p>Linux armv7l and riscv64 have CPU prebuilts (<code>linux-armv7l</code>, <code>linux-riscv64</code>) and do not have their own page. 32-bit Raspberry Pi OS is the armv7l package, not the <a class="inline" href="/guides/linux-arm64/">arm64 guide</a>.</p>
         </div>
+        <h2>For a business</h2>
+        <ul class="guide-links">
+          <li><a href="/on-premise/">On-premise private LLM setup</a></li>
+          <li><a href="/compare/ollama-lm-studio-llama-cpp/">Ollama vs LM Studio vs llama.cpp vs Boole</a></li>
+          <li><a href="/ollama-alternative/">An Ollama alternative with setup and support</a></li>
+        </ul>
         ${guideIndex()}
       </div>
     </section>`;
@@ -529,7 +540,7 @@ export function sitePages(css: string): BuiltPage[] {
     });
   }
 
-  return pages;
+  return pages.concat(seoPages(css));
 }
 
 function guideIndex(): string {

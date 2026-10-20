@@ -1,0 +1,2 @@
+date,source,model,quant,tokens,elapsed_ms,tok_s,threads,gpu_layers,runtime,hardware,notes
+,boole.sh browser demo,SmolLM2-135M-Instruct,Q4_K_M,64,5187,12.3,1,0,wllama 3.8.1 WebAssembly,"4-core Xeon CPU","Only measured row. Not a phone. Not a 20B model. Recorded on the boole.sh demo, not by this repository's script."
