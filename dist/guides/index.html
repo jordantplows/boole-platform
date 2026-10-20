@@ -1153,9 +1153,9 @@ footer {
         <p class="crumbs"><a href="/">Boole</a> · Setup guides</p>
         <p class="kicker">Run it on your own device</p>
         <h1>Run a local AI model on your device.</h1>
-        <p class="lede">Pick the machine in front of you. Each guide covers requirements, the Boole CLI, and the four commands that exist: doctor, pull, run, and models.</p>
+        <p class="lede">Pick the machine in front of you. Each guide uses @boole/cli 0.7.0 on Node.js 22 or newer: doctor, pull, run, models, list, and serve.</p>
         <div class="prose">
-          <p>These pages are for people who want to run an LLM locally on a Mac, run a local AI model on Windows, or keep offline AI on Linux. <code>serve</code> and <code>list</code> are not implemented. No guide invents a benchmark. The only measured speed on this site is the browser demo.</p>
+          <p>These pages are for people who want to run an LLM locally on a Mac, run a local AI model on Windows, or keep offline AI on Linux. The first command is <code>npx @boole/cli doctor</code>. <code>serve</code> is a local development server with no authentication and a <code>POST /generate</code> route. No guide invents a benchmark. The only measured speed on this site is the browser demo.</p>
           <p>Linux armv7l and riscv64 have CPU prebuilts (<code>linux-armv7l</code>, <code>linux-riscv64</code>) and do not have their own page. 32-bit Raspberry Pi OS is the armv7l package, not the <a class="inline" href="/guides/linux-arm64/">arm64 guide</a>.</p>
         </div>
         <h2>For a business</h2>

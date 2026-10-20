@@ -1154,7 +1154,7 @@ footer {
       <h1>An on-premise LLM, set up for you.</h1>
       <p class="lede">Boole AI, Inc. sets up a local model on hardware you control and runs it. The entry payment for that managed tier is $1,800. The codebase is a separate inquiry.</p>
       <div class="aside">
-        <p><strong>What works today.</strong> Release 0.0.1 is a command line: <code>boole run</code>, <code>pull</code>, <code>doctor</code>, and <code>models</code>. <code>serve</code> and <code>list</code> are not implemented. The only measured speed on this site is the browser demo, 12.3 tok/s on a 4-core Xeon in WebAssembly. Ternary weights and a 20B model at 200 tok/s are goals, not results. There is no published uptime percentage.</p>
+        <p><strong>What works today.</strong> <code>@boole/cli</code> 0.7.0 needs Node.js 22 or newer. Start with <code>npx @boole/cli doctor</code>, then <code>npx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M</code> and <code>npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hello"</code>. <code>doctor --json</code>, <code>models</code>, <code>list</code>, and <code>serve</code> are included. <code>serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>. The only measured speed on this site is the browser demo, 12.3 tok/s on a 4-core Xeon in WebAssembly. Ternary weights and a 20B model at 200 tok/s are goals, not results. There is no published uptime percentage.</p>
       </div>
       <h2>Why a business runs it locally</h2>
       <div class="prose">
@@ -1174,7 +1174,13 @@ footer {
       </div>
       <h2>What you can run yourself</h2>
       <div class="prose">
-        <p>The same runtime is installable as <code>npx @boole/cli</code> on Node.js 20 or newer. <code>doctor</code> prints the machine and suggests a size from free RAM minus a 2 GiB headroom. It shows VRAM when the runtime reports it, and it does not use VRAM to pick the size. <code>pull</code> downloads a GGUF. <code>run</code> samples tokens locally. <code>models</code> lists aliases. Device steps live in the <a class="inline" href="/guides/">setup guides</a>.</p>
+        <p>Install Node.js 22 or newer from <a class="inline" href="https://nodejs.org/">nodejs.org</a> (macOS: <code>brew install node@22</code>; Windows: <code>winget install OpenJS.NodeJS.LTS</code> when <code>node -v</code> is 22 or higher; Linux: a distro package that reports the same). Then:</p>
+      </div>
+      <pre><code>npx @boole/cli doctor
+npx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M
+npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hello"</code></pre>
+      <div class="prose">
+        <p><code>doctor</code> prints the machine and suggests a size from free RAM minus a 2 GiB headroom. <code>--json</code> prints that report as JSON. It shows VRAM when the runtime reports it, and it does not use VRAM to pick the size. <code>list</code> prints downloaded models. <code>serve</code> is local development only, with no authentication, and accepts <code>POST /generate</code>. Device steps live in the <a class="inline" href="/guides/">setup guides</a>.</p>
       </div>
       <h2>Hardware, without invented tiers</h2>
       <div class="prose">

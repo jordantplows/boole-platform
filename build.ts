@@ -28,11 +28,11 @@ const KEYWORDS =
 const FAQ = [
   {
     q: 'What is Imagine OS?',
-    a: 'Imagine OS is the product Boole AI, Inc. is building: software shaped around the person using it, with the model running on the device. Release 0.0.1 is the local command-line runtime. The shell that keeps adapting is the direction of the company.',
+    a: 'Imagine OS is the product Boole AI, Inc. is building: software shaped around the person using it, with the model running on the device. @boole/cli 0.7.0 is the local command line. It needs Node.js 22 or newer. The shell that keeps adapting is the direction of the company.',
   },
   {
     q: 'What runs today, and what is still a roadmap?',
-    a: 'Today you can run a local GGUF model with boole run, pull, doctor, and models. The browser demo runs SmolLM2 135M in WebAssembly. Ternary weights, a 20B model at 200 tok/s, phones, NPUs, and an adapting shell are goals. They are not measured results and not commitments.',
+    a: 'Today @boole/cli 0.7.0 runs a local GGUF model with run, pull, doctor, models, list, and serve. doctor also accepts --json. serve is for local development only: no authentication, and it accepts POST /generate. The package needs Node.js 22 or newer. The browser demo runs SmolLM2 135M in WebAssembly. Ternary weights, a 20B model at 200 tok/s, phones, NPUs, and an adapting shell are goals. They are not measured results and not commitments.',
   },
   {
     q: 'Which devices does it support?',
@@ -86,10 +86,10 @@ const jsonLd = JSON.stringify({
       alternateName: 'Boole',
       applicationCategory: 'DeveloperApplication',
       operatingSystem: 'macOS, Linux, Windows',
-      softwareVersion: '0.0.1',
+      softwareVersion: '0.7.0',
       url: `${SITE}/`,
       description:
-        'Imagine OS is the direction of Boole AI, Inc.: software shaped around the person using it, with models that run on the device. Release 0.0.1 is a local GGUF runtime through llama.cpp. A 20-billion-parameter model at 200 tokens per second is a target, not a measured result.',
+        'Imagine OS is the direction of Boole AI, Inc.: software shaped around the person using it, with models that run on the device. @boole/cli 0.7.0 is a local GGUF runtime through llama.cpp. It needs Node.js 22 or newer. Commands: run, pull, doctor, models, list, and serve. serve is local development only, with no authentication, and accepts POST /generate. A 20-billion-parameter model at 200 tokens per second is a target, not a measured result.',
       keywords: KEYWORDS,
       copyrightHolder: { '@id': `${SITE}/#organization` },
       copyrightNotice: 'Copyright (c) 2026 Boole AI, Inc. All rights reserved.',
@@ -195,7 +195,7 @@ const html = `<!doctype html>
           Boole AI builds Imagine OS so the model stays on the device and the
           software takes its shape from the person holding it. One system, on
           the laptop and on the phone. Private. Immediate. Still yours when
-          the network is gone. Release 0.0.1 is the local runtime the company
+          the network is gone. @boole/cli 0.7.0 is the local runtime the company
           ships today. The shell that keeps adapting is the product we are building.
         </p>
         <div class="actions actions-hero">
@@ -241,7 +241,7 @@ const html = `<!doctype html>
             <p>
               Imagine OS runs the model where you are, and composes the
               software for the task in front of you. That is the company.
-              Release 0.0.1 is the runtime underneath it.
+              @boole/cli 0.7.0 is the runtime underneath it.
             </p>
           </article>
         </div>
@@ -255,7 +255,7 @@ const html = `<!doctype html>
         <p class="prose reveal">
           Imagine OS is the same session on both screens. The illustrated
           layout below is the product direction. The live model is the
-          demonstration further down. Release 0.0.1 runs that model locally.
+          demonstration further down. @boole/cli 0.7.0 runs a model locally.
         </p>
         <div class="devices">
           <figure class="laptop">
@@ -330,7 +330,7 @@ const html = `<!doctype html>
         <h2 class="reveal">The model spends the machine’s own power.</h2>
         <p class="prose reveal">
           Boole keeps inference on the device so the work does not travel to a
-          cluster. What follows is what release 0.0.1 actually does. Anything
+          cluster. What follows is what @boole/cli 0.7.0 actually does. Anything
           else is a design goal. The only measured speed we have is from the
           browser demo: 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens,
           on a 4-core Xeon CPU in WebAssembly, one thread, no GPU layers.
@@ -360,13 +360,12 @@ const html = `<!doctype html>
             <p>
               The CLI calls <code>getLlama({ gpu: 'auto' })</code>. That runtime
               uses Metal, CUDA, or Vulkan when the prebuilt binary matches the
-              machine, and the CPU when it does not. <code>--gpu-layers</code>
-              is accepted and is not passed to <code>loadModel</code> in 0.0.1.
+              machine, and the CPU when it does not.
             </p>
           </article>
           <article class="card">
             <span class="tag">Threads</span>
-            <h3>Not exposed in 0.0.1.</h3>
+            <h3>The CLI does not set a thread count.</h3>
             <p>
               The command line does not set a thread count. The browser demo
               does: one WebAssembly thread and zero GPU layers. Choosing threads
@@ -374,12 +373,13 @@ const html = `<!doctype html>
             </p>
           </article>
           <article class="card">
-            <span class="tag">Idle</span>
-            <h3>The process exits, and the model goes with it.</h3>
+            <span class="tag">Serve</span>
+            <h3>A local development server.</h3>
             <p>
-              There is no long-running server. <code>serve</code> is reserved
-              and not implemented. A resident runtime that unloads the model
-              when it is idle is a design goal, not a behavior of this release.
+              <code>npx @boole/cli serve</code> is for local development only.
+              It has no authentication. It accepts <code>POST /generate</code>.
+              <code>npx @boole/cli list</code> prints models already downloaded.
+              A runtime that unloads the model when it is idle is still a design goal.
             </p>
           </article>
           <article class="card">
@@ -387,7 +387,7 @@ const html = `<!doctype html>
             <h3>Generation reads the local file.</h3>
             <p>
               Token sampling uses the GGUF on disk. The prompt is not uploaded.
-              Release 0.0.1 still asks Hugging Face for the file name before it
+              The CLI still asks Hugging Face for the file name before it
               opens the cache, so a cached <code>boole run</code> is not fully
               offline yet. Weights download only when they are missing.
             </p>
@@ -526,15 +526,16 @@ const html = `<!doctype html>
     <section id="builders" tabindex="-1">
       <div class="wrap">
         <p class="kicker">For builders</p>
-        <h2 class="reveal">Release 0.0.1</h2>
+        <h2 class="reveal">@boole/cli 0.7.0</h2>
         <table class="spec">
           <tbody>
-            <tr><th scope="row">Install</th><td><code>npx @boole/cli</code></td></tr>
-            <tr><th scope="row">run</th><td>Prompt a local model. An alias such as <code>llama3</code> picks a quantization that fits available memory.</td></tr>
-            <tr><th scope="row">pull</th><td>Download weights into the cache. An interrupted download resumes.</td></tr>
-            <tr><th scope="row">doctor</th><td>Read the machine and suggest a size it can hold.</td></tr>
-            <tr><th scope="row">models</th><td>List the aliases.</td></tr>
-            <tr><th scope="row">Not built</th><td><code>serve</code> and <code>list</code> are reserved and not implemented. If node-llama-cpp is missing, the CLI says so and stops.</td></tr>
+            <tr><th scope="row">Node.js</th><td>22 or newer. macOS: the installer at <a class="inline" href="https://nodejs.org/">nodejs.org</a> or <code>brew install node@22</code>. Windows: the installer, or <code>winget install OpenJS.NodeJS.LTS</code> when <code>node -v</code> is 22 or higher. Linux: a build from nodejs.org, or a distro package that reports 22 or newer.</td></tr>
+            <tr><th scope="row">First</th><td><code>npx @boole/cli doctor</code>. Add <code>--json</code> for the same report as JSON.</td></tr>
+            <tr><th scope="row">pull</th><td><code>npx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M</code></td></tr>
+            <tr><th scope="row">run</th><td><code>npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hello"</code></td></tr>
+            <tr><th scope="row">serve</th><td>Local development only. No authentication. Accepts <code>POST /generate</code>.</td></tr>
+            <tr><th scope="row">list</th><td>Prints models already downloaded.</td></tr>
+            <tr><th scope="row">models</th><td>Lists the aliases.</td></tr>
             <tr><th scope="row">Guides</th><td>Device setup, from Apple Silicon to the browser demo, is in the <a class="inline" href="/guides/">setup guides</a>.</td></tr>
             <tr><th scope="row">Package</th><td>The command-line runtime is published as <a class="inline" href="https://www.npmjs.com/package/@boole/cli">@boole/cli</a>.</td></tr>
           </tbody>
