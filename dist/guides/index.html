@@ -1034,6 +1034,24 @@ footer {
   font-size: inherit;
 }
 
+.aside {
+  max-width: 40rem;
+  margin: 0.2rem 0 1.6rem;
+  padding: 1rem 1.15rem 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.aside p {
+  color: var(--body);
+}
+
+.aside strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
 .crumbs {
   margin-bottom: 1.15rem;
   color: var(--muted);
@@ -1140,6 +1158,12 @@ footer {
           <p>These pages are for people who want to run an LLM locally on a Mac, run a local AI model on Windows, or keep offline AI on Linux. <code>serve</code> and <code>list</code> are not implemented. No guide invents a benchmark. The only measured speed on this site is the browser demo.</p>
           <p>Linux armv7l and riscv64 have CPU prebuilts (<code>linux-armv7l</code>, <code>linux-riscv64</code>) and do not have their own page. 32-bit Raspberry Pi OS is the armv7l package, not the <a class="inline" href="/guides/linux-arm64/">arm64 guide</a>.</p>
         </div>
+        <h2>For a business</h2>
+        <ul class="guide-links">
+          <li><a href="/on-premise/">On-premise private LLM setup</a></li>
+          <li><a href="/compare/ollama-lm-studio-llama-cpp/">Ollama vs LM Studio vs llama.cpp vs Boole</a></li>
+          <li><a href="/ollama-alternative/">An Ollama alternative with setup and support</a></li>
+        </ul>
         <ul class="guide-index"><li><a href="/guides/macos-apple-silicon/"><span class="tag">macOS</span><strong>macOS Apple Silicon</strong><span>Run an LLM locally on a Mac with Apple Silicon</span></a></li><li><a href="/guides/macos-intel/"><span class="tag">macOS</span><strong>macOS Intel</strong><span>Run a local AI model on an Intel Mac</span></a></li><li><a href="/guides/windows-x64/"><span class="tag">Windows</span><strong>Windows x64</strong><span>Run a local AI model on Windows</span></a></li><li><a href="/guides/linux-x64/"><span class="tag">Linux</span><strong>Linux x64</strong><span>Offline AI on Linux x64</span></a></li><li><a href="/guides/linux-arm64/"><span class="tag">Linux</span><strong>Linux arm64</strong><span>Run a local model on Linux arm64</span></a></li><li><a href="/guides/windows-arm64/"><span class="tag">Windows</span><strong>Windows arm64</strong><span>Run a local model on Windows arm64</span></a></li><li><a href="/guides/browser/"><span class="tag">Browser</span><strong>Browser demo</strong><span>Run a model in the browser</span></a></li></ul>
       </div>
     </section>
@@ -1150,6 +1174,9 @@ footer {
       <a href="/#license">License</a>
       <a href="/#offers">Ways to work with Boole</a>
       <a href="/guides/">Setup guides</a>
+      <a href="/on-premise/">On-premise</a>
+      <a href="/compare/ollama-lm-studio-llama-cpp/">Compare</a>
+      <a href="/ollama-alternative/">Ollama alternative</a>
       <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
       <a href="mailto:hello@booleinference.com">hello@booleinference.com</a>
     </div>

@@ -630,6 +630,9 @@ const html = `<!doctype html>
       <a href="#license">License</a>
       <a href="#offers">Ways to work with Boole</a>
       <a href="/guides/">Setup guides</a>
+      <a href="/on-premise/">On-premise</a>
+      <a href="/compare/ollama-lm-studio-llama-cpp/">Compare</a>
+      <a href="/ollama-alternative/">Ollama alternative</a>
       <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
       <a href="mailto:${CTA.email}">${CTA.email}</a>
     </div>

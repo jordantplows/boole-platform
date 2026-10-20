@@ -1,0 +1,1207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>On-premise private LLM setup for a business — Boole</title>
+  <meta name="description" content="On-premise LLM setup for a small business. Boole AI, Inc. sets it up and runs it. The managed tier is a $1,800 entry payment. The codebase is an inquiry.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="on premise LLM for business, private local LLM, on-prem AI setup, local LLM for a company, white-glove local AI">
+  <link rel="canonical" href="https://boole.sh/on-premise/">
+  <meta property="og:site_name" content="Boole">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="On-premise private LLM setup for a business — Boole">
+  <meta property="og:description" content="On-premise LLM setup for a small business. Boole AI, Inc. sets it up and runs it. The managed tier is a $1,800 entry payment. The codebase is an inquiry.">
+  <meta property="og:image" content="https://boole.sh/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Imagine OS. On-device models for software that adapts.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://boole.sh/on-premise/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="On-premise private LLM setup for a business — Boole">
+  <meta name="twitter:description" content="On-premise LLM setup for a small business. Boole AI, Inc. sets it up and runs it. The managed tier is a $1,800 entry payment. The codebase is an inquiry.">
+  <meta name="twitter:image" content="https://boole.sh/og.png">
+  <meta name="twitter:image:alt" content="Imagine OS. On-device models for software that adapts.">
+  <meta name="theme-color" content="#090909">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"On-premise private LLM setup","name":"On-premise private LLM setup","description":"On-premise LLM setup for a small business. Boole AI, Inc. sets it up and runs it. The managed tier is a $1,800 entry payment. The codebase is an inquiry.","url":"https://boole.sh/on-premise/","inLanguage":"en","mainEntityOfPage":"https://boole.sh/on-premise/","author":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"publisher":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does a prompt leave the building?","acceptedAnswer":{"@type":"Answer","text":"On the published CLI, token generation reads a GGUF file on disk and does not upload the prompt. The same command still asks Hugging Face for the file name before it opens the cache, and it downloads weights that are not cached. The managed tier’s network scope is agreed when you start. This is not a security certification."}},{"@type":"Question","name":"Is this HIPAA compliant, or legal advice for a firm?","acceptedAnswer":{"@type":"Answer","text":"No. Keeping inference on a machine you control can avoid sending a prompt to a third-party API. That is not a HIPAA determination, not a confidentiality opinion, and not legal advice."}},{"@type":"Question","name":"What does the $1,800 payment buy?","acceptedAnswer":{"@type":"Answer","text":"It is the entry payment for the managed tier. Boole AI, Inc. sets Imagine OS up and runs it, with continuous uptime and white-glove onboarding. There is no published uptime percentage. The scope of the service is agreed when you start."}},{"@type":"Question","name":"How soon does onboarding start?","acceptedAnswer":{"@type":"Answer","text":"After payment, the welcome page says you will be onboarded in less than 24 hours. Wait for an email from hello@booleinference.com."}},{"@type":"Question","name":"Can we buy the codebase instead?","acceptedAnswer":{"@type":"Answer","text":"Yes, as an inquiry, not a checkout. Email hello@booleinference.com with the subject “Boole: Codebase acquisition”. Ownership is settled in a written agreement."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Boole","item":"https://boole.sh/"},{"@type":"ListItem","position":2,"name":"On-premise setup","item":"https://boole.sh/on-premise/"}]},{"@type":"Service","name":"Managed on-premise Imagine OS","serviceType":"On-premise local model setup and operation","provider":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"areaServed":"Worldwide","offers":{"@type":"Offer","price":"1800","priceCurrency":"USD","url":"https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03","availability":"https://schema.org/OnlineOnly"}}]}</script>
+  <style>@font-face {
+  font-family: "Instrument Sans";
+  src: url("/fonts/instrument-sans.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Sans Fallback";
+  src: local("Arial");
+  ascent-override: 97%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+  size-adjust: 102%;
+}
+
+:root {
+  --bg: #090909;
+  --surface: #111111;
+  --ink: #141412;
+  --text: #f4f1ea;
+  --body: #c9c6bf;
+  --muted: #9b9892;
+  --faint: #6f6d68;
+  --line: rgba(244, 241, 234, 0.1);
+  --line-strong: rgba(244, 241, 234, 0.18);
+  --accent: #e7e2d8;
+  --radius: 4px;
+  --sans: "Instrument Sans", "Instrument Sans Fallback", ui-sans-serif, system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--bg);
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  font-weight: 430;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 40;
+  background: var(--accent);
+  color: var(--ink);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+}
+
+.skip:focus {
+  top: 0.75rem;
+  outline-color: var(--ink);
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  min-height: 3.75rem;
+  padding: 0.55rem 1.75rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  font-size: 1rem;
+}
+
+.brand span {
+  margin-left: 0.75rem;
+  color: var(--muted);
+  font-weight: 450;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.35rem;
+  margin-left: auto;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 450;
+  letter-spacing: -0.01em;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.55rem 1.05rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font: 500 0.92rem/1 var(--sans);
+  letter-spacing: -0.012em;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+.btn-buy,
+.btn-pay {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+.btn-call {
+  color: var(--text);
+  border-color: var(--line-strong);
+  background: transparent;
+}
+
+.btn-buy:hover,
+.btn-pay:hover {
+  background: #f7f4ee;
+}
+
+.btn-call:hover {
+  border-color: var(--accent);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+
+.text-link {
+  color: var(--text);
+  font-weight: 450;
+  font-size: 0.95rem;
+  text-underline-offset: 0.18em;
+}
+
+.wrap {
+  width: min(1120px, calc(100% - 3.5rem));
+  margin: 0 auto;
+}
+
+section {
+  padding: 6.5rem 0;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 4.5rem;
+}
+
+#vision {
+  position: relative;
+  isolation: isolate;
+  border-top: 0;
+  padding-top: 6.25rem;
+  padding-bottom: 6.75rem;
+  overflow: hidden;
+}
+
+#vision::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -18%;
+  right: -8%;
+  width: min(720px, 62vw);
+  height: 78%;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(231, 226, 216, 0.14), rgba(231, 226, 216, 0) 72%);
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #vision::before {
+    animation: bloom 16s var(--ease) infinite alternate;
+  }
+}
+
+@keyframes bloom {
+  from { opacity: 0.45; transform: scale(1); }
+  to { opacity: 0.9; transform: scale(1.06); }
+}
+
+.kicker {
+  margin-bottom: 1.15rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+h1, h2, h3 {
+  font-weight: 480;
+  letter-spacing: -0.038em;
+  line-height: 1.04;
+  color: var(--text);
+}
+
+h1 {
+  max-width: 11.5ch;
+  margin-bottom: 1.4rem;
+  font-size: clamp(2.85rem, 5.8vw, 4.7rem);
+  letter-spacing: -0.046em;
+  line-height: 0.98;
+}
+
+h2 {
+  max-width: 18ch;
+  margin-bottom: 1.15rem;
+  font-size: clamp(1.9rem, 3vw, 2.55rem);
+  letter-spacing: -0.038em;
+}
+
+h3 {
+  margin-bottom: 0.45rem;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+.lede,
+.prose {
+  max-width: 38rem;
+  color: var(--body);
+}
+
+.lede {
+  margin-bottom: 2rem;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  letter-spacing: -0.014em;
+}
+
+.prose p + p,
+.stack > * + * {
+  margin-top: 0.95rem;
+}
+
+.actions-hero {
+  margin-bottom: 2.75rem;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 46rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.facts div {
+  padding: 1rem 1.1rem 1.05rem 0;
+}
+
+.facts div + div {
+  padding-left: 1.1rem;
+  border-left: 1px solid var(--line);
+}
+
+.facts dt {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.facts dd {
+  font-size: 0.98rem;
+  font-weight: 450;
+  letter-spacing: -0.015em;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.beats {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 44rem;
+  margin-top: 0.5rem;
+}
+
+.soon,
+.note {
+  color: var(--muted);
+  font-size: 0.98rem;
+  max-width: 42rem;
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.js .reveal.is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 1.15s var(--ease), transform 1.15s var(--ease);
+}
+
+.js .reveal-seq > * {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.js .reveal-seq.is-in > * {
+  opacity: 1;
+  transform: none;
+  transition: opacity 1.05s var(--ease), transform 1.05s var(--ease);
+}
+
+.js .reveal-seq.is-in > *:nth-child(2) { transition-delay: 0.08s; }
+.js .reveal-seq.is-in > *:nth-child(3) { transition-delay: 0.16s; }
+.js .reveal-seq.is-in > *:nth-child(n + 4) { transition-delay: 0.22s; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.4rem 1.3rem;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+}
+
+.card p,
+.flow span,
+.goals p {
+  color: var(--body);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.bench {
+  margin-top: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.35rem 1.35rem 1.45rem;
+}
+
+.bench-top,
+.bench-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.bench-top span,
+.bench-meta {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.bench-meta {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+
+.bench-meta strong,
+#demo-metrics {
+  color: var(--text);
+  font-weight: 500;
+}
+
+label {
+  display: block;
+  margin: 1.15rem 0 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+textarea {
+  width: 100%;
+  min-height: 6.5rem;
+  resize: vertical;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #0c0c0c;
+  color: var(--text);
+  font: 430 1rem/1.5 var(--sans);
+  letter-spacing: -0.011em;
+  padding: 0.85rem 0.9rem;
+}
+
+.bench .btn {
+  margin-top: 0.95rem;
+}
+
+#demo-output {
+  min-height: 7.5rem;
+  margin-top: 0.9rem;
+  padding: 0.95rem 1rem;
+  border-radius: var(--radius);
+  background: #0c0c0c;
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.host {
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.devices {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(200px, 0.42fr);
+  gap: 2.5rem 3rem;
+  align-items: end;
+  margin-top: 2.75rem;
+}
+
+.laptop,
+.phone {
+  margin: 0;
+}
+
+.laptop figcaption,
+.phone figcaption {
+  margin-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.bezel {
+  position: relative;
+  background: linear-gradient(180deg, #2c2c2c 0%, #161616 38%, #101010 100%);
+  border: 1px solid rgba(244, 241, 234, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 24px 48px rgba(0, 0, 0, 0.38);
+}
+
+.laptop .bezel {
+  border-radius: 12px;
+  padding: 10px 10px 14px;
+  aspect-ratio: 16 / 10;
+}
+
+.phone {
+  justify-self: end;
+  width: min(228px, 100%);
+}
+
+.phone .bezel {
+  border-radius: 32px;
+  padding: 7px;
+  aspect-ratio: 9 / 19.2;
+}
+
+.phone .bezel::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  left: 50%;
+  width: 62px;
+  height: 14px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  background: #0a0a0a;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.deck {
+  position: relative;
+  height: 12px;
+  margin: 0 11%;
+  border: 1px solid rgba(244, 241, 234, 0.1);
+  border-top: 0;
+  border-radius: 0 0 8px 8px;
+  background: linear-gradient(180deg, #1c1c1c, #0d0d0d);
+}
+
+.deck::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  width: 22%;
+  height: 3px;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.screen {
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(90% 70% at 100% 0%, rgba(231, 226, 216, 0.07), transparent 55%),
+    #0b0b0b;
+  color: var(--text);
+}
+
+.laptop .screen {
+  border-radius: 6px;
+}
+
+.phone .screen {
+  border-radius: 26px;
+}
+
+.os-ui {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  height: 100%;
+  padding: 1.1rem 1.15rem 1.15rem;
+}
+
+.phone .os-ui {
+  gap: 0.4rem;
+  padding: 2rem 0.75rem 0.9rem;
+}
+
+.os-bar,
+.os-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.os-user,
+.os-reply {
+  margin: 0;
+  border-radius: var(--radius);
+  padding: 0.6rem 0.7rem;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+}
+
+.phone .os-user,
+.phone .os-reply {
+  font-size: 0.74rem;
+  padding: 0.45rem 0.5rem;
+}
+
+.os-user {
+  background: rgba(244, 241, 234, 0.05);
+  color: var(--body);
+}
+
+.os-reply {
+  background: rgba(231, 226, 216, 0.09);
+  color: var(--text);
+}
+
+.os-meta {
+  margin-top: auto;
+}
+
+.js .devices > * {
+  opacity: 0;
+}
+
+.js .devices > .laptop { transform: translateY(16px); }
+.js .devices > .phone { transform: translateY(22px); }
+
+.js .devices.is-in > * {
+  opacity: 1;
+  transform: none;
+  transition: opacity 1.25s var(--ease), transform 1.25s var(--ease);
+}
+
+.js .devices.is-in > .phone {
+  transition-delay: 0.12s;
+}
+
+.energy {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2.5rem;
+  margin-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.energy .card {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1.2rem 0 1.25rem;
+}
+
+.matrix {
+  margin-top: 1.75rem;
+}
+
+.matrix-label {
+  margin: 2rem 0 0.85rem;
+  max-width: none;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2.5rem;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.matrix-grid li {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 1.05rem 0 1.1rem;
+}
+
+.matrix-grid strong {
+  display: block;
+  margin: 0.1rem 0 0.3rem;
+  font-size: 1.02rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.matrix-grid li span:last-child {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.planned li {
+  border-bottom-style: dashed;
+}
+
+.offers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  margin-top: 0.6rem;
+}
+
+.offers .btn {
+  margin-top: 1.35rem;
+}
+
+.tier-fast {
+  border-color: var(--line-strong);
+  background:
+    linear-gradient(180deg, rgba(231, 226, 216, 0.05), transparent 42%),
+    var(--surface);
+}
+
+.faq {
+  display: grid;
+  gap: 0;
+  margin-top: 0.4rem;
+  border-top: 1px solid var(--line);
+}
+
+.faq details {
+  border-bottom: 1px solid var(--line);
+  padding: 0 0.15rem;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 480;
+  letter-spacing: -0.018em;
+  padding: 1.05rem 1.75rem 1.05rem 0;
+  min-height: 44px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 1px solid var(--muted);
+  border-bottom: 1px solid var(--muted);
+  transform: rotate(45deg) translateY(-2px);
+  flex: none;
+}
+
+.faq details[open] summary::after {
+  transform: rotate(225deg) translateY(-2px);
+}
+
+.faq details p {
+  color: var(--body);
+  padding: 0 2rem 1.15rem 0;
+  max-width: 42rem;
+}
+
+.flow,
+.goals {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+  list-style: none;
+}
+
+.flow {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.flow li,
+.goals li {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.15rem 1.2rem;
+}
+
+.tag {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.spec {
+  width: 100%;
+  margin-top: 1.75rem;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.spec th,
+.spec td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.9rem 1rem 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+  font-weight: 430;
+}
+
+.spec th {
+  width: 8.5rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+}
+
+a {
+  color: var(--text);
+}
+
+.inline {
+  text-underline-offset: 0.18em;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 1.6rem 0 2.75rem;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.4rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.footer-row a {
+  color: var(--text);
+  text-underline-offset: 0.18em;
+}
+
+@media (max-width: 800px) {
+  .wrap {
+    width: min(1120px, calc(100% - 1.75rem));
+  }
+
+  section {
+    padding: 4.25rem 0;
+  }
+
+  #vision {
+    padding-top: 3.5rem;
+    padding-bottom: 4.25rem;
+  }
+
+  .lede {
+    font-size: 1.05rem;
+  }
+
+  .offers,
+  .facts,
+  .split,
+  .flow,
+  .beats,
+  .devices,
+  .energy,
+  .matrix-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .facts div + div {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .nav-links {
+    gap: 0.95rem;
+  }
+
+  .brand span {
+    display: none;
+  }
+
+  .bar {
+    padding: 0.45rem 0.85rem;
+    min-height: 3.25rem;
+  }
+
+  .phone {
+    justify-self: center;
+    width: min(220px, 70%);
+  }
+
+  .spec th {
+    display: block;
+    width: auto;
+    padding-bottom: 0.15rem;
+  }
+
+  .spec td {
+    display: block;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .actions .btn,
+  .actions-hero .btn,
+  .bench .btn {
+    flex: 1 1 8.5rem;
+  }
+}
+
+.price,
+.card .price {
+  margin: 0.15rem 0 0.85rem;
+  color: var(--text);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 480;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.price-inline {
+  flex: 1 0 100%;
+  margin-top: 0.15rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.doc h1 {
+  max-width: 16ch;
+  font-size: clamp(2.35rem, 4.4vw, 3.5rem);
+}
+
+.doc h2 {
+  max-width: 24ch;
+  margin-top: 2.6rem;
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+}
+
+.doc h3 {
+  margin-top: 1.15rem;
+}
+
+.doc .prose,
+.doc ul,
+.doc ol {
+  max-width: 40rem;
+}
+
+.doc ul,
+.doc ol,
+.guide-links {
+  margin: 0.35rem 0 0.4rem 1.15rem;
+  color: var(--body);
+}
+
+.doc li + li,
+.guide-links li + li {
+  margin-top: 0.4rem;
+}
+
+.doc pre {
+  max-width: 40rem;
+  margin: 0.85rem 0 1.1rem;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.doc pre code {
+  font-size: inherit;
+}
+
+.aside {
+  max-width: 40rem;
+  margin: 0.2rem 0 1.6rem;
+  padding: 1rem 1.15rem 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.aside p {
+  color: var(--body);
+}
+
+.aside strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.crumbs {
+  margin-bottom: 1.15rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.crumbs a {
+  color: var(--muted);
+}
+
+.guide-index {
+  list-style: none;
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.guide-index a {
+  display: block;
+  padding: 1.05rem 0 1.1rem;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+
+.guide-index strong {
+  display: block;
+  margin: 0.12rem 0 0.25rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.guide-index a span:last-child {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.end-note {
+  margin-top: 2rem;
+}
+
+.matrix-grid a {
+  text-underline-offset: 0.18em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #vision::before {
+    animation: none;
+    opacity: 0.7;
+    transform: none;
+  }
+
+  .js .reveal,
+  .js .reveal.is-in,
+  .js .reveal-seq > *,
+  .js .reveal-seq.is-in > *,
+  .js .devices > *,
+  .js .devices.is-in > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .facts,
+  .flow,
+  .goals,
+  .card,
+  .bench,
+  textarea,
+  #demo-output,
+  .btn,
+  .bar,
+  .bezel,
+  .screen,
+  .faq details,
+  .matrix-grid li,
+  footer {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
+  }
+}
+</style>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="bar">
+    <a class="brand" href="/">boole <span>Imagine OS</span></a>
+    <nav class="nav-links" aria-label="Page">
+      <a href="/#energy">Energy</a>
+      <a href="/#devices">Devices</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+  </header>
+  <main id="content" tabindex="-1">
+    <section class="doc"><div class="wrap">
+      <p class="crumbs"><a href="/">Boole</a> · On-premise setup</p>
+      <p class="kicker">Private local LLM · for a business</p>
+      <h1>An on-premise LLM, set up for you.</h1>
+      <p class="lede">Boole AI, Inc. sets up a local model on hardware you control and runs it. The entry payment for that managed tier is $1,800. The codebase is a separate inquiry.</p>
+      <div class="aside">
+        <p><strong>What works today.</strong> Release 0.0.1 is a command line: <code>boole run</code>, <code>pull</code>, <code>doctor</code>, and <code>models</code>. <code>serve</code> and <code>list</code> are not implemented. The only measured speed on this site is the browser demo, 12.3 tok/s on a 4-core Xeon in WebAssembly. Ternary weights and a 20B model at 200 tok/s are goals, not results. There is no published uptime percentage.</p>
+      </div>
+      <h2>Why a business runs it locally</h2>
+      <div class="prose">
+        <p>A rented model sends the prompt, and often the files around it, to someone else’s cluster. A local GGUF session reads weights from disk. That is the reason a law office, a clinic, or a small company asks for an on-premise LLM: the work stays on a machine they control.</p>
+        <p>The published CLI does not upload the prompt. It does contact Hugging Face to resolve a model file name before it opens the cache, and it downloads weights that are missing. Say that plainly when you scope a deployment. This page is not a promise that a particular network is air-gapped, and it is not a HIPAA or confidentiality opinion.</p>
+      </div>
+      <h2>What the managed tier includes</h2>
+      <div class="prose">
+        <p>Pay to start is the fast path. Boole sets Imagine OS up and runs it: continuous uptime and white-glove onboarding. The button goes to Stripe for the $1,800 entry payment. After payment, onboarding email comes from hello@booleinference.com in less than 24 hours. The rest of the service is agreed then. We do not publish an uptime percentage, and we do not invent a hardware SKU to go with the price.</p>
+      </div>
+      <p class="price">$1,800</p>
+      <p class="note">Entry payment for the managed tier.</p>
+      <div class="actions actions-hero" style="margin-top:1.5rem">
+        <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Pay to start</a>
+        <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Codebase%20acquisition">Start an inquiry</a>
+        <p class="price-inline">$1,800 entry payment for the managed tier. We set it up and run it.</p>
+      </div>
+      <h2>What you can run yourself</h2>
+      <div class="prose">
+        <p>The same runtime is installable as <code>npx @boole/cli</code> on Node.js 20 or newer. <code>doctor</code> prints the machine and suggests a size from free RAM minus a 2 GiB headroom. It shows VRAM when the runtime reports it, and it does not use VRAM to pick the size. <code>pull</code> downloads a GGUF. <code>run</code> samples tokens locally. <code>models</code> lists aliases. Device steps live in the <a class="inline" href="/guides/">setup guides</a>.</p>
+      </div>
+      <h2>Hardware, without invented tiers</h2>
+      <div class="prose">
+        <p>Support today follows node-llama-cpp 3.22.2 prebuilts: Apple Silicon with Metal, Intel Macs on CPU, Windows and Linux x64 with CUDA, Vulkan, or CPU, Linux arm64 and Windows arm64 on CPU. Phones, NPUs, and other edge devices are a roadmap, not a commitment. A 64-bit Raspberry Pi-class board is the arm64 CPU guide. We do not claim a specific board works, and we do not quote a tokens-per-second number for it.</p>
+        <p>The size estimate is a formula, not a measured file. Bits per weight in the hardware package run from 3.35 for Q2_K to 8.50 for Q8_0. An 8B model at Q4_K_M comes out near 4.5 GiB by that formula. <code>phi3</code> (3.8B) is the smaller alias when memory is tight. <code>llama3</code> has no Q2_K.</p>
+      </div>
+      <h2>The other path</h2>
+      <div class="prose">
+        <p>Acquiring the codebase is a full inquiry, not a checkout. Write to <a class="inline" href="mailto:hello@booleinference.com?subject=Boole%3A%20Codebase%20acquisition">hello@booleinference.com</a> with the subject “Boole: Codebase acquisition”. The software is proprietary to Boole AI, Inc.</p>
+        <p>If you are choosing a tool rather than a managed setup, read the <a class="inline" href="/compare/ollama-lm-studio-llama-cpp/">comparison</a> and the <a class="inline" href="/ollama-alternative/">Ollama alternative</a> page. Both stay with documented facts.</p>
+      </div>
+      <h2>Questions</h2>
+      <div class="faq"><details><summary>Does a prompt leave the building?</summary><p>On the published CLI, token generation reads a GGUF file on disk and does not upload the prompt. The same command still asks Hugging Face for the file name before it opens the cache, and it downloads weights that are not cached. The managed tier’s network scope is agreed when you start. This is not a security certification.</p></details><details><summary>Is this HIPAA compliant, or legal advice for a firm?</summary><p>No. Keeping inference on a machine you control can avoid sending a prompt to a third-party API. That is not a HIPAA determination, not a confidentiality opinion, and not legal advice.</p></details><details><summary>What does the $1,800 payment buy?</summary><p>It is the entry payment for the managed tier. Boole AI, Inc. sets Imagine OS up and runs it, with continuous uptime and white-glove onboarding. There is no published uptime percentage. The scope of the service is agreed when you start.</p></details><details><summary>How soon does onboarding start?</summary><p>After payment, the <a class="inline" href="/welcome/">welcome page</a> says you will be onboarded in less than 24 hours. Wait for an email from <a class="inline" href="mailto:hello@booleinference.com">hello@booleinference.com</a>.</p></details><details><summary>Can we buy the codebase instead?</summary><p>Yes, as an inquiry, not a checkout. Email <a class="inline" href="mailto:hello@booleinference.com">hello@booleinference.com</a> with the subject “Boole: Codebase acquisition”. Ownership is settled in a written agreement.</p></details></div>
+    </div></section>
+  </main>
+  <footer>
+    <div class="wrap footer-row">
+      <span>© 2026 Boole AI, Inc.</span>
+      <a href="/#license">License</a>
+      <a href="/#offers">Ways to work with Boole</a>
+      <a href="/guides/">Setup guides</a>
+      <a href="/on-premise/">On-premise</a>
+      <a href="/compare/ollama-lm-studio-llama-cpp/">Compare</a>
+      <a href="/ollama-alternative/">Ollama alternative</a>
+      <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
+      <a href="mailto:hello@booleinference.com">hello@booleinference.com</a>
+    </div>
+  </footer>
+</body>
+</html>
