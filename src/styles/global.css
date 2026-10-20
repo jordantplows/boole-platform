@@ -1012,6 +1012,118 @@ footer {
   }
 }
 
+.price,
+.card .price {
+  margin: 0.15rem 0 0.85rem;
+  color: var(--text);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 480;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.price-inline {
+  flex: 1 0 100%;
+  margin-top: 0.15rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.doc h1 {
+  max-width: 16ch;
+  font-size: clamp(2.35rem, 4.4vw, 3.5rem);
+}
+
+.doc h2 {
+  max-width: 24ch;
+  margin-top: 2.6rem;
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+}
+
+.doc h3 {
+  margin-top: 1.15rem;
+}
+
+.doc .prose,
+.doc ul,
+.doc ol {
+  max-width: 40rem;
+}
+
+.doc ul,
+.doc ol,
+.guide-links {
+  margin: 0.35rem 0 0.4rem 1.15rem;
+  color: var(--body);
+}
+
+.doc li + li,
+.guide-links li + li {
+  margin-top: 0.4rem;
+}
+
+.doc pre {
+  max-width: 40rem;
+  margin: 0.85rem 0 1.1rem;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.doc pre code {
+  font-size: inherit;
+}
+
+.crumbs {
+  margin-bottom: 1.15rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.crumbs a {
+  color: var(--muted);
+}
+
+.guide-index {
+  list-style: none;
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.guide-index a {
+  display: block;
+  padding: 1.05rem 0 1.1rem;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+
+.guide-index strong {
+  display: block;
+  margin: 0.12rem 0 0.25rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.guide-index a span:last-child {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.end-note {
+  margin-top: 2rem;
+}
+
+.matrix-grid a {
+  text-underline-offset: 0.18em;
+}
+
 @media (prefers-reduced-motion: reduce) {
   #vision::before {
     animation: none;
