@@ -177,21 +177,6 @@ const html = `<!doctype html>
 </head>
 <body>
   <a class="skip" href="#vision">Skip to content</a>
-  <aside class="announce" aria-label="Ways to work with Boole">
-    <div class="announce-inner">
-      <p class="announce-lead"><span>Two ways in</span> Pay to start is a $1,800 entry payment. Acquiring the codebase is a full inquiry.</p>
-      <div class="announce-paths">
-        <div class="announce-path">
-          <p><strong>Pay to start · $1,800.</strong> <span class="announce-detail">Managed tier. We set it up and run it. Continuous uptime. White-glove onboarding.</span></p>
-          <a class="btn btn-pay" href="${CTA.buyNow}">Pay to start</a>
-        </div>
-        <div class="announce-path">
-          <p><strong>Acquire the codebase.</strong> <span class="announce-detail">Full ownership. A deliberate inquiry.</span></p>
-          <a class="btn btn-call" href="${CTA.buyCodebase}">Inquire</a>
-        </div>
-      </div>
-    </div>
-  </aside>
   <header class="bar">
     <a class="brand" href="#vision">boole <span>Imagine OS</span></a>
     <nav class="nav-links" aria-label="Page">

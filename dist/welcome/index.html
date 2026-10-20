@@ -112,69 +112,6 @@ body {
   outline-color: var(--ink);
 }
 
-.announce {
-  background: var(--bg);
-  border-bottom: 1px solid var(--line);
-}
-
-.announce-inner {
-  width: min(1120px, calc(100% - 3.5rem));
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(12rem, 0.7fr) 1.6fr;
-  gap: 0.75rem 2.5rem;
-  align-items: center;
-  padding: 0.65rem 0;
-}
-
-.announce-lead {
-  font-size: 0.92rem;
-  line-height: 1.4;
-  letter-spacing: -0.012em;
-  color: var(--body);
-}
-
-.announce-lead span {
-  display: block;
-  margin-bottom: 0.15rem;
-  color: var(--muted);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.announce-paths {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem 1.5rem;
-}
-
-.announce-path {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem 1rem;
-  min-height: 44px;
-}
-
-.announce-path p {
-  font-size: 0.9rem;
-  line-height: 1.35;
-  color: var(--muted);
-}
-
-.announce-path strong {
-  color: var(--text);
-  font-weight: 500;
-}
-
-.announce-path .btn {
-  flex: 0 0 auto;
-  padding: 0.4rem 0.85rem;
-  font-size: 0.84rem;
-}
-
 .bar {
   position: sticky;
   top: 0;
@@ -955,8 +892,7 @@ footer {
 }
 
 @media (max-width: 800px) {
-  .wrap,
-  .announce-inner {
+  .wrap {
     width: min(1120px, calc(100% - 1.75rem));
   }
 
@@ -973,13 +909,6 @@ footer {
     font-size: 1.05rem;
   }
 
-  .announce-inner {
-    grid-template-columns: 1fr;
-    gap: 0.65rem;
-    padding: 0.75rem 0;
-  }
-
-  .announce-paths,
   .offers,
   .facts,
   .split,
@@ -995,10 +924,6 @@ footer {
     padding-left: 0;
     border-left: 0;
     border-top: 1px solid var(--line);
-  }
-
-  .announce-detail {
-    display: none;
   }
 
   .nav-links {
@@ -1180,7 +1105,6 @@ footer {
   #demo-output,
   .btn,
   .bar,
-  .announce,
   .bezel,
   .screen,
   .faq details,
