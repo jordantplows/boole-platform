@@ -1154,25 +1154,27 @@ footer {
       <p class="lede">This covers 64-bit ARM Linux, including a 64-bit Raspberry Pi-class board. The prebuilt is CPU only. This page does not claim that a specific Pi model works, and it does not quote a tokens-per-second number.</p>
 
       <h2>Requirements</h2>
-      <ul><li>64-bit ARM Linux (aarch64 / arm64), including Raspberry Pi OS 64-bit. The package is <code>@node-llama-cpp/linux-arm64</code>.</li><li>Node.js 20 or newer.</li><li>No CUDA package and no Vulkan package exist for Linux arm64 in node-llama-cpp 3.22.2. <code>boole doctor</code> should report GPU <code>none</code>.</li><li>32-bit Raspberry Pi OS is armv7l. That is <code>@node-llama-cpp/linux-armv7l</code>, a different prebuilt, and it is not this guide. riscv64 is <code>@node-llama-cpp/linux-riscv64</code>, also separate.</li></ul>
+      <ul><li>64-bit ARM Linux (aarch64 / arm64), including Raspberry Pi OS 64-bit. The package is <code>@node-llama-cpp/linux-arm64</code>.</li><li>Node.js 22 or newer. Install a current Linux build from <a class="inline" href="https://nodejs.org/">nodejs.org</a>. A distro package is fine when <code>node -v</code> reports 22 or newer.</li><li>No CUDA package and no Vulkan package exist for Linux arm64 in node-llama-cpp 3.22.2. <code>boole doctor</code> should report GPU <code>none</code>.</li><li>32-bit Raspberry Pi OS is armv7l. That is <code>@node-llama-cpp/linux-armv7l</code>, a different prebuilt, and it is not this guide. riscv64 is <code>@node-llama-cpp/linux-riscv64</code>, also separate.</li></ul>
       <div class="prose"><p>Free RAM decides the model. A board with a few gigabytes free will not hold an 8B alias. <code>phi3</code> is the smaller alias shipped today (3.8B, quants Q4_K_M through Q8_0). If even that estimate does not fit, the CLI exits 3 and says so.</p><p>Nothing on this page is a measured result for a Raspberry Pi. “Pi-class” means a 64-bit ARM machine in that category, not a tested model number.</p></div>
 
       <h2>Install the Boole CLI</h2>
       <div class="prose">
-        <p>Node.js 20 or newer. Install the published package, or run it once with npx. This does not republish the package.</p>
+        <p><code>@boole/cli</code> 0.7.0 needs Node.js 22 or newer. The way to install Node on this machine is in the requirements above. The first command checks the machine. The next two download a small GGUF and run it. npx fetches the published package. This page does not republish it.</p>
       </div>
-      <pre><code>npm install -g @boole/cli
-npx @boole/cli doctor</code></pre>
+      <pre><code>npx @boole/cli doctor
+npx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M
+npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt &quot;Say hello&quot;</code></pre>
       <div class="prose">
         <p>If <code>node-llama-cpp</code> is missing, <code>boole run</code> writes <code>error: node-llama-cpp is not installed</code> and <code>npm install node-llama-cpp</code>, then exits 1.</p>
       </div>
 
       <h2>Check the machine with boole doctor</h2>
       <div class="prose">
-        <p><code>boole doctor</code> prints the operating system, architecture, Node version, RAM total and available, the GPU backend (<code>metal</code>, <code>cuda</code>, <code>vulkan</code>, or <code>none</code>) and a device name when it has one. VRAM is printed only when <code>getVramState</code> returns it. It also prints the binaries and the cache path and size. All of that goes to standard error.</p>
+        <p><code>npx @boole/cli doctor</code> prints the operating system, architecture, Node version, RAM total and available, the GPU backend (<code>metal</code>, <code>cuda</code>, <code>vulkan</code>, or <code>none</code>) and a device name when it has one. VRAM is printed only when <code>getVramState</code> returns it. It also prints the binaries and the cache path and size. All of that goes to standard error. <code>npx @boole/cli doctor --json</code> prints the same report as JSON.</p>
         <p>The verdict uses free RAM minus a 2 GiB headroom. It does not use VRAM. When that headroom leaves no room, it prints <code>not enough memory for inference</code> and exits 1.</p>
       </div>
-      <pre><code>boole doctor</code></pre>
+      <pre><code>npx @boole/cli doctor
+npx @boole/cli doctor --json</code></pre>
 
       <h2>Download a model with boole pull</h2>
       <div class="prose">
@@ -1181,19 +1183,16 @@ npx @boole/cli doctor</code></pre>
         <p>A file reported over 2 GB asks <code>[y/N]</code> on a terminal unless you passed <code>--yes</code>. An interrupted download keeps a <code>.partial</code> file and resumes with an HTTP Range request.</p>
         <p>The name is resolved on Hugging Face before the cache is checked. A file that is already on disk still causes that request. Saying no to the size prompt exits 0.</p>
       </div>
-      <pre><code>boole pull llama3
-boole pull llama3 --yes
-boole pull bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M --yes</code></pre>
+      <pre><code>npx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M</code></pre>
 
       <h2>Run it with boole run</h2>
       <div class="prose">
         <p>An alias such as <code>llama3</code> picks a quant. A specifier with a slash and a colon, or a local <code>.gguf</code> path, is used as given. The prompt comes from <code>--file</code>, <code>-p</code> / <code>--prompt</code>, a second positional argument, or stdin. The first match wins.</p>
         <p>Flags that change the run: <code>--system</code> / <code>-s</code>, <code>--stream</code>, <code>--temp</code> / <code>-t</code> (default 0.8), <code>--ctx-size</code> (default 2048), <code>--max-tokens</code>, <code>--json</code>, <code>--jsonl</code>, <code>--yes</code>, <code>--quiet</code> / <code>-q</code>. Standard output is the model text. Diagnostics stay on standard error.</p>
-        <p>The process calls <code>getLlama({ gpu: 'auto' })</code> and loads the file. <code>--gpu-layers</code> is accepted by the parser and is not passed into <code>loadModel</code> in release 0.0.1. The CLI does not set a thread count.</p>
+        <p>The process calls <code>getLlama({ gpu: 'auto' })</code> and loads the file. The CLI does not set a thread count.</p>
         <p>Exit codes: 0 success, 1 runtime failure, 2 bad usage, 3 model unavailable (unknown name, missing quant, or not enough memory).</p>
       </div>
-      <pre><code>boole run llama3 -p &quot;What does it mean to run a language model on the device?&quot;
-boole run ./weights.gguf -p &quot;Hello&quot;</code></pre>
+      <pre><code>npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt &quot;Say hello&quot;</code></pre>
 
       <h2>Pick a model size for your RAM</h2>
       <div class="prose">
@@ -1202,16 +1201,21 @@ boole run ./weights.gguf -p &quot;Hello&quot;</code></pre>
         <p><code>doctor</code> walks 1B, 3B, 7B, 8B, 13B, 34B, and 70B and keeps the largest size that fits. Those labels are the estimator’s ladder. They are not aliases, and they are not measured file sizes. For an 8B model at Q4_K_M the same formula comes out near 4.5 GiB. That is the estimate, not a file we weighed.</p>
         <p><code>boole models</code> lists the aliases. <code>llama3</code> is 8B with Q3_K_M through Q8_0, and it has no Q2_K. <code>llama3-70b</code> is 70B with the same quants. <code>phi3</code> is 3.8B (Q4_K_M through Q8_0) when memory is tight. <code>mixtral</code> is 47B with Q2_K through Q5_K_M. <code>llama2</code> and <code>codellama</code> are 7B and do include Q2_K. Do not pass Q2_K for <code>llama3</code>.</p>
       </div>
-      <pre><code>boole models</code></pre>
+      <pre><code>npx @boole/cli models</code></pre>
+
+      <h2>Serve and list</h2>
+      <div class="prose">
+        <p><code>npx @boole/cli list</code> prints the models already downloaded. <code>npx @boole/cli serve</code> starts a server for local development only. It has no authentication. It accepts <code>POST /generate</code>. Do not put that server on a public network.</p>
+      </div>
+      <pre><code>npx @boole/cli list
+npx @boole/cli serve</code></pre>
 
       <h2>Troubleshooting</h2>
       <div class="prose">
         <h3>node-llama-cpp is not installed</h3>
-        <p>The error is exactly <code>error: node-llama-cpp is not installed</code>, then <code>npm install node-llama-cpp</code>. Exit code 1. Node 20 or newer is required before that install is useful.</p>
+        <p>The error is exactly <code>error: node-llama-cpp is not installed</code>, then <code>npm install node-llama-cpp</code>. Exit code 1. Node.js 22 or newer is required before that install is useful.</p>
         <h3>Not enough memory</h3>
         <p><code>doctor</code> exits 1 when free RAM is not above the 2 GiB headroom. <code>run</code> exits 3 when the alias’s smallest quant still does not fit, and it prints the estimate beside the memory it computed.</p>
-        <h3>serve and list</h3>
-        <p><code>boole serve</code> and <code>boole list</code> print <code>boole serve is not yet implemented</code> or the same for list, and exit 1. They are not part of this setup.</p>
         <h3>not enough memory</h3><p>The verdict needs more than 2 GiB free before it will recommend anything. Below that, doctor exits 1. An alias that still does not fit exits 3 from <code>boole run</code>.</p>
       </div>
       <h2>Other devices</h2><ul class="guide-links"><li><a href="/guides/macos-apple-silicon/">macOS Apple Silicon</a></li><li><a href="/guides/macos-intel/">macOS Intel</a></li><li><a href="/guides/windows-x64/">Windows x64</a></li><li><a href="/guides/linux-x64/">Linux x64</a></li><li><a href="/guides/windows-arm64/">Windows arm64</a></li><li><a href="/guides/browser/">Browser demo</a></li></ul>

@@ -1,7 +1,8 @@
 /**
  * Setup guides and the post-payment welcome page.
  * Commands documented here are the ones the CLI actually runs:
- * run, pull, doctor, models. serve and list exit 1 with "not yet implemented".
+ * @boole/cli 0.7.0: run, pull, serve, list, doctor (--json), models.
+ * Requires Node.js 22 or newer. serve is local development only.
  */
 
 import { seoPages } from './seo.ts';
@@ -38,7 +39,7 @@ export const GUIDES: Guide[] = [
       'run LLM locally on Mac, Apple Silicon, Metal, local AI model Mac, offline LLM macOS, Boole CLI',
     requirements: [
       'A Mac with Apple Silicon (arm64). The prebuilt package is <code>@node-llama-cpp/mac-arm64-metal</code>.',
-      'Node.js 20 or newer. That is the engines range node-llama-cpp 3.22.2 documents, and it is what this CLI imports.',
+      'Node.js 22 or newer. Install the macOS package from <a class="inline" href="https://nodejs.org/">nodejs.org</a>, or Homebrew: <code>brew install node@22</code>. Confirm with <code>node -v</code>.',
       'Metal is on by default on Apple Silicon, per the <a class="inline" href="https://node-llama-cpp.withcat.ai/guide/Metal">node-llama-cpp Metal guide</a>. That is the runtime’s documentation, not a Boole measurement.',
     ],
     notes: [
@@ -57,7 +58,7 @@ export const GUIDES: Guide[] = [
     nav: 'macOS Intel',
     kicker: 'macOS · x64 · CPU',
     h1: 'Run a local AI model on an Intel Mac',
-    lede: 'Intel Macs use the x64 CPU prebuilt. Metal is off by default on these machines. The same four commands apply.',
+    lede: 'Intel Macs use the x64 CPU prebuilt. Metal is off by default on these machines. The same commands apply.',
     seoTitle: 'Run a local AI model on an Intel Mac — Boole',
     description:
       'Run a local AI model on an Intel Mac. The Boole CLI uses the mac-x64 CPU prebuilt. Metal is off by default. Commands: doctor, pull, run, models.',
@@ -65,7 +66,7 @@ export const GUIDES: Guide[] = [
       'run LLM locally on Mac, Intel Mac, local AI model macOS, offline LLM Mac, CPU inference',
     requirements: [
       'An Intel Mac (x64). The prebuilt package is <code>@node-llama-cpp/mac-x64</code>.',
-      'Node.js 20 or newer.',
+      'Node.js 22 or newer. Install the macOS package from <a class="inline" href="https://nodejs.org/">nodejs.org</a>, or Homebrew: <code>brew install node@22</code>. Confirm with <code>node -v</code>.',
       'Metal is off by default on Intel Macs. That is stated in the <a class="inline" href="https://node-llama-cpp.withcat.ai/guide/Metal">node-llama-cpp Metal guide</a>. A GPU line of <code>none</code> is the expected CPU path, not a failed install by itself.',
     ],
     notes: [
@@ -91,7 +92,7 @@ export const GUIDES: Guide[] = [
       'run local AI model on Windows, local LLM Windows, NVIDIA CUDA, Vulkan, offline AI Windows, Boole CLI',
     requirements: [
       '64-bit Windows on x64. Prebuilt packages: <code>@node-llama-cpp/win-x64</code> (CPU), <code>@node-llama-cpp/win-x64-cuda</code>, <code>@node-llama-cpp/win-x64-cuda-ext</code>, and <code>@node-llama-cpp/win-x64-vulkan</code>.',
-      'Node.js 20 or newer.',
+      'Node.js 22 or newer. Install the Windows package from <a class="inline" href="https://nodejs.org/">nodejs.org</a>, or in PowerShell: <code>winget install OpenJS.NodeJS.LTS</code>. Confirm with <code>node -v</code> that the major version is 22 or higher.',
       'For the CUDA prebuilts, the node-llama-cpp <a class="inline" href="https://node-llama-cpp.withcat.ai/guide/CUDA">CUDA guide</a> documents CUDA Toolkit 12.4+ or 13.1. That is the runtime’s requirement, not a speed Boole has measured on Windows.',
       'Vulkan uses <code>win-x64-vulkan</code>. There is no Windows arm64 GPU package. ARM Windows is a <a class="inline" href="/guides/windows-arm64/">separate guide</a>, and it is CPU only.',
     ],
@@ -118,7 +119,7 @@ export const GUIDES: Guide[] = [
       'offline AI on Linux, run LLM locally Linux, local AI model Linux, CUDA, Vulkan, Boole CLI',
     requirements: [
       'Linux x64. Prebuilt packages: <code>@node-llama-cpp/linux-x64</code>, <code>@node-llama-cpp/linux-x64-cuda</code>, <code>@node-llama-cpp/linux-x64-cuda-ext</code>, and <code>@node-llama-cpp/linux-x64-vulkan</code>.',
-      'Node.js 20 or newer.',
+      'Node.js 22 or newer. Install a current Linux build from <a class="inline" href="https://nodejs.org/">nodejs.org</a>. A distro package is fine when <code>node -v</code> reports 22 or newer.',
       'The CUDA prebuilts follow the runtime’s <a class="inline" href="https://node-llama-cpp.withcat.ai/guide/CUDA">CUDA guide</a> (CUDA Toolkit 12.4+ or 13.1). Linux Vulkan needs the Vulkan SDK, per the <a class="inline" href="https://node-llama-cpp.withcat.ai/guide/Vulkan">Vulkan guide</a>. Both are that project’s requirements, not Boole benchmarks.',
     ],
     notes: [
@@ -145,7 +146,7 @@ export const GUIDES: Guide[] = [
       'run LLM on Raspberry Pi, Linux arm64 local AI, offline AI on Linux, local model ARM, Boole CLI',
     requirements: [
       '64-bit ARM Linux (aarch64 / arm64), including Raspberry Pi OS 64-bit. The package is <code>@node-llama-cpp/linux-arm64</code>.',
-      'Node.js 20 or newer.',
+      'Node.js 22 or newer. Install a current Linux build from <a class="inline" href="https://nodejs.org/">nodejs.org</a>. A distro package is fine when <code>node -v</code> reports 22 or newer.',
       'No CUDA package and no Vulkan package exist for Linux arm64 in node-llama-cpp 3.22.2. <code>boole doctor</code> should report GPU <code>none</code>.',
       '32-bit Raspberry Pi OS is armv7l. That is <code>@node-llama-cpp/linux-armv7l</code>, a different prebuilt, and it is not this guide. riscv64 is <code>@node-llama-cpp/linux-riscv64</code>, also separate.',
     ],
@@ -173,7 +174,7 @@ export const GUIDES: Guide[] = [
       'run local AI model on Windows, Windows arm64, Windows on ARM, local LLM, offline AI, Boole CLI',
     requirements: [
       '64-bit Windows on ARM. The package is <code>@node-llama-cpp/win-arm64</code>.',
-      'Node.js 20 or newer.',
+      'Node.js 22 or newer. Install the Windows package from <a class="inline" href="https://nodejs.org/">nodejs.org</a>, or in PowerShell: <code>winget install OpenJS.NodeJS.LTS</code>. Confirm with <code>node -v</code> that the major version is 22 or higher.',
       'No CUDA or Vulkan prebuilt is published for win-arm64. GPU <code>none</code> in <code>boole doctor</code> is expected. x64 Windows with NVIDIA or Vulkan is the <a class="inline" href="/guides/windows-x64/">Windows x64 guide</a>.',
     ],
     notes: [
@@ -201,6 +202,7 @@ export const GUIDES: Guide[] = [
       'A current browser with WebAssembly. Open <a class="inline" href="/#demo">the homepage demo</a> and press “Run on this device”. Nothing loads until that click.',
       'The demo uses wllama 3.8.1 (MIT) and the file <code>SmolLM2-135M-Instruct-Q4_K_M.gguf</code> from bartowski on Hugging Face (Apache-2.0). Context 1024, 1 thread, 0 GPU layers, batch 128. Generation stops at 64 tokens. Temperature is 0.6.',
       'The first run downloads the weights. After they are in memory, the page counts new network requests during generation.',
+      'The CLI on the computer needs Node.js 22 or newer from <a class="inline" href="https://nodejs.org/">nodejs.org</a>. macOS can use <code>brew install node@22</code>. Windows can use <code>winget install OpenJS.NodeJS.LTS</code> when <code>node -v</code> reports 22 or higher. Linux can use a distro package that reports the same.',
     ],
     notes: [
       'The only measured speed Boole publishes: 12.3 tok/s, 64 tokens, about 5187 ms, on a 4-core Xeon CPU, WebAssembly, 1 thread, no GPU layers. That is not a phone, and it is not the 20B at 200 tok/s goal.',
@@ -209,7 +211,7 @@ export const GUIDES: Guide[] = [
     trouble: [
       {
         h: 'The button says this browser does not provide WebAssembly',
-        p: 'The demo stops there. The command-line runtime is <code>npx @boole/cli</code> on a machine with Node.js 20 or newer.',
+        p: 'The demo stops there. The command-line runtime is <code>npx @boole/cli</code> on a machine with Node.js 22 or newer, from <a class="inline" href="https://nodejs.org/">nodejs.org</a>.',
       },
     ],
   },
@@ -262,19 +264,19 @@ function cliBody(guide: Guide): string {
 
       <h2>Install the Boole CLI</h2>
       <div class="prose">
-        <p>Node.js 20 or newer. Install the published package, or run it once with npx. This does not republish the package.</p>
+        <p><code>@boole/cli</code> 0.7.0 needs Node.js 22 or newer. The way to install Node on this machine is in the requirements above. The first command checks the machine. The next two download a small GGUF and run it. npx fetches the published package. This page does not republish it.</p>
       </div>
-      ${cmd(`npm install -g @boole/cli\nnpx @boole/cli doctor`)}
+      ${cmd(`npx @boole/cli doctor\nnpx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M\nnpx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hello"`)}
       <div class="prose">
         <p>If <code>node-llama-cpp</code> is missing, <code>boole run</code> writes <code>error: node-llama-cpp is not installed</code> and <code>npm install node-llama-cpp</code>, then exits 1.</p>
       </div>
 
       <h2>Check the machine with boole doctor</h2>
       <div class="prose">
-        <p><code>boole doctor</code> prints the operating system, architecture, Node version, RAM total and available, the GPU backend (<code>metal</code>, <code>cuda</code>, <code>vulkan</code>, or <code>none</code>) and a device name when it has one. VRAM is printed only when <code>getVramState</code> returns it. It also prints the binaries and the cache path and size. All of that goes to standard error.</p>
+        <p><code>npx @boole/cli doctor</code> prints the operating system, architecture, Node version, RAM total and available, the GPU backend (<code>metal</code>, <code>cuda</code>, <code>vulkan</code>, or <code>none</code>) and a device name when it has one. VRAM is printed only when <code>getVramState</code> returns it. It also prints the binaries and the cache path and size. All of that goes to standard error. <code>npx @boole/cli doctor --json</code> prints the same report as JSON.</p>
         <p>The verdict uses free RAM minus a 2 GiB headroom. It does not use VRAM. When that headroom leaves no room, it prints <code>not enough memory for inference</code> and exits 1.</p>
       </div>
-      ${cmd('boole doctor')}
+      ${cmd('npx @boole/cli doctor\nnpx @boole/cli doctor --json')}
 
       <h2>Download a model with boole pull</h2>
       <div class="prose">
@@ -283,16 +285,16 @@ function cliBody(guide: Guide): string {
         <p>A file reported over 2 GB asks <code>[y/N]</code> on a terminal unless you passed <code>--yes</code>. An interrupted download keeps a <code>.partial</code> file and resumes with an HTTP Range request.</p>
         <p>The name is resolved on Hugging Face before the cache is checked. A file that is already on disk still causes that request. Saying no to the size prompt exits 0.</p>
       </div>
-      ${cmd(`boole pull llama3\nboole pull llama3 --yes\nboole pull bartowski/Meta-Llama-3.1-8B-Instruct-GGUF:Q4_K_M --yes`)}
+      ${cmd(`npx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M`)}
 
       <h2>Run it with boole run</h2>
       <div class="prose">
         <p>An alias such as <code>llama3</code> picks a quant. A specifier with a slash and a colon, or a local <code>.gguf</code> path, is used as given. The prompt comes from <code>--file</code>, <code>-p</code> / <code>--prompt</code>, a second positional argument, or stdin. The first match wins.</p>
         <p>Flags that change the run: <code>--system</code> / <code>-s</code>, <code>--stream</code>, <code>--temp</code> / <code>-t</code> (default 0.8), <code>--ctx-size</code> (default 2048), <code>--max-tokens</code>, <code>--json</code>, <code>--jsonl</code>, <code>--yes</code>, <code>--quiet</code> / <code>-q</code>. Standard output is the model text. Diagnostics stay on standard error.</p>
-        <p>The process calls <code>getLlama({ gpu: 'auto' })</code> and loads the file. <code>--gpu-layers</code> is accepted by the parser and is not passed into <code>loadModel</code> in release 0.0.1. The CLI does not set a thread count.</p>
+        <p>The process calls <code>getLlama({ gpu: 'auto' })</code> and loads the file. The CLI does not set a thread count.</p>
         <p>Exit codes: 0 success, 1 runtime failure, 2 bad usage, 3 model unavailable (unknown name, missing quant, or not enough memory).</p>
       </div>
-      ${cmd(`boole run llama3 -p "What does it mean to run a language model on the device?"\nboole run ./weights.gguf -p "Hello"`)}
+      ${cmd(`npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hello"`)}
 
       <h2>Pick a model size for your RAM</h2>
       <div class="prose">
@@ -301,16 +303,20 @@ function cliBody(guide: Guide): string {
         <p><code>doctor</code> walks 1B, 3B, 7B, 8B, 13B, 34B, and 70B and keeps the largest size that fits. Those labels are the estimator’s ladder. They are not aliases, and they are not measured file sizes. For an 8B model at Q4_K_M the same formula comes out near 4.5 GiB. That is the estimate, not a file we weighed.</p>
         <p><code>boole models</code> lists the aliases. <code>llama3</code> is 8B with Q3_K_M through Q8_0, and it has no Q2_K. <code>llama3-70b</code> is 70B with the same quants. <code>phi3</code> is 3.8B (Q4_K_M through Q8_0) when memory is tight. <code>mixtral</code> is 47B with Q2_K through Q5_K_M. <code>llama2</code> and <code>codellama</code> are 7B and do include Q2_K. Do not pass Q2_K for <code>llama3</code>.</p>
       </div>
-      ${cmd('boole models')}
+      ${cmd('npx @boole/cli models')}
+
+      <h2>Serve and list</h2>
+      <div class="prose">
+        <p><code>npx @boole/cli list</code> prints the models already downloaded. <code>npx @boole/cli serve</code> starts a server for local development only. It has no authentication. It accepts <code>POST /generate</code>. Do not put that server on a public network.</p>
+      </div>
+      ${cmd('npx @boole/cli list\nnpx @boole/cli serve')}
 
       <h2>Troubleshooting</h2>
       <div class="prose">
         <h3>node-llama-cpp is not installed</h3>
-        <p>The error is exactly <code>error: node-llama-cpp is not installed</code>, then <code>npm install node-llama-cpp</code>. Exit code 1. Node 20 or newer is required before that install is useful.</p>
+        <p>The error is exactly <code>error: node-llama-cpp is not installed</code>, then <code>npm install node-llama-cpp</code>. Exit code 1. Node.js 22 or newer is required before that install is useful.</p>
         <h3>Not enough memory</h3>
         <p><code>doctor</code> exits 1 when free RAM is not above the 2 GiB headroom. <code>run</code> exits 3 when the alias’s smallest quant still does not fit, and it prints the estimate beside the memory it computed.</p>
-        <h3>serve and list</h3>
-        <p><code>boole serve</code> and <code>boole list</code> print <code>boole serve is not yet implemented</code> or the same for list, and exit 1. They are not part of this setup.</p>
         ${trouble}
       </div>
       ${related(guide.slug)}
@@ -477,9 +483,9 @@ export function sitePages(css: string): BuiltPage[] {
         <p class="crumbs"><a href="/">Boole</a> · Setup guides</p>
         <p class="kicker">Run it on your own device</p>
         <h1>Run a local AI model on your device.</h1>
-        <p class="lede">Pick the machine in front of you. Each guide covers requirements, the Boole CLI, and the four commands that exist: doctor, pull, run, and models.</p>
+        <p class="lede">Pick the machine in front of you. Each guide uses @boole/cli 0.7.0 on Node.js 22 or newer: doctor, pull, run, models, list, and serve.</p>
         <div class="prose">
-          <p>These pages are for people who want to run an LLM locally on a Mac, run a local AI model on Windows, or keep offline AI on Linux. <code>serve</code> and <code>list</code> are not implemented. No guide invents a benchmark. The only measured speed on this site is the browser demo.</p>
+          <p>These pages are for people who want to run an LLM locally on a Mac, run a local AI model on Windows, or keep offline AI on Linux. The first command is <code>npx @boole/cli doctor</code>. <code>serve</code> is a local development server with no authentication and a <code>POST /generate</code> route. No guide invents a benchmark. The only measured speed on this site is the browser demo.</p>
           <p>Linux armv7l and riscv64 have CPU prebuilts (<code>linux-armv7l</code>, <code>linux-riscv64</code>) and do not have their own page. 32-bit Raspberry Pi OS is the armv7l package, not the <a class="inline" href="/guides/linux-arm64/">arm64 guide</a>.</p>
         </div>
         <h2>For a business</h2>

@@ -19,7 +19,7 @@ The only speed Boole has published for this setup is from the demo on boole.sh: 
 
 ## Setup scripts
 
-The scripts check for Node.js 20 or newer, then run `npx @boole/cli doctor`. They do not vendor the CLI.
+The scripts check for Node.js 22 or newer, then run `npx @boole/cli doctor`. They do not vendor the CLI. Install Node from [nodejs.org](https://nodejs.org/). On macOS, `brew install node@22` also works. On Windows, `winget install OpenJS.NodeJS.LTS` is fine when `node -v` reports 22 or higher. On Linux, use a distro package that reports the same.
 
 | Machine | Script |
 |---|---|
@@ -27,7 +27,14 @@ The scripts check for Node.js 20 or newer, then run `npx @boole/cli doctor`. The
 | Linux | `bash scripts/setup-linux.sh` |
 | Windows | `powershell -File scripts/setup-windows.ps1` |
 
-`boole serve` and `boole list` are not implemented in the published CLI. The scripts only call `doctor`. After that, the commands that exist are `boole pull`, `boole run`, and `boole models`. Per-device notes are on https://boole.sh/guides/ .
+`@boole/cli` 0.7.0 provides `run`, `pull`, `serve`, `list`, `doctor` (`--json`), and `models`. The scripts only call `doctor`. After that:
+
+```sh
+npx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M
+npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hello"
+```
+
+`npx @boole/cli list` prints models already downloaded. `npx @boole/cli serve` is for local development only. It has no authentication and accepts `POST /generate`. Do not put that server on a public network. It is not an OpenAI-compatible API. Per-device notes are on https://boole.sh/guides/ .
 
 ## Benchmarks
 
