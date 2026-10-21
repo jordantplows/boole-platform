@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ollama vs LM Studio vs llama.cpp vs Boole — Boole</title>
-  <meta name="description" content="A factual comparison of Ollama, LM Studio, llama.cpp, and Boole. No invented benchmarks. @boole/cli 0.7.0 needs Node.js 22. The managed tier is a $1,800 setup.">
+  <meta name="description" content="A factual comparison of Ollama, LM Studio, llama.cpp, and Boole. No invented benchmarks. @boole/cli 0.7.0 needs Node.js 22. The done-for-you package is $1,800.">
   <meta name="robots" content="index, follow">
   <meta name="keywords" content="ollama vs lm studio, ollama vs llama.cpp, llama.cpp vs LM Studio, local LLM comparison, Boole">
   <link rel="canonical" href="https://boole.sh/compare/ollama-lm-studio-llama-cpp/">
   <meta property="og:site_name" content="Boole">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Ollama vs LM Studio vs llama.cpp vs Boole — Boole">
-  <meta property="og:description" content="A factual comparison of Ollama, LM Studio, llama.cpp, and Boole. No invented benchmarks. @boole/cli 0.7.0 needs Node.js 22. The managed tier is a $1,800 setup.">
+  <meta property="og:description" content="A factual comparison of Ollama, LM Studio, llama.cpp, and Boole. No invented benchmarks. @boole/cli 0.7.0 needs Node.js 22. The done-for-you package is $1,800.">
   <meta property="og:image" content="https://boole.sh/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -20,13 +20,13 @@
   <meta property="og:url" content="https://boole.sh/compare/ollama-lm-studio-llama-cpp/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ollama vs LM Studio vs llama.cpp vs Boole — Boole">
-  <meta name="twitter:description" content="A factual comparison of Ollama, LM Studio, llama.cpp, and Boole. No invented benchmarks. @boole/cli 0.7.0 needs Node.js 22. The managed tier is a $1,800 setup.">
+  <meta name="twitter:description" content="A factual comparison of Ollama, LM Studio, llama.cpp, and Boole. No invented benchmarks. @boole/cli 0.7.0 needs Node.js 22. The done-for-you package is $1,800.">
   <meta name="twitter:image" content="https://boole.sh/og.png">
   <meta name="twitter:image:alt" content="Imagine OS. On-device models for software that adapts.">
   <meta name="theme-color" content="#090909">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Ollama vs LM Studio vs llama.cpp vs Boole","name":"Ollama vs LM Studio vs llama.cpp vs Boole","description":"A factual comparison of Ollama, LM Studio, llama.cpp, and Boole. No invented benchmarks. @boole/cli 0.7.0 needs Node.js 22. The managed tier is a $1,800 setup.","url":"https://boole.sh/compare/ollama-lm-studio-llama-cpp/","inLanguage":"en","mainEntityOfPage":"https://boole.sh/compare/ollama-lm-studio-llama-cpp/","author":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"publisher":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which one is fastest?","acceptedAnswer":{"@type":"Answer","text":"Boole has not published a speed comparison against Ollama, LM Studio, or llama.cpp. The only measured number on this site is the browser demo: 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, on a 4-core Xeon CPU in WebAssembly, one thread, no GPU layers. A 20B model at 200 tok/s is a goal, not a measurement."}},{"@type":"Question","name":"Is the Boole CLI a drop-in replacement for Ollama?","acceptedAnswer":{"@type":"Answer","text":"No. Ollama’s docs describe a local server on 127.0.0.1 port 11434 and an OpenAI-compatible subset at /v1. @boole/cli 0.7.0 has run, pull, doctor (--json), models, list, and serve. serve is for local development only, has no authentication, and accepts POST /generate. That is not Ollama’s /v1 API. It needs Node.js 22 or newer."}},{"@type":"Question","name":"What is Boole actually built on?","acceptedAnswer":{"@type":"Answer","text":"The CLI imports node-llama-cpp 3.22.2, which runs llama.cpp and GGUF files. It is a thin command line on that runtime, plus a separate WebAssembly demo. It is not a fork we claim is faster than upstream."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Boole","item":"https://boole.sh/"},{"@type":"ListItem","position":2,"name":"Comparison","item":"https://boole.sh/compare/ollama-lm-studio-llama-cpp/"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Ollama vs LM Studio vs llama.cpp vs Boole","name":"Ollama vs LM Studio vs llama.cpp vs Boole","description":"A factual comparison of Ollama, LM Studio, llama.cpp, and Boole. No invented benchmarks. @boole/cli 0.7.0 needs Node.js 22. The done-for-you package is $1,800.","url":"https://boole.sh/compare/ollama-lm-studio-llama-cpp/","inLanguage":"en","mainEntityOfPage":"https://boole.sh/compare/ollama-lm-studio-llama-cpp/","author":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"publisher":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which one is fastest?","acceptedAnswer":{"@type":"Answer","text":"Boole has not published a speed comparison against Ollama, LM Studio, or llama.cpp. The only measured number on this site is the browser demo: 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, on a 4-core Xeon CPU in WebAssembly, one thread, no GPU layers. A 20B model at 200 tok/s is a goal, not a measurement."}},{"@type":"Question","name":"Is the Boole CLI a drop-in replacement for Ollama?","acceptedAnswer":{"@type":"Answer","text":"No. Ollama’s docs describe a local server on 127.0.0.1 port 11434 and an OpenAI-compatible subset at /v1. @boole/cli 0.7.0 has run, pull, doctor (--json), models, list, and serve. serve is for local development only, has no authentication, and accepts POST /generate. That is not Ollama’s /v1 API. It needs Node.js 22 or newer."}},{"@type":"Question","name":"What is Boole actually built on?","acceptedAnswer":{"@type":"Answer","text":"The CLI imports node-llama-cpp 3.22.2, which runs llama.cpp and GGUF files. It is a thin command line on that runtime, plus a separate WebAssembly demo. It is not a fork we claim is faster than upstream."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Boole","item":"https://boole.sh/"},{"@type":"ListItem","position":2,"name":"Comparison","item":"https://boole.sh/compare/ollama-lm-studio-llama-cpp/"}]}]}</script>
   <style>@font-face {
   font-family: "Instrument Sans";
   src: url("/fonts/instrument-sans.woff2") format("woff2");
@@ -751,6 +751,60 @@ textarea {
   margin-top: 1.35rem;
 }
 
+.gets-title {
+  margin: 1.15rem 0 0.15rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.gets {
+  list-style: none;
+  margin: 0.15rem 0 0.1rem;
+  padding: 0;
+  max-width: 40rem;
+  border-top: 1px solid var(--line);
+}
+
+.card .gets {
+  max-width: none;
+}
+
+.doc .gets {
+  margin-left: 0;
+}
+
+.gets li {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.doc .gets li + li {
+  margin-top: 0;
+}
+
+.gets .n {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  padding-top: 0.32rem;
+}
+
+.gets strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
 .tier-fast {
   border-color: var(--line-strong);
   background:
@@ -1176,7 +1230,7 @@ footer {
         <article class="card">
           <span class="tag">Managed, or a small CLI</span>
           <h3>Boole</h3>
-          <p>Boole AI, Inc. sells a managed setup for $1,800 and, separately, a codebase inquiry. <code>@boole/cli</code> 0.7.0 needs Node.js 22 or newer. Commands: <code>run</code>, <code>pull</code>, <code>doctor</code>, <code>models</code>, <code>list</code>, and <code>serve</code>. <code>serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>.</p>
+          <p>Boole AI, Inc. sells a $1,800 done-for-you package, and, separately, a codebase inquiry. The package is a 60-minute setup on up to three devices, a private document assistant, 30 days of direct support, and a full refund if it is not running after setup. <code>@boole/cli</code> 0.7.0 needs Node.js 22 or newer. Commands: <code>run</code>, <code>pull</code>, <code>doctor</code>, <code>models</code>, <code>list</code>, and <code>serve</code>. <code>serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>.</p>
         </article>
       </div>
       <h2>What each one documents</h2>
@@ -1185,7 +1239,7 @@ footer {
           <tr><th scope="row">Ollama</th><td>MIT license (<a class="inline" href="https://github.com/ollama/ollama/blob/main/LICENSE">LICENSE</a>). Local server at 127.0.0.1:11434 (<a class="inline" href="https://github.com/ollama/ollama/blob/main/docs/faq.mdx">FAQ</a>). OpenAI-compatible subset at <code>/v1</code> on that port (<a class="inline" href="https://github.com/ollama/ollama/blob/main/docs/api/openai-compatibility.mdx">docs</a>). Default context in the FAQ is 4096 tokens. Local runs stay local; the FAQ describes a different path for cloud models.</td></tr>
           <tr><th scope="row">LM Studio</th><td>Desktop app for macOS, Windows, and Linux (<a class="inline" href="https://lmstudio.ai/docs/app">docs</a>). llama.cpp for GGUF, plus MLX on Apple Silicon. Server via the Developer tab or <code>lms server start</code> (<a class="inline" href="https://lmstudio.ai/docs/developer/core/server">server</a>). Examples use <code>http://localhost:1234/v1</code> (<a class="inline" href="https://lmstudio.ai/docs/developer/openai-compat">OpenAI compatibility</a>). <a class="inline" href="https://lmstudio.ai/app-terms">App terms</a> (23 Aug 2026) license personal and internal business use and restrict redistribution and service-bureau use. Source is not offered as an open-source grant.</td></tr>
           <tr><th scope="row">llama.cpp</th><td>MIT-licensed C/C++ (<a class="inline" href="https://github.com/ggml-org/llama.cpp">repository</a>). GGUF. <a class="inline" href="https://llama.app/docs/introduction">Introduction</a>: <code>llama cli</code> and <code>llama serve</code>. <a class="inline" href="https://llama.app/docs/serve">Server docs</a>: default listen address 127.0.0.1:9931, OpenAI-compatible <code>/v1</code> routes, Metal and CUDA among the backends in the README. You build or install it yourself.</td></tr>
-          <tr><th scope="row">Boole</th><td>Proprietary CLI from Boole AI, Inc., <code>@boole/cli</code> 0.7.0, on Node.js 22 or newer. First: <code>npx @boole/cli doctor</code> (<code>--json</code> optional). Then pull and run a model, for example <code>bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M</code>. <code>list</code> prints downloaded models. <code>serve</code> is local development only, no authentication, <code>POST /generate</code>. Managed entry payment $1,800. Codebase acquisition is an inquiry to hello@booleinference.com.</td></tr>
+          <tr><th scope="row">Boole</th><td>Proprietary CLI from Boole AI, Inc., <code>@boole/cli</code> 0.7.0, on Node.js 22 or newer. First: <code>npx @boole/cli doctor</code> (<code>--json</code> optional). Then pull and run a model, for example <code>bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M</code>. <code>list</code> prints downloaded models. <code>serve</code> is local development only, no authentication, <code>POST /generate</code>. The done-for-you package is $1,800: live setup on up to 3 devices, a private document assistant, 30 days of support, and a full refund if it is not running after setup. Founding price for the first 10 customers. Codebase acquisition is an inquiry to hello@booleinference.com.</td></tr>
         </tbody>
       </table>
       <h2>When to use which</h2>
@@ -1193,7 +1247,7 @@ footer {
         <p>Use Ollama when you want a local runner that already has a documented server and an OpenAI-compatible subset, and you are comfortable operating it.</p>
         <p>Use LM Studio when you want a desktop app, a chat window, and a local server without building llama.cpp. Read their terms before you redistribute anything or offer it as a service.</p>
         <p>Use llama.cpp when you want the engine itself: the binary, the server, and the backends upstream ships. Boole does not claim to be a faster build of it.</p>
-        <p>Use Boole’s managed tier when you want Boole AI, Inc. to set the local system up and run it. Use the Boole CLI, and the <a class="inline" href="/guides/">device guides</a>, when you want to run it yourself. <code>serve</code> is a local development server, not a hosted API.</p>
+        <p>Use Boole’s done-for-you package when you want a 60-minute setup on up to three devices, a private document assistant, and 30 days of direct support. The price is $1,800. Use the Boole CLI, and the <a class="inline" href="/guides/">device guides</a>, when you want to run it yourself. <code>serve</code> is a local development server, not a hosted API.</p>
       </div>
       <h2>Questions</h2>
       <div class="faq"><details><summary>Which one is fastest?</summary><p>Boole has not published a speed comparison against Ollama, LM Studio, or llama.cpp. The only measured number on this site is the browser demo: 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, on a 4-core Xeon CPU in WebAssembly, one thread, no GPU layers. A 20B model at 200 tok/s is a goal, not a measurement.</p></details><details><summary>Is the Boole CLI a drop-in replacement for Ollama?</summary><p>No. Ollama’s docs describe a local server on 127.0.0.1 port 11434 and an OpenAI-compatible subset at <code>/v1</code>. <code>@boole/cli</code> 0.7.0 has <code>run</code>, <code>pull</code>, <code>doctor</code> (<code>--json</code>), <code>models</code>, <code>list</code>, and <code>serve</code>. <code>serve</code> is for local development only, has no authentication, and accepts <code>POST /generate</code>. That is not Ollama’s <code>/v1</code> API. It needs Node.js 22 or newer.</p></details><details><summary>What is Boole actually built on?</summary><p>The CLI imports node-llama-cpp 3.22.2, which runs llama.cpp and GGUF files. It is a thin command line on that runtime, plus a separate WebAssembly demo. It is not a fork we claim is faster than upstream.</p></details></div>
@@ -1201,7 +1255,7 @@ footer {
       <div class="actions actions-hero" style="margin-top:1.5rem">
         <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Pay to start</a>
         <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Codebase%20acquisition">Start an inquiry</a>
-        <p class="price-inline">$1,800 entry payment for the managed tier. We set it up and run it.</p>
+        <p class="price-inline">$1,800 done for you. Live setup on up to three devices, a private document assistant, and 30 days of direct support.</p>
       </div>
     </div></section>
   </main>

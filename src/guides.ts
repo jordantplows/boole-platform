@@ -6,6 +6,7 @@
  */
 
 import { seoPages } from './seo.ts';
+import { OFFER_DESCRIPTION } from './offer.ts';
 
 const SITE = 'https://boole.sh';
 const EMAIL = 'hello@booleinference.com';
@@ -320,7 +321,7 @@ function cliBody(guide: Guide): string {
         ${trouble}
       </div>
       ${related(guide.slug)}
-      <p class="prose end-note">Managed setup is a <a class="inline" href="${STRIPE}">$1,800 entry payment</a>. Acquiring the codebase is an inquiry to <a class="inline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Codebase acquisition')}">${EMAIL}</a>.</p>`;
+      <p class="prose end-note">The done-for-you package is a <a class="inline" href="${STRIPE}">$1,800</a> payment: live setup on up to 3 devices, a private document assistant, 30 days of support, and a full refund if it is not running after setup. Founding price for the first 10 customers. Acquiring the codebase is an inquiry to <a class="inline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Codebase acquisition')}">${EMAIL}</a>.</p>`;
 }
 
 export function layout(opts: {
@@ -435,11 +436,11 @@ export type BuiltPage = { file: string; html: string; loc?: string };
 export function sitePages(css: string): BuiltPage[] {
   const welcomeMain = `<section id="vision">
       <div class="wrap">
-        <p class="kicker">Managed tier</p>
+        <p class="kicker">Done for you</p>
         <h1>Payment received.</h1>
         <p class="lede">You’ll be onboarded in less than 24 hours — just wait for an email from us at <a class="inline" href="mailto:${EMAIL}">${EMAIL}</a>.</p>
         <div class="prose">
-          <p>The entry payment is $1,800 for the managed tier. Boole sets it up and runs it, with continuous uptime and white-glove onboarding. While you wait, the setup guides cover running a local model yourself.</p>
+          <p>${OFFER_DESCRIPTION} While you wait, the setup guides cover running a local model yourself.</p>
         </div>
         <h2>Next steps</h2>
         ${guideIndex()}

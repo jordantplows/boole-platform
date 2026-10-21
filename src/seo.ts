@@ -4,6 +4,7 @@
  */
 
 import { layout, type BuiltPage } from './guides.ts';
+import { OFFER_BLURB, OFFER_DESCRIPTION, offerChecklistHtml } from './offer.ts';
 
 const SITE = 'https://boole.sh';
 const EMAIL = 'hello@booleinference.com';
@@ -52,7 +53,7 @@ function actions(): string {
   return `<div class="actions actions-hero" style="margin-top:1.5rem">
         <a class="btn btn-pay" href="${STRIPE}">Pay to start</a>
         <a class="btn btn-call" href="${INQUIRY}">Start an inquiry</a>
-        <p class="price-inline">$1,800 entry payment for the managed tier. We set it up and run it.</p>
+        <p class="price-inline">${OFFER_BLURB}</p>
       </div>`;
 }
 
@@ -97,8 +98,8 @@ function pageLd(opts: {
 const onPremFaq: Faq[] = [
   {
     q: 'Does a prompt leave the building?',
-    a: 'On the published CLI, token generation reads a GGUF file on disk and does not upload the prompt. The same command still asks Hugging Face for the file name before it opens the cache, and it downloads weights that are not cached. The managed tier’s network scope is agreed when you start. This is not a security certification.',
-    html: 'On the published CLI, token generation reads a GGUF file on disk and does not upload the prompt. The same command still asks Hugging Face for the file name before it opens the cache, and it downloads weights that are not cached. The managed tier’s network scope is agreed when you start. This is not a security certification.',
+    a: 'On the published CLI, token generation reads a GGUF file on disk and does not upload the prompt. The same command still asks Hugging Face for the file name before it opens the cache, and it downloads weights that are not cached. In the done-for-you package, the private document assistant answers from your PDFs, notes, and docs on the machine. Those files are not uploaded. This is not a security certification.',
+    html: 'On the published CLI, token generation reads a GGUF file on disk and does not upload the prompt. The same command still asks Hugging Face for the file name before it opens the cache, and it downloads weights that are not cached. In the done-for-you package, the private document assistant answers from your PDFs, notes, and docs on the machine. Those files are not uploaded. This is not a security certification.',
   },
   {
     q: 'Is this HIPAA compliant, or legal advice for a firm?',
@@ -107,8 +108,8 @@ const onPremFaq: Faq[] = [
   },
   {
     q: 'What does the $1,800 payment buy?',
-    a: 'It is the entry payment for the managed tier. Boole AI, Inc. sets Imagine OS up and runs it, with continuous uptime and white-glove onboarding. There is no published uptime percentage. The scope of the service is agreed when you start.',
-    html: 'It is the entry payment for the managed tier. Boole AI, Inc. sets Imagine OS up and runs it, with continuous uptime and white-glove onboarding. There is no published uptime percentage. The scope of the service is agreed when you start.',
+    a: `${OFFER_DESCRIPTION} After payment, onboarding email comes from hello@booleinference.com in less than 24 hours.`,
+    html: `${OFFER_DESCRIPTION} After payment, onboarding email comes from <a class="inline" href="mailto:hello@booleinference.com">hello@booleinference.com</a> in less than 24 hours.`,
   },
   {
     q: 'How soon does onboarding start?',
@@ -152,9 +153,9 @@ const altFaq: Faq[] = [
     html: 'Yes. <code>boole run</code> accepts a local path that ends in <code>.gguf</code>, as well as an alias such as <code>llama3</code> or a <code>repo:quant</code> specifier. <code>pull</code> downloads into the local cache and resumes an interrupted transfer.',
   },
   {
-    q: 'Who is the managed tier for?',
-    a: 'A team that wants Boole AI, Inc. to set the local system up and keep it running. The entry payment is $1,800. Hobbyist setup stays on the free CLI, or on Ollama, LM Studio, or llama.cpp. There is no published uptime percentage.',
-    html: 'A team that wants Boole AI, Inc. to set the local system up and keep it running. The entry payment is $1,800. Hobbyist setup stays on the free CLI, or on Ollama, LM Studio, or llama.cpp. There is no published uptime percentage.',
+    q: 'Who is the done-for-you package for?',
+    a: 'Someone who wants Boole AI, Inc. to install Boole on up to three devices, connect a private document assistant, and stay available for 30 days. The payment is $1,800. If it is not running after setup, the payment is refunded. Hobbyist setup stays on the free CLI, or on Ollama, LM Studio, or llama.cpp.',
+    html: 'Someone who wants Boole AI, Inc. to install Boole on up to three devices, connect a private document assistant, and stay available for 30 days. The payment is $1,800. If it is not running after setup, the payment is refunded. Hobbyist setup stays on the free CLI, or on Ollama, LM Studio, or llama.cpp.',
   },
 ];
 
@@ -163,7 +164,7 @@ function onPremMain(): string {
       ${crumbs('On-premise setup')}
       <p class="kicker">Private local LLM · for a business</p>
       <h1>An on-premise LLM, set up for you.</h1>
-      <p class="lede">Boole AI, Inc. sets up a local model on hardware you control and runs it. The entry payment for that managed tier is $1,800. The codebase is a separate inquiry.</p>
+      <p class="lede">Boole AI, Inc. installs a local model on hardware you control and leaves it running. The done-for-you package is $1,800. The codebase is a separate inquiry.</p>
       <div class="aside">
         <p><strong>What works today.</strong> <code>@boole/cli</code> 0.7.0 needs Node.js 22 or newer. Start with <code>npx @boole/cli doctor</code>, then <code>npx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M</code> and <code>npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hello"</code>. <code>doctor --json</code>, <code>models</code>, <code>list</code>, and <code>serve</code> are included. <code>serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>. The only measured speed on this site is the browser demo, 12.3 tok/s on a 4-core Xeon in WebAssembly. Ternary weights and a 20B model at 200 tok/s are goals, not results. There is no published uptime percentage.</p>
       </div>
@@ -172,12 +173,13 @@ function onPremMain(): string {
         <p>A rented model sends the prompt, and often the files around it, to someone else’s cluster. A local GGUF session reads weights from disk. That is the reason a law office, a clinic, or a small company asks for an on-premise LLM: the work stays on a machine they control.</p>
         <p>The published CLI does not upload the prompt. It does contact Hugging Face to resolve a model file name before it opens the cache, and it downloads weights that are missing. Say that plainly when you scope a deployment. This page is not a promise that a particular network is air-gapped, and it is not a HIPAA or confidentiality opinion.</p>
       </div>
-      <h2>What the managed tier includes</h2>
-      <div class="prose">
-        <p>Pay to start is the fast path. Boole sets Imagine OS up and runs it: continuous uptime and white-glove onboarding. The button goes to Stripe for the $1,800 entry payment. After payment, onboarding email comes from ${EMAIL} in less than 24 hours. The rest of the service is agreed then. We do not publish an uptime percentage, and we do not invent a hardware SKU to go with the price.</p>
-      </div>
+      <h2>What you get</h2>
       <p class="price">$1,800</p>
-      <p class="note">Entry payment for the managed tier.</p>
+      <p class="note">A done-for-you package for founding customers, the first 10. This price stays locked for future upgrades.</p>
+      ${offerChecklistHtml({ title: false })}
+      <div class="prose">
+        <p>The button goes to Stripe. After payment, onboarding email comes from ${EMAIL} in less than 24 hours. We do not publish an uptime percentage, and we do not invent a hardware SKU to go with the price.</p>
+      </div>
       ${actions()}
       <h2>What you can run yourself</h2>
       <div class="prose">
@@ -233,7 +235,7 @@ function compareMain(): string {
         <article class="card">
           <span class="tag">Managed, or a small CLI</span>
           <h3>Boole</h3>
-          <p>Boole AI, Inc. sells a managed setup for $1,800 and, separately, a codebase inquiry. <code>@boole/cli</code> 0.7.0 needs Node.js 22 or newer. Commands: <code>run</code>, <code>pull</code>, <code>doctor</code>, <code>models</code>, <code>list</code>, and <code>serve</code>. <code>serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>.</p>
+          <p>Boole AI, Inc. sells a $1,800 done-for-you package, and, separately, a codebase inquiry. The package is a 60-minute setup on up to three devices, a private document assistant, 30 days of direct support, and a full refund if it is not running after setup. <code>@boole/cli</code> 0.7.0 needs Node.js 22 or newer. Commands: <code>run</code>, <code>pull</code>, <code>doctor</code>, <code>models</code>, <code>list</code>, and <code>serve</code>. <code>serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>.</p>
         </article>
       </div>
       <h2>What each one documents</h2>
@@ -242,7 +244,7 @@ function compareMain(): string {
           <tr><th scope="row">Ollama</th><td>MIT license (<a class="inline" href="${OLLAMA_LICENSE}">LICENSE</a>). Local server at 127.0.0.1:11434 (<a class="inline" href="${OLLAMA_FAQ}">FAQ</a>). OpenAI-compatible subset at <code>/v1</code> on that port (<a class="inline" href="${OLLAMA_OPENAI}">docs</a>). Default context in the FAQ is 4096 tokens. Local runs stay local; the FAQ describes a different path for cloud models.</td></tr>
           <tr><th scope="row">LM Studio</th><td>Desktop app for macOS, Windows, and Linux (<a class="inline" href="${LM_APP}">docs</a>). llama.cpp for GGUF, plus MLX on Apple Silicon. Server via the Developer tab or <code>lms server start</code> (<a class="inline" href="${LM_SERVER}">server</a>). Examples use <code>http://localhost:1234/v1</code> (<a class="inline" href="${LM_OPENAI}">OpenAI compatibility</a>). <a class="inline" href="${LM_TERMS}">App terms</a> (23 Aug 2026) license personal and internal business use and restrict redistribution and service-bureau use. Source is not offered as an open-source grant.</td></tr>
           <tr><th scope="row">llama.cpp</th><td>MIT-licensed C/C++ (<a class="inline" href="${LLAMA_REPO}">repository</a>). GGUF. <a class="inline" href="${LLAMA_INTRO}">Introduction</a>: <code>llama cli</code> and <code>llama serve</code>. <a class="inline" href="${LLAMA_SERVE}">Server docs</a>: default listen address 127.0.0.1:9931, OpenAI-compatible <code>/v1</code> routes, Metal and CUDA among the backends in the README. You build or install it yourself.</td></tr>
-          <tr><th scope="row">Boole</th><td>Proprietary CLI from Boole AI, Inc., <code>@boole/cli</code> 0.7.0, on Node.js 22 or newer. First: <code>npx @boole/cli doctor</code> (<code>--json</code> optional). Then pull and run a model, for example <code>bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M</code>. <code>list</code> prints downloaded models. <code>serve</code> is local development only, no authentication, <code>POST /generate</code>. Managed entry payment $1,800. Codebase acquisition is an inquiry to ${EMAIL}.</td></tr>
+          <tr><th scope="row">Boole</th><td>Proprietary CLI from Boole AI, Inc., <code>@boole/cli</code> 0.7.0, on Node.js 22 or newer. First: <code>npx @boole/cli doctor</code> (<code>--json</code> optional). Then pull and run a model, for example <code>bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M</code>. <code>list</code> prints downloaded models. <code>serve</code> is local development only, no authentication, <code>POST /generate</code>. The done-for-you package is $1,800: live setup on up to 3 devices, a private document assistant, 30 days of support, and a full refund if it is not running after setup. Founding price for the first 10 customers. Codebase acquisition is an inquiry to ${EMAIL}.</td></tr>
         </tbody>
       </table>
       <h2>When to use which</h2>
@@ -250,7 +252,7 @@ function compareMain(): string {
         <p>Use Ollama when you want a local runner that already has a documented server and an OpenAI-compatible subset, and you are comfortable operating it.</p>
         <p>Use LM Studio when you want a desktop app, a chat window, and a local server without building llama.cpp. Read their terms before you redistribute anything or offer it as a service.</p>
         <p>Use llama.cpp when you want the engine itself: the binary, the server, and the backends upstream ships. Boole does not claim to be a faster build of it.</p>
-        <p>Use Boole’s managed tier when you want Boole AI, Inc. to set the local system up and run it. Use the Boole CLI, and the <a class="inline" href="/guides/">device guides</a>, when you want to run it yourself. <code>serve</code> is a local development server, not a hosted API.</p>
+        <p>Use Boole’s done-for-you package when you want a 60-minute setup on up to three devices, a private document assistant, and 30 days of direct support. The price is $1,800. Use the Boole CLI, and the <a class="inline" href="/guides/">device guides</a>, when you want to run it yourself. <code>serve</code> is a local development server, not a hosted API.</p>
       </div>
       <h2>Questions</h2>
       ${faqBlock(compareFaq)}
@@ -264,7 +266,7 @@ function altMain(): string {
       ${crumbs('Ollama alternative')}
       <p class="kicker">Ollama alternative · with setup and support</p>
       <h1>An Ollama alternative with someone to set it up.</h1>
-      <p class="lede">Ollama is a capable local runner you operate yourself. Boole is the path where Boole AI, Inc. does the setup and keeps the managed system running. The CLI underneath is not a clone of Ollama.</p>
+      <p class="lede">Ollama is a capable local runner you operate yourself. Boole is the path where Boole AI, Inc. installs it with you and stays for 30 days. The CLI underneath is not a clone of Ollama.</p>
       <div class="aside">
         <p><strong>What works today.</strong> On Node.js 22 or newer: <code>npx @boole/cli doctor</code>, then <code>npx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M</code> and <code>npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hello"</code>. <code>list</code> and <code>serve</code> are included. <code>serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>. It is not Ollama’s OpenAI-compatible server. The only measured speed we publish is 12.3 tok/s in the browser demo. We have not benchmarked Boole against Ollama.</p>
       </div>
@@ -276,9 +278,10 @@ function altMain(): string {
           <p>Their docs give you <code>ollama run</code>, <code>ollama pull</code>, and <code>ollama serve</code>. The local server binds 127.0.0.1:11434, with an OpenAI-compatible subset at <code>/v1</code>. The software is MIT-licensed. You install it, you pick the model, and you keep the process running.</p>
         </article>
         <article class="card">
-          <span class="tag">We operate it</span>
-          <h3>Boole managed tier</h3>
-          <p>The $1,800 entry payment is for a managed local setup. Boole sets it up and runs it, with continuous uptime and white-glove onboarding. Email follows in less than 24 hours. There is no published uptime percentage. This is the product for a team that does not want to own the operations.</p>
+          <span class="tag">Done for you</span>
+          <h3>Boole, $1,800</h3>
+          <p>A done-for-you package for founding customers, the first 10. Email follows in less than 24 hours.</p>
+          ${offerChecklistHtml()}
         </article>
       </div>
       <h2>Where the CLI matches, and where it does not</h2>
@@ -297,7 +300,7 @@ function altMain(): string {
       </div>
       <h2>Support, not a faster number</h2>
       <div class="prose">
-        <p>The reason to pick the managed tier over Ollama is the service: setup and ongoing running of the local system, by Boole AI, Inc. It is not a claim that the CLI is faster, more compatible, or a substitute for Ollama’s server. If you want the engine with no company in the middle, use <a class="inline" href="${LLAMA_REPO}">llama.cpp</a> or <a class="inline" href="${OLLAMA_LICENSE}">Ollama</a>. The <a class="inline" href="/compare/ollama-lm-studio-llama-cpp/">comparison</a> keeps the four options side by side. The <a class="inline" href="/on-premise/">on-premise page</a> is the business offer.</p>
+        <p>The reason to pick the done-for-you package over Ollama is the service: a 60-minute setup on up to three devices, a private document assistant, 30 days of direct support, and a full refund if it is not running after setup. It is not a claim that the CLI is faster, more compatible, or a substitute for Ollama’s server. If you want the engine with no company in the middle, use <a class="inline" href="${LLAMA_REPO}">llama.cpp</a> or <a class="inline" href="${OLLAMA_LICENSE}">Ollama</a>. The <a class="inline" href="/compare/ollama-lm-studio-llama-cpp/">comparison</a> keeps the four options side by side. The <a class="inline" href="/on-premise/">on-premise page</a> is the business offer.</p>
       </div>
       <h2>Questions</h2>
       ${faqBlock(altFaq)}
@@ -355,9 +358,9 @@ export function seoPages(css: string): BuiltPage[] {
       urlPath: '/on-premise/',
       title: 'On-premise private LLM setup for a business — Boole',
       description:
-        'On-premise LLM setup for a small business. Boole AI, Inc. sets it up and runs it. The managed tier is a $1,800 entry payment. The codebase is an inquiry.',
+        'On-premise LLM setup for a small business. The done-for-you package is $1,800: live setup, a private document assistant, and 30 days of support. The codebase is an inquiry.',
       keywords:
-        'on premise LLM for business, private local LLM, on-prem AI setup, local LLM for a company, white-glove local AI',
+        'on premise LLM for business, private local LLM, on-prem AI setup, local LLM for a company, done for you local AI',
       name: 'On-premise private LLM setup',
       crumb: 'On-premise setup',
       type: 'TechArticle',
@@ -366,8 +369,9 @@ export function seoPages(css: string): BuiltPage[] {
       extra: [
         {
           '@type': 'Service',
-          name: 'Managed on-premise Imagine OS',
-          serviceType: 'On-premise local model setup and operation',
+          name: 'Imagine OS done-for-you setup',
+          description: OFFER_DESCRIPTION,
+          serviceType: 'Done-for-you on-premise local model setup',
           provider: { '@type': 'Organization', name: 'Boole AI, Inc.', url: `${SITE}/` },
           areaServed: 'Worldwide',
           offers: {
@@ -386,7 +390,7 @@ export function seoPages(css: string): BuiltPage[] {
       urlPath: '/compare/ollama-lm-studio-llama-cpp/',
       title: 'Ollama vs LM Studio vs llama.cpp vs Boole — Boole',
       description:
-        'A factual comparison of Ollama, LM Studio, llama.cpp, and Boole. No invented benchmarks. @boole/cli 0.7.0 needs Node.js 22. The managed tier is a $1,800 setup.',
+        'A factual comparison of Ollama, LM Studio, llama.cpp, and Boole. No invented benchmarks. @boole/cli 0.7.0 needs Node.js 22. The done-for-you package is $1,800.',
       keywords:
         'ollama vs lm studio, ollama vs llama.cpp, llama.cpp vs LM Studio, local LLM comparison, Boole',
       name: 'Ollama vs LM Studio vs llama.cpp vs Boole',
@@ -401,7 +405,7 @@ export function seoPages(css: string): BuiltPage[] {
       urlPath: '/ollama-alternative/',
       title: 'An Ollama alternative with setup and support — Boole',
       description:
-        'An Ollama alternative when you want setup and support. Boole’s managed tier is a $1,800 entry payment. @boole/cli serve is local development only and accepts POST /generate.',
+        'An Ollama alternative when you want setup and support. Boole’s done-for-you package is $1,800. @boole/cli serve is local development only and accepts POST /generate.',
       keywords:
         'ollama alternative, ollama alternative with support, managed local LLM, private LLM setup, Boole',
       name: 'An Ollama alternative with setup and support',
