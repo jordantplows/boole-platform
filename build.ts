@@ -3,6 +3,7 @@ import { join, extname, dirname } from 'node:path';
 import { createServer } from 'node:http';
 import sharp from 'sharp';
 import { sitePages } from './src/guides.ts';
+import { OFFER_BLURB, OFFER_DESCRIPTION, offerChecklistHtml } from './src/offer.ts';
 
 const DIST = 'dist';
 const SITE = 'https://boole.sh';
@@ -21,7 +22,7 @@ const CTA = {
 
 const TITLE = 'Run a local AI model on your own device — Boole';
 const DESCRIPTION =
-  'Run a local LLM on your Mac, Windows, or Linux machine. Managed setup from Boole AI, Inc. is a $1,800 entry payment. A 20B model at 200 tok/s is a goal.';
+  'Run a local LLM on your Mac, Windows, or Linux machine. The done-for-you package is $1,800: live setup on up to three devices, a private document assistant, and 30 days of support. A 20B model at 200 tok/s is a goal.';
 const KEYWORDS =
   'run LLM locally on Mac, run local AI model on Windows, offline AI on Linux, on-device AI, local models, local inference, Imagine OS, GGUF, Apple Silicon Metal, CUDA, Vulkan, WebAssembly, managed on-device AI';
 
@@ -43,8 +44,8 @@ const FAQ = [
     a: 'A prompt is passed to the local session. The CLI has no analytics call. It does contact Hugging Face to resolve a model file name before it opens the cache, and it downloads weights when they are not cached. Token generation reads the local GGUF. The page demo fetches weights only after you press the button, then counts network requests during generation.',
   },
   {
-    q: 'What do managed and white-glove include?',
-    a: 'Pay to start is a $1,800 entry payment for the managed tier. Boole AI sets Imagine OS up and runs it, with continuous uptime and white-glove onboarding. The button goes to Stripe. The scope of that service is agreed when you start. There is no published uptime percentage.',
+    q: 'What does Pay to start include?',
+    a: `${OFFER_DESCRIPTION} The button goes to Stripe. After payment, onboarding email comes from hello@booleinference.com in less than 24 hours.`,
   },
   {
     q: 'How does acquiring the codebase work?',
@@ -56,7 +57,7 @@ const FAQ = [
   },
   {
     q: 'How do I contact Boole AI?',
-    a: 'Email hello@booleinference.com. Pay to start is a $1,800 Stripe payment for the managed tier. A codebase inquiry uses the subject “Boole: Codebase acquisition”.',
+    a: 'Email hello@booleinference.com. Pay to start is a $1,800 Stripe payment for the done-for-you package. A codebase inquiry uses the subject “Boole: Codebase acquisition”.',
   },
 ];
 
@@ -105,9 +106,8 @@ const jsonLd = JSON.stringify({
     {
       '@type': 'Product',
       '@id': `${SITE}/#managed-product`,
-      name: 'Imagine OS managed tier',
-      description:
-        'Entry payment for the managed tier. Boole AI, Inc. sets Imagine OS up and runs it, with continuous uptime and white-glove onboarding.',
+      name: 'Imagine OS done-for-you setup',
+      description: OFFER_DESCRIPTION,
       brand: { '@type': 'Brand', name: 'Imagine OS' },
       manufacturer: { '@id': `${SITE}/#organization` },
       offers: {
@@ -201,7 +201,7 @@ const html = `<!doctype html>
         <div class="actions actions-hero">
           <a class="btn btn-pay" href="${CTA.buyNow}">Pay to start</a>
           <a class="text-link" href="#offers">Or inquire about the codebase</a>
-          <p class="price-inline">$1,800 entry payment for the managed tier. We set it up and run it.</p>
+          <p class="price-inline">${OFFER_BLURB}</p>
         </div>
         <dl class="facts">
           <div><dt>Runtime</dt><dd>llama.cpp</dd></div>
@@ -569,14 +569,14 @@ const html = `<!doctype html>
         <h2 class="reveal">Pay to start. Or acquire the codebase.</h2>
         <div class="offers">
           <article class="card tier-fast">
-            <span class="tag">Tier 1 · Fast path</span>
+            <span class="tag">Tier 1 · Done for you</span>
             <h3>Pay to start.</h3>
             <p class="price">$1,800</p>
             <p>
-              Entry payment for the managed tier. Boole sets it up and runs it:
-              continuous uptime and white-glove onboarding. This is the path
-              that starts now.
+              A done-for-you package for founding customers, the first 10.
+              We install Boole on your hardware and leave it running.
             </p>
+            ${offerChecklistHtml()}
             <a class="btn btn-pay" href="${CTA.buyNow}">Pay to start</a>
           </article>
           <article class="card tier-slow">
@@ -609,9 +609,12 @@ const html = `<!doctype html>
         <h2 class="reveal">Start with the product. Or ask for the code.</h2>
         <div class="prose">
           <p>
-            Pay to start is a $1,800 entry payment on Stripe for the managed
-            tier. Boole sets it up and runs it, with continuous uptime and
-            white-glove onboarding. Acquiring the codebase is a separate
+            Pay to start is $1,800 on Stripe. On a 60-minute call we install
+            Boole on up to three of your devices, pick a model for each, and
+            confirm it runs before we hang up. Your files stay on the machine.
+            You have 30 days of direct support. If it is not running after
+            setup, the payment is refunded. The first 10 customers keep this
+            price for future upgrades. Acquiring the codebase is a separate
             inquiry to
             <a class="inline" href="mailto:${CTA.email}">${CTA.email}</a>
             with the subject “Boole: Codebase acquisition”.
