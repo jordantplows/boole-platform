@@ -1,42 +1,54 @@
 /**
- * The $1,800 done-for-you package. Price and Stripe Payment Link stay fixed.
- * No customer counts beyond the founding offer itself, and no speed claims.
+ * Token Cost Audit. The fee and Stripe link stay in this file so the package
+ * can change later without a hunt through the pages.
+ * No savings percentage and no guarantee: neither is confirmed.
  */
 
+export const STRIPE_URL = 'https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03';
+export const AUDIT_PRICE_AMOUNT = '1800';
+export const AUDIT_PRICE = '$1,800';
+export const AUDIT_CTA = 'Start the audit';
+export const EMAIL = 'hello@booleinference.com';
+export const IMPL_MAIL = `mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Implementation and managed plans')}`;
+
 export const OFFER_BLURB =
-  '$1,800 done for you. Live setup on up to three devices, a private document assistant, and 30 days of direct support.';
+  `${AUDIT_PRICE} fixed fee for the Token Cost Audit. Implementation and managed plans are a separate conversation.`;
 
 export const OFFER_DESCRIPTION =
-  'A $1,800 done-for-you package from Boole AI, Inc. On a 60-minute live setup call we install Boole on up to 3 of your devices, pick and tune the right model for each, and confirm it runs before we hang up. A private document assistant connects your own files (PDFs, notes, docs) so the model answers from them locally, with nothing from those files leaving your machine. Includes 30 days of direct support for fixes, model upgrades, and adding devices. If it is not running on your hardware after setup, the payment is refunded in full. Founding customers: the first 10. This price stays locked for future upgrades.';
+  `The Token Cost Audit is a ${AUDIT_PRICE} fixed fee from Boole AI, Inc. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals.`;
 
-const OFFER_ITEMS: Array<{ title: string; text: string }> = [
+const AUDIT_ITEMS: Array<{ title: string; text: string }> = [
   {
-    title: 'Live setup',
-    text: 'A 60-minute call. We install Boole on up to 3 of your devices, pick and tune the right model for each, and confirm it runs before we hang up.',
+    title: 'Spend breakdown',
+    text: 'By endpoint and model, from the usage you share.',
   },
   {
-    title: 'Private document assistant',
-    text: 'Connect your own files (PDFs, notes, docs) so the model answers from them locally, with nothing from those files leaving your machine.',
+    title: 'Caching, batch, and trimming',
+    text: 'A list of calls that are candidates for each lever. The list is the finding. It is not a promised percentage.',
   },
   {
-    title: '30 days of direct support',
-    text: 'Fixes, model upgrades, and adding devices, for 30 days.',
+    title: 'Local-model candidates',
+    text: 'Calls that could move onto hardware you own, with quality tested on a sample of your traffic before anything is routed.',
   },
   {
-    title: 'Guarantee',
-    text: 'If it is not running on your hardware after setup, you get a full refund.',
+    title: 'Break-even',
+    text: 'An on-prem comparison using your volumes. Hardware has a fixed cost. We do not publish a generic savings figure.',
   },
   {
-    title: 'Founding price',
-    text: 'The first 10 customers. This price stays locked for future upgrades.',
+    title: 'Implementation quote',
+    text: 'A scoped quote for the work after the audit. That fee is not included in the audit.',
   },
 ];
 
-export function offerChecklistHtml(opts?: { title?: boolean }): string {
-  const title = opts?.title === false ? '' : '<h4 class="gets-title">What you get</h4>';
-  const items = OFFER_ITEMS.map((item, i) => {
+export function auditChecklistHtml(opts?: { title?: boolean }): string {
+  const title = opts?.title === false ? '' : '<p class="gets-title">What the audit delivers</p>';
+  const items = AUDIT_ITEMS.map((item, i) => {
     const n = String(i + 1).padStart(2, '0');
     return `<li><span class="n">${n}</span><span><strong>${item.title}.</strong> ${item.text}</span></li>`;
   }).join('');
   return `${title}<ol class="gets">${items}</ol>`;
+}
+
+export function auditButton(): string {
+  return `<a class="btn btn-pay" href="${STRIPE_URL}">${AUDIT_CTA}</a>`;
 }
