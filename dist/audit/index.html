@@ -3,30 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>An Ollama alternative with setup and support — Boole</title>
-  <meta name="description" content="An Ollama alternative when you want setup and support. Boole’s done-for-you package is $1,800. @boole/cli serve is local development only and accepts POST /generate.">
+  <title>Token Cost Audit — $1,800 fixed fee — Boole</title>
+  <meta name="description" content="A token cost audit for a fixed $1,800 fee. Spend breakdown, caching and batch candidates, local-model candidates tested on a sample, and an on-prem break-even. No savings percentage.">
   <meta name="robots" content="index, follow">
-  <meta name="keywords" content="ollama alternative, ollama alternative with support, managed local LLM, private LLM setup, Boole">
-  <link rel="canonical" href="https://boole.sh/ollama-alternative/">
+  <meta name="keywords" content="LLM cost audit, AI cost optimization consulting, reduce OpenAI API costs service, LLM FinOps consultant">
+  <link rel="canonical" href="https://boole.sh/audit/">
   <meta property="og:site_name" content="Boole">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="An Ollama alternative with setup and support — Boole">
-  <meta property="og:description" content="An Ollama alternative when you want setup and support. Boole’s done-for-you package is $1,800. @boole/cli serve is local development only and accepts POST /generate.">
+  <meta property="og:title" content="Token Cost Audit — $1,800 fixed fee — Boole">
+  <meta property="og:description" content="A token cost audit for a fixed $1,800 fee. Spend breakdown, caching and batch candidates, local-model candidates tested on a sample, and an on-prem break-even. No savings percentage.">
   <meta property="og:image" content="https://boole.sh/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Imagine OS. On-device models for software that adapts.">
+  <meta property="og:image:alt" content="Boole. Repetitive LLM calls on hardware you own.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://boole.sh/ollama-alternative/">
+  <meta property="og:url" content="https://boole.sh/audit/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="An Ollama alternative with setup and support — Boole">
-  <meta name="twitter:description" content="An Ollama alternative when you want setup and support. Boole’s done-for-you package is $1,800. @boole/cli serve is local development only and accepts POST /generate.">
+  <meta name="twitter:title" content="Token Cost Audit — $1,800 fixed fee — Boole">
+  <meta name="twitter:description" content="A token cost audit for a fixed $1,800 fee. Spend breakdown, caching and batch candidates, local-model candidates tested on a sample, and an on-prem break-even. No savings percentage.">
   <meta name="twitter:image" content="https://boole.sh/og.png">
-  <meta name="twitter:image:alt" content="Imagine OS. On-device models for software that adapts.">
+  <meta name="twitter:image:alt" content="Boole. Repetitive LLM calls on hardware you own.">
   <meta name="theme-color" content="#090909">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"An Ollama alternative with setup and support","name":"An Ollama alternative with setup and support","description":"An Ollama alternative when you want setup and support. Boole’s done-for-you package is $1,800. @boole/cli serve is local development only and accepts POST /generate.","url":"https://boole.sh/ollama-alternative/","inLanguage":"en","mainEntityOfPage":"https://boole.sh/ollama-alternative/","author":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"publisher":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can an OpenAI client call Boole the way it calls Ollama?","acceptedAnswer":{"@type":"Answer","text":"Not as an OpenAI-compatible stand-in. Ollama documents http://localhost:11434/v1/. npx @boole/cli serve is for local development only, has no authentication, and accepts POST /generate. If you need an OpenAI-compatible local server, Ollama, llama.cpp, and LM Studio document one."}},{"@type":"Question","name":"Can I run a GGUF file I already downloaded?","acceptedAnswer":{"@type":"Answer","text":"Yes. boole run accepts a local path that ends in .gguf, as well as an alias such as llama3 or a repo:quant specifier. pull downloads into the local cache and resumes an interrupted transfer."}},{"@type":"Question","name":"Who is the done-for-you package for?","acceptedAnswer":{"@type":"Answer","text":"Someone who wants Boole AI, Inc. to install Boole on up to three devices, connect a private document assistant, and stay available for 30 days. The payment is $1,800. If it is not running after setup, the payment is refunded. Hobbyist setup stays on the free CLI, or on Ollama, LM Studio, or llama.cpp."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Boole","item":"https://boole.sh/"},{"@type":"ListItem","position":2,"name":"Ollama alternative","item":"https://boole.sh/ollama-alternative/"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Token Cost Audit","name":"Token Cost Audit","description":"A token cost audit for a fixed $1,800 fee. Spend breakdown, caching and batch candidates, local-model candidates tested on a sample, and an on-prem break-even. No savings percentage.","url":"https://boole.sh/audit/","inLanguage":"en","mainEntityOfPage":"https://boole.sh/audit/","author":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"publisher":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the $1,800 payment buy?","acceptedAnswer":{"@type":"Answer","text":"The Token Cost Audit is a $1,800 fixed fee from Boole AI, Inc. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals."}},{"@type":"Question","name":"Is there a savings guarantee?","acceptedAnswer":{"@type":"Answer","text":"No. Boole does not publish a savings percentage, and this page does not offer a refund tied to savings. The audit is the work product: the breakdown, the candidate lists, the sample quality check, the break-even, and a quote."}},{"@type":"Question","name":"How soon does onboarding start?","acceptedAnswer":{"@type":"Answer","text":"After payment, the welcome page says you will be onboarded in less than 24 hours. Wait for an email from hello@booleinference.com."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Boole","item":"https://boole.sh/"},{"@type":"ListItem","position":2,"name":"Token Cost Audit","item":"https://boole.sh/audit/"}]},{"@type":"Service","name":"Token Cost Audit","serviceType":"LLM token cost audit","provider":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"description":"The Token Cost Audit is a $1,800 fixed fee from Boole AI, Inc. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals.","offers":{"@type":"Offer","price":"1800","priceCurrency":"USD","url":"https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03","availability":"https://schema.org/OnlineOnly"}},{"@type":"Product","name":"Token Cost Audit","description":"The Token Cost Audit is a $1,800 fixed fee from Boole AI, Inc. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals.","brand":{"@type":"Brand","name":"Boole"},"offers":{"@type":"Offer","price":"1800","priceCurrency":"USD","url":"https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03","availability":"https://schema.org/OnlineOnly"}}]}</script>
   <style>@font-face {
   font-family: "Instrument Sans";
   src: url("/fonts/instrument-sans.woff2") format("woff2");
@@ -147,8 +147,10 @@ body {
 
 .nav-links {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.35rem;
+  justify-content: flex-end;
+  gap: 0.75rem 1.35rem;
   margin-left: auto;
 }
 
@@ -1052,6 +1054,11 @@ footer {
   margin-top: 1.15rem;
 }
 
+.doc .card h3,
+.flow h3 {
+  margin-top: 0;
+}
+
 .doc .prose,
 .doc ul,
 .doc ol {
@@ -1086,6 +1093,55 @@ footer {
 
 .doc pre code {
   font-size: inherit;
+}
+
+.home h1 {
+  max-width: 18ch;
+  font-size: clamp(2.35rem, 4.8vw, 3.75rem);
+}
+
+.card .text-link {
+  display: inline-block;
+  margin-top: 0.85rem;
+}
+
+.calc {
+  display: grid;
+  gap: 0.95rem;
+  max-width: 40rem;
+  margin-top: 1.25rem;
+}
+
+.calc label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.calc .hint {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.calc input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--text);
+  font: 430 1rem/1.4 var(--sans);
+}
+
+.calc-out {
+  max-width: 40rem;
+  margin-top: 1.5rem;
+}
+
+#calc-result {
+  white-space: pre-wrap;
 }
 
 .aside {
@@ -1194,75 +1250,58 @@ footer {
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="bar">
-    <a class="brand" href="/">boole <span>Imagine OS</span></a>
+    <a class="brand" href="/">boole</a>
     <nav class="nav-links" aria-label="Page">
-      <a href="/#energy">Energy</a>
-      <a href="/#devices">Devices</a>
-      <a href="/#faq">FAQ</a>
+      <a href="/audit/">Audit</a>
+      <a href="/how-it-works/">How it works</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/guides/">Guides</a>
     </nav>
   </header>
   <main id="content" tabindex="-1">
     <section class="doc"><div class="wrap">
-      <p class="crumbs"><a href="/">Boole</a> · Ollama alternative</p>
-      <p class="kicker">Ollama alternative · with setup and support</p>
-      <h1>An Ollama alternative with someone to set it up.</h1>
-      <p class="lede">Ollama is a capable local runner you operate yourself. Boole is the path where Boole AI, Inc. installs it with you and stays for 30 days. The CLI underneath is not a clone of Ollama.</p>
-      <div class="aside">
-        <p><strong>What works today.</strong> On Node.js 22 or newer: <code>npx @boole/cli doctor</code>, then <code>npx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M</code> and <code>npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hello"</code>. <code>list</code> and <code>serve</code> are included. <code>serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>. It is not Ollama’s OpenAI-compatible server. The only measured speed we publish is 12.3 tok/s in the browser demo. We have not benchmarked Boole against Ollama.</p>
-      </div>
-      <h2>DIY, or managed</h2>
-      <div class="offers">
-        <article class="card">
-          <span class="tag">You operate it</span>
-          <h3>Ollama</h3>
-          <p>Their docs give you <code>ollama run</code>, <code>ollama pull</code>, and <code>ollama serve</code>. The local server binds 127.0.0.1:11434, with an OpenAI-compatible subset at <code>/v1</code>. The software is MIT-licensed. You install it, you pick the model, and you keep the process running.</p>
-        </article>
-        <article class="card">
-          <span class="tag">Done for you</span>
-          <h3>Boole, $1,800</h3>
-          <p>A done-for-you package for founding customers, the first 10. Email follows in less than 24 hours.</p>
-          <h4 class="gets-title">What you get</h4><ol class="gets"><li><span class="n">01</span><span><strong>Live setup.</strong> A 60-minute call. We install Boole on up to 3 of your devices, pick and tune the right model for each, and confirm it runs before we hang up.</span></li><li><span class="n">02</span><span><strong>Private document assistant.</strong> Connect your own files (PDFs, notes, docs) so the model answers from them locally, with nothing from those files leaving your machine.</span></li><li><span class="n">03</span><span><strong>30 days of direct support.</strong> Fixes, model upgrades, and adding devices, for 30 days.</span></li><li><span class="n">04</span><span><strong>Guarantee.</strong> If it is not running on your hardware after setup, you get a full refund.</span></li><li><span class="n">05</span><span><strong>Founding price.</strong> The first 10 customers. This price stays locked for future upgrades.</span></li></ol>
-        </article>
-      </div>
-      <h2>Where the CLI matches, and where it does not</h2>
-      <table class="spec">
-        <tbody>
-          <tr><th scope="row">Run a model</th><td>Ollama documents <code>ollama run</code>. Boole documents <code>boole run</code> for an alias, a <code>repo:quant</code> specifier, or a local <code>.gguf</code> file. Standard output is the model text.</td></tr>
-          <tr><th scope="row">Download</th><td>Ollama documents <code>ollama pull</code>. Boole’s <code>pull</code> saves a GGUF in the local cache, asks before a file over 2 GB, and resumes a <code>.partial</code> download. Resolving the name still contacts Hugging Face first.</td></tr>
-          <tr><th scope="row">Check the machine</th><td>Boole’s <code>doctor</code> prints OS, RAM, GPU backend, and a RAM-based size verdict with 2 GiB held back. That command is Boole’s, not a port of an Ollama command.</td></tr>
-          <tr><th scope="row">Local API</th><td>Ollama documents one, on port 11434. llama.cpp documents <code>llama serve</code> on port 9931. LM Studio’s examples use port 1234. <code>npx @boole/cli serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>.</td></tr>
-        </tbody>
-      </table>
-      <h2>Moving a model you already have</h2>
+      <p class="crumbs"><a href="/">Boole</a> · Token Cost Audit</p>
+      <p class="kicker">Fixed fee · $1,800</p>
+      <h1>A token cost audit before anything moves.</h1>
+      <p class="lede">Your repetitive AI calls may not need a frontier model. The hard ones should stay where they are. The audit measures which is which. It does not start from a savings percentage.</p>
+      <p class="price">$1,800</p>
+      <p class="note">Stripe. This fee is the audit. Implementation and managed plans are not included and are not priced on this site.</p>
+      <h2>What you get</h2>
+      <ol class="gets"><li><span class="n">01</span><span><strong>Spend breakdown.</strong> By endpoint and model, from the usage you share.</span></li><li><span class="n">02</span><span><strong>Caching, batch, and trimming.</strong> A list of calls that are candidates for each lever. The list is the finding. It is not a promised percentage.</span></li><li><span class="n">03</span><span><strong>Local-model candidates.</strong> Calls that could move onto hardware you own, with quality tested on a sample of your traffic before anything is routed.</span></li><li><span class="n">04</span><span><strong>Break-even.</strong> An on-prem comparison using your volumes. Hardware has a fixed cost. We do not publish a generic savings figure.</span></li><li><span class="n">05</span><span><strong>Implementation quote.</strong> A scoped quote for the work after the audit. That fee is not included in the audit.</span></li></ol>
       <div class="prose">
-        <p>A GGUF file on disk can be passed to <code>boole run ./weights.gguf -p "Hello"</code>. An alias such as <code>llama3</code> or <code>phi3</code> is resolved from free RAM. That is a file-level handoff, not an import of Ollama’s model library, its Modelfile, or its process manager.</p>
-        <p>Node.js 22 or newer is required, from <a class="inline" href="https://nodejs.org/">nodejs.org</a>. Per-device steps are in the <a class="inline" href="/guides/">setup guides</a>, including <a class="inline" href="/guides/macos-apple-silicon/">Apple Silicon</a>, <a class="inline" href="/guides/windows-x64/">Windows</a>, and <a class="inline" href="/guides/linux-x64/">Linux</a>.</p>
+        <p>The Token Cost Audit is a $1,800 fixed fee from Boole AI, Inc. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals.</p>
+        <p>After payment, the <a class="inline" href="/welcome/">welcome page</a> says you will be onboarded in less than 24 hours. Wait for an email from <a class="inline" href="mailto:hello@booleinference.com">hello@booleinference.com</a>.</p>
       </div>
-      <h2>Support, not a faster number</h2>
+      <div class="actions" style="margin-top:1.5rem">
+        <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Start the audit</a>
+        <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Implementation%20and%20managed%20plans">Contact us</a>
+        <p class="price-inline">$1,800 fixed fee for the Token Cost Audit. Implementation and managed plans are a separate conversation.</p>
+      </div>
+      <h2>What this is not</h2>
       <div class="prose">
-        <p>The reason to pick the done-for-you package over Ollama is the service: a 60-minute setup on up to three devices, a private document assistant, 30 days of direct support, and a full refund if it is not running after setup. It is not a claim that the CLI is faster, more compatible, or a substitute for Ollama’s server. If you want the engine with no company in the middle, use <a class="inline" href="https://github.com/ggml-org/llama.cpp">llama.cpp</a> or <a class="inline" href="https://github.com/ollama/ollama/blob/main/LICENSE">Ollama</a>. The <a class="inline" href="/compare/ollama-lm-studio-llama-cpp/">comparison</a> keeps the four options side by side. The <a class="inline" href="/on-premise/">on-premise page</a> is the business offer.</p>
+        <p>It is not a guarantee that the fee comes back, and it is not a promise that a share of traffic will move. Open models trail closed models on hard tasks. Menlo’s mid-2025 update had open-source models at 13% of production workloads, and only 11% of teams had changed provider in the prior year (<a class="inline" href="https://menlovc.com/perspective/2025-mid-year-llm-market-update/">source</a>). Quality is checked against your evals before a recommendation to move a call.</p>
+        <p>The only speed Boole has measured is 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, on a 4-core Xeon in WebAssembly, one thread, no GPU layers. A 20B model at 200 tok/s is a roadmap goal, not a measurement. No server throughput is claimed.</p>
       </div>
       <h2>Questions</h2>
-      <div class="faq"><details><summary>Can an OpenAI client call Boole the way it calls Ollama?</summary><p>Not as an OpenAI-compatible stand-in. Ollama documents <code>http://localhost:11434/v1/</code>. <code>npx @boole/cli serve</code> is for local development only, has no authentication, and accepts <code>POST /generate</code>. If you need an OpenAI-compatible local server, Ollama, llama.cpp, and LM Studio document one.</p></details><details><summary>Can I run a GGUF file I already downloaded?</summary><p>Yes. <code>boole run</code> accepts a local path that ends in <code>.gguf</code>, as well as an alias such as <code>llama3</code> or a <code>repo:quant</code> specifier. <code>pull</code> downloads into the local cache and resumes an interrupted transfer.</p></details><details><summary>Who is the done-for-you package for?</summary><p>Someone who wants Boole AI, Inc. to install Boole on up to three devices, connect a private document assistant, and stay available for 30 days. The payment is $1,800. If it is not running after setup, the payment is refunded. Hobbyist setup stays on the free CLI, or on Ollama, LM Studio, or llama.cpp.</p></details></div>
-      <div class="actions actions-hero" style="margin-top:1.5rem">
-        <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Pay to start</a>
-        <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Codebase%20acquisition">Start an inquiry</a>
-        <p class="price-inline">$1,800 done for you. Live setup on up to three devices, a private document assistant, and 30 days of direct support.</p>
-      </div>
+      <div class="faq"><details><summary>What does the $1,800 payment buy?</summary><p>The Token Cost Audit is a $1,800 fixed fee from Boole AI, Inc. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals.</p></details><details><summary>Is there a savings guarantee?</summary><p>No. Boole does not publish a savings percentage, and this page does not offer a refund tied to savings. The audit is the work product: the breakdown, the candidate lists, the sample quality check, the break-even, and a quote.</p></details><details><summary>How soon does onboarding start?</summary><p>After payment, the <a class="inline" href="/welcome/">welcome page</a> says you will be onboarded in less than 24 hours. Wait for an email from <a class="inline" href="mailto:hello@booleinference.com">hello@booleinference.com</a>.</p></details></div>
     </div></section>
   </main>
   <footer>
     <div class="wrap footer-row">
-      <span>© 2026 Boole AI, Inc.</span>
-      <a href="/#license">License</a>
-      <a href="/#offers">Ways to work with Boole</a>
-      <a href="/guides/">Setup guides</a>
+      <span>© 2026 Boole AI, Inc. All rights reserved.</span>
+      <a href="/audit/">Audit</a>
+      <a href="/how-it-works/">How it works</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/calculator/">Calculator</a>
+      <a href="/hybrid-routing/">Hybrid routing</a>
       <a href="/on-premise/">On-premise</a>
-      <a href="/compare/ollama-lm-studio-llama-cpp/">Compare</a>
-      <a href="/ollama-alternative/">Ollama alternative</a>
+      <a href="/compare/">Compare</a>
+      <a href="/guides/">Setup guides</a>
+      <a href="/contact/">Contact</a>
       <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
       <a href="mailto:hello@booleinference.com">hello@booleinference.com</a>
     </div>
   </footer>
+  
 </body>
 </html>

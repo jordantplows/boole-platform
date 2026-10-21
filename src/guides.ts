@@ -5,7 +5,7 @@
  * Requires Node.js 22 or newer. serve is local development only.
  */
 
-import { seoPages } from './seo.ts';
+import { marketingPages } from './pages.ts';
 import { OFFER_DESCRIPTION } from './offer.ts';
 
 const SITE = 'https://boole.sh';
@@ -193,14 +193,14 @@ export const GUIDES: Guide[] = [
     nav: 'Browser demo',
     kicker: 'Browser · WebAssembly',
     h1: 'Run a model in the browser',
-    lede: 'The browser demo is not the CLI. It is the button on the Boole homepage. The CLI sections below are how you run a model on the computer itself.',
+    lede: 'The browser demo is on this page. It is not the CLI. The CLI sections below are how you run a model on the computer itself.',
     seoTitle: 'Run a local model in the browser — Boole',
     description:
-      'Run a small local model in the browser with WebAssembly, or install the Boole CLI for Mac, Windows, and Linux. The only measured speed is the homepage demo.',
+      'Run a small local model in the browser with WebAssembly, or install the Boole CLI for Mac, Windows, and Linux. The only measured speed is this page’s demo.',
     keywords:
       'run LLM in the browser, WebAssembly local model, offline AI, run LLM locally on Mac, local AI model Windows',
     requirements: [
-      'A current browser with WebAssembly. Open <a class="inline" href="/#demo">the homepage demo</a> and press “Run on this device”. Nothing loads until that click.',
+      'A current browser with WebAssembly. Press “Run on this device” on this page. Nothing loads until that click.',
       'The demo uses wllama 3.8.1 (MIT) and the file <code>SmolLM2-135M-Instruct-Q4_K_M.gguf</code> from bartowski on Hugging Face (Apache-2.0). Context 1024, 1 thread, 0 GPU layers, batch 128. Generation stops at 64 tokens. Temperature is 0.6.',
       'The first run downloads the weights. After they are in memory, the page counts new network requests during generation.',
       'The CLI on the computer needs Node.js 22 or newer from <a class="inline" href="https://nodejs.org/">nodejs.org</a>. macOS can use <code>brew install node@22</code>. Windows can use <code>winget install OpenJS.NodeJS.LTS</code> when <code>node -v</code> reports 22 or higher. Linux can use a distro package that reports the same.',
@@ -308,7 +308,7 @@ function cliBody(guide: Guide): string {
 
       <h2>Serve and list</h2>
       <div class="prose">
-        <p><code>npx @boole/cli list</code> prints the models already downloaded. <code>npx @boole/cli serve</code> starts a server for local development only. It has no authentication. It accepts <code>POST /generate</code>. Do not put that server on a public network.</p>
+        <p><code>npx @boole/cli list</code> prints the models already downloaded. <code>npx @boole/cli serve</code> starts a server for local development only. It has no authentication. It accepts <code>POST /generate</code>. Do not put that server on a public network. A production gateway in front of your providers is separate work, described on <a class="inline" href="/hybrid-routing/">hybrid routing</a>. This development server is not that gateway.</p>
       </div>
       ${cmd('npx @boole/cli list\nnpx @boole/cli serve')}
 
@@ -321,7 +321,7 @@ function cliBody(guide: Guide): string {
         ${trouble}
       </div>
       ${related(guide.slug)}
-      <p class="prose end-note">The done-for-you package is a <a class="inline" href="${STRIPE}">$1,800</a> payment: live setup on up to 3 devices, a private document assistant, 30 days of support, and a full refund if it is not running after setup. Founding price for the first 10 customers. Acquiring the codebase is an inquiry to <a class="inline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Codebase acquisition')}">${EMAIL}</a>.</p>`;
+      <p class="prose end-note">The Token Cost Audit is a <a class="inline" href="${STRIPE}">$1,800</a> fixed fee. Implementation and managed plans: <a class="inline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Implementation and managed plans')}">${EMAIL}</a>.</p>`;
 }
 
 export function layout(opts: {
@@ -333,6 +333,7 @@ export function layout(opts: {
   keywords?: string;
   ld?: unknown;
   main: string;
+  foot?: string;
 }): string {
   const kw = opts.keywords
     ? `\n  <meta name="keywords" content="${esc(opts.keywords)}">`
@@ -356,14 +357,14 @@ export function layout(opts: {
   <meta property="og:image" content="${SITE}/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Imagine OS. On-device models for software that adapts.">
+  <meta property="og:image:alt" content="Boole. Repetitive LLM calls on hardware you own.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${opts.canonical}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(opts.title)}">
   <meta name="twitter:description" content="${esc(opts.description)}">
   <meta name="twitter:image" content="${SITE}/og.png">
-  <meta name="twitter:image:alt" content="Imagine OS. On-device models for software that adapts.">
+  <meta name="twitter:image:alt" content="Boole. Repetitive LLM calls on hardware you own.">
   <meta name="theme-color" content="#090909">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>${ld}
@@ -372,11 +373,12 @@ export function layout(opts: {
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="bar">
-    <a class="brand" href="/">boole <span>Imagine OS</span></a>
+    <a class="brand" href="/">boole</a>
     <nav class="nav-links" aria-label="Page">
-      <a href="/#energy">Energy</a>
-      <a href="/#devices">Devices</a>
-      <a href="/#faq">FAQ</a>
+      <a href="/audit/">Audit</a>
+      <a href="/how-it-works/">How it works</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/guides/">Guides</a>
     </nav>
   </header>
   <main id="content" tabindex="-1">
@@ -384,17 +386,21 @@ export function layout(opts: {
   </main>
   <footer>
     <div class="wrap footer-row">
-      <span>© 2026 Boole AI, Inc.</span>
-      <a href="/#license">License</a>
-      <a href="/#offers">Ways to work with Boole</a>
-      <a href="/guides/">Setup guides</a>
+      <span>© 2026 Boole AI, Inc. All rights reserved.</span>
+      <a href="/audit/">Audit</a>
+      <a href="/how-it-works/">How it works</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/calculator/">Calculator</a>
+      <a href="/hybrid-routing/">Hybrid routing</a>
       <a href="/on-premise/">On-premise</a>
-      <a href="/compare/ollama-lm-studio-llama-cpp/">Compare</a>
-      <a href="/ollama-alternative/">Ollama alternative</a>
+      <a href="/compare/">Compare</a>
+      <a href="/guides/">Setup guides</a>
+      <a href="/contact/">Contact</a>
       <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
       <a href="mailto:${EMAIL}">${EMAIL}</a>
     </div>
   </footer>
+  ${opts.foot ?? ''}
 </body>
 </html>`;
 }
@@ -436,7 +442,7 @@ export type BuiltPage = { file: string; html: string; loc?: string };
 export function sitePages(css: string): BuiltPage[] {
   const welcomeMain = `<section id="vision">
       <div class="wrap">
-        <p class="kicker">Done for you</p>
+        <p class="kicker">Token Cost Audit</p>
         <h1>Payment received.</h1>
         <p class="lede">You’ll be onboarded in less than 24 hours — just wait for an email from us at <a class="inline" href="mailto:${EMAIL}">${EMAIL}</a>.</p>
         <div class="prose">
@@ -486,14 +492,19 @@ export function sitePages(css: string): BuiltPage[] {
         <h1>Run a local AI model on your device.</h1>
         <p class="lede">Pick the machine in front of you. Each guide uses @boole/cli 0.7.0 on Node.js 22 or newer: doctor, pull, run, models, list, and serve.</p>
         <div class="prose">
-          <p>These pages are for people who want to run an LLM locally on a Mac, run a local AI model on Windows, or keep offline AI on Linux. The first command is <code>npx @boole/cli doctor</code>. <code>serve</code> is a local development server with no authentication and a <code>POST /generate</code> route. No guide invents a benchmark. The only measured speed on this site is the browser demo.</p>
+          <p>These pages are for people who want to run an LLM locally on a Mac, run a local AI model on Windows, or keep offline AI on Linux. The first command is <code>npx @boole/cli doctor</code>. <code>serve</code> is a local development server with no authentication and a <code>POST /generate</code> route. No guide invents a benchmark. The only measured speed on this site is the <a class="inline" href="/guides/browser/">browser demo</a>.</p>
           <p>Linux armv7l and riscv64 have CPU prebuilts (<code>linux-armv7l</code>, <code>linux-riscv64</code>) and do not have their own page. 32-bit Raspberry Pi OS is the armv7l package, not the <a class="inline" href="/guides/linux-arm64/">arm64 guide</a>.</p>
+        </div>
+        <h2>Serve a local model behind a gateway</h2>
+        <div class="prose">
+          <p><code>npx @boole/cli serve</code> is for local development on the machine in front of you. No authentication. <code>POST /generate</code>. Do not expose it on a public network. A gateway that sends repetitive calls to that kind of local model, and leaves hard calls in the cloud, is the <a class="inline" href="/hybrid-routing/">hybrid routing</a> work. It is scoped after a <a class="inline" href="/audit/">Token Cost Audit</a>, not something this development server turns on by itself.</p>
         </div>
         <h2>For a business</h2>
         <ul class="guide-links">
-          <li><a href="/on-premise/">On-premise private LLM setup</a></li>
-          <li><a href="/compare/ollama-lm-studio-llama-cpp/">Ollama vs LM Studio vs llama.cpp vs Boole</a></li>
-          <li><a href="/ollama-alternative/">An Ollama alternative with setup and support</a></li>
+          <li><a href="/audit/">Token Cost Audit</a></li>
+          <li><a href="/hybrid-routing/">Hybrid routing</a></li>
+          <li><a href="/on-premise/">On-premise, for calls that stay on your hardware</a></li>
+          <li><a href="/compare/">OpenRouter, Portkey, Not Diamond, LiteLLM</a></li>
         </ul>
         ${guideIndex()}
       </div>
@@ -519,7 +530,7 @@ export function sitePages(css: string): BuiltPage[] {
         css,
         title: 'Run a local AI model on your device — Boole',
         description:
-          'Setup guides for a local LLM on Mac, Windows, and Linux, plus a browser demo. Install the Boole CLI and use doctor, pull, run, and models.',
+          'Setup guides for a local LLM on Mac, Windows, and Linux, plus a browser demo. @boole/cli 0.7.0 on Node.js 22 or newer: doctor, pull, run, models, list, and serve.',
         canonical: `${SITE}/guides/`,
         robots: 'index, follow',
         keywords:
@@ -542,12 +553,63 @@ export function sitePages(css: string): BuiltPage[] {
         robots: 'index, follow',
         keywords: guide.keywords,
         ld: guideLd(guide),
-        main: `<section class="doc"><div class="wrap">${cliBody(guide)}</div></section>`,
+        main: `<section class="doc"><div class="wrap">${guide.slug === 'browser' ? browserDemo() : ''}${cliBody(guide)}</div></section>`,
+        foot: guide.slug === 'browser' ? browserDemoScript() : undefined,
       }),
     });
   }
 
-  return pages.concat(seoPages(css));
+  return pages.concat(marketingPages(css));
+}
+
+function browserDemo(): string {
+  return `<div id="demo">
+        <h2>Run a model in this browser</h2>
+        <div class="prose">
+          <p>Press the button and a small open model loads into WebAssembly on this device. Nothing is typed in for you, and the tokens are the model’s. This is SmolLM2 135M Instruct at Q4_K_M. The first run downloads the weights from Hugging Face. Generation is capped at 64 tokens. After the weights are in memory, generation does not call a server. The published measurement from one run of this setup is 12.3 tok/s, 64 tokens, about 5187 ms, on a 4-core Xeon, one thread, no GPU layers. A 20B model at 200 tok/s is a goal, not this demo.</p>
+        </div>
+        <div class="bench">
+          <div class="bench-top">
+            <strong>SmolLM2-135M-Instruct</strong>
+            <span>Q4_K_M · llama.cpp via wllama · Apache-2.0 weights</span>
+          </div>
+          <label for="demo-prompt">Prompt</label>
+          <textarea id="demo-prompt" maxlength="500">What does it mean to run a language model on the device?</textarea>
+          <button class="btn btn-pay" id="run-demo" type="button">Run on this device</button>
+          <p class="bench-meta" id="demo-status">Waiting. Weights are not loaded.</p>
+          <div class="bench-meta">
+            <span>Decode <strong id="demo-metrics">—</strong></span>
+            <span id="demo-net">No generation yet</span>
+          </div>
+          <label for="demo-output">Output</label>
+          <pre id="demo-output" aria-live="polite"></pre>
+          <p class="host" id="demo-host">Hardware is reported when you run it.</p>
+        </div>
+      </div>`;
+}
+
+function browserDemoScript(): string {
+  return `<script>
+  (function () {
+    var btn = document.getElementById('run-demo');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      if (typeof WebAssembly !== 'object') {
+        document.getElementById('demo-status').textContent = 'This browser does not provide WebAssembly. The command-line runtime is npx @boole/cli.';
+        return;
+      }
+      btn.disabled = true;
+      import('/demo.js').then(function (mod) {
+        return mod.run();
+      }).catch(function (err) {
+        document.getElementById('demo-status').textContent = (err && err.message) ? err.message : 'The demo failed to start.';
+      }).then(function () {
+        btn.disabled = false;
+        btn.textContent = 'Run again';
+      });
+    });
+  })();
+  </script>`;
 }
 
 function guideIndex(): string {

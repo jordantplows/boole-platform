@@ -15,14 +15,14 @@
   <meta property="og:image" content="https://boole.sh/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Imagine OS. On-device models for software that adapts.">
+  <meta property="og:image:alt" content="Boole. Repetitive LLM calls on hardware you own.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boole.sh/guides/windows-x64/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Run a local AI model on Windows — Boole">
   <meta name="twitter:description" content="Run a local AI model on Windows x64 with NVIDIA CUDA, Vulkan, or the CPU. Install the Boole CLI and use boole doctor, pull, and run.">
   <meta name="twitter:image" content="https://boole.sh/og.png">
-  <meta name="twitter:image:alt" content="Imagine OS. On-device models for software that adapts.">
+  <meta name="twitter:image:alt" content="Boole. Repetitive LLM calls on hardware you own.">
   <meta name="theme-color" content="#090909">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
@@ -147,8 +147,10 @@ body {
 
 .nav-links {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.35rem;
+  justify-content: flex-end;
+  gap: 0.75rem 1.35rem;
   margin-left: auto;
 }
 
@@ -1052,6 +1054,11 @@ footer {
   margin-top: 1.15rem;
 }
 
+.doc .card h3,
+.flow h3 {
+  margin-top: 0;
+}
+
 .doc .prose,
 .doc ul,
 .doc ol {
@@ -1086,6 +1093,55 @@ footer {
 
 .doc pre code {
   font-size: inherit;
+}
+
+.home h1 {
+  max-width: 18ch;
+  font-size: clamp(2.35rem, 4.8vw, 3.75rem);
+}
+
+.card .text-link {
+  display: inline-block;
+  margin-top: 0.85rem;
+}
+
+.calc {
+  display: grid;
+  gap: 0.95rem;
+  max-width: 40rem;
+  margin-top: 1.25rem;
+}
+
+.calc label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.calc .hint {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.calc input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--text);
+  font: 430 1rem/1.4 var(--sans);
+}
+
+.calc-out {
+  max-width: 40rem;
+  margin-top: 1.5rem;
+}
+
+#calc-result {
+  white-space: pre-wrap;
 }
 
 .aside {
@@ -1194,11 +1250,12 @@ footer {
 <body>
   <a class="skip" href="#content">Skip to content</a>
   <header class="bar">
-    <a class="brand" href="/">boole <span>Imagine OS</span></a>
+    <a class="brand" href="/">boole</a>
     <nav class="nav-links" aria-label="Page">
-      <a href="/#energy">Energy</a>
-      <a href="/#devices">Devices</a>
-      <a href="/#faq">FAQ</a>
+      <a href="/audit/">Audit</a>
+      <a href="/how-it-works/">How it works</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/guides/">Guides</a>
     </nav>
   </header>
   <main id="content" tabindex="-1">
@@ -1259,7 +1316,7 @@ npx @boole/cli doctor --json</code></pre>
 
       <h2>Serve and list</h2>
       <div class="prose">
-        <p><code>npx @boole/cli list</code> prints the models already downloaded. <code>npx @boole/cli serve</code> starts a server for local development only. It has no authentication. It accepts <code>POST /generate</code>. Do not put that server on a public network.</p>
+        <p><code>npx @boole/cli list</code> prints the models already downloaded. <code>npx @boole/cli serve</code> starts a server for local development only. It has no authentication. It accepts <code>POST /generate</code>. Do not put that server on a public network. A production gateway in front of your providers is separate work, described on <a class="inline" href="/hybrid-routing/">hybrid routing</a>. This development server is not that gateway.</p>
       </div>
       <pre><code>npx @boole/cli list
 npx @boole/cli serve</code></pre>
@@ -1273,20 +1330,24 @@ npx @boole/cli serve</code></pre>
         <h3>CUDA does not load</h3><p>Confirm the CUDA prebuilt installed, and that the toolkit matches the version the runtime’s CUDA guide documents. The CPU package <code>win-x64</code> is the fallback this release actually ships. This page has no Windows tok/s number.</p>
       </div>
       <h2>Other devices</h2><ul class="guide-links"><li><a href="/guides/macos-apple-silicon/">macOS Apple Silicon</a></li><li><a href="/guides/macos-intel/">macOS Intel</a></li><li><a href="/guides/linux-x64/">Linux x64</a></li><li><a href="/guides/linux-arm64/">Linux arm64</a></li><li><a href="/guides/windows-arm64/">Windows arm64</a></li><li><a href="/guides/browser/">Browser demo</a></li></ul>
-      <p class="prose end-note">The done-for-you package is a <a class="inline" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">$1,800</a> payment: live setup on up to 3 devices, a private document assistant, 30 days of support, and a full refund if it is not running after setup. Founding price for the first 10 customers. Acquiring the codebase is an inquiry to <a class="inline" href="mailto:hello@booleinference.com?subject=Boole%3A%20Codebase%20acquisition">hello@booleinference.com</a>.</p></div></section>
+      <p class="prose end-note">The Token Cost Audit is a <a class="inline" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">$1,800</a> fixed fee. Implementation and managed plans: <a class="inline" href="mailto:hello@booleinference.com?subject=Boole%3A%20Implementation%20and%20managed%20plans">hello@booleinference.com</a>.</p></div></section>
   </main>
   <footer>
     <div class="wrap footer-row">
-      <span>© 2026 Boole AI, Inc.</span>
-      <a href="/#license">License</a>
-      <a href="/#offers">Ways to work with Boole</a>
-      <a href="/guides/">Setup guides</a>
+      <span>© 2026 Boole AI, Inc. All rights reserved.</span>
+      <a href="/audit/">Audit</a>
+      <a href="/how-it-works/">How it works</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/calculator/">Calculator</a>
+      <a href="/hybrid-routing/">Hybrid routing</a>
       <a href="/on-premise/">On-premise</a>
-      <a href="/compare/ollama-lm-studio-llama-cpp/">Compare</a>
-      <a href="/ollama-alternative/">Ollama alternative</a>
+      <a href="/compare/">Compare</a>
+      <a href="/guides/">Setup guides</a>
+      <a href="/contact/">Contact</a>
       <a href="https://www.npmjs.com/package/@boole/cli">npm</a>
       <a href="mailto:hello@booleinference.com">hello@booleinference.com</a>
     </div>
   </footer>
+  
 </body>
 </html>
