@@ -10,7 +10,6 @@ import { OFFER_DESCRIPTION } from './offer.ts';
 
 const SITE = 'https://boole.sh';
 const EMAIL = 'hello@booleinference.com';
-const STRIPE = 'https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03';
 
 export type Guide = {
   slug: string;
@@ -321,7 +320,7 @@ function cliBody(guide: Guide): string {
         ${trouble}
       </div>
       ${related(guide.slug)}
-      <p class="prose end-note"><a class="inline" href="${STRIPE}">Book a Token Cost Audit</a>. Pricing is scoped per engagement. Implementation and managed plans: <a class="inline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Implementation and managed plans')}">${EMAIL}</a>.</p>`;
+      <p class="prose end-note"><a class="inline" href="/contact/">Book a free audit</a>. The Token Cost Audit is free. Boole charges 10% of measured monthly savings. Nothing is owed if there are no savings. Email <a class="inline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Token Cost Audit')}">${EMAIL}</a>.</p>`;
 }
 
 export function layout(opts: {
@@ -377,6 +376,7 @@ export function layout(opts: {
     <nav class="nav-links" aria-label="Page">
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
       <a href="/pricing/">Pricing</a>
       <a href="/guides/">Guides</a>
     </nav>
@@ -389,6 +389,9 @@ export function layout(opts: {
       <span>© 2026 Boole AI, Inc. All rights reserved.</span>
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
+      <a href="/context-windows/">Context windows</a>
+      <a href="/rag-pipelines/">RAG pipelines</a>
       <a href="/pricing/">Pricing</a>
       <a href="/calculator/">Calculator</a>
       <a href="/hybrid-routing/">Hybrid routing</a>
@@ -443,7 +446,7 @@ export function sitePages(css: string): BuiltPage[] {
   const welcomeMain = `<section id="vision">
       <div class="wrap">
         <p class="kicker">Token Cost Audit</p>
-        <h1>Payment received.</h1>
+        <h1>Request received.</h1>
         <p class="lede">You’ll be onboarded in less than 24 hours — just wait for an email from us at <a class="inline" href="mailto:${EMAIL}">${EMAIL}</a>.</p>
         <div class="prose">
           <p>${OFFER_DESCRIPTION} While you wait, the setup guides cover running a local model yourself.</p>
@@ -501,9 +504,12 @@ export function sitePages(css: string): BuiltPage[] {
         </div>
         <h2>For a business</h2>
         <ul class="guide-links">
+          <li><a href="/llm-serving/">LLM serving and optimization</a></li>
           <li><a href="/audit/">Token Cost Audit</a></li>
           <li><a href="/hybrid-routing/">Hybrid routing</a></li>
           <li><a href="/on-premise/">On-premise, for calls that stay on your hardware</a></li>
+          <li><a href="/context-windows/">Context windows</a></li>
+          <li><a href="/rag-pipelines/">RAG pipelines</a></li>
           <li><a href="/compare/">OpenRouter, Portkey, Not Diamond, LiteLLM</a></li>
         </ul>
         ${guideIndex()}
@@ -515,9 +521,9 @@ export function sitePages(css: string): BuiltPage[] {
       file: 'welcome/index.html',
       html: layout({
         css,
-        title: 'Payment received — Boole',
+        title: 'Request received — Boole',
         description:
-          'Payment received. You’ll be onboarded in less than 24 hours — just wait for an email from us at hello@booleinference.com.',
+          'Request received. You’ll be onboarded in less than 24 hours — just wait for an email from us at hello@booleinference.com.',
         canonical: `${SITE}/welcome/`,
         robots: 'noindex, nofollow',
         main: welcomeMain,

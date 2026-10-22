@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>How LLM cost optimization works — Boole</title>
-  <meta name="description" content="Audit the bill, route repetitive calls onto hardware you own, keep hard calls in the cloud, then measure against invoices. No savings percentage in advance.">
+  <title>How LLM serving and optimization works — Boole</title>
+  <meta name="description" content="LLM cost optimization starts with the bill you have. Repetitive calls can move to self-hosted serving. Hard calls stay in the cloud. No savings percentage in advance.">
   <meta name="robots" content="index, follow">
-  <meta name="keywords" content="how to reduce LLM costs, LLM FinOps consultant, hybrid LLM routing">
+  <meta name="keywords" content="LLM cost optimization, LLM serving and optimization, self-hosted LLM serving, how to reduce LLM costs">
   <link rel="canonical" href="https://boole.sh/how-it-works/">
   <meta property="og:site_name" content="Boole">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="How LLM cost optimization works — Boole">
-  <meta property="og:description" content="Audit the bill, route repetitive calls onto hardware you own, keep hard calls in the cloud, then measure against invoices. No savings percentage in advance.">
+  <meta property="og:title" content="How LLM serving and optimization works — Boole">
+  <meta property="og:description" content="LLM cost optimization starts with the bill you have. Repetitive calls can move to self-hosted serving. Hard calls stay in the cloud. No savings percentage in advance.">
   <meta property="og:image" content="https://boole.sh/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,14 +19,14 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boole.sh/how-it-works/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="How LLM cost optimization works — Boole">
-  <meta name="twitter:description" content="Audit the bill, route repetitive calls onto hardware you own, keep hard calls in the cloud, then measure against invoices. No savings percentage in advance.">
+  <meta name="twitter:title" content="How LLM serving and optimization works — Boole">
+  <meta name="twitter:description" content="LLM cost optimization starts with the bill you have. Repetitive calls can move to self-hosted serving. Hard calls stay in the cloud. No savings percentage in advance.">
   <meta name="twitter:image" content="https://boole.sh/og.png">
   <meta name="twitter:image:alt" content="Boole. Repetitive LLM calls on hardware you own.">
   <meta name="theme-color" content="#090909">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"How it works","name":"How it works","description":"Audit the bill, route repetitive calls onto hardware you own, keep hard calls in the cloud, then measure against invoices. No savings percentage in advance.","url":"https://boole.sh/how-it-works/","inLanguage":"en","mainEntityOfPage":"https://boole.sh/how-it-works/","author":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"publisher":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do you move traffic before an eval?","acceptedAnswer":{"@type":"Answer","text":"No. A call is a candidate until quality is checked on a sample of your traffic. Open models are weaker on hard tasks. The hard calls stay in the cloud."}},{"@type":"Question","name":"Is boole serve the production gateway?","acceptedAnswer":{"@type":"Answer","text":"No. npx @boole/cli serve is a local development server with no authentication. It accepts POST /generate. It is not an OpenAI-compatible public API, and it should not be exposed on a public network."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Boole","item":"https://boole.sh/"},{"@type":"ListItem","position":2,"name":"How it works","item":"https://boole.sh/how-it-works/"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"LLM cost optimization starts with the bill.","name":"LLM cost optimization starts with the bill.","description":"LLM cost optimization starts with the bill you have. Repetitive calls can move to self-hosted serving. Hard calls stay in the cloud. No savings percentage in advance.","url":"https://boole.sh/how-it-works/","inLanguage":"en","mainEntityOfPage":"https://boole.sh/how-it-works/","author":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"publisher":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do you move traffic before an eval?","acceptedAnswer":{"@type":"Answer","text":"No. A call is a candidate until quality is checked on a sample of your traffic. Open models are weaker on hard tasks. The hard calls stay in the cloud."}},{"@type":"Question","name":"Is boole serve the production gateway?","acceptedAnswer":{"@type":"Answer","text":"No. npx @boole/cli serve is a local development server with no authentication. It accepts POST /generate. It is not an OpenAI-compatible public API, and it should not be exposed on a public network."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Boole","item":"https://boole.sh/"},{"@type":"ListItem","position":2,"name":"How it works","item":"https://boole.sh/how-it-works/"}]}]}</script>
   <style>@font-face {
   font-family: "Instrument Sans";
   src: url("/fonts/instrument-sans.woff2") format("woff2");
@@ -918,6 +918,23 @@ textarea {
   text-transform: uppercase;
 }
 
+.spec.example th {
+  width: 46%;
+  color: var(--text);
+  font-size: 0.98rem;
+  font-weight: 450;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.spec caption {
+  caption-side: bottom;
+  padding-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
 code {
   font-family: var(--mono);
   font-size: 0.9em;
@@ -1254,6 +1271,7 @@ footer {
     <nav class="nav-links" aria-label="Page">
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
       <a href="/pricing/">Pricing</a>
       <a href="/guides/">Guides</a>
     </nav>
@@ -1262,11 +1280,11 @@ footer {
     <section class="doc"><div class="wrap">
       <p class="crumbs"><a href="/">Boole</a> · How it works</p>
       <p class="kicker">Audit, route, measure</p>
-      <h1>We measure first.</h1>
-      <p class="lede">Cut your LLM bill without cutting quality starts with the bill you already have. Routing comes after a sample of your own traffic passes your evals.</p>
+      <h1>LLM cost optimization starts with the bill.</h1>
+      <p class="lede">Cut your LLM bill without cutting quality starts with the bill you already have. Self-hosted LLM serving comes after a sample of your own traffic passes your evals.</p>
       <h2>1. Audit</h2>
       <div class="prose">
-        <p>The Token Cost Audit breaks spend down by endpoint and model. It lists calls that could use caching, a batch API, or a shorter prompt. It lists calls that could move to a local model, and it tests quality on a sample before that list is a recommendation. It calculates on-prem break-even from your volumes, and it ends with an implementation quote. Pricing is scoped per engagement.</p>
+        <p>The Token Cost Audit is free. It breaks spend down by endpoint and model. It lists calls that could use caching, a batch API, a shorter prompt, or a smaller retrieval. It lists calls that could move to a local model, and it tests quality on a sample before that list is a recommendation. It calculates on-prem break-even from your volumes. The map of that work is <a class="inline" href="/llm-serving/">LLM serving and optimization</a>.</p>
       </div>
       <h2>2. Route</h2>
       <div class="prose">
@@ -1274,12 +1292,13 @@ footer {
       </div>
       <h2>3. Measure</h2>
       <div class="prose">
-        <p>Invoices compared with a baseline you lock are the measurement. Boole will not publish a savings percentage until a real customer result exists, and only with their written permission. The <a class="inline" href="/calculator/">calculator</a> on this site runs numbers you type and shows the formula. It is not that result.</p>
+        <p>Invoices compared with a baseline you lock are the measurement. The fee is 10% of that measured monthly difference. Nothing is owed if the difference is not savings. Boole will not publish a savings percentage until a real customer result exists, and only with their written permission. The <a class="inline" href="/calculator/">calculator</a> on this site runs numbers you type and shows the formula. It is not that result. The fee’s worked example is on <a class="inline" href="/pricing/">pricing</a>.</p>
       </div>
+      <p class="prose end-note">Related: <a class="inline" href="/llm-serving/">LLM serving</a>, <a class="inline" href="/hybrid-routing/">hybrid routing</a>, <a class="inline" href="/context-windows/">context windows</a>, <a class="inline" href="/rag-pipelines/">RAG pipelines</a>.</p>
       <div class="actions" style="margin-top:1.5rem">
-        <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Book a Token Cost Audit</a>
-        <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Implementation%20and%20managed%20plans">Contact us</a>
-        <p class="price-inline">Pricing is scoped per engagement. Implementation and managed plans are a separate conversation.</p>
+        <a class="btn btn-pay" href="/contact/">Book a free audit</a>
+        <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Token%20Cost%20Audit">Contact us</a>
+        <p class="price-inline">The Token Cost Audit is free. Boole charges 10% of measured monthly savings. No setup fee. Nothing is owed if there are no savings.</p>
       </div>
       <h2>Questions</h2>
       <div class="faq"><details><summary>Do you move traffic before an eval?</summary><p>No. A call is a candidate until quality is checked on a sample of your traffic. Open models are weaker on hard tasks. The hard calls stay in the cloud.</p></details><details><summary>Is boole serve the production gateway?</summary><p>No. <code>npx @boole/cli serve</code> is a local development server with no authentication. It accepts <code>POST /generate</code>. It is not an OpenAI-compatible public API, and it should not be exposed on a public network.</p></details></div>
@@ -1290,6 +1309,9 @@ footer {
       <span>© 2026 Boole AI, Inc. All rights reserved.</span>
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
+      <a href="/context-windows/">Context windows</a>
+      <a href="/rag-pipelines/">RAG pipelines</a>
       <a href="/pricing/">Pricing</a>
       <a href="/calculator/">Calculator</a>
       <a href="/hybrid-routing/">Hybrid routing</a>

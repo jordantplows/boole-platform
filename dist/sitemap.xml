@@ -16,6 +16,9 @@
   <url><loc>https://boole.sh/batch-api/</loc></url>
   <url><loc>https://boole.sh/prompt-compression/</loc></url>
   <url><loc>https://boole.sh/on-premise/</loc></url>
+  <url><loc>https://boole.sh/llm-serving/</loc></url>
+  <url><loc>https://boole.sh/context-windows/</loc></url>
+  <url><loc>https://boole.sh/rag-pipelines/</loc></url>
   <url><loc>https://boole.sh/pricing/</loc></url>
   <url><loc>https://boole.sh/compare/</loc></url>
   <url><loc>https://boole.sh/compare/openrouter/</loc></url>

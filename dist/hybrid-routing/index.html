@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hybrid LLM routing to hardware you own — Boole</title>
-  <meta name="description" content="Route repetitive LLM calls to a model on hardware you own. Keep hard calls in the cloud. RouteLLM’s published range is cited. Boole publishes no savings percentage.">
+  <title>Hybrid LLM serving on hardware you own — Boole</title>
+  <meta name="description" content="LLM inference optimization that keeps hard calls in the cloud and sends repetitive calls to hardware you own. RouteLLM’s published range is cited, not claimed as a Boole result.">
   <meta name="robots" content="index, follow">
-  <meta name="keywords" content="hybrid LLM routing, local LLM vs API cost, self-hosted LLM gateway, on-prem LLM deployment service">
+  <meta name="keywords" content="LLM inference optimization, hybrid LLM serving, self-hosted LLM serving, hybrid LLM routing">
   <link rel="canonical" href="https://boole.sh/hybrid-routing/">
   <meta property="og:site_name" content="Boole">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Hybrid LLM routing to hardware you own — Boole">
-  <meta property="og:description" content="Route repetitive LLM calls to a model on hardware you own. Keep hard calls in the cloud. RouteLLM’s published range is cited. Boole publishes no savings percentage.">
+  <meta property="og:title" content="Hybrid LLM serving on hardware you own — Boole">
+  <meta property="og:description" content="LLM inference optimization that keeps hard calls in the cloud and sends repetitive calls to hardware you own. RouteLLM’s published range is cited, not claimed as a Boole result.">
   <meta property="og:image" content="https://boole.sh/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,14 +19,14 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boole.sh/hybrid-routing/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hybrid LLM routing to hardware you own — Boole">
-  <meta name="twitter:description" content="Route repetitive LLM calls to a model on hardware you own. Keep hard calls in the cloud. RouteLLM’s published range is cited. Boole publishes no savings percentage.">
+  <meta name="twitter:title" content="Hybrid LLM serving on hardware you own — Boole">
+  <meta name="twitter:description" content="LLM inference optimization that keeps hard calls in the cloud and sends repetitive calls to hardware you own. RouteLLM’s published range is cited, not claimed as a Boole result.">
   <meta name="twitter:image" content="https://boole.sh/og.png">
   <meta name="twitter:image:alt" content="Boole. Repetitive LLM calls on hardware you own.">
   <meta name="theme-color" content="#090909">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Hybrid routing","name":"Hybrid routing","description":"Route repetitive LLM calls to a model on hardware you own. Keep hard calls in the cloud. RouteLLM’s published range is cited. Boole publishes no savings percentage.","url":"https://boole.sh/hybrid-routing/","inLanguage":"en","mainEntityOfPage":"https://boole.sh/hybrid-routing/","author":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"publisher":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What share of calls should move?","acceptedAnswer":{"@type":"Answer","text":"Unknown until an audit. It varies by workload. Boole does not publish a share, and does not use figures such as “the cheap 80%.”"}},{"@type":"Question","name":"Is RouteLLM’s 3.66× a Boole result?","acceptedAnswer":{"@type":"Answer","text":"No. It is the top of the range in the RouteLLM paper, on MT-Bench, at 95% of GPT-4 quality. The same paper reports 1.41× on MMLU and 1.49× on GSM8K. Results depend on the workload."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Boole","item":"https://boole.sh/"},{"@type":"ListItem","position":2,"name":"Hybrid routing","item":"https://boole.sh/hybrid-routing/"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Hybrid LLM serving for the calls that can leave the cloud.","name":"Hybrid LLM serving for the calls that can leave the cloud.","description":"LLM inference optimization that keeps hard calls in the cloud and sends repetitive calls to hardware you own. RouteLLM’s published range is cited, not claimed as a Boole result.","url":"https://boole.sh/hybrid-routing/","inLanguage":"en","mainEntityOfPage":"https://boole.sh/hybrid-routing/","author":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"publisher":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What share of calls should move?","acceptedAnswer":{"@type":"Answer","text":"Unknown until an audit. It varies by workload. Boole does not publish a share, and does not use figures such as “the cheap 80%.”"}},{"@type":"Question","name":"Is RouteLLM’s 3.66× a Boole result?","acceptedAnswer":{"@type":"Answer","text":"No. It is the top of the range in the RouteLLM paper, on MT-Bench, at 95% of GPT-4 quality. The same paper reports 1.41× on MMLU and 1.49× on GSM8K. Results depend on the workload."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Boole","item":"https://boole.sh/"},{"@type":"ListItem","position":2,"name":"Hybrid routing","item":"https://boole.sh/hybrid-routing/"}]}]}</script>
   <style>@font-face {
   font-family: "Instrument Sans";
   src: url("/fonts/instrument-sans.woff2") format("woff2");
@@ -918,6 +918,23 @@ textarea {
   text-transform: uppercase;
 }
 
+.spec.example th {
+  width: 46%;
+  color: var(--text);
+  font-size: 0.98rem;
+  font-weight: 450;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.spec caption {
+  caption-side: bottom;
+  padding-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
 code {
   font-family: var(--mono);
   font-size: 0.9em;
@@ -1254,6 +1271,7 @@ footer {
     <nav class="nav-links" aria-label="Page">
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
       <a href="/pricing/">Pricing</a>
       <a href="/guides/">Guides</a>
     </nav>
@@ -1262,8 +1280,8 @@ footer {
     <section class="doc"><div class="wrap">
       <p class="crumbs"><a href="/">Boole</a> · Hybrid routing</p>
       <p class="kicker">Local tier · cloud for the rest</p>
-      <h1>Route the easy calls to hardware you own. Keep the hard ones in the cloud.</h1>
-      <p class="lede">Classification, tagging, extraction, and summarization are the kind of repetitive calls an audit looks at. The share of your bill that fits is unknown until it is measured. This page does not guess it.</p>
+      <h1>Hybrid LLM serving for the calls that can leave the cloud.</h1>
+      <p class="lede">Classification, tagging, extraction, and summarization are the kind of repetitive calls an audit looks at. Hard calls stay in the cloud. The share of your bill that fits is unknown until it is measured. This page does not guess it.</p>
       <h2>What “hybrid” means here</h2>
       <div class="prose">
         <p>A gateway in your own environment sends a call either to the cloud model you already use or to a model running on hardware you own. Boole’s opening, next to cloud-only routers, is that second hop. Cloud gateways pick among cloud models. They do not publish a tier that runs on your machine.</p>
@@ -1276,12 +1294,13 @@ footer {
       </div>
       <h2>The development server</h2>
       <div class="prose">
-        <p><code>npx @boole/cli serve</code> starts a server for local development only. No authentication. <code>POST /generate</code>. <code>npx @boole/cli list</code> prints models already downloaded. Serving a local model behind a gateway you control is implementation work. The development server is not that gateway, and it is not for a public network.</p>
+        <p><code>npx @boole/cli serve</code> starts a server for local development only. No authentication. <code>POST /generate</code>. <code>npx @boole/cli list</code> prints models already downloaded. Serving a local model behind a gateway you control is implementation work. The development server is not that gateway, and it is not for a public network. The wider practice is <a class="inline" href="/llm-serving/">LLM serving and optimization</a>.</p>
       </div>
+      <p class="prose end-note">Related: <a class="inline" href="/llm-serving/">LLM serving</a>, <a class="inline" href="/on-premise/">on-premise</a>, <a class="inline" href="/context-windows/">context windows</a>, <a class="inline" href="/rag-pipelines/">RAG pipelines</a>.</p>
       <div class="actions" style="margin-top:1.5rem">
-        <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Book a Token Cost Audit</a>
-        <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Implementation%20and%20managed%20plans">Contact us</a>
-        <p class="price-inline">Pricing is scoped per engagement. Implementation and managed plans are a separate conversation.</p>
+        <a class="btn btn-pay" href="/contact/">Book a free audit</a>
+        <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Token%20Cost%20Audit">Contact us</a>
+        <p class="price-inline">The Token Cost Audit is free. Boole charges 10% of measured monthly savings. No setup fee. Nothing is owed if there are no savings.</p>
       </div>
       <h2>Questions</h2>
       <div class="faq"><details><summary>What share of calls should move?</summary><p>Unknown until an audit. It varies by workload. Boole does not publish a share, and does not use figures such as “the cheap 80%.”</p></details><details><summary>Is RouteLLM’s 3.66× a Boole result?</summary><p>No. It is the top of the range in the RouteLLM paper, on MT-Bench, at 95% of GPT-4 quality. The same paper reports 1.41× on MMLU and 1.49× on GSM8K. Results depend on the workload.</p></details></div>
@@ -1292,6 +1311,9 @@ footer {
       <span>© 2026 Boole AI, Inc. All rights reserved.</span>
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
+      <a href="/context-windows/">Context windows</a>
+      <a href="/rag-pipelines/">RAG pipelines</a>
       <a href="/pricing/">Pricing</a>
       <a href="/calculator/">Calculator</a>
       <a href="/hybrid-routing/">Hybrid routing</a>

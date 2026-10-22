@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Payment received — Boole</title>
-  <meta name="description" content="Payment received. You’ll be onboarded in less than 24 hours — just wait for an email from us at hello@booleinference.com.">
+  <title>Request received — Boole</title>
+  <meta name="description" content="Request received. You’ll be onboarded in less than 24 hours — just wait for an email from us at hello@booleinference.com.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="https://boole.sh/welcome/">
   <meta property="og:site_name" content="Boole">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Payment received — Boole">
-  <meta property="og:description" content="Payment received. You’ll be onboarded in less than 24 hours — just wait for an email from us at hello@booleinference.com.">
+  <meta property="og:title" content="Request received — Boole">
+  <meta property="og:description" content="Request received. You’ll be onboarded in less than 24 hours — just wait for an email from us at hello@booleinference.com.">
   <meta property="og:image" content="https://boole.sh/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -18,8 +18,8 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boole.sh/welcome/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Payment received — Boole">
-  <meta name="twitter:description" content="Payment received. You’ll be onboarded in less than 24 hours — just wait for an email from us at hello@booleinference.com.">
+  <meta name="twitter:title" content="Request received — Boole">
+  <meta name="twitter:description" content="Request received. You’ll be onboarded in less than 24 hours — just wait for an email from us at hello@booleinference.com.">
   <meta name="twitter:image" content="https://boole.sh/og.png">
   <meta name="twitter:image:alt" content="Boole. Repetitive LLM calls on hardware you own.">
   <meta name="theme-color" content="#090909">
@@ -916,6 +916,23 @@ textarea {
   text-transform: uppercase;
 }
 
+.spec.example th {
+  width: 46%;
+  color: var(--text);
+  font-size: 0.98rem;
+  font-weight: 450;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.spec caption {
+  caption-side: bottom;
+  padding-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
 code {
   font-family: var(--mono);
   font-size: 0.9em;
@@ -1252,6 +1269,7 @@ footer {
     <nav class="nav-links" aria-label="Page">
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
       <a href="/pricing/">Pricing</a>
       <a href="/guides/">Guides</a>
     </nav>
@@ -1260,10 +1278,10 @@ footer {
     <section id="vision">
       <div class="wrap">
         <p class="kicker">Token Cost Audit</p>
-        <h1>Payment received.</h1>
+        <h1>Request received.</h1>
         <p class="lede">You’ll be onboarded in less than 24 hours — just wait for an email from us at <a class="inline" href="mailto:hello@booleinference.com">hello@booleinference.com</a>.</p>
         <div class="prose">
-          <p>The Token Cost Audit from Boole AI, Inc. includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Pricing is scoped per engagement. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals. While you wait, the setup guides cover running a local model yourself.</p>
+          <p>The Token Cost Audit is free. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even from your volumes; and the same look at context windows and RAG pipelines when they are on the bill. Boole then charges 10% of measured monthly savings on the LLM bill: a baseline measured before changes, compared with the bill after. There is no setup fee. Nothing is owed if there are no savings. Boole does not publish a savings percentage. The 10% is the fee on savings that were measured, not a promise that the bill will fall. Whether any traffic should move depends on your workload and your own evals. While you wait, the setup guides cover running a local model yourself.</p>
         </div>
         <h2>Next steps</h2>
         <ul class="guide-index"><li><a href="/guides/macos-apple-silicon/"><span class="tag">macOS</span><strong>macOS Apple Silicon</strong><span>Run an LLM locally on a Mac with Apple Silicon</span></a></li><li><a href="/guides/macos-intel/"><span class="tag">macOS</span><strong>macOS Intel</strong><span>Run a local AI model on an Intel Mac</span></a></li><li><a href="/guides/windows-x64/"><span class="tag">Windows</span><strong>Windows x64</strong><span>Run a local AI model on Windows</span></a></li><li><a href="/guides/linux-x64/"><span class="tag">Linux</span><strong>Linux x64</strong><span>Offline AI on Linux x64</span></a></li><li><a href="/guides/linux-arm64/"><span class="tag">Linux</span><strong>Linux arm64</strong><span>Run a local model on Linux arm64</span></a></li><li><a href="/guides/windows-arm64/"><span class="tag">Windows</span><strong>Windows arm64</strong><span>Run a local model on Windows arm64</span></a></li><li><a href="/guides/browser/"><span class="tag">Browser</span><strong>Browser demo</strong><span>Run a model in the browser</span></a></li></ul>
@@ -1275,6 +1293,9 @@ footer {
       <span>© 2026 Boole AI, Inc. All rights reserved.</span>
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
+      <a href="/context-windows/">Context windows</a>
+      <a href="/rag-pipelines/">RAG pipelines</a>
       <a href="/pricing/">Pricing</a>
       <a href="/calculator/">Calculator</a>
       <a href="/hybrid-routing/">Hybrid routing</a>

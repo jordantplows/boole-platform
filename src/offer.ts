@@ -1,19 +1,22 @@
 /**
- * Token Cost Audit. The Stripe link and the public wording stay in this file
- * so the package can change later without a hunt through the pages.
- * No published price, no savings percentage, and no guarantee.
+ * Commercial terms. The Token Cost Audit is free. The fee is 10% of measured
+ * monthly savings on the customer's LLM bill. There is no setup fee, and
+ * nothing is owed when measured savings are zero. The booking path is email,
+ * not a card checkout.
+ * Boole does not publish a savings percentage. The 10% is the fee on savings
+ * that were measured, not a prediction.
  */
 
-export const STRIPE_URL = 'https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03';
-export const AUDIT_CTA = 'Book a Token Cost Audit';
+export const AUDIT_CTA = 'Book a free audit';
 export const EMAIL = 'hello@booleinference.com';
-export const IMPL_MAIL = `mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Implementation and managed plans')}`;
+export const CONTACT_PATH = '/contact/';
+export const IMPL_MAIL = `mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Token Cost Audit')}`;
 
 export const OFFER_BLURB =
-  'Pricing is scoped per engagement. Implementation and managed plans are a separate conversation.';
+  'The Token Cost Audit is free. Boole charges 10% of measured monthly savings. No setup fee. Nothing is owed if there are no savings.';
 
 export const OFFER_DESCRIPTION =
-  'The Token Cost Audit from Boole AI, Inc. includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Pricing is scoped per engagement. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals.';
+  'The Token Cost Audit is free. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even from your volumes; and the same look at context windows and RAG pipelines when they are on the bill. Boole then charges 10% of measured monthly savings on the LLM bill: a baseline measured before changes, compared with the bill after. There is no setup fee. Nothing is owed if there are no savings. Boole does not publish a savings percentage. The 10% is the fee on savings that were measured, not a promise that the bill will fall. Whether any traffic should move depends on your workload and your own evals.';
 
 const AUDIT_ITEMS: Array<{ title: string; text: string }> = [
   {
@@ -33,8 +36,8 @@ const AUDIT_ITEMS: Array<{ title: string; text: string }> = [
     text: 'An on-prem comparison using your volumes. Hardware has a fixed cost. We do not publish a generic savings figure.',
   },
   {
-    title: 'Implementation quote',
-    text: 'A scoped quote for the work after the audit. That work is quoted separately and is not included in the audit.',
+    title: 'Context, retrieval, and compression',
+    text: 'Context-window and RAG candidates when they are on the bill. Prompt compression is one tool on that list, not the whole engagement.',
   },
 ];
 
@@ -48,5 +51,5 @@ export function auditChecklistHtml(opts?: { title?: boolean }): string {
 }
 
 export function auditButton(): string {
-  return `<a class="btn btn-pay" href="${STRIPE_URL}">${AUDIT_CTA}</a>`;
+  return `<a class="btn btn-pay" href="${CONTACT_PATH}">${AUDIT_CTA}</a>`;
 }

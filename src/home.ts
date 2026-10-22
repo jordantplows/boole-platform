@@ -4,15 +4,15 @@
  */
 
 import { layout } from './guides.ts';
-import { EMAIL, IMPL_MAIL, OFFER_BLURB, OFFER_DESCRIPTION, STRIPE_URL, auditButton, auditChecklistHtml } from './offer.ts';
+import { CONTACT_PATH, EMAIL, IMPL_MAIL, OFFER_BLURB, OFFER_DESCRIPTION, auditButton, auditChecklistHtml } from './offer.ts';
 
 const SITE = 'https://boole.sh';
 
-const TITLE = 'Move repetitive LLM calls onto hardware you own — Boole';
+const TITLE = 'LLM Serving and Optimization — Boole';
 const DESCRIPTION =
-  'Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud. Pricing for the Token Cost Audit is scoped per engagement. Boole publishes no savings percentage.';
+  'LLM serving and optimization for repetitive calls on hardware you own, with hard calls left in the cloud. The audit is free. The fee is 10% of measured monthly savings.';
 const KEYWORDS =
-  'LLM cost audit, AI cost optimization consulting, reduce OpenAI API costs service, LLM FinOps consultant, on-prem LLM deployment service, hybrid LLM routing, local LLM vs API cost';
+  'LLM serving and optimization, LLM serving, LLM inference optimization, LLM cost optimization, self-hosted LLM serving, context window optimization, RAG pipeline optimization';
 
 const FAQ = [
   {
@@ -28,12 +28,16 @@ const FAQ = [
     a: OFFER_DESCRIPTION,
   },
   {
-    q: 'What about implementation and a managed plan?',
-    a: 'Those are not priced on this site. Email hello@booleinference.com and we will scope them. The audit includes an implementation quote. It does not include the implementation itself.',
+    q: 'What do you charge?',
+    a: 'The Token Cost Audit is free. There is no setup fee. Boole charges 10% of measured monthly savings on the LLM bill: a baseline measured before changes, compared with the bill after. Nothing is owed if there are no savings. The 10% is the fee, not a prediction of how far the bill will fall.',
   },
   {
     q: 'What speed has Boole measured?',
     a: 'One number: 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, on a 4-core Xeon CPU in WebAssembly, one thread, no GPU layers. That is the browser demo, not a server. A 20-billion-parameter model at 200 tok/s is a roadmap goal, not a measurement.',
+  },
+  {
+    q: 'What do you mean by LLM serving?',
+    a: 'Serving is generating the tokens. Optimization is deciding which calls stay in the cloud, which can run on hardware you own, and which prompts are longer than the task needs. Boole does not operate a public hosted serving API. npx @boole/cli serve is a local development server with no authentication. It accepts POST /generate and should not be put on a public network.',
   },
   {
     q: 'Where does a prompt go?',
@@ -72,12 +76,12 @@ export function homePage(css: string): string {
       {
         '@type': 'Service',
         '@id': `${SITE}/#service`,
-        name: 'LLM token cost optimization',
-        serviceType: 'Token cost audit and hybrid local-cloud routing',
+        name: 'LLM serving and optimization',
+        serviceType: 'LLM serving, inference optimization, and a token cost audit',
         provider: { '@id': `${SITE}/#organization` },
         areaServed: 'Worldwide',
         description: DESCRIPTION,
-        url: `${SITE}/audit/`,
+        url: `${SITE}/llm-serving/`,
       },
       {
         '@type': 'Product',
@@ -88,7 +92,10 @@ export function homePage(css: string): string {
         manufacturer: { '@id': `${SITE}/#organization` },
         offers: {
           '@type': 'Offer',
-          url: STRIPE_URL,
+          price: '0',
+          priceCurrency: 'USD',
+          description: OFFER_BLURB,
+          url: `${SITE}${CONTACT_PATH}`,
           availability: 'https://schema.org/OnlineOnly',
           seller: { '@id': `${SITE}/#organization` },
         },
@@ -107,13 +114,14 @@ export function homePage(css: string): string {
 
   const main = `<section class="home" id="top">
       <div class="wrap">
-        <p class="kicker">Boole AI, Inc. · LLM cost</p>
-        <h1>Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud.</h1>
-        <p class="lede">Cut your LLM bill without cutting quality. We measure first. Pricing is scoped per engagement. The share of traffic that can move is something we measure for you. It is not a number we publish in advance.</p>
+        <p class="kicker">Boole AI, Inc. · LLM serving</p>
+        <h1>LLM serving and optimization, on hardware you own.</h1>
+        <p class="lede">Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud. We measure first. The Token Cost Audit is free. The fee is 10% of measured monthly savings. The share of traffic that can move is something we measure for you. It is not a number we publish in advance.</p>
         <div class="actions actions-hero">
           ${auditButton()}
+          <a class="text-link" href="/llm-serving/">LLM serving</a>
           <a class="text-link" href="/how-it-works/">How it works</a>
-          <p class="price-inline">${OFFER_BLURB} No savings percentage until a customer result exists, and only with their permission.</p>
+          <p class="price-inline">${OFFER_BLURB} Boole does not publish a savings percentage.</p>
         </div>
       </div>
     </section>
@@ -132,8 +140,8 @@ export function homePage(css: string): string {
     <section id="levers">
       <div class="wrap">
         <p class="kicker">Four levers</p>
-        <h2>Caching, batch, compression, and a local tier.</h2>
-        <p class="lede">Each lever is real only where the workload fits. The audit says which calls are candidates. It does not apply a market-wide percentage to your bill.</p>
+        <h2>LLM inference optimization has four levers.</h2>
+        <p class="lede">Caching, batch, compression, and a local tier. Each one is real only where the workload fits. The audit says which calls are candidates. It does not apply a market-wide percentage to your bill.</p>
         <div class="offers">
           <article class="card">
             <span class="tag">01</span>
@@ -160,6 +168,7 @@ export function homePage(css: string): string {
             <a class="text-link" href="/prompt-compression/">Prompt compression</a>
           </article>
         </div>
+        <p class="lede" style="margin-top:1.35rem">Long prompts and retrieval are the same bill, looked at from the other side. <a class="inline" href="/context-windows/">Context window optimization</a> covers trimming, compression, and cache hits. <a class="inline" href="/rag-pipelines/">RAG pipeline optimization</a> covers retrieval, chunking, embeddings, and rerankers. The map of the whole practice is <a class="inline" href="/llm-serving/">LLM serving and optimization</a>.</p>
       </div>
     </section>
 
@@ -167,7 +176,7 @@ export function homePage(css: string): string {
       <div class="wrap">
         <p class="kicker">The audit</p>
         <h2>A token cost audit in days.</h2>
-        <p class="note">Pay on Stripe. Implementation is quoted after, and it is not included.</p>
+        <p class="note">The audit is free. No setup fee. Nothing is owed if there are no savings.</p>
         ${auditChecklistHtml({ title: false })}
         <div class="actions" style="margin-top:1.35rem">
           ${auditButton()}
@@ -179,13 +188,13 @@ export function homePage(css: string): string {
     <section id="local">
       <div class="wrap">
         <p class="kicker">Why hardware you own</p>
-        <h2>A fixed cost, and a boundary around the data.</h2>
+        <h2>Self-hosted LLM serving has a fixed cost.</h2>
         <div class="prose">
           <p>Cloud gateways route among cloud models. They do not put the cheap tier on a machine in your office. An on-prem box has a fixed cost and a low marginal cost per token. The break-even is your volume against that fixed cost. We calculate it in the audit. We do not print a universal saving.</p>
           <p>Sensitive calls can stay on hardware you control. A prompt that never leaves the building is a different path from a prompt sent to a provider API. That is not a HIPAA determination, and it is not a claim that model downloads never touch the network. Weights still come from somewhere the first time.</p>
           <p>The only speed Boole has measured is the browser demo: 12.3 tok/s, SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, 4-core Xeon, WebAssembly, one thread, no GPU layers. A 20B model at 200 tok/s remains a goal. Server throughput is not claimed until it is measured.</p>
         </div>
-        <p><a class="text-link" href="/on-premise/">On-premise</a></p>
+        <p><a class="text-link" href="/on-premise/">On-premise</a> · <a class="text-link" href="/llm-serving/">LLM serving</a></p>
       </div>
     </section>
 
@@ -205,19 +214,19 @@ export function homePage(css: string): string {
     <section id="pricing">
       <div class="wrap">
         <p class="kicker">Pricing</p>
-        <h2>Pricing is scoped per engagement.</h2>
+        <h2>10% of measured monthly savings.</h2>
         <div class="offers">
           <article class="card tier-fast">
-            <span class="tag">Audit</span>
+            <span class="tag">Free</span>
             <h3>Token Cost Audit</h3>
-            <p>Scoped per engagement. Stripe. The deliverables are listed above. There is no savings guarantee on this page.</p>
+            <p>The audit is free. No setup fee. Nothing is owed if there are no savings. There is no savings guarantee on this page.</p>
             ${auditButton()}
           </article>
           <article class="card">
-            <span class="tag">Not priced here</span>
-            <h3>Implementation and managed plans</h3>
-            <p>Contact us. We will not print a fee we have not set. The audit’s last deliverable is a quote for the implementation, scoped to what the audit found.</p>
-            <a class="btn btn-call" href="${IMPL_MAIL}">Contact us</a>
+            <span class="tag">The fee</span>
+            <h3>10% after a baseline</h3>
+            <p>The fee is 10% of measured monthly savings: the LLM bill before changes, compared with the bill after. A worked example on the pricing page is labeled as arithmetic, not a customer result.</p>
+            <a class="btn btn-call" href="/pricing/">See the example</a>
           </article>
         </div>
         <p style="margin-top:1.25rem"><a class="text-link" href="/pricing/">Pricing</a></p>
@@ -248,7 +257,7 @@ export function homePage(css: string): string {
         <p class="kicker">Begin</p>
         <h2>Measure the bill before you move a call.</h2>
         <div class="prose">
-          <p>Book the audit on Stripe. Implementation and managed plans: <a class="inline" href="${IMPL_MAIL}">${EMAIL}</a>. A calculator on this site runs your own assumptions and shows the formula. It does not claim a Boole saving.</p>
+          <p><a class="inline" href="${CONTACT_PATH}">Book a free audit</a>, or email <a class="inline" href="${IMPL_MAIL}">${EMAIL}</a>. A calculator on this site runs your own assumptions and shows the formula. It does not claim a Boole saving.</p>
         </div>
         <div class="actions" style="margin-top:1.5rem">
           ${auditButton()}

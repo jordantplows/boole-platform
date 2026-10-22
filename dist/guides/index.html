@@ -918,6 +918,23 @@ textarea {
   text-transform: uppercase;
 }
 
+.spec.example th {
+  width: 46%;
+  color: var(--text);
+  font-size: 0.98rem;
+  font-weight: 450;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.spec caption {
+  caption-side: bottom;
+  padding-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
 code {
   font-family: var(--mono);
   font-size: 0.9em;
@@ -1254,6 +1271,7 @@ footer {
     <nav class="nav-links" aria-label="Page">
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
       <a href="/pricing/">Pricing</a>
       <a href="/guides/">Guides</a>
     </nav>
@@ -1275,9 +1293,12 @@ footer {
         </div>
         <h2>For a business</h2>
         <ul class="guide-links">
+          <li><a href="/llm-serving/">LLM serving and optimization</a></li>
           <li><a href="/audit/">Token Cost Audit</a></li>
           <li><a href="/hybrid-routing/">Hybrid routing</a></li>
           <li><a href="/on-premise/">On-premise, for calls that stay on your hardware</a></li>
+          <li><a href="/context-windows/">Context windows</a></li>
+          <li><a href="/rag-pipelines/">RAG pipelines</a></li>
           <li><a href="/compare/">OpenRouter, Portkey, Not Diamond, LiteLLM</a></li>
         </ul>
         <ul class="guide-index"><li><a href="/guides/macos-apple-silicon/"><span class="tag">macOS</span><strong>macOS Apple Silicon</strong><span>Run an LLM locally on a Mac with Apple Silicon</span></a></li><li><a href="/guides/macos-intel/"><span class="tag">macOS</span><strong>macOS Intel</strong><span>Run a local AI model on an Intel Mac</span></a></li><li><a href="/guides/windows-x64/"><span class="tag">Windows</span><strong>Windows x64</strong><span>Run a local AI model on Windows</span></a></li><li><a href="/guides/linux-x64/"><span class="tag">Linux</span><strong>Linux x64</strong><span>Offline AI on Linux x64</span></a></li><li><a href="/guides/linux-arm64/"><span class="tag">Linux</span><strong>Linux arm64</strong><span>Run a local model on Linux arm64</span></a></li><li><a href="/guides/windows-arm64/"><span class="tag">Windows</span><strong>Windows arm64</strong><span>Run a local model on Windows arm64</span></a></li><li><a href="/guides/browser/"><span class="tag">Browser</span><strong>Browser demo</strong><span>Run a model in the browser</span></a></li></ul>
@@ -1289,6 +1310,9 @@ footer {
       <span>© 2026 Boole AI, Inc. All rights reserved.</span>
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
+      <a href="/context-windows/">Context windows</a>
+      <a href="/rag-pipelines/">RAG pipelines</a>
       <a href="/pricing/">Pricing</a>
       <a href="/calculator/">Calculator</a>
       <a href="/hybrid-routing/">Hybrid routing</a>

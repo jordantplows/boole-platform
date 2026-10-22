@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Move repetitive LLM calls onto hardware you own — Boole</title>
-  <meta name="description" content="Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud. Pricing for the Token Cost Audit is scoped per engagement. Boole publishes no savings percentage.">
+  <title>LLM Serving and Optimization — Boole</title>
+  <meta name="description" content="LLM serving and optimization for repetitive calls on hardware you own, with hard calls left in the cloud. The audit is free. The fee is 10% of measured monthly savings.">
   <meta name="robots" content="index, follow">
-  <meta name="keywords" content="LLM cost audit, AI cost optimization consulting, reduce OpenAI API costs service, LLM FinOps consultant, on-prem LLM deployment service, hybrid LLM routing, local LLM vs API cost">
+  <meta name="keywords" content="LLM serving and optimization, LLM serving, LLM inference optimization, LLM cost optimization, self-hosted LLM serving, context window optimization, RAG pipeline optimization">
   <link rel="canonical" href="https://boole.sh/">
   <meta property="og:site_name" content="Boole">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Move repetitive LLM calls onto hardware you own — Boole">
-  <meta property="og:description" content="Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud. Pricing for the Token Cost Audit is scoped per engagement. Boole publishes no savings percentage.">
+  <meta property="og:title" content="LLM Serving and Optimization — Boole">
+  <meta property="og:description" content="LLM serving and optimization for repetitive calls on hardware you own, with hard calls left in the cloud. The audit is free. The fee is 10% of measured monthly savings.">
   <meta property="og:image" content="https://boole.sh/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,14 +19,14 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boole.sh/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Move repetitive LLM calls onto hardware you own — Boole">
-  <meta name="twitter:description" content="Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud. Pricing for the Token Cost Audit is scoped per engagement. Boole publishes no savings percentage.">
+  <meta name="twitter:title" content="LLM Serving and Optimization — Boole">
+  <meta name="twitter:description" content="LLM serving and optimization for repetitive calls on hardware you own, with hard calls left in the cloud. The audit is free. The fee is 10% of measured monthly savings.">
   <meta name="twitter:image" content="https://boole.sh/og.png">
   <meta name="twitter:image:alt" content="Boole. Repetitive LLM calls on hardware you own.">
   <meta name="theme-color" content="#090909">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://boole.sh/#organization","name":"Boole AI, Inc.","legalName":"Boole AI, Inc.","url":"https://boole.sh/","email":"hello@booleinference.com","logo":"https://boole.sh/favicon.svg"},{"@type":"WebSite","@id":"https://boole.sh/#website","url":"https://boole.sh/","name":"Boole","description":"Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud. Pricing for the Token Cost Audit is scoped per engagement. Boole publishes no savings percentage.","publisher":{"@id":"https://boole.sh/#organization"}},{"@type":"Service","@id":"https://boole.sh/#service","name":"LLM token cost optimization","serviceType":"Token cost audit and hybrid local-cloud routing","provider":{"@id":"https://boole.sh/#organization"},"areaServed":"Worldwide","description":"Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud. Pricing for the Token Cost Audit is scoped per engagement. Boole publishes no savings percentage.","url":"https://boole.sh/audit/"},{"@type":"Product","@id":"https://boole.sh/#audit-product","name":"Token Cost Audit","description":"The Token Cost Audit from Boole AI, Inc. includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Pricing is scoped per engagement. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals.","brand":{"@type":"Brand","name":"Boole"},"manufacturer":{"@id":"https://boole.sh/#organization"},"offers":{"@type":"Offer","url":"https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03","availability":"https://schema.org/OnlineOnly","seller":{"@id":"https://boole.sh/#organization"}}},{"@type":"FAQPage","@id":"https://boole.sh/#faq","mainEntity":[{"@type":"Question","name":"Do you publish a savings percentage?","acceptedAnswer":{"@type":"Answer","text":"No. Boole will not publish a savings percentage until a real customer result exists, and only with their written permission. Published research is cited separately, with the benchmark and the range. Your result depends on your workload."}},{"@type":"Question","name":"Will you replace our model provider?","acceptedAnswer":{"@type":"Answer","text":"No. The hard calls stay in the cloud, with the provider you already use. Menlo Ventures reported that 11% of teams changed model provider in the year before its mid-2025 update. The audit looks for repetitive calls that can move onto hardware you own, after your own evals pass."}},{"@type":"Question","name":"What does the Token Cost Audit include?","acceptedAnswer":{"@type":"Answer","text":"The Token Cost Audit from Boole AI, Inc. includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Pricing is scoped per engagement. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals."}},{"@type":"Question","name":"What about implementation and a managed plan?","acceptedAnswer":{"@type":"Answer","text":"Those are not priced on this site. Email hello@booleinference.com and we will scope them. The audit includes an implementation quote. It does not include the implementation itself."}},{"@type":"Question","name":"What speed has Boole measured?","acceptedAnswer":{"@type":"Answer","text":"One number: 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, on a 4-core Xeon CPU in WebAssembly, one thread, no GPU layers. That is the browser demo, not a server. A 20-billion-parameter model at 200 tok/s is a roadmap goal, not a measurement."}},{"@type":"Question","name":"Where does a prompt go?","acceptedAnswer":{"@type":"Answer","text":"A call that stays in the cloud goes to that provider, as it does today. A call moved to hardware you own is generated from a local GGUF file. The Boole CLI still contacts Hugging Face to resolve a model file name, and it downloads weights that are not cached. This is not a security certification and not a HIPAA determination."}}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://boole.sh/#organization","name":"Boole AI, Inc.","legalName":"Boole AI, Inc.","url":"https://boole.sh/","email":"hello@booleinference.com","logo":"https://boole.sh/favicon.svg"},{"@type":"WebSite","@id":"https://boole.sh/#website","url":"https://boole.sh/","name":"Boole","description":"LLM serving and optimization for repetitive calls on hardware you own, with hard calls left in the cloud. The audit is free. The fee is 10% of measured monthly savings.","publisher":{"@id":"https://boole.sh/#organization"}},{"@type":"Service","@id":"https://boole.sh/#service","name":"LLM serving and optimization","serviceType":"LLM serving, inference optimization, and a token cost audit","provider":{"@id":"https://boole.sh/#organization"},"areaServed":"Worldwide","description":"LLM serving and optimization for repetitive calls on hardware you own, with hard calls left in the cloud. The audit is free. The fee is 10% of measured monthly savings.","url":"https://boole.sh/llm-serving/"},{"@type":"Product","@id":"https://boole.sh/#audit-product","name":"Token Cost Audit","description":"The Token Cost Audit is free. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even from your volumes; and the same look at context windows and RAG pipelines when they are on the bill. Boole then charges 10% of measured monthly savings on the LLM bill: a baseline measured before changes, compared with the bill after. There is no setup fee. Nothing is owed if there are no savings. Boole does not publish a savings percentage. The 10% is the fee on savings that were measured, not a promise that the bill will fall. Whether any traffic should move depends on your workload and your own evals.","brand":{"@type":"Brand","name":"Boole"},"manufacturer":{"@id":"https://boole.sh/#organization"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"The Token Cost Audit is free. Boole charges 10% of measured monthly savings. No setup fee. Nothing is owed if there are no savings.","url":"https://boole.sh/contact/","availability":"https://schema.org/OnlineOnly","seller":{"@id":"https://boole.sh/#organization"}}},{"@type":"FAQPage","@id":"https://boole.sh/#faq","mainEntity":[{"@type":"Question","name":"Do you publish a savings percentage?","acceptedAnswer":{"@type":"Answer","text":"No. Boole will not publish a savings percentage until a real customer result exists, and only with their written permission. Published research is cited separately, with the benchmark and the range. Your result depends on your workload."}},{"@type":"Question","name":"Will you replace our model provider?","acceptedAnswer":{"@type":"Answer","text":"No. The hard calls stay in the cloud, with the provider you already use. Menlo Ventures reported that 11% of teams changed model provider in the year before its mid-2025 update. The audit looks for repetitive calls that can move onto hardware you own, after your own evals pass."}},{"@type":"Question","name":"What does the Token Cost Audit include?","acceptedAnswer":{"@type":"Answer","text":"The Token Cost Audit is free. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even from your volumes; and the same look at context windows and RAG pipelines when they are on the bill. Boole then charges 10% of measured monthly savings on the LLM bill: a baseline measured before changes, compared with the bill after. There is no setup fee. Nothing is owed if there are no savings. Boole does not publish a savings percentage. The 10% is the fee on savings that were measured, not a promise that the bill will fall. Whether any traffic should move depends on your workload and your own evals."}},{"@type":"Question","name":"What do you charge?","acceptedAnswer":{"@type":"Answer","text":"The Token Cost Audit is free. There is no setup fee. Boole charges 10% of measured monthly savings on the LLM bill: a baseline measured before changes, compared with the bill after. Nothing is owed if there are no savings. The 10% is the fee, not a prediction of how far the bill will fall."}},{"@type":"Question","name":"What speed has Boole measured?","acceptedAnswer":{"@type":"Answer","text":"One number: 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, on a 4-core Xeon CPU in WebAssembly, one thread, no GPU layers. That is the browser demo, not a server. A 20-billion-parameter model at 200 tok/s is a roadmap goal, not a measurement."}},{"@type":"Question","name":"What do you mean by LLM serving?","acceptedAnswer":{"@type":"Answer","text":"Serving is generating the tokens. Optimization is deciding which calls stay in the cloud, which can run on hardware you own, and which prompts are longer than the task needs. Boole does not operate a public hosted serving API. npx @boole/cli serve is a local development server with no authentication. It accepts POST /generate and should not be put on a public network."}},{"@type":"Question","name":"Where does a prompt go?","acceptedAnswer":{"@type":"Answer","text":"A call that stays in the cloud goes to that provider, as it does today. A call moved to hardware you own is generated from a local GGUF file. The Boole CLI still contacts Hugging Face to resolve a model file name, and it downloads weights that are not cached. This is not a security certification and not a HIPAA determination."}}]}]}</script>
   <style>@font-face {
   font-family: "Instrument Sans";
   src: url("/fonts/instrument-sans.woff2") format("woff2");
@@ -918,6 +918,23 @@ textarea {
   text-transform: uppercase;
 }
 
+.spec.example th {
+  width: 46%;
+  color: var(--text);
+  font-size: 0.98rem;
+  font-weight: 450;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.spec caption {
+  caption-side: bottom;
+  padding-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
 code {
   font-family: var(--mono);
   font-size: 0.9em;
@@ -1254,6 +1271,7 @@ footer {
     <nav class="nav-links" aria-label="Page">
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
       <a href="/pricing/">Pricing</a>
       <a href="/guides/">Guides</a>
     </nav>
@@ -1261,13 +1279,14 @@ footer {
   <main id="content" tabindex="-1">
     <section class="home" id="top">
       <div class="wrap">
-        <p class="kicker">Boole AI, Inc. · LLM cost</p>
-        <h1>Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud.</h1>
-        <p class="lede">Cut your LLM bill without cutting quality. We measure first. Pricing is scoped per engagement. The share of traffic that can move is something we measure for you. It is not a number we publish in advance.</p>
+        <p class="kicker">Boole AI, Inc. · LLM serving</p>
+        <h1>LLM serving and optimization, on hardware you own.</h1>
+        <p class="lede">Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud. We measure first. The Token Cost Audit is free. The fee is 10% of measured monthly savings. The share of traffic that can move is something we measure for you. It is not a number we publish in advance.</p>
         <div class="actions actions-hero">
-          <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Book a Token Cost Audit</a>
+          <a class="btn btn-pay" href="/contact/">Book a free audit</a>
+          <a class="text-link" href="/llm-serving/">LLM serving</a>
           <a class="text-link" href="/how-it-works/">How it works</a>
-          <p class="price-inline">Pricing is scoped per engagement. Implementation and managed plans are a separate conversation. No savings percentage until a customer result exists, and only with their permission.</p>
+          <p class="price-inline">The Token Cost Audit is free. Boole charges 10% of measured monthly savings. No setup fee. Nothing is owed if there are no savings. Boole does not publish a savings percentage.</p>
         </div>
       </div>
     </section>
@@ -1286,8 +1305,8 @@ footer {
     <section id="levers">
       <div class="wrap">
         <p class="kicker">Four levers</p>
-        <h2>Caching, batch, compression, and a local tier.</h2>
-        <p class="lede">Each lever is real only where the workload fits. The audit says which calls are candidates. It does not apply a market-wide percentage to your bill.</p>
+        <h2>LLM inference optimization has four levers.</h2>
+        <p class="lede">Caching, batch, compression, and a local tier. Each one is real only where the workload fits. The audit says which calls are candidates. It does not apply a market-wide percentage to your bill.</p>
         <div class="offers">
           <article class="card">
             <span class="tag">01</span>
@@ -1314,6 +1333,7 @@ footer {
             <a class="text-link" href="/prompt-compression/">Prompt compression</a>
           </article>
         </div>
+        <p class="lede" style="margin-top:1.35rem">Long prompts and retrieval are the same bill, looked at from the other side. <a class="inline" href="/context-windows/">Context window optimization</a> covers trimming, compression, and cache hits. <a class="inline" href="/rag-pipelines/">RAG pipeline optimization</a> covers retrieval, chunking, embeddings, and rerankers. The map of the whole practice is <a class="inline" href="/llm-serving/">LLM serving and optimization</a>.</p>
       </div>
     </section>
 
@@ -1321,10 +1341,10 @@ footer {
       <div class="wrap">
         <p class="kicker">The audit</p>
         <h2>A token cost audit in days.</h2>
-        <p class="note">Pay on Stripe. Implementation is quoted after, and it is not included.</p>
-        <ol class="gets"><li><span class="n">01</span><span><strong>Spend breakdown.</strong> By endpoint and model, from the usage you share.</span></li><li><span class="n">02</span><span><strong>Caching, batch, and trimming.</strong> A list of calls that are candidates for each lever. The list is the finding. It is not a promised percentage.</span></li><li><span class="n">03</span><span><strong>Local-model candidates.</strong> Calls that could move onto hardware you own, with quality tested on a sample of your traffic before anything is routed.</span></li><li><span class="n">04</span><span><strong>Break-even.</strong> An on-prem comparison using your volumes. Hardware has a fixed cost. We do not publish a generic savings figure.</span></li><li><span class="n">05</span><span><strong>Implementation quote.</strong> A scoped quote for the work after the audit. That work is quoted separately and is not included in the audit.</span></li></ol>
+        <p class="note">The audit is free. No setup fee. Nothing is owed if there are no savings.</p>
+        <ol class="gets"><li><span class="n">01</span><span><strong>Spend breakdown.</strong> By endpoint and model, from the usage you share.</span></li><li><span class="n">02</span><span><strong>Caching, batch, and trimming.</strong> A list of calls that are candidates for each lever. The list is the finding. It is not a promised percentage.</span></li><li><span class="n">03</span><span><strong>Local-model candidates.</strong> Calls that could move onto hardware you own, with quality tested on a sample of your traffic before anything is routed.</span></li><li><span class="n">04</span><span><strong>Break-even.</strong> An on-prem comparison using your volumes. Hardware has a fixed cost. We do not publish a generic savings figure.</span></li><li><span class="n">05</span><span><strong>Context, retrieval, and compression.</strong> Context-window and RAG candidates when they are on the bill. Prompt compression is one tool on that list, not the whole engagement.</span></li></ol>
         <div class="actions" style="margin-top:1.35rem">
-          <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Book a Token Cost Audit</a>
+          <a class="btn btn-pay" href="/contact/">Book a free audit</a>
           <a class="text-link" href="/audit/">Audit details</a>
         </div>
       </div>
@@ -1333,13 +1353,13 @@ footer {
     <section id="local">
       <div class="wrap">
         <p class="kicker">Why hardware you own</p>
-        <h2>A fixed cost, and a boundary around the data.</h2>
+        <h2>Self-hosted LLM serving has a fixed cost.</h2>
         <div class="prose">
           <p>Cloud gateways route among cloud models. They do not put the cheap tier on a machine in your office. An on-prem box has a fixed cost and a low marginal cost per token. The break-even is your volume against that fixed cost. We calculate it in the audit. We do not print a universal saving.</p>
           <p>Sensitive calls can stay on hardware you control. A prompt that never leaves the building is a different path from a prompt sent to a provider API. That is not a HIPAA determination, and it is not a claim that model downloads never touch the network. Weights still come from somewhere the first time.</p>
           <p>The only speed Boole has measured is the browser demo: 12.3 tok/s, SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, 4-core Xeon, WebAssembly, one thread, no GPU layers. A 20B model at 200 tok/s remains a goal. Server throughput is not claimed until it is measured.</p>
         </div>
-        <p><a class="text-link" href="/on-premise/">On-premise</a></p>
+        <p><a class="text-link" href="/on-premise/">On-premise</a> · <a class="text-link" href="/llm-serving/">LLM serving</a></p>
       </div>
     </section>
 
@@ -1359,19 +1379,19 @@ footer {
     <section id="pricing">
       <div class="wrap">
         <p class="kicker">Pricing</p>
-        <h2>Pricing is scoped per engagement.</h2>
+        <h2>10% of measured monthly savings.</h2>
         <div class="offers">
           <article class="card tier-fast">
-            <span class="tag">Audit</span>
+            <span class="tag">Free</span>
             <h3>Token Cost Audit</h3>
-            <p>Scoped per engagement. Stripe. The deliverables are listed above. There is no savings guarantee on this page.</p>
-            <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Book a Token Cost Audit</a>
+            <p>The audit is free. No setup fee. Nothing is owed if there are no savings. There is no savings guarantee on this page.</p>
+            <a class="btn btn-pay" href="/contact/">Book a free audit</a>
           </article>
           <article class="card">
-            <span class="tag">Not priced here</span>
-            <h3>Implementation and managed plans</h3>
-            <p>Contact us. We will not print a fee we have not set. The audit’s last deliverable is a quote for the implementation, scoped to what the audit found.</p>
-            <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Implementation%20and%20managed%20plans">Contact us</a>
+            <span class="tag">The fee</span>
+            <h3>10% after a baseline</h3>
+            <p>The fee is 10% of measured monthly savings: the LLM bill before changes, compared with the bill after. A worked example on the pricing page is labeled as arithmetic, not a customer result.</p>
+            <a class="btn btn-call" href="/pricing/">See the example</a>
           </article>
         </div>
         <p style="margin-top:1.25rem"><a class="text-link" href="/pricing/">Pricing</a></p>
@@ -1403,15 +1423,19 @@ footer {
           </details>
 <details>
             <summary>What does the Token Cost Audit include?</summary>
-            <p>The Token Cost Audit from Boole AI, Inc. includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Pricing is scoped per engagement. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals.</p>
+            <p>The Token Cost Audit is free. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even from your volumes; and the same look at context windows and RAG pipelines when they are on the bill. Boole then charges 10% of measured monthly savings on the LLM bill: a baseline measured before changes, compared with the bill after. There is no setup fee. Nothing is owed if there are no savings. Boole does not publish a savings percentage. The 10% is the fee on savings that were measured, not a promise that the bill will fall. Whether any traffic should move depends on your workload and your own evals.</p>
           </details>
 <details>
-            <summary>What about implementation and a managed plan?</summary>
-            <p>Those are not priced on this site. Email hello@booleinference.com and we will scope them. The audit includes an implementation quote. It does not include the implementation itself.</p>
+            <summary>What do you charge?</summary>
+            <p>The Token Cost Audit is free. There is no setup fee. Boole charges 10% of measured monthly savings on the LLM bill: a baseline measured before changes, compared with the bill after. Nothing is owed if there are no savings. The 10% is the fee, not a prediction of how far the bill will fall.</p>
           </details>
 <details>
             <summary>What speed has Boole measured?</summary>
             <p>One number: 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, on a 4-core Xeon CPU in WebAssembly, one thread, no GPU layers. That is the browser demo, not a server. A 20-billion-parameter model at 200 tok/s is a roadmap goal, not a measurement.</p>
+          </details>
+<details>
+            <summary>What do you mean by LLM serving?</summary>
+            <p>Serving is generating the tokens. Optimization is deciding which calls stay in the cloud, which can run on hardware you own, and which prompts are longer than the task needs. Boole does not operate a public hosted serving API. npx @boole/cli serve is a local development server with no authentication. It accepts POST /generate and should not be put on a public network.</p>
           </details>
 <details>
             <summary>Where does a prompt go?</summary>
@@ -1425,10 +1449,10 @@ footer {
         <p class="kicker">Begin</p>
         <h2>Measure the bill before you move a call.</h2>
         <div class="prose">
-          <p>Book the audit on Stripe. Implementation and managed plans: <a class="inline" href="mailto:hello@booleinference.com?subject=Boole%3A%20Implementation%20and%20managed%20plans">hello@booleinference.com</a>. A calculator on this site runs your own assumptions and shows the formula. It does not claim a Boole saving.</p>
+          <p><a class="inline" href="/contact/">Book a free audit</a>, or email <a class="inline" href="mailto:hello@booleinference.com?subject=Boole%3A%20Token%20Cost%20Audit">hello@booleinference.com</a>. A calculator on this site runs your own assumptions and shows the formula. It does not claim a Boole saving.</p>
         </div>
         <div class="actions" style="margin-top:1.5rem">
-          <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Book a Token Cost Audit</a>
+          <a class="btn btn-pay" href="/contact/">Book a free audit</a>
           <a class="btn btn-call" href="/calculator/">Savings calculator</a>
         </div>
       </div>
@@ -1439,6 +1463,9 @@ footer {
       <span>© 2026 Boole AI, Inc. All rights reserved.</span>
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
+      <a href="/context-windows/">Context windows</a>
+      <a href="/rag-pipelines/">RAG pipelines</a>
       <a href="/pricing/">Pricing</a>
       <a href="/calculator/">Calculator</a>
       <a href="/hybrid-routing/">Hybrid routing</a>

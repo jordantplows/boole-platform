@@ -918,6 +918,23 @@ textarea {
   text-transform: uppercase;
 }
 
+.spec.example th {
+  width: 46%;
+  color: var(--text);
+  font-size: 0.98rem;
+  font-weight: 450;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.spec caption {
+  caption-side: bottom;
+  padding-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
 code {
   font-family: var(--mono);
   font-size: 0.9em;
@@ -1254,6 +1271,7 @@ footer {
     <nav class="nav-links" aria-label="Page">
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
       <a href="/pricing/">Pricing</a>
       <a href="/guides/">Guides</a>
     </nav>
@@ -1271,14 +1289,14 @@ footer {
         <tr><th scope="row">Where it runs</th><td>Between cloud models. VPC is described on custom plans, not as a default local tier on hardware you own.</td></tr>
       </tbody></table>
       <div class="prose">
-        <p>A learned router among cloud models can be the right tool when every call should stay in the cloud. It is a different offer from moving repetitive calls onto hardware you own. Boole does not publish a cost-per-token for routing. The offer is a Token Cost Audit, scoped per engagement.</p>
+        <p>A learned router among cloud models can be the right tool when every call should stay in the cloud. It is a different offer from moving repetitive calls onto hardware you own. Boole does not publish a cost-per-token for routing. The offer is a free audit, then 10% of measured monthly savings.</p>
       </div>
       <h2>Questions</h2>
       <div class="faq"><details><summary>Which Not Diamond price is current?</summary><p>Unknown from here. On the October 2026 check, notdiamond.ai/pricing listed $0.05 per 1 million tokens routed, and docs.notdiamond.ai/docs/pricing listed a free tier to 100,000 requests, then $100 a month plus $0.001 per request. Both are linked. Neither is treated as the other.</p></details></div>
       <div class="actions" style="margin-top:1.5rem">
-        <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Book a Token Cost Audit</a>
-        <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Implementation%20and%20managed%20plans">Contact us</a>
-        <p class="price-inline">Pricing is scoped per engagement. Implementation and managed plans are a separate conversation.</p>
+        <a class="btn btn-pay" href="/contact/">Book a free audit</a>
+        <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Token%20Cost%20Audit">Contact us</a>
+        <p class="price-inline">The Token Cost Audit is free. Boole charges 10% of measured monthly savings. No setup fee. Nothing is owed if there are no savings.</p>
       </div>
     </div></section>
   </main>
@@ -1287,6 +1305,9 @@ footer {
       <span>© 2026 Boole AI, Inc. All rights reserved.</span>
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
+      <a href="/context-windows/">Context windows</a>
+      <a href="/rag-pipelines/">RAG pipelines</a>
       <a href="/pricing/">Pricing</a>
       <a href="/calculator/">Calculator</a>
       <a href="/hybrid-routing/">Hybrid routing</a>
