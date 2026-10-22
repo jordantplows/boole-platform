@@ -1,21 +1,19 @@
 /**
- * Token Cost Audit. The fee and Stripe link stay in this file so the package
- * can change later without a hunt through the pages.
- * No savings percentage and no guarantee: neither is confirmed.
+ * Token Cost Audit. The Stripe link and the public wording stay in this file
+ * so the package can change later without a hunt through the pages.
+ * No published price, no savings percentage, and no guarantee.
  */
 
 export const STRIPE_URL = 'https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03';
-export const AUDIT_PRICE_AMOUNT = '1800';
-export const AUDIT_PRICE = '$1,800';
-export const AUDIT_CTA = 'Start the audit';
+export const AUDIT_CTA = 'Book a Token Cost Audit';
 export const EMAIL = 'hello@booleinference.com';
 export const IMPL_MAIL = `mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Implementation and managed plans')}`;
 
 export const OFFER_BLURB =
-  `${AUDIT_PRICE} fixed fee for the Token Cost Audit. Implementation and managed plans are a separate conversation.`;
+  'Pricing is scoped per engagement. Implementation and managed plans are a separate conversation.';
 
 export const OFFER_DESCRIPTION =
-  `The Token Cost Audit is a ${AUDIT_PRICE} fixed fee from Boole AI, Inc. It includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals.`;
+  'The Token Cost Audit from Boole AI, Inc. includes a spend breakdown by endpoint and model; a list of caching, batch, and trimming candidates; a list of calls that could move to a local model, with quality tested on a sample; an on-prem break-even calculation from your volumes; and an implementation quote. Pricing is scoped per engagement. Boole does not publish a savings percentage. Whether any traffic should move depends on your workload and your own evals.';
 
 const AUDIT_ITEMS: Array<{ title: string; text: string }> = [
   {
@@ -36,7 +34,7 @@ const AUDIT_ITEMS: Array<{ title: string; text: string }> = [
   },
   {
     title: 'Implementation quote',
-    text: 'A scoped quote for the work after the audit. That fee is not included in the audit.',
+    text: 'A scoped quote for the work after the audit. That work is quoted separately and is not included in the audit.',
   },
 ];
 
