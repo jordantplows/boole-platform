@@ -1280,9 +1280,9 @@ npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hel
         <p><code>doctor --json</code> prints the same report as JSON. <code>list</code> prints downloaded models. <code>serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>. The only speed Boole has measured is 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, on a 4-core Xeon in WebAssembly, one thread, no GPU layers. A 20B model at 200 tok/s is a roadmap goal, not a measurement. No server throughput is claimed.</p>
       </div>
       <div class="actions" style="margin-top:1.5rem">
-        <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Start the audit</a>
+        <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Book a Token Cost Audit</a>
         <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Implementation%20and%20managed%20plans">Contact us</a>
-        <p class="price-inline">$1,800 fixed fee for the Token Cost Audit. Implementation and managed plans are a separate conversation.</p>
+        <p class="price-inline">Pricing is scoped per engagement. Implementation and managed plans are a separate conversation.</p>
       </div>
       <h2>Questions</h2>
       <div class="faq"><details><summary>Does a prompt leave the building?</summary><p>A call you leave in the cloud goes to that provider. A call you move to hardware you own is read from a local GGUF file. The CLI still asks Hugging Face for a model file name, and it downloads weights that are not cached. This is not a security certification.</p></details><details><summary>Is this HIPAA compliant?</summary><p>No determination is made here. Keeping inference on a machine you control can avoid sending a prompt to a third-party API. That is not a HIPAA finding and not legal advice.</p></details><details><summary>What speed do you claim for an on-prem server?</summary><p>None. The only measured Boole speed is 12.3 tok/s in the browser demo described on this page. A 20B model at 200 tok/s is a goal. Server hardware has not been measured for a published tok/s figure.</p></details></div>

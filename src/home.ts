@@ -4,13 +4,13 @@
  */
 
 import { layout } from './guides.ts';
-import { AUDIT_PRICE, EMAIL, IMPL_MAIL, OFFER_DESCRIPTION, STRIPE_URL, auditButton, auditChecklistHtml } from './offer.ts';
+import { EMAIL, IMPL_MAIL, OFFER_BLURB, OFFER_DESCRIPTION, STRIPE_URL, auditButton, auditChecklistHtml } from './offer.ts';
 
 const SITE = 'https://boole.sh';
 
 const TITLE = 'Move repetitive LLM calls onto hardware you own — Boole';
 const DESCRIPTION =
-  'Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud. The Token Cost Audit is a $1,800 fixed fee. Boole publishes no savings percentage.';
+  'Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud. Pricing for the Token Cost Audit is scoped per engagement. Boole publishes no savings percentage.';
 const KEYWORDS =
   'LLM cost audit, AI cost optimization consulting, reduce OpenAI API costs service, LLM FinOps consultant, on-prem LLM deployment service, hybrid LLM routing, local LLM vs API cost';
 
@@ -24,7 +24,7 @@ const FAQ = [
     a: 'No. The hard calls stay in the cloud, with the provider you already use. Menlo Ventures reported that 11% of teams changed model provider in the year before its mid-2025 update. The audit looks for repetitive calls that can move onto hardware you own, after your own evals pass.',
   },
   {
-    q: 'What does the $1,800 audit include?',
+    q: 'What does the Token Cost Audit include?',
     a: OFFER_DESCRIPTION,
   },
   {
@@ -88,8 +88,6 @@ export function homePage(css: string): string {
         manufacturer: { '@id': `${SITE}/#organization` },
         offers: {
           '@type': 'Offer',
-          price: '1800',
-          priceCurrency: 'USD',
           url: STRIPE_URL,
           availability: 'https://schema.org/OnlineOnly',
           seller: { '@id': `${SITE}/#organization` },
@@ -111,11 +109,11 @@ export function homePage(css: string): string {
       <div class="wrap">
         <p class="kicker">Boole AI, Inc. · LLM cost</p>
         <h1>Move your repetitive LLM calls onto hardware you own. Keep the hard ones in the cloud.</h1>
-        <p class="lede">Cut your LLM bill without cutting quality. We measure first. A token cost audit is a fixed fee. The share of traffic that can move is something we measure for you. It is not a number we publish in advance.</p>
+        <p class="lede">Cut your LLM bill without cutting quality. We measure first. Pricing is scoped per engagement. The share of traffic that can move is something we measure for you. It is not a number we publish in advance.</p>
         <div class="actions actions-hero">
           ${auditButton()}
           <a class="text-link" href="/how-it-works/">How it works</a>
-          <p class="price-inline">${AUDIT_PRICE} fixed fee. No savings percentage until a customer result exists, and only with their permission.</p>
+          <p class="price-inline">${OFFER_BLURB} No savings percentage until a customer result exists, and only with their permission.</p>
         </div>
       </div>
     </section>
@@ -168,9 +166,8 @@ export function homePage(css: string): string {
     <section id="audit">
       <div class="wrap">
         <p class="kicker">The audit</p>
-        <h2>A token cost audit in days, for a fixed fee.</h2>
-        <p class="price">${AUDIT_PRICE}</p>
-        <p class="note">Pay on Stripe. The fee is the audit. Implementation is quoted after, and it is not included.</p>
+        <h2>A token cost audit in days.</h2>
+        <p class="note">Pay on Stripe. Implementation is quoted after, and it is not included.</p>
         ${auditChecklistHtml({ title: false })}
         <div class="actions" style="margin-top:1.35rem">
           ${auditButton()}
@@ -208,13 +205,12 @@ export function homePage(css: string): string {
     <section id="pricing">
       <div class="wrap">
         <p class="kicker">Pricing</p>
-        <h2>The audit has a price. The rest is a conversation.</h2>
+        <h2>Pricing is scoped per engagement.</h2>
         <div class="offers">
           <article class="card tier-fast">
-            <span class="tag">Priced</span>
+            <span class="tag">Audit</span>
             <h3>Token Cost Audit</h3>
-            <p class="price">${AUDIT_PRICE}</p>
-            <p>Fixed fee. Stripe. The deliverables are listed above. There is no savings guarantee on this page.</p>
+            <p>Scoped per engagement. Stripe. The deliverables are listed above. There is no savings guarantee on this page.</p>
             ${auditButton()}
           </article>
           <article class="card">
@@ -252,7 +248,7 @@ export function homePage(css: string): string {
         <p class="kicker">Begin</p>
         <h2>Measure the bill before you move a call.</h2>
         <div class="prose">
-          <p>The audit is ${AUDIT_PRICE} on Stripe. Implementation and managed plans: <a class="inline" href="${IMPL_MAIL}">${EMAIL}</a>. A calculator on this site runs your own assumptions and shows the formula. It does not claim a Boole saving.</p>
+          <p>Book the audit on Stripe. Implementation and managed plans: <a class="inline" href="${IMPL_MAIL}">${EMAIL}</a>. A calculator on this site runs your own assumptions and shows the formula. It does not claim a Boole saving.</p>
         </div>
         <div class="actions" style="margin-top:1.5rem">
           ${auditButton()}

@@ -5,7 +5,6 @@
 
 import { layout, type BuiltPage } from './guides.ts';
 import {
-  AUDIT_PRICE,
   EMAIL,
   IMPL_MAIL,
   OFFER_BLURB,
@@ -148,11 +147,10 @@ const batchFacts = `A batch API discount of 50% is documented for both Anthropic
 function auditMain(): string {
   return `<section class="doc"><div class="wrap">
       ${crumbs('Token Cost Audit')}
-      <p class="kicker">Fixed fee · ${AUDIT_PRICE}</p>
+      <p class="kicker">Token Cost Audit</p>
       <h1>A token cost audit before anything moves.</h1>
-      <p class="lede">Your repetitive AI calls may not need a frontier model. The hard ones should stay where they are. The audit measures which is which. It does not start from a savings percentage.</p>
-      <p class="price">${AUDIT_PRICE}</p>
-      <p class="note">Stripe. This fee is the audit. Implementation and managed plans are not included and are not priced on this site.</p>
+      <p class="lede">Your repetitive AI calls may not need a frontier model. The hard ones should stay where they are. The audit measures which is which. It does not start from a savings percentage. Pricing is scoped per engagement.</p>
+      <p class="note">Pay on Stripe. Implementation and managed plans are scoped separately and are not included.</p>
       <h2>What you get</h2>
       ${auditChecklistHtml({ title: false })}
       <div class="prose">
@@ -172,7 +170,7 @@ function auditMain(): string {
 
 const auditFaq: Faq[] = [
   faq(
-    'What does the $1,800 payment buy?',
+    'What does the Token Cost Audit include?',
     OFFER_DESCRIPTION,
   ),
   faq(
@@ -194,7 +192,7 @@ function howMain(): string {
       <p class="lede">Cut your LLM bill without cutting quality starts with the bill you already have. Routing comes after a sample of your own traffic passes your evals.</p>
       <h2>1. Audit</h2>
       <div class="prose">
-        <p>The ${AUDIT_PRICE} Token Cost Audit breaks spend down by endpoint and model. It lists calls that could use caching, a batch API, or a shorter prompt. It lists calls that could move to a local model, and it tests quality on a sample before that list is a recommendation. It calculates on-prem break-even from your volumes, and it ends with an implementation quote.</p>
+        <p>The Token Cost Audit breaks spend down by endpoint and model. It lists calls that could use caching, a batch API, or a shorter prompt. It lists calls that could move to a local model, and it tests quality on a sample before that list is a recommendation. It calculates on-prem break-even from your volumes, and it ends with an implementation quote. Pricing is scoped per engagement.</p>
       </div>
       <h2>2. Route</h2>
       <div class="prose">
@@ -388,19 +386,18 @@ const onPremFaq: Faq[] = [
 function pricingMain(): string {
   return `<section class="doc"><div class="wrap">
       ${crumbs('Pricing')}
-      <p class="kicker">One priced offer</p>
-      <h1>The audit is ${AUDIT_PRICE}. Implementation and managed plans: contact us.</h1>
-      <p class="lede">Nothing else on this page has a number, because those fees are not set. A blank price would be a placeholder. A range we have not sold would be a guess.</p>
+      <p class="kicker">Scoped per engagement</p>
+      <h1>Pricing is scoped per engagement.</h1>
+      <p class="lede">The Token Cost Audit, implementation, and managed plans are scoped to the work. Email <a class="inline" href="mailto:${EMAIL}">${EMAIL}</a>.</p>
       <article class="card tier-fast">
         <span class="tag">Token Cost Audit</span>
-        <p class="price">${AUDIT_PRICE}</p>
-        <p>Pay on Stripe. ${OFFER_DESCRIPTION}</p>
+        <p>Pay on Stripe when you are ready to book. ${OFFER_DESCRIPTION}</p>
         ${auditChecklistHtml({ title: false })}
         <div class="actions" style="margin-top:1.25rem">${auditButton()}</div>
       </article>
       <h2>Implementation and managed plans</h2>
       <div class="prose">
-        <p>Contact us at <a class="inline" href="${IMPL_MAIL}">${EMAIL}</a>. Tell us the providers on the bill and whether any traffic has to stay on hardware you own. The audit’s implementation quote is the first priced scope for the work after. A managed plan, if you want one, is part of that conversation. Neither is listed as a monthly price here.</p>
+        <p>Contact us at <a class="inline" href="${IMPL_MAIL}">${EMAIL}</a>. Tell us the providers on the bill and whether any traffic has to stay on hardware you own. The audit’s implementation quote is the first scoped conversation for the work after. A managed plan, if you want one, is part of that conversation. Neither is listed as a monthly price here.</p>
         <p>There is no percentage-of-savings offer on this site. A fee tied to savings needs a locked baseline, invoice access, and a contract. Until that exists, it is not a product on this page.</p>
       </div>
       <h2>Questions</h2>
@@ -434,7 +431,7 @@ function compareHub(): string {
         <article class="card"><h3>LiteLLM</h3><p>The open-source proxy is free. The enterprise license is by quote. A local tier can sit behind it.</p><a class="text-link" href="/compare/litellm/">LiteLLM</a></article>
       </div>
       <div class="prose">
-        <p>Boole is not a drop-in for any of them. The priced offer is a ${AUDIT_PRICE} audit. The technical opening is a local model on hardware you own, for repetitive calls, with hard calls left in the cloud. ${speed}</p>
+        <p>Boole is not a drop-in for any of them. The offer is a Token Cost Audit, scoped per engagement. The technical opening is a local model on hardware you own, for repetitive calls, with hard calls left in the cloud. ${speed}</p>
       </div>
       <h2>Questions</h2>
       ${faqBlock(compareFaq)}
@@ -479,7 +476,7 @@ function openrouterMain(): string {
 const openrouterFaq: Faq[] = [
   faq(
     'Is Boole cheaper than OpenRouter’s 5.5% fee?',
-    'Not as a published comparison. OpenRouter’s fee is 5.5% (Standard) or 8% (Business) on credits, checked October 2026 on their pricing page. Boole’s priced offer is a $1,800 audit, not a take-rate on tokens. A local tier changes the shape of the bill. It is not a discount on the same cloud credits.',
+    'Not as a published comparison. OpenRouter’s fee is 5.5% (Standard) or 8% (Business) on credits, checked October 2026 on their pricing page. Boole’s offer is a Token Cost Audit, scoped per engagement, not a take-rate on tokens. A local tier changes the shape of the bill. It is not a discount on the same cloud credits.',
   ),
 ];
 
@@ -526,7 +523,7 @@ function notDiamondMain(): string {
         <tr><th scope="row">Where it runs</th><td>Between cloud models. VPC is described on custom plans, not as a default local tier on hardware you own.</td></tr>
       </tbody></table>
       <div class="prose">
-        <p>A learned router among cloud models can be the right tool when every call should stay in the cloud. It is a different offer from moving repetitive calls onto hardware you own. Boole does not publish a cost-per-token for routing, because the priced product is the ${AUDIT_PRICE} audit.</p>
+        <p>A learned router among cloud models can be the right tool when every call should stay in the cloud. It is a different offer from moving repetitive calls onto hardware you own. Boole does not publish a cost-per-token for routing. The offer is a Token Cost Audit, scoped per engagement.</p>
       </div>
       <h2>Questions</h2>
       ${faqBlock(notDiamondFaq)}
@@ -554,7 +551,7 @@ function litellmMain(): string {
         <tr><th scope="row">Local on-prem tier</th><td>Not a priced Boole gateway on top of LiteLLM today. An implementation can put a local model behind a LiteLLM proxy you run. That is scoped work, quoted after the audit.</td></tr>
       </tbody></table>
       <div class="prose">
-        <p>Self-hosting a gateway is DIY. The ${AUDIT_PRICE} audit is the opposite order of operations: measure the bill, then decide whether a proxy and a local model belong in the path. <a class="inline" href="/guides/">Setup guides</a> cover <code>@boole/cli</code> 0.7.0 on Node.js 22 or newer, including <code>serve</code> for local development only.</p>
+        <p>Self-hosting a gateway is DIY. The Token Cost Audit is the opposite order of operations: measure the bill, then decide whether a proxy and a local model belong in the path. Pricing is scoped per engagement. <a class="inline" href="/guides/">Setup guides</a> cover <code>@boole/cli</code> 0.7.0 on Node.js 22 or newer, including <code>serve</code> for local development only.</p>
       </div>
       <h2>Questions</h2>
       ${faqBlock(litellmFaq)}
@@ -645,7 +642,7 @@ function contactMain(): string {
       ${crumbs('Contact')}
       <p class="kicker">Boole AI, Inc.</p>
       <h1>Contact.</h1>
-      <p class="lede">Email <a class="inline" href="mailto:${EMAIL}">${EMAIL}</a>. The audit itself is the Stripe button, ${AUDIT_PRICE}, if you already know you want it.</p>
+      <p class="lede">Email <a class="inline" href="mailto:${EMAIL}">${EMAIL}</a>. Book a Token Cost Audit on Stripe if you already know you want it.</p>
       <div class="prose">
         <p>Implementation and managed plans: <a class="inline" href="${IMPL_MAIL}">write with that subject</a>. Useful context is which providers are on the bill, a rough monthly spend if you want to share it, and whether any calls have to stay on hardware you own. Do not send secrets or production prompts in the first email.</p>
         <p>The software is proprietary to Boole AI, Inc. All rights reserved. A codebase inquiry is a separate written conversation, not a checkout. Use the subject “Boole: Codebase acquisition”.</p>
@@ -676,8 +673,6 @@ export function marketingPages(css: string): BuiltPage[] {
       description: OFFER_DESCRIPTION,
       offers: {
         '@type': 'Offer',
-        price: '1800',
-        priceCurrency: 'USD',
         url: STRIPE_URL,
         availability: 'https://schema.org/OnlineOnly',
       },
@@ -689,8 +684,6 @@ export function marketingPages(css: string): BuiltPage[] {
       brand: { '@type': 'Brand', name: 'Boole' },
       offers: {
         '@type': 'Offer',
-        price: '1800',
-        priceCurrency: 'USD',
         url: STRIPE_URL,
         availability: 'https://schema.org/OnlineOnly',
       },
@@ -698,20 +691,20 @@ export function marketingPages(css: string): BuiltPage[] {
   ];
 
   return [
-    render({ css, file: 'audit/index.html', urlPath: '/audit/', title: 'Token Cost Audit — $1,800 fixed fee — Boole', description: 'A token cost audit for a fixed $1,800 fee. Spend breakdown, caching and batch candidates, local-model candidates tested on a sample, and an on-prem break-even. No savings percentage.', keywords: 'LLM cost audit, AI cost optimization consulting, reduce OpenAI API costs service, LLM FinOps consultant', name: 'Token Cost Audit', crumb: 'Token Cost Audit', faq: auditFaq, main: auditMain(), extra: auditExtra }),
+    render({ css, file: 'audit/index.html', urlPath: '/audit/', title: 'Token Cost Audit — Boole', description: 'A token cost audit scoped per engagement. Spend breakdown, caching and batch candidates, local-model candidates tested on a sample, and an on-prem break-even. No savings percentage.', keywords: 'LLM cost audit, AI cost optimization consulting, reduce OpenAI API costs service, LLM FinOps consultant', name: 'Token Cost Audit', crumb: 'Token Cost Audit', faq: auditFaq, main: auditMain(), extra: auditExtra }),
     render({ css, file: 'how-it-works/index.html', urlPath: '/how-it-works/', title: 'How LLM cost optimization works — Boole', description: 'Audit the bill, route repetitive calls onto hardware you own, keep hard calls in the cloud, then measure against invoices. No savings percentage in advance.', keywords: 'how to reduce LLM costs, LLM FinOps consultant, hybrid LLM routing', name: 'How it works', crumb: 'How it works', faq: howFaq, main: howMain() }),
     render({ css, file: 'hybrid-routing/index.html', urlPath: '/hybrid-routing/', title: 'Hybrid LLM routing to hardware you own — Boole', description: 'Route repetitive LLM calls to a model on hardware you own. Keep hard calls in the cloud. RouteLLM’s published range is cited. Boole publishes no savings percentage.', keywords: 'hybrid LLM routing, local LLM vs API cost, self-hosted LLM gateway, on-prem LLM deployment service', name: 'Hybrid routing', crumb: 'Hybrid routing', faq: hybridFaq, main: hybridMain() }),
     render({ css, file: 'prompt-caching/index.html', urlPath: '/prompt-caching/', title: 'Prompt caching for Anthropic and OpenAI — Boole', description: 'Anthropic cache reads at 0.1× input, writes at 1.25× or 2×, checked October 2026. OpenAI’s cache discount is not cited because the figures conflict.', keywords: 'prompt caching Anthropic vs OpenAI, how to reduce LLM costs, LLM cost audit', name: 'Prompt caching', crumb: 'Prompt caching', faq: cachingFaq, main: cachingMain() }),
     render({ css, file: 'batch-api/index.html', urlPath: '/batch-api/', title: 'OpenAI and Anthropic batch API discount — Boole', description: 'Batch API is documented at 50% off for Anthropic and OpenAI, checked October 2026. It applies to calls that can wait. Not a Boole discount.', keywords: 'OpenAI batch API discount, how to reduce LLM costs, Anthropic batch API', name: 'Batch API', crumb: 'Batch API', faq: batchFaq, main: batchMain() }),
     render({ css, file: 'prompt-compression/index.html', urlPath: '/prompt-compression/', title: 'Prompt compression and LLMLingua — Boole', description: 'LLMLingua reports up to 20× prompt compression with about a 1.5-point drop on its tested datasets. That is not a Boole result.', keywords: 'prompt compression LLMLingua, how to reduce LLM costs', name: 'Prompt compression', crumb: 'Prompt compression', faq: compressionFaq, main: compressionMain() }),
     render({ css, file: 'on-premise/index.html', urlPath: '/on-premise/', title: 'On-premise LLM for repetitive calls — Boole', description: 'Run repetitive LLM calls on hardware you own. Keep hard calls in the cloud. Break-even uses your volumes. No HIPAA claim and no published savings percentage.', keywords: 'on-prem LLM deployment service, local LLM vs API cost, self-host Llama break-even, private local LLM', name: 'On-premise LLM', crumb: 'On-premise', faq: onPremFaq, main: onPremMain() }),
-    render({ css, file: 'pricing/index.html', urlPath: '/pricing/', title: 'Pricing — Token Cost Audit $1,800 — Boole', description: 'The Token Cost Audit is $1,800. Implementation and managed plans: contact us. No placeholder prices and no percentage-of-savings offer.', keywords: 'LLM cost audit, AI cost optimization consulting, LLM FinOps consultant', name: 'Pricing', crumb: 'Pricing', faq: pricingFaq, main: pricingMain() }),
+    render({ css, file: 'pricing/index.html', urlPath: '/pricing/', title: 'Pricing — Token Cost Audit — Boole', description: 'Pricing is scoped per engagement. Email hello@booleinference.com. The Token Cost Audit is paid on Stripe. No percentage-of-savings offer.', keywords: 'LLM cost audit, AI cost optimization consulting, LLM FinOps consultant', name: 'Pricing', crumb: 'Pricing', faq: pricingFaq, main: pricingMain() }),
     render({ css, file: 'compare/index.html', urlPath: '/compare/', title: 'LLM router comparison — OpenRouter, Portkey, Not Diamond, LiteLLM — Boole', description: 'Published pricing for OpenRouter, Portkey, Not Diamond, and LiteLLM, checked October 2026. Unverified prices are left out. No speed ranking.', keywords: 'LLM router comparison, OpenRouter alternative, Portkey alternative, LiteLLM vs Portkey, self-hosted LLM gateway', name: 'LLM router comparison', crumb: 'Compare', faq: compareFaq, main: compareHub() }),
     render({ css, file: 'compare/openrouter/index.html', urlPath: '/compare/openrouter/', title: 'OpenRouter alternative with a local tier — Boole', description: 'OpenRouter charges 5.5% or 8% on credits, checked October 2026. BYOK is free to $25k a month, then 5%. No local inference in that product.', keywords: 'OpenRouter alternative, LLM router comparison, self-hosted LLM gateway', name: 'OpenRouter and Boole', crumb: 'OpenRouter', faq: openrouterFaq, main: openrouterMain() }),
     render({ css, file: 'compare/portkey/index.html', urlPath: '/compare/portkey/', title: 'Portkey alternative — local tier and an audit — Boole', description: 'Portkey self-host is free. Hosted production is $49 a month for 100k logs, then $9 per 100k, checked October 2026. No local model in that price.', keywords: 'Portkey alternative, LiteLLM vs Portkey, self-hosted LLM gateway', name: 'Portkey and Boole', crumb: 'Portkey', faq: portkeyFaq, main: portkeyMain() }),
     render({ css, file: 'compare/not-diamond/index.html', urlPath: '/compare/not-diamond/', title: 'Not Diamond pricing, both published figures — Boole', description: 'Not Diamond lists $0.05 per 1M tokens routed, and an older docs page lists $100 a month plus $0.001 a request. Checked October 2026. The pages conflict.', keywords: 'LLM router comparison, Not Diamond pricing, self-hosted LLM gateway', name: 'Not Diamond and Boole', crumb: 'Not Diamond', faq: notDiamondFaq, main: notDiamondMain() }),
     render({ css, file: 'compare/litellm/index.html', urlPath: '/compare/litellm/', title: 'LiteLLM vs Portkey on published price — Boole', description: 'LiteLLM’s open-source proxy is free and enterprise is by quote. Portkey hosted production is $49 a month, checked October 2026. A local tier is separate.', keywords: 'LiteLLM vs Portkey, self-hosted LLM gateway, LLM router comparison', name: 'LiteLLM and Boole', crumb: 'LiteLLM', faq: litellmFaq, main: litellmMain() }),
     render({ css, file: 'calculator/index.html', urlPath: '/calculator/', title: 'LLM cost calculator from your own assumptions — Boole', description: 'Enter your LLM spend or volume and your own discount assumptions. The formula is shown. No Boole savings percentage.', keywords: 'how to reduce LLM costs, local LLM vs API cost, self-host Llama break-even, LLM cost audit', name: 'LLM cost calculator', crumb: 'Calculator', faq: calcFaq, main: calculatorMain(), foot: '<script src="/calculator.js" defer></script>' }),
-    render({ css, file: 'contact/index.html', urlPath: '/contact/', title: 'Contact Boole AI, Inc.', description: 'Email hello@booleinference.com. The Token Cost Audit is a $1,800 Stripe payment. Implementation and managed plans: contact us.', keywords: 'LLM cost audit, LLM FinOps consultant, Boole AI', name: 'Contact', crumb: 'Contact', faq: contactFaq, main: contactMain() }),
+    render({ css, file: 'contact/index.html', urlPath: '/contact/', title: 'Contact Boole AI, Inc.', description: 'Email hello@booleinference.com. Book a Token Cost Audit on Stripe. Implementation and managed plans: contact us.', keywords: 'LLM cost audit, LLM FinOps consultant, Boole AI', name: 'Contact', crumb: 'Contact', faq: contactFaq, main: contactMain() }),
   ];
 }

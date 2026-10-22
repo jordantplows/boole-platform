@@ -321,7 +321,7 @@ function cliBody(guide: Guide): string {
         ${trouble}
       </div>
       ${related(guide.slug)}
-      <p class="prose end-note">The Token Cost Audit is a <a class="inline" href="${STRIPE}">$1,800</a> fixed fee. Implementation and managed plans: <a class="inline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Implementation and managed plans')}">${EMAIL}</a>.</p>`;
+      <p class="prose end-note"><a class="inline" href="${STRIPE}">Book a Token Cost Audit</a>. Pricing is scoped per engagement. Implementation and managed plans: <a class="inline" href="mailto:${EMAIL}?subject=${encodeURIComponent('Boole: Implementation and managed plans')}">${EMAIL}</a>.</p>`;
 }
 
 export function layout(opts: {

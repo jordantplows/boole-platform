@@ -1266,7 +1266,7 @@ footer {
       <p class="lede">Cut your LLM bill without cutting quality starts with the bill you already have. Routing comes after a sample of your own traffic passes your evals.</p>
       <h2>1. Audit</h2>
       <div class="prose">
-        <p>The $1,800 Token Cost Audit breaks spend down by endpoint and model. It lists calls that could use caching, a batch API, or a shorter prompt. It lists calls that could move to a local model, and it tests quality on a sample before that list is a recommendation. It calculates on-prem break-even from your volumes, and it ends with an implementation quote.</p>
+        <p>The Token Cost Audit breaks spend down by endpoint and model. It lists calls that could use caching, a batch API, or a shorter prompt. It lists calls that could move to a local model, and it tests quality on a sample before that list is a recommendation. It calculates on-prem break-even from your volumes, and it ends with an implementation quote. Pricing is scoped per engagement.</p>
       </div>
       <h2>2. Route</h2>
       <div class="prose">
@@ -1277,9 +1277,9 @@ footer {
         <p>Invoices compared with a baseline you lock are the measurement. Boole will not publish a savings percentage until a real customer result exists, and only with their written permission. The <a class="inline" href="/calculator/">calculator</a> on this site runs numbers you type and shows the formula. It is not that result.</p>
       </div>
       <div class="actions" style="margin-top:1.5rem">
-        <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Start the audit</a>
+        <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Book a Token Cost Audit</a>
         <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Implementation%20and%20managed%20plans">Contact us</a>
-        <p class="price-inline">$1,800 fixed fee for the Token Cost Audit. Implementation and managed plans are a separate conversation.</p>
+        <p class="price-inline">Pricing is scoped per engagement. Implementation and managed plans are a separate conversation.</p>
       </div>
       <h2>Questions</h2>
       <div class="faq"><details><summary>Do you move traffic before an eval?</summary><p>No. A call is a candidate until quality is checked on a sample of your traffic. Open models are weaker on hard tasks. The hard calls stay in the cloud.</p></details><details><summary>Is boole serve the production gateway?</summary><p>No. <code>npx @boole/cli serve</code> is a local development server with no authentication. It accepts <code>POST /generate</code>. It is not an OpenAI-compatible public API, and it should not be exposed on a public network.</p></details></div>
