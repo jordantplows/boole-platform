@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>On-premise LLM for repetitive calls — Boole</title>
-  <meta name="description" content="Run repetitive LLM calls on hardware you own. Keep hard calls in the cloud. Break-even uses your volumes. No HIPAA claim and no published savings percentage.">
+  <title>Self-hosted LLM serving for repetitive calls — Boole</title>
+  <meta name="description" content="Self-hosted LLM serving for calls that should stay on hardware you own. Hard calls stay in the cloud. Break-even uses your volumes. No published savings percentage.">
   <meta name="robots" content="index, follow">
-  <meta name="keywords" content="on-prem LLM deployment service, local LLM vs API cost, self-host Llama break-even, private local LLM">
+  <meta name="keywords" content="self-hosted LLM serving, on-prem LLM deployment service, LLM serving, private local LLM">
   <link rel="canonical" href="https://boole.sh/on-premise/">
   <meta property="og:site_name" content="Boole">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="On-premise LLM for repetitive calls — Boole">
-  <meta property="og:description" content="Run repetitive LLM calls on hardware you own. Keep hard calls in the cloud. Break-even uses your volumes. No HIPAA claim and no published savings percentage.">
+  <meta property="og:title" content="Self-hosted LLM serving for repetitive calls — Boole">
+  <meta property="og:description" content="Self-hosted LLM serving for calls that should stay on hardware you own. Hard calls stay in the cloud. Break-even uses your volumes. No published savings percentage.">
   <meta property="og:image" content="https://boole.sh/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -19,14 +19,14 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boole.sh/on-premise/">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="On-premise LLM for repetitive calls — Boole">
-  <meta name="twitter:description" content="Run repetitive LLM calls on hardware you own. Keep hard calls in the cloud. Break-even uses your volumes. No HIPAA claim and no published savings percentage.">
+  <meta name="twitter:title" content="Self-hosted LLM serving for repetitive calls — Boole">
+  <meta name="twitter:description" content="Self-hosted LLM serving for calls that should stay on hardware you own. Hard calls stay in the cloud. Break-even uses your volumes. No published savings percentage.">
   <meta name="twitter:image" content="https://boole.sh/og.png">
   <meta name="twitter:image:alt" content="Boole. Repetitive LLM calls on hardware you own.">
   <meta name="theme-color" content="#090909">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"On-premise LLM","name":"On-premise LLM","description":"Run repetitive LLM calls on hardware you own. Keep hard calls in the cloud. Break-even uses your volumes. No HIPAA claim and no published savings percentage.","url":"https://boole.sh/on-premise/","inLanguage":"en","mainEntityOfPage":"https://boole.sh/on-premise/","author":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"publisher":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does a prompt leave the building?","acceptedAnswer":{"@type":"Answer","text":"A call you leave in the cloud goes to that provider. A call you move to hardware you own is read from a local GGUF file. The CLI still asks Hugging Face for a model file name, and it downloads weights that are not cached. This is not a security certification."}},{"@type":"Question","name":"Is this HIPAA compliant?","acceptedAnswer":{"@type":"Answer","text":"No determination is made here. Keeping inference on a machine you control can avoid sending a prompt to a third-party API. That is not a HIPAA finding and not legal advice."}},{"@type":"Question","name":"What speed do you claim for an on-prem server?","acceptedAnswer":{"@type":"Answer","text":"None. The only measured Boole speed is 12.3 tok/s in the browser demo described on this page. A 20B model at 200 tok/s is a goal. Server hardware has not been measured for a published tok/s figure."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Boole","item":"https://boole.sh/"},{"@type":"ListItem","position":2,"name":"On-premise","item":"https://boole.sh/on-premise/"}]}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Self-hosted LLM serving for the calls that should not leave.","name":"Self-hosted LLM serving for the calls that should not leave.","description":"Self-hosted LLM serving for calls that should stay on hardware you own. Hard calls stay in the cloud. Break-even uses your volumes. No published savings percentage.","url":"https://boole.sh/on-premise/","inLanguage":"en","mainEntityOfPage":"https://boole.sh/on-premise/","author":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"},"publisher":{"@type":"Organization","name":"Boole AI, Inc.","url":"https://boole.sh/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does a prompt leave the building?","acceptedAnswer":{"@type":"Answer","text":"A call you leave in the cloud goes to that provider. A call you move to hardware you own is read from a local GGUF file. The CLI still asks Hugging Face for a model file name, and it downloads weights that are not cached. This is not a security certification."}},{"@type":"Question","name":"Is this HIPAA compliant?","acceptedAnswer":{"@type":"Answer","text":"No determination is made here. Keeping inference on a machine you control can avoid sending a prompt to a third-party API. That is not a HIPAA finding and not legal advice."}},{"@type":"Question","name":"What speed do you claim for an on-prem server?","acceptedAnswer":{"@type":"Answer","text":"None. The only measured Boole speed is 12.3 tok/s in the browser demo described on this page. A 20B model at 200 tok/s is a goal. Server hardware has not been measured for a published tok/s figure."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Boole","item":"https://boole.sh/"},{"@type":"ListItem","position":2,"name":"On-premise","item":"https://boole.sh/on-premise/"}]}]}</script>
   <style>@font-face {
   font-family: "Instrument Sans";
   src: url("/fonts/instrument-sans.woff2") format("woff2");
@@ -918,6 +918,23 @@ textarea {
   text-transform: uppercase;
 }
 
+.spec.example th {
+  width: 46%;
+  color: var(--text);
+  font-size: 0.98rem;
+  font-weight: 450;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.spec caption {
+  caption-side: bottom;
+  padding-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
 code {
   font-family: var(--mono);
   font-size: 0.9em;
@@ -1254,6 +1271,7 @@ footer {
     <nav class="nav-links" aria-label="Page">
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
       <a href="/pricing/">Pricing</a>
       <a href="/guides/">Guides</a>
     </nav>
@@ -1262,7 +1280,7 @@ footer {
     <section class="doc"><div class="wrap">
       <p class="crumbs"><a href="/">Boole</a> · On-premise</p>
       <p class="kicker">Hardware you own</p>
-      <h1>An on-premise model for the calls that should not leave.</h1>
+      <h1>Self-hosted LLM serving for the calls that should not leave.</h1>
       <p class="lede">Some traffic has a privacy or residency reason to stay in the building: legal, clinical, finance, a government contractor. The rest can stay with the cloud model you already trust. Hybrid routing is that split.</p>
       <h2>Fixed cost, not a published saving</h2>
       <div class="prose">
@@ -1277,12 +1295,13 @@ footer {
 npx @boole/cli pull bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M
 npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hello"</code></pre>
       <div class="prose">
-        <p><code>doctor --json</code> prints the same report as JSON. <code>list</code> prints downloaded models. <code>serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>. The only speed Boole has measured is 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, on a 4-core Xeon in WebAssembly, one thread, no GPU layers. A 20B model at 200 tok/s is a roadmap goal, not a measurement. No server throughput is claimed.</p>
+        <p><code>doctor --json</code> prints the same report as JSON. <code>list</code> prints downloaded models. <code>serve</code> is local development only, with no authentication, and it accepts <code>POST /generate</code>. The only speed Boole has measured is 12.3 tok/s for SmolLM2-135M Instruct Q4_K_M, 64 tokens, about 5187 ms, on a 4-core Xeon in WebAssembly, one thread, no GPU layers. A 20B model at 200 tok/s is a roadmap goal, not a measurement. No server throughput is claimed. Embeddings and rerankers can be candidates for the same hardware. That is <a class="inline" href="/rag-pipelines/">RAG pipeline optimization</a>, not a measured embedding speed. The overview is <a class="inline" href="/llm-serving/">LLM serving and optimization</a>.</p>
       </div>
+      <p class="prose end-note">Related: <a class="inline" href="/llm-serving/">LLM serving</a>, <a class="inline" href="/hybrid-routing/">hybrid routing</a>, <a class="inline" href="/rag-pipelines/">RAG pipelines</a>, <a class="inline" href="/guides/">setup guides</a>.</p>
       <div class="actions" style="margin-top:1.5rem">
-        <a class="btn btn-pay" href="https://buy.stripe.com/cNi28rbZN1ml2wkbOydUY03">Book a Token Cost Audit</a>
-        <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Implementation%20and%20managed%20plans">Contact us</a>
-        <p class="price-inline">Pricing is scoped per engagement. Implementation and managed plans are a separate conversation.</p>
+        <a class="btn btn-pay" href="/contact/">Book a free audit</a>
+        <a class="btn btn-call" href="mailto:hello@booleinference.com?subject=Boole%3A%20Token%20Cost%20Audit">Contact us</a>
+        <p class="price-inline">The Token Cost Audit is free. Boole charges 10% of measured monthly savings. No setup fee. Nothing is owed if there are no savings.</p>
       </div>
       <h2>Questions</h2>
       <div class="faq"><details><summary>Does a prompt leave the building?</summary><p>A call you leave in the cloud goes to that provider. A call you move to hardware you own is read from a local GGUF file. The CLI still asks Hugging Face for a model file name, and it downloads weights that are not cached. This is not a security certification.</p></details><details><summary>Is this HIPAA compliant?</summary><p>No determination is made here. Keeping inference on a machine you control can avoid sending a prompt to a third-party API. That is not a HIPAA finding and not legal advice.</p></details><details><summary>What speed do you claim for an on-prem server?</summary><p>None. The only measured Boole speed is 12.3 tok/s in the browser demo described on this page. A 20B model at 200 tok/s is a goal. Server hardware has not been measured for a published tok/s figure.</p></details></div>
@@ -1293,6 +1312,9 @@ npx @boole/cli run bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M --prompt "Say hel
       <span>© 2026 Boole AI, Inc. All rights reserved.</span>
       <a href="/audit/">Audit</a>
       <a href="/how-it-works/">How it works</a>
+      <a href="/llm-serving/">LLM serving</a>
+      <a href="/context-windows/">Context windows</a>
+      <a href="/rag-pipelines/">RAG pipelines</a>
       <a href="/pricing/">Pricing</a>
       <a href="/calculator/">Calculator</a>
       <a href="/hybrid-routing/">Hybrid routing</a>
